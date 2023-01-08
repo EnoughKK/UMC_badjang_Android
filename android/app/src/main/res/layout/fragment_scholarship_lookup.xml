@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:paddingTop="15dp"
+    android:paddingTop="10dp"
     android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,8 +49,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginTop="15dp"
+            android:background="#252525"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,8 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="장학금" />
+                android:text="장학금"
+                />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -95,5 +96,14 @@
         </androidx.viewpager2.widget.ViewPager2>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/scholarship_floating_action_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
