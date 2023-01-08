@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/border_layout.xml" value="0.382" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_layout.xml" value="0.121" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_lookup.xml" value="0.33" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_viewpager1.xml" value="0.5484375" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/rv_scholarship_lookup.xml" value="0.5494791666666666" />
       </map>
     </option>
   </component>

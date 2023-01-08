@@ -10,4 +10,6 @@
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#FF000000</color>
     <color name="colorAccent">#FF707070</color>
+    <color name="border_layout">#FF999999</color>
+
 </resources>
