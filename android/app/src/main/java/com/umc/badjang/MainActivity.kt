@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Toolbar
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
+
 
         // 하단 메뉴바를 위한 fragment
         supportFragmentManager.beginTransaction().replace(binding.fragmentLayout.id, HomeFragment()).commit()
