@@ -3,8 +3,10 @@ package com.umc.badjang
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
+
+        // 하단 메뉴바를 위한 fragment
         supportFragmentManager.beginTransaction().replace(binding.fragmentLayout.id, HomeFragment()).commit()
         // navigationBottomView 등록: 하단바 fragment id(bottom_navigation) 등록
         transitionNavigationBottomView(binding.bottomNavigation, supportFragmentManager)
