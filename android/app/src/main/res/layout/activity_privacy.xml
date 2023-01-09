@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TermofUseActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#D9D9D9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/Privacy_linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/Privacy_UpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개인정보 처리 방침"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="5dp"
+            />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/Privacy_Scroll"
+        android:layout_width="320dp"
+        android:layout_height="611dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="90dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_use2"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            />
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Privacy_Btn"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:background="@drawable/round_box"
+        android:backgroundTint="#2173FD"
+        android:text="동의하기"
+        android:fontFamily="@font/notosanskr_medium"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="15sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="713dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D9D9D9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="768dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
