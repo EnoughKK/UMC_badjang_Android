@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ChangePW_toat_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+    <TextView
+        android:id="@+id/ChangePW_toast"
+        android:layout_width="320dp"
+        android:layout_height="40sp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:fontFamily="@font/notosanskr_regular"
+        android:background="@drawable/toastmsg"
+        />
+</LinearLayout>

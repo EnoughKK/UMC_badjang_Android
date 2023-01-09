@@ -3,6 +3,43 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/downround_box.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.206" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.206" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/round_box.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/round_box2.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/round_box3.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/round_box4.xml" value="0.153" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/toastmsg.xml" value="0.1" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/drawable/upround_box.xml" value="0.1375" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.162890625" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout-w936dp/activity_login2.xml" value="0.14241803278688525" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_auth_find_idactivity.xml" value="0.1" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_change_pwactvity.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_choiceschool.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_disagree.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_idactivity.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_pwactivity.xml" value="0.18902991840435177" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_school.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_login.xml" value="0.18354430379746836" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_login2.xml" value="0.18902991840435177" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_logo.xml" value="0.1085934159897392" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_main.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_privacy.xml" value="0.25" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_register.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_rservice.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_rservice2.xml" value="0.1897644927536232" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_schoolcheck.xml" value="0.2261650277896537" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_searchschool.xml" value="0.2261650277896537" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_signup.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_termofuse.xml" value="0.2261650277896537" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/termtodisagree_dialog.xml" value="0.2261650277896537" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/toastmsg_layout.xml" value="0.1" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/verification_id_dialog.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22" />
+     
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/border_layout.xml" value="0.382" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/btn_cancel.xml" value="0.2545" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/btn_confirm.xml" value="0.2545" />
@@ -54,6 +91,7 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
