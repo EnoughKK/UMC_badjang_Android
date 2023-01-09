@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/border_layout.xml" value="0.382" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/btn_cancel.xml" value="0.2545" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/btn_confirm.xml" value="0.2545" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/comments.xml" value="0.2605" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/dialog_selection_board.xml" value="0.171" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/polygon_up.xml" value="0.477" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_layout.xml" value="0.121" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/scholarship_floating_action_button.xml" value="0.2545" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/search.xml" value="0.2545" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/university_label_round.xml" value="0.209" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/activity_main.xml" value="0.5314814814814814" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_scholarship_lookup.xml" value="0.5" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_lookup.xml" value="0.33" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_viewpager1.xml" value="0.5484375" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/rv_scholarship_lookup.xml" value="0.5" />
