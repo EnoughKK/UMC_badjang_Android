@@ -1,5 +1,6 @@
 package com.umc.badjang.HomePage
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.HomeMorePage.MySchoolFragment
+import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
 
@@ -30,6 +33,19 @@ class HomeFragment : Fragment() {
     // 전국소식 리스트 recyclerview adapter
     private val nationalNewsDatas = mutableListOf<MainNationalNewsData>()
     private lateinit var mainNationalNewsAdapter: MainNationalNewsAdapter
+
+    // 프래그먼트 전환을 위해
+    var activity: MainActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = getActivity() as MainActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        activity = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +81,11 @@ class HomeFragment : Fragment() {
             val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
             addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
         }
+
+        // 우리학교 장학금 더보기 버튼 클릭
+        viewBinding.mainMySchoolMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(MySchoolFragment())
+        })
     }
 
     // recyclerview 세팅

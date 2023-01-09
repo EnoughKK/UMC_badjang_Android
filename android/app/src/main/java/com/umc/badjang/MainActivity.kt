@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
@@ -51,5 +52,14 @@ class MainActivity : AppCompatActivity() {
             }
             Log.d("test", "final") == 0
         }
+    }
+
+    // fragment 전환
+    fun changeFragment(fragment: Fragment){
+        // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.fragmentLayout.id, fragment)
+            .commit()
     }
 }
