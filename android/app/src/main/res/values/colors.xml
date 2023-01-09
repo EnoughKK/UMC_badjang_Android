@@ -14,5 +14,6 @@
     <color name="main_theme">#2173FD</color>
     <color name="sub_theme">#FF7FB3FD</color>
     <color name="btn_cancel">#D9D9D9</color>
+    <color name="commentsbar_background">#DEDEDE</color>
 
 </resources>
