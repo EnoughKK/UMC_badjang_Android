@@ -12,4 +12,6 @@
     <color name="item_out_line">#BABABA</color>
     <color name="item_in_line">#999999</color>
     <color name="sub_theme">#FF7FB3FD</color>
+    <color name="bookmark_tab_select">#2173FD</color>
+    <color name="bookmark_tab_unselect">#666666</color>
 </resources>

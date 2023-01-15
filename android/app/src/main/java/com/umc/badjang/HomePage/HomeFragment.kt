@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.umc.badjang.HomeMorePage.MySchoolFragment
+import com.umc.badjang.Bookmarks.BookmarksFragment
+import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
@@ -63,6 +65,33 @@ class HomeFragment : Fragment() {
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
 
+        // 우리학교 장학금 더보기 버튼 선택
+        viewBinding.mainMySchoolMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(MySchoolFragment())
+        })
+
+        // 인기글 더보기 버튼 선택
+        viewBinding.mainPopularMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(PopularPostFragment())
+        })
+
+        // 전국소식 더보기 버튼 선택
+        viewBinding.mainNationalNewsMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(NationalNewsFragment())
+        })
+
+        // 즐겨찾기 버튼 선택
+        val bookmarksBtn: ImageButton = toolbar.findViewById(R.id.toolbar_star_btn)
+        bookmarksBtn.setOnClickListener {
+            activity?.changeFragment(BookmarksFragment())
+        }
+
+        // 알림 버튼 선택
+        val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
+        newIssueBtn.setOnClickListener {
+            activity?.changeFragment(NewIssueFragment())
+        }
+
         // recyclerview 세팅
         initRecycler()
 
@@ -77,15 +106,10 @@ class HomeFragment : Fragment() {
         }
 
         // 전국 소식 데이터 추가
+        val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
         for(i: Int in 0..3) {
-            val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
             addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
         }
-
-        // 우리학교 장학금 더보기 버튼 클릭
-        viewBinding.mainMySchoolMore.setOnClickListener(View.OnClickListener {
-            activity?.changeFragment(MySchoolFragment())
-        })
     }
 
     // recyclerview 세팅

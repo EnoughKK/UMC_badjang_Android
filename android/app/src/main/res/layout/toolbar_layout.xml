@@ -44,14 +44,14 @@
             android:id="@+id/toolbar_star_btn"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_header_star"
-            android:layout_toLeftOf="@id/toolbar_bell_btn"
             android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="20dp"
+            android:layout_toLeftOf="@id/toolbar_bell_btn"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_header_star" />
 
         <ImageButton
             android:id="@+id/toolbar_bell_btn"

@@ -9,12 +9,12 @@
 
     <!-- 학교명 -->
     <TextView
-        android:id="@+id/new_issue_university_label"
+        android:id="@+id/new_issue_institution_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/university_label_round"
+        android:background="@drawable/institution_label_round"
         android:paddingHorizontal="12dp"
         android:paddingVertical="4dp"
         android:text="OO대학교"

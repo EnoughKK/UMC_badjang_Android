@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         // 하단 메뉴바를 위한 fragment
         supportFragmentManager.beginTransaction().replace(binding.fragmentLayout.id, HomeFragment()).commit()
         // navigationBottomView 등록: 하단바 fragment id(bottom_navigation) 등록

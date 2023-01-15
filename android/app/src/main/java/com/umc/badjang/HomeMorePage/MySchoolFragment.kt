@@ -20,4 +20,15 @@ class MySchoolFragment : Fragment() {
         return viewBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 이전 버튼 선택 시
+        viewBinding.mySchoolBackBtn.setOnClickListener {
+            // 이전 페이지로 이동
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+    }
+
 }

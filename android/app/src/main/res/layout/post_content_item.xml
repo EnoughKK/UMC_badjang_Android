@@ -12,30 +12,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <!-- 프로필 이미지 -->
         <ImageView
             android:id="@+id/popular_post_profile_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/non_profile" />
+            android:adjustViewBounds="true" />
 
+        <!-- 닉네임 -->
         <TextView
             android:id="@+id/popular_post_profile_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="익명"
             android:textSize="12dp"
             android:textStyle="bold"
             android:textColor="#000000"
             android:layout_toRightOf="@+id/popular_post_profile_img"/>
 
+        <!-- 작성일 -->
         <TextView
             android:id="@+id/popular_post_profile_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="2022.12.28"
             android:textSize="10dp"
             android:textColor="#000000"
             android:layout_below="@+id/popular_post_profile_nickname"
@@ -51,15 +51,16 @@
         android:layout_below="@id/popular_post_profile"
         android:layout_marginTop="10dp">
 
+        <!-- 제목 -->
         <TextView
             android:id="@+id/popular_post_content_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자기추천 장학금 신청방법"
             android:textColor="#000000"
             android:textSize="15dp"
             android:textStyle="bold" />
 
+        <!-- 내용 -->
         <TextView
             android:id="@+id/popular_post_content_text"
             android:layout_width="wrap_content"
@@ -67,21 +68,20 @@
             android:layout_below="@+id/popular_post_content_title"
             android:layout_marginTop="5dp"
             android:layout_marginRight="100dp"
-            android:text="자기추천 장학금 신청방법은 성적향상도(15), 진로탐색경험 (15),  대외활동(10), 자격층 취득(5), 지도교수상담(5) 총 50점 중 ..."
             android:textColor="#000000"
             android:textSize="12dp" />
 
     </RelativeLayout>
 
+    <!-- 이미지 -->
     <ImageView
         android:id="@+id/popular_post_content_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_alignParentRight="true"
-        android:adjustViewBounds="true"
-        android:src="@drawable/popular_post_img" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true" />
 
     <!-- 인기글 아이콘 -->
     <RelativeLayout
@@ -96,7 +96,6 @@
             android:id="@+id/popular_post_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginRight="2dp">
 
             <ImageView

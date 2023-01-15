@@ -48,4 +48,7 @@ dependencies {
 
     // 이미지 라운딩을 위한 부분
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
