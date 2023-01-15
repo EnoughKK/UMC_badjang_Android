@@ -19,10 +19,9 @@
             android:id="@+id/toolbar_line"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginVertical="2dp"
             android:layout_marginHorizontal="20dp"
             android:layout_below="@id/toolbar"
-            android:background="#252525"/>
+            android:background="@color/header_line"/>
 
         <ScrollView
             android:layout_width="match_parent"
