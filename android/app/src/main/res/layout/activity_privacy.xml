@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/terms_use2"
+            android:text="@string/terms_use"
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="#000000"
             android:textSize="12sp"

@@ -41,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true" />
             
         <activity
             android:name=".MainActivity"
@@ -56,12 +56,8 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
 
-        </activity>
-        <!-- 카카오 로그인 -->
+         카카오 로그인
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
