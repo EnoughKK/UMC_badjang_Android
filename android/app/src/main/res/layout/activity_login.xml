@@ -82,7 +82,8 @@ tools:context=".Login.LoginActivity">
             android:text="아이디 찾기"
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="#B2B2B2"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:clickable="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,7 +100,8 @@ tools:context=".Login.LoginActivity">
             android:text="비밀번호 찾기"
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="#B2B2B2"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/Login_Signup"
@@ -109,7 +111,8 @@ tools:context=".Login.LoginActivity">
             android:fontFamily="@font/notosanskr_regular"
             android:textAlignment="textEnd"
             android:textColor="#000000"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout

@@ -1,6 +1,8 @@
 package com.umc.badjang.Login
 
 data class Login(
-    val email: String,
-    val password: String
+    var uid :String? = null,
+    var textOne : String? = null,
+    var textTwo : String? = null,
+    var timestamp : Long? = null
 )
