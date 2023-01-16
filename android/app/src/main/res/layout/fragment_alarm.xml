@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings.AlarmFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#D9D9D9" />
+
+    <LinearLayout
+        android:id="@+id/SettinsAlarm_linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/SettinsAlarm_UpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp"/>
+
+        <TextView
+            android:id="@+id/SettinsAlarm_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알림설정"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="#252525"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="86dp"/>
+
+
+    <!--즐겨찾기-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/SettingsAlarm_Favorites"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="즐겨찾기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="90dp"/>
+
+        <Switch
+            android:id="@+id/SettingsAlarm_FavoritesSwitch"
+            android:layout_width="46dp"
+            android:layout_height="22dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            android:layout_marginStart="295dp"
+            android:layout_marginTop="100dp"/>
+    </FrameLayout>
+    <!--학교 및 지역의 새로운 글-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/SettingsAlarm_New"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="학교 및 지역의 새로운 글"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="145dp"/>
+
+        <Switch
+            android:id="@+id/SettingsAlarm_NewSwitch"
+            android:layout_width="46dp"
+            android:layout_height="22dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            android:layout_marginStart="295dp"
+            android:layout_marginTop="155dp"/>
+    </FrameLayout>
+    <!--문의답변-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/SettingsAlarm_Inquiries"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="문의 답변"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="200dp"/>
+        <Switch
+            android:id="@+id/SettingsAlarm_InquiriesSwitch"
+            android:layout_width="46dp"
+            android:layout_height="22dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            android:layout_marginStart="295dp"
+            android:layout_marginTop="210dp"/>
+    </FrameLayout>
+
+    <!--댓글알림-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/SettingsAlarm_Comment"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="댓글 알림"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="258dp"/>
+
+        <Switch
+            android:id="@+id/SettingsAlarm_CommentSwitch"
+            android:layout_width="46dp"
+            android:layout_height="22dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            android:layout_marginStart="295dp"
+            android:layout_marginTop="268dp"/>
+    </FrameLayout>
+</FrameLayout>

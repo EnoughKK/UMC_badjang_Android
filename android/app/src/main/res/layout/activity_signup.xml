@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".Login.SignUpActivity">
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
@@ -92,7 +92,7 @@
 
         <ImageButton
             android:id="@+id/Signup_PW_show"
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="15dp"
             android:src="@drawable/ic_baseline_remove_red_eye_24"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,8 +104,8 @@
         <ImageButton
             android:id="@+id/Signup_PW_unshow"
             android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:src="@drawable/remove_eye"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_vector"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="320dp"
@@ -144,7 +144,7 @@
 
         <ImageButton
             android:id="@+id/Signup_confirm_show"
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="15dp"
             android:src="@drawable/ic_baseline_remove_red_eye_24"
             app:layout_constraintStart_toStartOf="parent"
@@ -155,8 +155,8 @@
         <ImageButton
             android:id="@+id/Signup_confirm_unshow"
             android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:src="@drawable/remove_eye"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_vector"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

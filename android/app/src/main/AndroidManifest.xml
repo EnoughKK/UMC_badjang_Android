@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".GlobalApplication"
+        android:name=".Login.GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,34 +18,29 @@
         tools:targetApi="31">
         
         <activity
-            android:name=".ChangePWActvity"
+            android:name=".Login.ChangePWActvity"
             android:exported="false" />
         <activity
-            android:name=".FindPWActivity"
+            android:name=".Login.FindPWActivity"
             android:exported="false" />
         <activity
-            android:name=".FindIDActivity"
+            android:name=".Login.FindIDActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchSchoolActivity"
+            android:name=".Login.SearchSchoolActivity"
             android:exported="false" />
         <activity
-            android:name=".SchoolCheckActivity"
+            android:name=".Login.SchoolCheckActivity"
             android:exported="false" />
         <activity
-            android:name=".VerificationIDActivity"
+            android:name=".Login.VerificationIDActivity"
             android:exported="false" />
 
         <activity
-            android:name=".TermofUseActivity"
+            android:name=".Login.TermofUseActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="true" >
-            
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/NoTitleBarTheme"
+            android:name=".Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,14 +48,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
+
+            
         <activity
             android:name=".MainActivity"
+            android:theme="@style/NoTitleBarTheme"
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".Login.SignUpActivity"
+            android:exported="false" />
+
         <!-- 카카오 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -80,7 +79,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key"/>
         <activity
-            android:name=".LogoActivity"
+            android:name=".Login.LogoActivity"
             android:exported="false" />
     </application>
 </manifest>

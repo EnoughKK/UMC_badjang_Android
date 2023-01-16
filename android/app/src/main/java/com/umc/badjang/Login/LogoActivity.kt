@@ -1,4 +1,4 @@
-package com.umc.badjang
+package com.umc.badjang.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

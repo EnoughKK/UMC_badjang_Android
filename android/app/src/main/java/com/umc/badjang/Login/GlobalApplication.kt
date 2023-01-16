@@ -1,4 +1,4 @@
-package com.umc.badjang
+package com.umc.badjang.Login
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk

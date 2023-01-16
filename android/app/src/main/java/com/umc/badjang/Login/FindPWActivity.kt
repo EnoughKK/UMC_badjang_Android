@@ -1,11 +1,12 @@
-package com.umc.badjang
+package com.umc.badjang.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.umc.badjang.R
 
-class SchoolCheckActivity : AppCompatActivity() {
+class FindPWActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schoolcheck)
+        setContentView(R.layout.activity_find_pwactivity)
     }
 }

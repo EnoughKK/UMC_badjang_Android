@@ -188,6 +188,7 @@
 <![CDATA[①]]> 이 개인정보처리방침은 2023년 1월 2부터 적용됩니다.
 
 <![CDATA[②]]> 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다. </string>
+    <string name="terms_use3">받장(이하 당사)은 회원의 개인정보를 매우 중요시 하며, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 및 개인정보보호법을 준수하고 있습니다. 당사는 개인정보처리방침을 통하여 재공한 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</string>
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -199,5 +200,21 @@
     <string name="login_failed">"Login failed"</string>
     <!-- Kakao-init에서 사용 -->
     <string name="kakao_app_key">{b31ceafa89bebeeb560346e90f07ea91}</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

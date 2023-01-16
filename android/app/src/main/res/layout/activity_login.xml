@@ -5,7 +5,17 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".LoginActivity">
+tools:context=".Login.LoginActivity">
+
+    <ImageView
+        android:layout_width="204dp"
+        android:layout_height="204dp"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="65dp"/>
+
 
     <EditText
         android:id="@+id/Login_Email"

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings.MyInfoFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#D9D9D9" />
+
+    <LinearLayout
+        android:id="@+id/MyInfo_linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/MyInfo_UpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp"/>
+
+        <TextView
+            android:id="@+id/MyInfo_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 정보"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="#252525"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="86dp"/>
+
+    <TextView
+        android:id="@+id/MyInfo_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인 정보"
+        android:fontFamily="@font/notosanskr_bold"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="102dp"/>
+
+<!--이름-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Name"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="맥스"
+           android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="151dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MyInfo_NameBtn"
+            android:layout_width="67dp"
+            android:layout_height="28dp"
+            android:background="@drawable/round_box5"
+            android:backgroundTint="#7FB3FD"
+            android:text="변경하기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="165dp"/>
+
+        <TextView
+            android:id="@+id/MyInfo_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#707070"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:paddingStart="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="135dp"/>
+    </FrameLayout>
+<!--생년월일-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_BirthDate"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="2000/05/29"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="220dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MyInfo_BirthDateBtn"
+            android:layout_width="67dp"
+            android:layout_height="28dp"
+            android:background="@drawable/round_box5"
+            android:backgroundTint="#7FB3FD"
+            android:text="변경하기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="234dp"/>
+
+        <TextView
+            android:id="@+id/MyInfo_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="생년월일"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#707070"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="204dp"/>
+    </FrameLayout>
+
+    <!--전화번호-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Phone"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="010-0000-0000"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="291dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MyInfo_PhoneBtn"
+            android:layout_width="67dp"
+            android:layout_height="28dp"
+            android:background="@drawable/round_box5"
+            android:backgroundTint="#7FB3FD"
+            android:text="변경하기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="305dp"/>
+
+        <TextView
+            android:id="@+id/MyInfo_text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전화번호"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#707070"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="275dp"/>
+    </FrameLayout>
+    <!--이메일-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Email"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="0000000@naver.com"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="356dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MyInfo_EmailBtn"
+            android:layout_width="67dp"
+            android:layout_height="28dp"
+            android:background="@drawable/round_box5"
+            android:backgroundTint="#7FB3FD"
+            android:text="변경하기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="370dp"/>
+
+        <TextView
+            android:id="@+id/MyInfo_text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#707070"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="344dp"/>
+    </FrameLayout>
+
+
+    <!--일반 항목-->
+    <TextView
+        android:id="@+id/MyInfo_text6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일반"
+        android:fontFamily="@font/notosanskr_bold"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="410dp"/>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Privacy"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="개인정보 처리방침"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="440dp"/>
+
+        <ImageButton
+            android:id="@+id/MyInfo_PrivacyBtn"
+            android:layout_width="16dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_marginStart="322dp"
+            android:layout_marginTop="440dp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Termofuse"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="서비스 이용약관"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="499dp"/>
+
+        <ImageButton
+            android:id="@+id/MyInfo_TermofuseBtn"
+            android:layout_width="16dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_marginStart="322dp"
+            android:layout_marginTop="499dp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/MyInfo_Withdrawal"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:background="@drawable/settingsbox"
+            android:text="회원탈퇴"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="557dp"/>
+
+        <ImageButton
+            android:id="@+id/MyInfo_WithdrawalBtn"
+            android:layout_width="16dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_marginStart="322dp"
+            android:layout_marginTop="557dp"/>
+    </FrameLayout>
+</FrameLayout>
