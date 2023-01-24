@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.MainActivity
@@ -23,6 +26,16 @@ class HomeFragment : Fragment() {
 
     val mySchoolSampleData = mutableListOf(mutableListOf("자기추천장학금", 215), mutableListOf("삼금문화장학재단 장학금", 215),
         mutableListOf("서울희망 대학 장학금", 215), mutableListOf("대산농촌재단 장학금", 215))
+
+    // 추천 배너 슬라이더 adapter
+    private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
+    private var mainRecommendCurrentPosition = 0 // 슬라이드 이미지 현재 위치
+
+    // 추천 배너 슬라이드 핸들러 설정
+    val handler = Handler(Looper.getMainLooper()){
+        setMainRecommendSlideImage()
+        true
+    }
 
     // 우리대학 장학금 리스트 recyclerview adapter
     private val mySchoolDatas = mutableListOf<MainMySchoolData>()
@@ -92,6 +105,18 @@ class HomeFragment : Fragment() {
             activity?.changeFragment(NewIssueFragment())
         }
 
+        // 추천 배너 슬라이드 어댑터 연결하기
+        mainRecommendSliderAdapter = MainRecommendSliderAdapter()
+        viewBinding.mainRecommendSlideViewpager.adapter = mainRecommendSliderAdapter
+
+        // 추천 배너 슬라이드 ViewPager 넘기는 쓰레드
+        val mainRecommendSlideThread = Thread(mainRecommendSlideRunnable())
+        mainRecommendSlideThread.start()
+
+        // 추천 배너 슬라이드 ViewPager의 Indicator
+        val mainRecommendSlideIndicator: WormDotsIndicator = viewBinding.mainRecommendSlideIndicator
+        mainRecommendSlideIndicator.attachTo(viewBinding.mainRecommendSlideViewpager)
+
         // recyclerview 세팅
         initRecycler()
 
@@ -109,6 +134,23 @@ class HomeFragment : Fragment() {
         val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
         for(i: Int in 0..3) {
             addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
+        }
+    }
+
+    // 추천 배너 슬라이드 이미지 변경하기
+    fun setMainRecommendSlideImage(){
+        if(mainRecommendCurrentPosition == 5) mainRecommendCurrentPosition = 0
+        viewBinding.mainRecommendSlideViewpager.setCurrentItem(mainRecommendCurrentPosition,true)
+        mainRecommendCurrentPosition += 1
+    }
+
+    // 추천 배너 슬라이드 5초마다 이미지 넘기기
+    inner class mainRecommendSlideRunnable: Runnable{
+        override fun run() {
+            while(true){
+                Thread.sleep(5000)
+                handler.sendEmptyMessage(0)
+            }
         }
     }
 

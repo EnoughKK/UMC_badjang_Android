@@ -29,6 +29,7 @@
         android:layout_gravity="start"
         app:menu="@menu/bottom_navigation_menu"
         android:background="#ffffff"
+        app:itemBackground="@drawable/bottom_menu_item_selector"
         app:itemIconTint="@drawable/bottom_menu_selector_color"
         app:itemTextColor="@drawable/bottom_menu_selector_color"
         app:labelVisibilityMode="labeled"
