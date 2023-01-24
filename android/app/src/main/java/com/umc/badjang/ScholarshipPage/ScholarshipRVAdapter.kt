@@ -12,11 +12,12 @@ class ScholarshipRVAdapter(private val context: Context):
     RecyclerView.Adapter<ScholarshipRVAdapter.ScholarshipHolder>() {
 
     private lateinit var viewBinding: RvScholarshipBinding
+    private lateinit var mItemClickListener: OnClickInterface
 
     var datas = mutableListOf<ScholarshipRVDTO>()
 
     interface OnClickInterface{
-        fun onClick(view: RvScholarshipBinding, position: Int)
+        fun onClick(view: View, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
@@ -31,6 +32,9 @@ class ScholarshipRVAdapter(private val context: Context):
 
     override fun onBindViewHolder(holder: ScholarshipRVAdapter.ScholarshipHolder, position: Int) {
         holder.bind(datas[position])
+        holder.itemView.setOnClickListener {
+            mItemClickListener.onClick(it, position)
+        }
     }
 
     override fun getItemCount(): Int = datas.size
@@ -46,6 +50,14 @@ class ScholarshipRVAdapter(private val context: Context):
             binding.textViewViews.text = item.scholarshipViews.toString()         // 장학금 뷰어수
             binding.textViewComments.text = item.scholarshipComments.toString()   // 장학금 댓글수
 
+            if(item.bookMark == true){
+                binding.btnStarUnChecked.visibility = View.INVISIBLE
+                binding.btnStarChecked.visibility = View.VISIBLE
+            } else {
+                binding.btnStarUnChecked.visibility = View.VISIBLE
+                binding.btnStarChecked.visibility = View.INVISIBLE
+            }
+
             // 즐겨찾기 추가
             binding.btnStarUnChecked.setOnClickListener {
 
@@ -53,7 +65,7 @@ class ScholarshipRVAdapter(private val context: Context):
                 binding.btnStarUnChecked.visibility = View.INVISIBLE
                 binding.btnStarChecked.visibility = View.VISIBLE
 
-                item.bookMark = true // DTO에 즐겨찾기 추가? <- 테스트필요
+                item.bookMark = true // DTO에 즐겨찾기 추가? <- 임시
 
             }
 
@@ -64,7 +76,7 @@ class ScholarshipRVAdapter(private val context: Context):
                 binding.btnStarUnChecked.visibility = View.VISIBLE
                 binding.btnStarChecked.visibility = View.INVISIBLE
 
-                item.bookMark = false // DTO에 즐겨찾기 해제? <- 테스트필요
+                item.bookMark = false // DTO에 즐겨찾기 해제? <- 임시
 
             }
 
@@ -86,8 +98,14 @@ class ScholarshipRVAdapter(private val context: Context):
                 }
             }
 
+            // 장학금 상세 페이지 이동
+
         }
 
+    }
+
+    fun setItemClickListener(itemClickListener: OnClickInterface){
+        mItemClickListener = itemClickListener
     }
 
 }
