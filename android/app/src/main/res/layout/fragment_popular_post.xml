@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 홈 화면 > 우리 학교 장학금 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeMorePage.MySchoolFragment">
+    tools:context=".HomeMorePage.PopularPostFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/my_school_header"
+            android:id="@+id/popular_post_header"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
             <ImageButton
-                android:id="@+id/my_school_back_btn"
+                android:id="@+id/popular_post_back_btn"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_gravity="center"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:text="우리학교 장학금"
+                android:text="인기글"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -42,10 +42,27 @@
             android:id="@+id/toolbar_line"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginVertical="2dp"
+            android:layout_below="@id/popular_post_header"
             android:layout_marginHorizontal="20dp"
-            android:layout_below="@id/my_school_header"
-            android:background="@color/header_line"/>
+            android:layout_marginVertical="2dp"
+            android:background="@color/header_line" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_line">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popular_post_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="20dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/post_content_item" />
+
+        </ScrollView>
 
     </RelativeLayout>
 

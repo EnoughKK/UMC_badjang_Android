@@ -19,10 +19,9 @@
             android:id="@+id/toolbar_line"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginVertical="2dp"
             android:layout_marginHorizontal="20dp"
             android:layout_below="@id/toolbar"
-            android:background="#252525"/>
+            android:background="@color/header_line"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -53,13 +52,26 @@
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <!-- 추천 배너 이미지 슬라이더 -->
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/main_recommend_slide_viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="94dp"
-                        android:layout_marginTop="10dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/recommend_img"
-                        app:riv_corner_radius="10dp" />
+                        android:layout_marginTop="15dp" />
+
+                    <!-- 추천 배너 이미지 슬라이드 indicator-->
+                    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                        android:id="@+id/main_recommend_slide_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:dotsColor="@color/main_theme"
+                        app:dotsStrokeColor="#D9D9D9"
+                        app:dotsCornerRadius="8dp"
+                        app:dotsSize="4dp"
+                        app:dotsSpacing="2dp"
+                        app:dotsStrokeWidth="2dp"
+                        android:layout_gravity="center_horizontal"/>
 
                 </LinearLayout>
 
@@ -69,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -197,7 +209,7 @@
                             android:id="@+id/main_national_news_recyclerview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/main_national_news_item" />
