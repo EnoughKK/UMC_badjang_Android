@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.TermofUseActivity">
+    tools:context=".LoginPage.TermofUseActivity">
 
     <View
         android:layout_width="match_parent"
@@ -44,10 +44,9 @@
             />
     </LinearLayout>
 
-    <TextView
+    <WebView
         android:layout_width="320dp"
-        android:layout_height="400dp"
-        android:text="@string/terms_use"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_regular"
         android:textColor="@color/black"
         android:textSize="12sp"

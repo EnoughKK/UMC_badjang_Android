@@ -64,19 +64,19 @@
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_idactivity.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_pwactivity.xml" value="0.18902991840435177" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_find_school.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_login.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_login2.xml" value="0.18902991840435177" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_logo.xml" value="0.1085934159897392" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_main.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_privacy.xml" value="0.1619718309859155" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_privacy.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_register.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_result.xml" value="0.10431808465156049" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_rservice.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_rservice2.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_schoolcheck.xml" value="0.2261650277896537" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_searchschool.xml" value="0.2261650277896537" />
-        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_signup.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_termofuse.xml" value="0.2261650277896537" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_signup.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/activity_termofuse.xml" value="0.1" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_birthdatechange.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_emailchange.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_logout.xml" value="0.2857142857142857" />
@@ -87,7 +87,7 @@
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_termtodisagree.xml" value="0.1085934159897392" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_verification_id.xml" value="0.1085934159897392" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/dialog_withdrawal.xml" value="0.10773834972210346" />
-        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/fragment_alarm.xml" value="0.22530996152201796" />
+        <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/fragment_alarm.xml" value="0.12571428571428572" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/fragment_home.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/fragment_my_info.xml" value="0.1085934159897392" />
         <entry key="..\:/Users/dana5/AndroidStudioProjects/UMC_badjang_Android/android/app/src/main/res/layout/fragment_my_page.xml" value="0.18857142857142858" />

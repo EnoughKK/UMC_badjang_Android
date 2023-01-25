@@ -1,8 +1,7 @@
-package com.umc.badjang.Login
+package com.umc.badjang.LoginPage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.umc.badjang.databinding.ActivityLoginBinding
 import com.umc.badjang.databinding.ActivityLogoBinding
 
 class LogoActivity : AppCompatActivity() {

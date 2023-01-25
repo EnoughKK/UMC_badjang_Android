@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.TermofUseActivity">
+    tools:context=".LoginPage.TermofUseActivity">
 
     <View
         android:layout_width="match_parent"
@@ -55,10 +55,10 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="90dp">
 
-        <TextView
+        <WebView
+            android:id="@+id/privacy_webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/terms_use2"
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="#000000"
             android:textSize="12sp"

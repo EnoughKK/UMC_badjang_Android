@@ -1,9 +1,9 @@
-package com.umc.badjang.Login
+package com.umc.badjang.LoginPage
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -22,22 +22,28 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.umc.badjang.LoginPage.models.LoginRequest
+import com.umc.badjang.LoginPage.models.LoginResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
-import java.util.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInterface {
+
     //firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
-
     //google client
     private lateinit var googleSignInClient: GoogleSignInClient
-
     //private const val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 99
 
     private lateinit var binding: ActivityLoginBinding// viewBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,19 +52,42 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         //setContentView(R.layout.activity_login)
 
+
+        //var retrofit = Retrofit.Builder()
+          //  .baseUrl("https://prod.badjang2023.shop/users")
+            //.addConverterFactory(GsonConverterFactory.create())
+            //.build()
+      //  var loginservice: LoginRetrofit = retrofit.create(LoginRetrofit::class.java)
+
+        //HashKey확인
         val KeyHash = Utility.getKeyHash(this)
         Log.e("Hash", "KeyHash: $KeyHash")
-        //kakao SDK 초기화
-        KakaoSdk.init(this, "b31ceafa89bebeeb560346e90f07ea91")
+
+
 
         // 회원가입 창으로
         binding.LoginSignup.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
+        //아이디찾기 창으로
+        binding.LoginFindID.setOnClickListener{
+            startActivity(Intent(this,FindIDActivity::class.java))
+        }
+        //비밀번호찾기 창으로
+        binding.LoginFindPW.setOnClickListener{
+            startActivity(Intent(this,FindPWActivity::class.java))
+        }
 
         // 로그인 버튼
         binding.LoginBtn.setOnClickListener {
-            signIn()
+
+            var email = binding.LoginEmail.text.toString()
+            var password =binding.LoginPassword.text.toString()
+            val loginRequest = LoginRequest(user_email = email , user_password = password )
+            LoginService(this).tryPostLogin(loginRequest)
+            startActivity(Intent(this,MainActivity::class.java))
+            Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+
         }
 
         //카카오톡 로그인 버튼
@@ -82,9 +111,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun signIn() {
-        TODO("Not yet implemented")
-    }
 
     // 로그아웃하지 않을 시 자동 로그인 , 회원가입시 바로 로그인 됨
     public override fun onStart() {
@@ -148,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
     }
     // signIn End
 
-    fun onClick(p0: View?) {
+    override fun onClick(p0: View?) {
     }
 
 
@@ -170,85 +196,54 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-    //카카오톡 로그인 함수
-    private fun kakaoLogin() {
-        UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
-            if (error != null) {
-                Toast.makeText(this, "토근 정보 보기 실패", Toast.LENGTH_SHORT).show()
-            } else if (tokenInfo != null) {
-                Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LogoActivity::class.java)
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                finish()
-            }
-        }
+    private fun kakaoLogin(){
+        // 카카오계정으로 로그인 공통 callback 구성
+        // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                when {
-                    error.toString() == AuthErrorCause.AccessDenied.toString() -> {
-                        Toast.makeText(this, "접근이 거부 됨(동의 취소)", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.InvalidClient.toString() -> {
-                        Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
-                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
-                        Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.InvalidScope.toString() -> {
-                        Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.Misconfigured.toString() -> {
-                        Toast.makeText(this, "잘못 구성된 애플리케이션", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.ServerError.toString() -> {
-                        Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
-                    }
-                    error.toString() == AuthErrorCause.Unauthorized.toString() -> {
-                        Toast.makeText(this, "앱 요청 권한이 없음", Toast.LENGTH_SHORT).show()
-                    }
-                    else -> { //Unknown
-                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
-                Toast.makeText(this, "로그인에 성공하셨습니다", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LogoActivity::class.java)
+                Log.i("LOGIN", "카카오계정으로 로그인 성공 ${token.accessToken}")
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                finish()
             }
         }
-        //카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니라면 카카오계정으로 로그인
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-                if (error != null) {
-                    Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
-                    //TextMsg(this,"카카오톡으로 로그인 실패: ${error}")
 
-                    //사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소할 경우,
-                    //의도적인 로그인 취소로 보고 카카오톡 계정으로 로그인 시도 없이 로그인 취소로 처리(예: 뒤로가기)
+        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
+            UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
+                if (error != null) {
+                    Log.e("LOGIN", "카카오톡으로 로그인 실패", error)
+
+                    // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
+                    // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         return@loginWithKakaoTalk
                     }
 
-                    //카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                    UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
+                    UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
                 } else if (token != null) {
-                    Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
-                    //val intent = Intent(this, LogoActivity::class.java)
+                    Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                    finish()
-                    //TextMsg(this,"카카오톡 로그인 성공 ${token.accessToken}")
-                    //setLogin(true)
+
                 }
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-        } }
+        }
+    }
+
+
+    override fun onPostLoginSuccess(response: LoginResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostLoginFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
 
 
 }
