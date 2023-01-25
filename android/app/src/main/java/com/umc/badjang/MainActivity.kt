@@ -5,13 +5,11 @@ import android.os.Bundle
 
 //develop 브랜치 추가
 import android.util.Log
-import android.view.View
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
-import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
+import com.umc.badjang.PostPage.PostFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
