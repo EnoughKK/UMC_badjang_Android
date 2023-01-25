@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:minHeight="134dp"
     android:background="@drawable/border_layout"
-    android:layout_marginTop="10dp">
+    android:layout_marginHorizontal="1dp"
+    android:layout_marginBottom="15dp">
 
     <TextView
         android:id="@+id/university_label"
@@ -26,10 +27,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/scholarship_category"
+        android:id="@+id/subsidy_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="교내 재학생 장학금"
+        android:text="교내 재학생 지원금"
         android:textSize="12sp"
         android:textColor="#000000"
         android:layout_marginTop="5dp"
@@ -37,26 +38,38 @@
         app:layout_constraintTop_toBottomOf="@+id/university_label" />
 
     <TextView
-        android:id="@+id/scholarship_title"
+        android:id="@+id/subsidy_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="자기추천장학금"
+        android:text="자기추천지원금"
         android:textColor="#000000"
         android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/university_label"
-        app:layout_constraintTop_toBottomOf="@+id/scholarship_category" />
+        app:layout_constraintTop_toBottomOf="@+id/subsidy_category" />
 
     <ImageButton
-        android:id="@+id/btn_favorites_small"
+        android:id="@+id/btn_starUnChecked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:padding="10dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/favorites_small" />
+
+    <ImageButton
+        android:id="@+id/btn_starChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_star_checked" />
 
     <TextView
         android:id="@+id/textView_views"
@@ -67,7 +80,7 @@
         android:textSize="12sp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/btn_viewMore"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
@@ -103,7 +116,7 @@
         app:srcCompat="@drawable/comments" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/btn_viewMore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,11 +132,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textview_viewMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:drawableEnd="@drawable/polygon_down"
             android:text="더보기"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -131,6 +144,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_viewMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_viewMore"
+            app:layout_constraintStart_toEndOf="@+id/textview_viewMore"
+            app:layout_constraintTop_toTopOf="@+id/textview_viewMore"
+            app:srcCompat="@drawable/polygon_down" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,10 +162,12 @@
         android:id="@+id/expandable_view"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintTop_toBottomOf="@id/scholarship_title"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/subsidy_title"
         app:layout_constraintBottom_toTopOf="@id/textView_views">
 
         <TextView
+            android:id="@+id/subsidy_contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="재학생의 자신의 개발 가능성을 토대로 자신을 추천하여
