@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_border"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="15dp">
+
+    <TextView
+        android:id="@+id/textview_school1"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="학교"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_search_school"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dialog_selection_board"
+        android:hint="검색하기"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_school1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_school1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textview_school2"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:text="단과대학"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_school"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selection_school" />
+
+    <TextView
+        android:id="@+id/selection_school"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/editText_search_school"
+        app:layout_constraintTop_toBottomOf="@id/editText_search_school" />
+
+    <TextView
+        android:id="@+id/textview_major"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:text="학과"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_major"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selection_major" />
+
+    <TextView
+        android:id="@+id/selection_major"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/editText_search_school"
+        app:layout_constraintTop_toBottomOf="@id/selection_school" />
+
+    <TextView
+        android:id="@+id/textview_grade"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:text="학년"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_grade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selection_grade" />
+
+    <TextView
+        android:id="@+id/selection_grade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/editText_search_school"
+        app:layout_constraintTop_toBottomOf="@id/selection_major" />
+
+    <TextView
+        android:id="@+id/textview_semester"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:text="학기"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_semester"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selection_semester" />
+
+    <TextView
+        android:id="@+id/selection_semester"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/editText_search_school"
+        app:layout_constraintTop_toBottomOf="@id/selection_grade" />
+
+    <View
+        android:id="@+id/contour"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/selection_semester" />
+
+    <TextView
+        android:id="@+id/textview_localName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="지역명(도, 시/군/구)"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contour" />
+
+    <TextView
+        android:id="@+id/textview_local1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_local1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selection_local1" />
+
+    <TextView
+        android:id="@+id/selection_local1"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/textview_local1"
+        app:layout_constraintTop_toBottomOf="@id/textview_localName" />
+
+    <TextView
+        android:id="@+id/textview_local2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="시/군/구"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selection_local2"
+        app:layout_constraintStart_toEndOf="@+id/selection_local1"
+        app:layout_constraintTop_toTopOf="@+id/selection_local2" />
+
+    <TextView
+        android:id="@+id/selection_local2"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/dialog_selection_board"
+        android:drawableEnd="@drawable/dialog_down"
+        android:hint="선택하기"
+        android:paddingRight="10dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/textview_local2"
+        app:layout_constraintTop_toBottomOf="@id/textview_localName" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="137dp"
+        android:layout_height="34sp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/btn_cancel"
+        android:text="취소하기"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selection_local1" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="137dp"
+        android:layout_height="34sp"
+        android:background="@drawable/btn_confirm"
+        android:text="적용하기"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_cancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

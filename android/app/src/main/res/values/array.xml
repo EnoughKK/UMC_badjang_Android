@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_category">
+        <item>전체</item>
+        <item>교내 신입생 입학성적 우수 장학금</item>
+        <item>교내 재학생 장학금</item>
+        <item>교외 장학금</item>
+    </string-array>
+
+    <string-array name="spinner_sort">
+        <item>날짜순</item>
+        <item>인기순</item>
+        <item>댓글순</item>
+    </string-array>
+</resources>

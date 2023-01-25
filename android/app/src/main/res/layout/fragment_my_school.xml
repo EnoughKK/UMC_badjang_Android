@@ -20,21 +20,21 @@
                 android:id="@+id/my_school_back_btn"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="17dp"
-                android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_back_btn"
-                android:layout_gravity="center"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_back_btn" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
                 android:text="우리학교 장학금"
-                android:textSize="20dp"
-                android:textStyle="bold"
                 android:textColor="#000000"
-                android:layout_gravity="center" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
