@@ -1,6 +1,7 @@
 package com.umc.badjang.ScholarshipPage
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ class ScholarshipRVAdapter(private val context: Context):
     private lateinit var viewBinding: RvScholarshipBinding
     private lateinit var mItemClickListener: OnClickInterface
 
-    var datas = mutableListOf<ScholarshipRVDTO>()
+    var datas = ArrayList<GetScholarshipDTO>()
 
     interface OnClickInterface{
         fun onClick(view: View, position: Int)
@@ -42,43 +43,45 @@ class ScholarshipRVAdapter(private val context: Context):
     inner class ScholarshipHolder(private val binding: RvScholarshipBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ScholarshipRVDTO) {
-            binding.universityLabel.text = item.universityLabel                   // 대학교 이름
-            binding.scholarshipCategory.text = item.scholarshipCategory           // 장학금 카테고리
-            binding.scholarshipTitle.text = item.scholarshipTitle                 // 장학금 이름
-            binding.scholarshipContents.text = item.scholarshipContents           // 장학금 상세내용
-            binding.textViewViews.text = item.scholarshipViews.toString()         // 장학금 뷰어수
-            binding.textViewComments.text = item.scholarshipComments.toString()   // 장학금 댓글수
+        fun bind(item: GetScholarshipDTO) {
+            Log.d("로그", "${datas.size}")
 
-            if(item.bookMark == true){
-                binding.btnStarUnChecked.visibility = View.INVISIBLE
-                binding.btnStarChecked.visibility = View.VISIBLE
-            } else {
-                binding.btnStarUnChecked.visibility = View.VISIBLE
-                binding.btnStarChecked.visibility = View.INVISIBLE
-            }
+            binding.universityLabel.text = item.scholarship_univ                  // 대학교 이름
+            binding.scholarshipCategory.text = item.scholarship_category          // 장학금 카테고리
+            binding.scholarshipTitle.text = item.scholarship_name                 // 장학금 이름
+            binding.scholarshipContents.text = item.scholarship_content           // 장학금 상세내용
+            binding.textViewViews.text = item.scholarship_view.toString()         // 장학금 뷰어수
+            binding.textViewComments.text = item.scholarship_comment.toString()   // 장학금 댓글수
+
+//            if(item.bookMark == true){
+//                binding.btnStarUnChecked.visibility = View.INVISIBLE
+//                binding.btnStarChecked.visibility = View.VISIBLE
+//            } else {
+//                binding.btnStarUnChecked.visibility = View.VISIBLE
+//                binding.btnStarChecked.visibility = View.INVISIBLE
+//            }
 
             // 즐겨찾기 추가
-            binding.btnStarUnChecked.setOnClickListener {
-
-                // 즐겨찾기 버튼 활성화/비활성화
-                binding.btnStarUnChecked.visibility = View.INVISIBLE
-                binding.btnStarChecked.visibility = View.VISIBLE
-
-                item.bookMark = true // DTO에 즐겨찾기 추가? <- 임시
-
-            }
+//            binding.btnStarUnChecked.setOnClickListener {
+//
+//                // 즐겨찾기 버튼 활성화/비활성화
+//                binding.btnStarUnChecked.visibility = View.INVISIBLE
+//                binding.btnStarChecked.visibility = View.VISIBLE
+//
+//                item.bookMark = true // DTO에 즐겨찾기 추가? <- 임시
+//
+//            }
 
             // 즐겨찾기 해제
-            binding.btnStarChecked.setOnClickListener {
-
-                // 즐겨찾기 버튼 활성화/비활성화
-                binding.btnStarUnChecked.visibility = View.VISIBLE
-                binding.btnStarChecked.visibility = View.INVISIBLE
-
-                item.bookMark = false // DTO에 즐겨찾기 해제? <- 임시
-
-            }
+//            binding.btnStarChecked.setOnClickListener {
+//
+//                // 즐겨찾기 버튼 활성화/비활성화
+//                binding.btnStarUnChecked.visibility = View.VISIBLE
+//                binding.btnStarChecked.visibility = View.INVISIBLE
+//
+//                item.bookMark = false // DTO에 즐겨찾기 해제? <- 임시
+//
+//            }
 
             // 상세내용 더보기/접기
             binding.btnViewMore.setOnClickListener {
