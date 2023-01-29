@@ -48,26 +48,25 @@
 
     <ScrollView
         android:id="@+id/Privacy_Scroll"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="611dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="90dp">
 
         <WebView
-            android:id="@+id/privacy_webview"
+            android:id="@+id/webView_privacy"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#000000"
-            android:textSize="12sp"
+            android:layout_height="match_parent"
+
             />
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Privacy_Btn"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/round_box"
         android:backgroundTint="#2173FD"
@@ -79,7 +78,8 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="713dp" />
 
     <View

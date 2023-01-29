@@ -53,7 +53,8 @@
       android:orientation="horizontal"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="240dp">
 
     <EditText
@@ -84,7 +85,7 @@
 
   <TextView
       android:id="@+id/FindID_missPhone"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="전화번호 형식에 맞게 입력해주세요"
       android:fontFamily="@font/notosanskr_regular"
@@ -93,25 +94,27 @@
       android:paddingStart="5dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="288dp"/>
 
   <LinearLayout
       android:id="@+id/FindID_linearLayout3"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
+      android:layout_height="56dp"
       android:orientation="horizontal"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="320dp"
       >
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
       <EditText
           android:id="@+id/FindID_Authnum"
-          android:layout_width="320dp"
+          android:layout_width="match_parent"
           android:layout_height="56dp"
           android:hint="인증번호"
           android:fontFamily="@font/notosanskr_regular"
@@ -122,21 +125,21 @@
       <TextView
           android:id="@+id/FindID_Time"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:text="04:59"
           android:fontFamily="@font/notosanskr_regular"
           android:textColor="#ED1C24"
           android:textSize="12sp"
+          android:gravity="center"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginStart="280dp"
-          android:layout_marginTop="5dp"/>
+          android:layout_marginLeft="320dp" />
     </FrameLayout>
   </LinearLayout>
 
   <TextView
       android:id="@+id/FindID_missAuthnum"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="인증번호가 일치하지 않습니다"
       android:fontFamily="@font/notosanskr_regular"
@@ -145,12 +148,13 @@
       android:paddingStart="5dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="365dp"/>
 
   <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/FindID_AuthBtn"
-      android:layout_width="320dp"
+      android:layout_width="match_parent"
       android:layout_height="40dp"
       android:background="@drawable/round_box"
       android:backgroundTint="#2173FD"
@@ -160,20 +164,24 @@
       android:textSize="15sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="410dp"/>
 
   <TextView
       android:id="@+id/FindID_PWPage"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="비밀번호를 잃어버리셨나요?"
       android:fontFamily="@font/notosanskr_regular"
       android:textColor="#6C6C6C"
       android:textSize="10sp"
+      android:clickable="true"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="141dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:gravity="center"
       android:layout_marginTop="448dp"/>
 
   <View

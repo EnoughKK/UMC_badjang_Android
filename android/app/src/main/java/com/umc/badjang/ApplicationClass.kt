@@ -41,7 +41,7 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
 
         //kakao SDK 초기화
-        KakaoSdk.init(this, getString(R.string.kakao_app_key))
+        KakaoSdk.init(this, getString(R.string.kakao_native_key))
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.
@@ -63,4 +63,7 @@ class ApplicationClass : Application() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+
+
 }

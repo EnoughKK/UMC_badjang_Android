@@ -1,11 +1,14 @@
 package com.umc.badjang.LoginPage
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,18 +25,19 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.umc.badjang.ApplicationClass
+import com.umc.badjang.ApplicationClass.Companion.sRetrofit
+import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.LoginPage.models.LoginRequest
 import com.umc.badjang.LoginPage.models.LoginResponse
+import com.umc.badjang.LoginPage.models.ResultLogin
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInterface {
+class LoginActivity : AppCompatActivity(),View.OnClickListener {
 
     //firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -44,25 +48,25 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInte
 
     private lateinit var binding: ActivityLoginBinding// viewBinding
 
+    //카카오 객체
+    companion object{
+        const val BASE_URL="https://prod.badjang2023.shop/oauth/kakao"
+        const val REST_API="b31ceafa89bebeeb560346e90f07ea91"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 바인딩 초기화
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_login)
 
+        //LoginRetrofit으로 전역변수로 지정된 sRetrifit으로 연결
+        val loginRetrofit = ApplicationClass.sRetrofit.create(LoginRetrofit::class.java)
 
-        //var retrofit = Retrofit.Builder()
-          //  .baseUrl("https://prod.badjang2023.shop/users")
-            //.addConverterFactory(GsonConverterFactory.create())
-            //.build()
-      //  var loginservice: LoginRetrofit = retrofit.create(LoginRetrofit::class.java)
 
         //HashKey확인
         val KeyHash = Utility.getKeyHash(this)
         Log.e("Hash", "KeyHash: $KeyHash")
-
 
 
         // 회원가입 창으로
@@ -83,15 +87,60 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInte
 
             var email = binding.LoginEmail.text.toString()
             var password =binding.LoginPassword.text.toString()
-            val loginRequest = LoginRequest(user_email = email , user_password = password )
-            LoginService(this).tryPostLogin(loginRequest)
-            startActivity(Intent(this,MainActivity::class.java))
-            Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+
+            val loginRequest:LoginRequest = LoginRequest(user_email = email , user_password = password )
+
+            loginRetrofit.requestLogin(loginRequest).enqueue(object :Callback<LoginResponse>{
+
+
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+
+                    var result: LoginResponse? = response.body()
+
+                    if(result?.isSuccess==true){
+
+                        // 정상적으로 통신이 성고된 경우
+                        Log.d("로그인", "onResponse 성공: " + result?.toString())
+
+                        //토큰값 저장
+                        val sharedPref = getSharedPreferences(getString(R.string.shared_preference_user_info),Context.MODE_PRIVATE)
+                        with(sharedPref.edit()){
+                            putString(getString(R.string.user_token), result.toString())
+                            apply()
+                        }
+                        Toast.makeText(this@LoginActivity,"로그인 성공!",Toast.LENGTH_SHORT).show()
+                        Intent(this@LoginActivity,MainActivity::class.java).apply{
+                            startActivity(this)
+                        }
+
+                    }
+                    else if (result?.isSuccess==false){
+                        // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
+                        Log.d("로그인", "onResponse 실패")
+                        onLoginFailure(result.code)
+                    }
+
+                /*result 사용
+                *val sharedPref = getSharedPreferences(getString(R.string.shared_perference_user_info),Context.MODE_PRIVATE)
+                *val result = sharedPref.getString(getString.R.string.user_token),"no data")
+                * Log.d("로그","userToken:${userToken}")*/
+
+                }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.e("로그인","${t.localizedMessage}")
+                }
+            })
+
 
         }
 
         //카카오톡 로그인 버튼
-        binding.LoginKakaoBtn.setOnClickListener { kakaoLogin() }
+        binding.LoginKakaoBtn.setOnClickListener {
+           kakaoLogin()
+         //startActivity(Intent(this,KakaoWebViewActivity::class.java))
+        }
+            //startActivity(Intent(this,KakaoWebViewActivity::class.java))
+
 
         // 구글 로그인 버튼
         binding.LoginGoogleBtn.setOnClickListener { googleLogin() }
@@ -110,6 +159,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInte
         firebaseAuth = FirebaseAuth.getInstance()
 
     }
+
+
 
 
     // 로그아웃하지 않을 시 자동 로그인 , 회원가입시 바로 로그인 됨
@@ -177,7 +228,6 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInte
     override fun onClick(p0: View?) {
     }
 
-
     private fun signOut() { // 로그아웃
         // Firebase sign out
         firebaseAuth.signOut()
@@ -236,15 +286,70 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, LoginActvityInte
     }
 
 
-    override fun onPostLoginSuccess(response: LoginResponse) {
-        TODO("Not yet implemented")
+    fun onLoginFailure(code: Int) {
+        when(code) {
+
+            2020 -> {
+                Toast.makeText(this@LoginActivity, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            2021 -> {
+                Toast.makeText(this@LoginActivity, "이메일 형식을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            2030 -> {
+                Toast.makeText(this@LoginActivity, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            2100 -> {
+                Toast.makeText(this@LoginActivity, "JWT를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            2101 -> {
+                Toast.makeText(this@LoginActivity, "유효하지 않은 JWT입니다.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            3000 -> {
+                Toast.makeText(this@LoginActivity, "값을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            3100 -> {
+                Toast.makeText(this@LoginActivity, "없는 아이디거나 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            4000 -> {
+                Toast.makeText(this@LoginActivity, "데이터베이스 연결에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+            4011 -> {
+                Toast.makeText(this@LoginActivity, "비밀번호 암호화에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                binding.LoginEmail.setText(null)
+                binding.LoginPassword.setText(null)
+                onStart()
+            }
+        }
     }
-
-    override fun onPostLoginFailure(message: String) {
-        TODO("Not yet implemented")
+    //키보드 내려가게 해줌
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return true
     }
-
-
-
 }
 

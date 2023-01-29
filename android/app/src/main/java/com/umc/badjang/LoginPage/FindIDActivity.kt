@@ -18,5 +18,9 @@ class FindIDActivity : AppCompatActivity() {
         binding.FindIDUpBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
+        binding.FindIDPWPage.setOnClickListener {
+            startActivity(Intent(this, FindPWActivity::class.java))
+        }
     }
 }

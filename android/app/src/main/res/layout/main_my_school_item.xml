@@ -57,13 +57,14 @@
         <RelativeLayout
             android:id="@+id/main_my_school_view"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="2dp">
 
             <ImageView
                 android:id="@+id/main_my_school_view_icon"
                 android:layout_width="15dp"
                 android:layout_height="10dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/ic_view_count"
@@ -73,7 +74,7 @@
                 android:id="@+id/main_my_school_view_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/main_my_school_view_icon"
                 android:textSize="10dp"
                 android:textColor="#000000"
@@ -85,7 +86,7 @@
             android:id="@+id/main_my_school_star_icon"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_toRightOf="@+id/main_my_school_view"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"

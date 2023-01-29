@@ -3,16 +3,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/atdContentTv"
-    android:layout_width="320dp"
+    android:layout_width="match_parent"
     android:layout_height="162dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:orientation="vertical">
 
   <TextView
+      android:id="@+id/termtodisagree_text"
       android:layout_width="match_parent"
       android:layout_height="114dp"
       android:background="@drawable/upround_box"
+      android:backgroundTint="@color/white"
       android:gravity="center_horizontal|center_vertical"
-      android:paddingLeft="20dp"
       android:text="개인정보 수집 및 이용 약관에\n동의해주세요"
       android:fontFamily="@font/notosanskr_regular"
       android:textColor="@color/black"

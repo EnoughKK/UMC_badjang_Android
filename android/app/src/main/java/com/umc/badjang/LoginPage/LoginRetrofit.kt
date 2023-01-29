@@ -1,9 +1,6 @@
 package com.umc.badjang.LoginPage
 
-import com.umc.badjang.LoginPage.models.KakaoOauthRequest
-import com.umc.badjang.LoginPage.models.LoginRequest
-import com.umc.badjang.LoginPage.models.LoginResponse
-import com.umc.badjang.LoginPage.models.OAuthTokenResponse
+import com.umc.badjang.LoginPage.models.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,8 +9,11 @@ import retrofit2.http.Query
 
 interface LoginRetrofit {
 
-    @POST("/users/logIn") //로그인임
+    @POST("/users/logIn") //로그인
    fun requestLogin(@Body params: LoginRequest): Call<LoginResponse>
+
+    @POST("/users") //회원가입
+    fun requestSignup(@Body params: SignUpRequest): Call<SignUpResponse>
 
    @POST("/oauth/kakao") //카카오로그인
     fun getKakaoToken(@Body KakaoOauthRequest: KakaoOauthRequest): Call<OAuthTokenResponse>

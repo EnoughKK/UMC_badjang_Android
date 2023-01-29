@@ -15,10 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31"
-        tools:ignore="MissingClass"
-        android:usesCleartextTraffic="true">
-
+        tools:targetApi="31">
+        
         <activity
             android:name=".LoginPage.ChangePWActvity"
             android:exported="false" />
@@ -37,26 +35,32 @@
         <activity
             android:name=".LoginPage.VerificationIDActivity"
             android:exported="false" />
+
         <activity
             android:name=".LoginPage.TermofUseActivity"
             android:exported="false" />
         <activity
             android:name=".LoginPage.LoginActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+            
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/NoTitleBarTheme"></activity>
+            android:theme="@style/NoTitleBarTheme"
+            android:exported="true">
 
-        <activity
+        </activity>
+
+            <activity
             android:name=".LoginPage.SignUpActivity"
             android:exported="false" />
+
+
         <!-- 카카오 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -69,18 +73,14 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="@string/kakao_native_key" />
+                    android:scheme="@string/kakao_native" />
             </intent-filter>
         </activity>
-
-        <!--
-         <meta-data
+        <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" /> -->
-
+            android:value="@string/kakao_native_key"/>
         <activity
             android:name=".LoginPage.LogoActivity"
             android:exported="false" />
     </application>
-
 </manifest>

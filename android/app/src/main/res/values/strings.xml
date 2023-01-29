@@ -12,9 +12,11 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
     <!-- Kakao-init에서 사용 -->
-    <string name="kakao_app_key">a9dcc29aa07d3765bb6d12ff08c77a56</string>
-    <string name="kakao_native_key">kakaoa9dcc29aa07d3765bb6d12ff08c77a56</string>
+    <string name="kakao_native_key">a9dcc29aa07d3765bb6d12ff08c77a56</string>
+    <string name="kakao_native">kakaoa9dcc29aa07d3765bb6d12ff08c77a56</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -31,5 +33,18 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--토큰값-->
+    <string name="shared_preference_user_info">shared_preference_user_info</string>
+    <string name="user_token">user_token</string>
+    <!-- 오류 메시지 -->
+    <string name="invalidemail">이메일 형식에 맞게 입력해주세요.</string>
+    <string name="invalidPhone">전화번호 형식에 맞게 입력해주세요.</string>
+    <string name="invalidbirthdate">생년월일 형식에 맞게 입력해주세요.</string>
+    <string name="invalidPassword">비밀번호에는 문자, 특수문자, 숫자가 포함되어야 합니다.</string>
+    <string name="password_match">비밀번호가 일치하지 않습니다.</string>
+    <string name="invalid_user_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
+    <string name="invalid_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
+
 
 </resources>
