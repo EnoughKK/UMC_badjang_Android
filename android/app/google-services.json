@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "599111291176",
+    "project_id": "badjang-88139",
+    "storage_bucket": "badjang-88139.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599111291176:android:86d618c5bc4cf453fa801d",
+        "android_client_info": {
+          "package_name": "com.umc.badjang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599111291176-llm3dj503t577vc0tkuvtd7kq9if1sok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd8Xm3cbO7WWmHp0CvF-F-MrC14MEJ1XQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599111291176-llm3dj503t577vc0tkuvtd7kq9if1sok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
