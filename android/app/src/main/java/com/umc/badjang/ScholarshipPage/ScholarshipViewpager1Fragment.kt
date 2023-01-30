@@ -12,18 +12,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.MainActivity
+import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
-import com.umc.badjang.retrofit.RetrofitManager
+import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipViewpager1Fragment:Fragment() {
     private lateinit var viewBinding: FragmentScholarshipViewpager1Binding
 
     var activity: MainActivity? = null
-
-    val scholarshipSampleData = mutableListOf(mutableListOf("부경대학교", "교내 재학생 장학금", "자기추천장학금", "부경대학교 장학금", true, 215, 64), mutableListOf("경상대학교", "교내 재학생 장학금", "삼금문화장학재단 장학금", "경상대학교 장학금", false, 215, 65),
-        mutableListOf("한국해양대학교", "교내 재학생 장학금", "서울희망 대학 장학금", "한국해양대학교 장학금", false, 215, 66), mutableListOf("부산대학교", "교내 재학생 장학금", "대산농촌재단 장학금", "부산대학교 장학금", false, 215, 67), mutableListOf("부산대학교", "교내 재학생 장학금", "대산농촌재단 장학금", "부산대학교 장학금", false, 215, 67))
 
     // 장학금 recyclerview adapter
     private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
@@ -52,12 +50,6 @@ class ScholarshipViewpager1Fragment:Fragment() {
 
         // 데이터 가져오기 (api 셋팅)
         loadData()
-
-        // 장학금 데이터 추가
-//        for(i: Int in 0..(scholarshipSampleData.size - 1)) {
-//            addscholarshipData(ScholarshipRVDTO(scholarshipSampleData[i][0].toString(), scholarshipSampleData[i][1].toString(), scholarshipSampleData[i][2].toString(),
-//                scholarshipSampleData[i][3].toString(), scholarshipSampleData[i][4] as Boolean, scholarshipSampleData[i][5] as Int, scholarshipSampleData[i][6] as Int))
-//        }
 
         // 카테고리 선택
         viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category, R.layout.spinner_layout)

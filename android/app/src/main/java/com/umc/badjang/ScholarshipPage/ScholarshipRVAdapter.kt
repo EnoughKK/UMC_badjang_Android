@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.databinding.RvScholarshipBinding
 
@@ -100,13 +101,10 @@ class ScholarshipRVAdapter(private val context: Context):
                     }
                 }
             }
-
-            // 장학금 상세 페이지 이동
-
         }
-
     }
 
+    // 장학금 상세 페이지 이동
     fun setItemClickListener(itemClickListener: OnClickInterface){
         mItemClickListener = itemClickListener
     }
