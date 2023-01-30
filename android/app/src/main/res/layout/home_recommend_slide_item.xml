@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 메인 추천 슬라이드 -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- 슬라이드 이미지 -->
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/main_recommend_image"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/recommend_img"
+        app:riv_corner_radius="10dp" />
+
+    <!-- 즐겨찾기 버튼 -->
+    <ImageButton
+        android:id="@+id/main_recommend_bookmark_btn"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_header_star" />
+
+</RelativeLayout>

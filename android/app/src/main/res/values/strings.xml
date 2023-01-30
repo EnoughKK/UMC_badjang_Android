@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">UMC_badjang_Android</string>
+    <string name="terms_use">1. 수집 및 이용목적 ·APP 회원가입, 서비스 이용시 본인의 확인 ·각종고지 · 통지, 고충처리, 분쟁조정을 위한 기록 보존\n\n 2. 수집 및 이용하는 개인정보 항목 APP 회원가입·이메일, 연락처·APP 서비스 관련·APP 접속 정보 및 서비스 이용정보\n\n 3. 수집방법 ·핸드폰에 직접 입력하는 방식·APP에 마련된 회원가입란에 회원 본인이 직접 입력하는 방식\n\n 4. 보유 및 이용기간 이용자가 회원탈회를 요청하거나 개인정보의 수집·이용 등에 대한 동의를 철회할 때까지 보유·이용합니다. 다만, 다음의 정보에 대해서는 아래의 이유로 예외로 합니다. ·기타 법률에 의해 이용자의 개인정보를 보존해야 할 필요가 있는 경우에는 해당 법률의 규정에 따릅니다. ·정보통신망 이용촉진 및 정보보 등에 관한 법률에 따라 APP을 대통령령으로 정하는 기간동안 로그인하지 아니하는 이용자의 개인정보를 보호하기 위하여 개인정보 파기 등 필요한 조치를 취합니다. ·APP 회원은 1년간 미로그인시 이용정지처리가 되며 3년이 지날시 회원정보 삭제처리가 됩니다. 이용자의 요청에 따라 달리 정한 경우가 있을 경우, 달리 정한 기간을 적용할 수 있습니다.\n</string>
+    <string name="terms_use2">2</string>
+    <string name="terms_use3">받장(이하 당사)은 회원의 개인정보를 매우 중요시 하며, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 및 개인정보보호법을 준수하고 있습니다. 당사는 개인정보처리방침을 통하여 재공한 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</string>
+    <string name="title_activity_login2">LoginActivity2</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- Kakao-init에서 사용 -->
+    <string name="kakao_native_key">a9dcc29aa07d3765bb6d12ff08c77a56</string>
+    <string name="kakao_native">kakaoa9dcc29aa07d3765bb6d12ff08c77a56</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--토큰값-->
+    <string name="shared_preference_user_info">shared_preference_user_info</string>
+    <string name="user_token">user_token</string>
+    <!-- 오류 메시지 -->
+    <string name="invalidemail">이메일 형식에 맞게 입력해주세요.</string>
+    <string name="invalidPhone">전화번호 형식에 맞게 입력해주세요.</string>
+    <string name="invalidbirthdate">생년월일 형식에 맞게 입력해주세요.</string>
+    <string name="invalidPassword">비밀번호에는 문자, 특수문자, 숫자가 포함되어야 합니다.</string>
+    <string name="password_match">비밀번호가 일치하지 않습니다.</string>
+    <string name="invalid_user_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
+    <string name="invalid_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
+
+    <string name="jwt_token_header">X-ACCESS-TOKEN</string>
+
+
 </resources>

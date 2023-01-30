@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.umc.badjang">
+    <!-- 인터넷 사용 권한 설정 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,17 +16,79 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.UMC_badjang_Android"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
+        
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginPage.Login.ChangePWActvity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.Login.FindPWActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.Login.FindIDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.SearchSchoolActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.SchoolCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.VerificationIDActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".LoginPage.SignUp.TermofUseActivity"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.SignUp.PrivacyActivity"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+            
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/NoTitleBarTheme"
+            android:exported="true">
 
+        </activity>
+
+    <activity
+            android:name=".LoginPage.SignUp.SignUpActivity"
+            android:exported="false" />
+
+
+        <!-- 카카오 로그인 -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="@string/kakao_native" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_native_key"/>
+        <activity
+            android:name=".LoginPage.LogoActivity"
+            android:exported="false" />
+    </application>
 </manifest>

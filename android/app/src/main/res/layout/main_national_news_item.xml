@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 메인 페이지에 보이는 전국 소식 게시물 리스트 아이템 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/main_national_news_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="10dp"
+        android:src="@drawable/national_news_img1"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/main_national_news_title"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_national_news_img"
+        android:layout_marginTop="10dp"
+        android:text="국가근로장학금"
+        android:textSize="12dp"
+        android:textColor="#000000"
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="134dp"
+    android:background="@drawable/border_layout"
+    android:layout_marginHorizontal="1dp"
+    android:layout_marginBottom="15dp">
+
+    <TextView
+        android:id="@+id/university_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/university_label_round"
+        android:padding="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="부경대학교"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subsidy_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="교내 재학생 지원금"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/university_label"
+        app:layout_constraintTop_toBottomOf="@+id/university_label" />
+
+    <TextView
+        android:id="@+id/subsidy_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자기추천지원금"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/university_label"
+        app:layout_constraintTop_toBottomOf="@+id/subsidy_category" />
+
+    <ImageButton
+        android:id="@+id/btn_starUnChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/favorites_small" />
+
+    <ImageButton
+        android:id="@+id/btn_starChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_star_checked" />
+
+    <TextView
+        android:id="@+id/textView_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="215"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_viewMore"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_views"
+        app:layout_constraintEnd_toStartOf="@+id/textView_views"
+        app:layout_constraintTop_toTopOf="@+id/textView_views"
+        app:srcCompat="@drawable/views" />
+
+    <TextView
+        android:id="@+id/textView_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="65"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_views"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_views"
+        app:layout_constraintTop_toTopOf="@+id/textView_views" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_views"
+        app:layout_constraintEnd_toStartOf="@+id/textView_comments"
+        app:layout_constraintTop_toTopOf="@+id/textView_views"
+        app:srcCompat="@drawable/comments" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_viewMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_viewMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="더보기"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_viewMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_viewMore"
+            app:layout_constraintStart_toEndOf="@+id/textview_viewMore"
+            app:layout_constraintTop_toTopOf="@+id/textview_viewMore"
+            app:srcCompat="@drawable/polygon_down" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expandable_view"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/subsidy_title"
+        app:layout_constraintBottom_toTopOf="@id/textView_views">
+
+        <TextView
+            android:id="@+id/subsidy_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="재학생의 자신의 개발 가능성을 토대로 자신을 추천하여
+장학금을 수혜받을 수 있도록 자기추천장학금을 시행하오니
+관심있는 학생들의 많은 참여바랍니다. \n\n대상 \n  8학기 이내 재학생
+\n  직전학기 이수학점 14학점이상, 평점평균 2.0이상 이수자 "
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

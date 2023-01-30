@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Verify_dialog"
+    android:layout_width="320dp"
+    android:layout_height="162dp"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/Verify_ID"
+      android:layout_width="match_parent"
+      android:layout_height="114dp"
+      android:background="@drawable/upround_box"
+      android:gravity="center_horizontal|center_vertical"
+      android:text="회원님의 아이디는 \n'000@000.000' 입니다"
+      android:fontFamily="@font/notosanskr_regular"
+      android:textColor="@color/black"
+      android:textSize="14sp"
+      android:paddingLeft="20dp"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Verify_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/downround_box"
+        android:backgroundTint="#2173FD "
+        android:text="확인"
+        android:fontFamily="@font/notosanskr_bold"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textSize="14sp" />
+  </LinearLayout>
+</LinearLayout>
