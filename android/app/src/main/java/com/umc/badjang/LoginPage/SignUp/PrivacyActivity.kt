@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.SignUp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +26,7 @@ class PrivacyActivity : AppCompatActivity() {
         }
 
         binding.PrivacyUpBtn.setOnClickListener{
-            startActivity(Intent(this,SignUpActivity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
 
         binding.PrivacyBtn.setOnClickListener{

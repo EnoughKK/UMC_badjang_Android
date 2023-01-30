@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
 import android.os.Bundle
 import android.util.Log

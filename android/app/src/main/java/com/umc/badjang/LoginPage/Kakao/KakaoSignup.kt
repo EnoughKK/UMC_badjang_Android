@@ -1,11 +1,11 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
 import android.util.Log
 import com.umc.badjang.ApplicationClass
-import com.umc.badjang.LoginPage.models.KakaoSignupRequest
-import com.umc.badjang.LoginPage.models.KakaoSignupResponse
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupRequest
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupResponse
 
-class KakaoSignup(accessToken: String):KakaoSignupView {
+class KakaoSignup(accessToken: String): KakaoSignupView {
     private var accesstoken = accessToken
     fun PostAccessToken(){
         //액세스 토큰이 널이 아니면 서버로 전송해줘야함. 그러면 서버에서는 jwt를 보내줄 것임.

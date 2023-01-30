@@ -1,6 +1,6 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.SignUp
 
-import com.umc.badjang.LoginPage.models.SignUpRequest
+import com.umc.badjang.LoginPage.SignUp.models.SignUpRequest
 import com.umc.badjang.LoginPage.models.SignUpResponse
 import retrofit2.Call
 import retrofit2.http.*

@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
 import retrofit2.http.GET
 

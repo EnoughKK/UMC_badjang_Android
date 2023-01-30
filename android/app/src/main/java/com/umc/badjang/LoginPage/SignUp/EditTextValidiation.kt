@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.SignUp
 
 import com.google.android.material.textfield.TextInputLayout
 import com.umc.badjang.R

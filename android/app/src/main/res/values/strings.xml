@@ -46,5 +46,7 @@
     <string name="invalid_user_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
     <string name="invalid_name">이름은 2 ~ 20자 사이로 입력해주세요.</string>
 
+    <string name="jwt_token_header">X-ACCESS-TOKEN</string>
+
 
 </resources>

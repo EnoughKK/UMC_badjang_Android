@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.SignUp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +25,7 @@ class TermofUseActivity : AppCompatActivity() {
         }
 
         binding.UseUpBtn.setOnClickListener{
-            startActivity(Intent(this,SignUpActivity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
 
 

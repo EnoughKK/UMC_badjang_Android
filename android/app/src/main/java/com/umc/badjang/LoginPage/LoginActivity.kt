@@ -1,6 +1,5 @@
 package com.umc.badjang.LoginPage
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,23 +18,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.umc.badjang.ApplicationClass
-import com.umc.badjang.ApplicationClass.Companion.sRetrofit
-import com.umc.badjang.HomePage.HomeFragment
-import com.umc.badjang.LoginPage.models.LoginRequest
-import com.umc.badjang.LoginPage.models.LoginResponse
-import com.umc.badjang.LoginPage.models.ResultLogin
+import com.umc.badjang.LoginPage.Kakao.KakaoSignup
+import com.umc.badjang.LoginPage.Login.FindIDActivity
+import com.umc.badjang.LoginPage.Login.FindPWActivity
+import com.umc.badjang.LoginPage.Login.LoginRetrofit
+import com.umc.badjang.LoginPage.SignUp.SignUpActivity
+import com.umc.badjang.LoginPage.Login.models.LoginRequest
+import com.umc.badjang.LoginPage.Login.models.LoginResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
 import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
+
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener {
 
@@ -47,12 +46,6 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
     private val RC_SIGN_IN = 99
 
     private lateinit var binding: ActivityLoginBinding// viewBinding
-
-    //카카오 객체
-    companion object{
-        const val BASE_URL="https://prod.badjang2023.shop/oauth/kakao"
-        const val REST_API="b31ceafa89bebeeb560346e90f07ea91"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +68,11 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         }
         //아이디찾기 창으로
         binding.LoginFindID.setOnClickListener{
-            startActivity(Intent(this,FindIDActivity::class.java))
+            startActivity(Intent(this, FindIDActivity::class.java))
         }
         //비밀번호찾기 창으로
         binding.LoginFindPW.setOnClickListener{
-            startActivity(Intent(this,FindPWActivity::class.java))
+            startActivity(Intent(this, FindPWActivity::class.java))
         }
 
         // 로그인 버튼
@@ -88,36 +81,42 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             var email = binding.LoginEmail.text.toString()
             var password =binding.LoginPassword.text.toString()
 
-            val loginRequest:LoginRequest = LoginRequest(user_email = email , user_password = password )
+            val loginRequest: LoginRequest = LoginRequest(user_email = email , user_password = password )
 
             loginRetrofit.requestLogin(loginRequest).enqueue(object :Callback<LoginResponse>{
 
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
 
-                    var result: LoginResponse? = response.body()
+                    var receive: LoginResponse? = response.body()
 
-                    if(result?.isSuccess==true){
+
+                    if(receive?.isSuccess==true){
+
+                        if(receive?.result!=null){
+                            val jwt = receive?.result.jwt
+
+                            //토큰값 저장
+                            ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", jwt).commit()
+                            Log.e("토큰값 확인jwt","${jwt}")
+                        }
 
                         // 정상적으로 통신이 성고된 경우
-                        Log.d("로그인", "onResponse 성공: " + result?.toString())
+                        Log.d("로그인", "onResponse 성공: " + receive?.toString())
 
-                        //토큰값 저장
-                        val sharedPref = getSharedPreferences(getString(R.string.shared_preference_user_info),Context.MODE_PRIVATE)
-                        with(sharedPref.edit()){
-                            putString(getString(R.string.user_token), result.toString())
-                            apply()
-                        }
+
+
                         Toast.makeText(this@LoginActivity,"로그인 성공!",Toast.LENGTH_SHORT).show()
                         Intent(this@LoginActivity,MainActivity::class.java).apply{
                             startActivity(this)
                         }
+                        finish()
 
                     }
-                    else if (result?.isSuccess==false){
+                    else if (receive?.isSuccess==false){
                         // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
                         Log.d("로그인", "onResponse 실패")
-                        onLoginFailure(result.code)
+                        onLoginFailure(receive.code)
                     }
 
                 /*result 사용
@@ -251,7 +250,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.i("LOGIN", "카카오계정으로 로그인 성공 ${token.accessToken}")
-                val kakaoSignup =KakaoSignup(token.accessToken)
+                val kakaoSignup = KakaoSignup(token.accessToken)
                 kakaoSignup.PostAccessToken()//액세스 토큰 보내기
 
                 //여기에서 엑세스 토큰을 받았는데, jwt가 없으면, 이 엑세스 토큰을 서버에 넘겨주는 과정 필요
@@ -262,8 +261,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 //저장되어있는 jwt가 없으면 추가정보 입력 화면으로 이동
 
                 if(ApplicationClass.sSharedPreferences.getString("J-ACCESS-TOKEN","")==""){
-                    Toast.makeText(this, "jwt 없음 -> 회원가입 필요합니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SignUpActivity::class.java))
+                    Log.e("로그인 jwt 없음", "jwt 없음")
+                    startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 }
                 //저장되어있는 jwt가 있으면, 바로 자동 로그인

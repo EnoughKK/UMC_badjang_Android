@@ -1,28 +1,19 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.SignUp
 
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.umc.badjang.ApplicationClass
-import com.umc.badjang.LoginPage.models.LoginRequest
-import com.umc.badjang.LoginPage.models.LoginResponse
-import com.umc.badjang.LoginPage.models.SignUpRequest
+import com.umc.badjang.LoginPage.LoginActivity
+import com.umc.badjang.LoginPage.MyDialog
+import com.umc.badjang.LoginPage.SignUp.models.SignUpRequest
 import com.umc.badjang.LoginPage.models.SignUpResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
@@ -31,9 +22,6 @@ import com.umc.badjang.databinding.DialogTermtodisagreeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.regex.Pattern
 import kotlin.properties.Delegates
 
 class SignUpActivity : AppCompatActivity() {
@@ -65,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
         //LoginRetrofit으로 전역변수로 지정된 sRetrifit으로 연결
-        val loginRetrofit = ApplicationClass.sRetrofit.create(LoginRetrofit::class.java)
+        val signUpRetrofit = ApplicationClass.sRetrofit.create(SignUpRetrofit::class.java)
 
 
         //이전 창으로 이동
@@ -270,7 +258,7 @@ class SignUpActivity : AppCompatActivity() {
 
            val signUpRequest: SignUpRequest = SignUpRequest(user_email = email , user_password = password , user_name = name, user_birth = birthdate, user_phone = phoneNo, user_type = type, user_push_yn = push_yn)
 
-           loginRetrofit.requestSignup(signUpRequest).enqueue(object :Callback<SignUpResponse>{
+           signUpRetrofit.requestSignup(signUpRequest).enqueue(object :Callback<SignUpResponse>{
                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
                    val result: SignUpResponse? = response.body()
 

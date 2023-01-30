@@ -6,10 +6,10 @@ data class SignUpResponse(
     @SerializedName("isSuccess") val isSuccess : Boolean,
     @SerializedName("code") val code : Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result : ResultSignUp?
+    @SerializedName("result") val result : Result
 )
 
-data class ResultSignUp(
+data class Result(
     @SerializedName("user_idx") val user_idx : Int,
     @SerializedName("jwt") val jwt : String
 )

@@ -1,11 +1,10 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.umc.badjang.R
+import com.umc.badjang.LoginPage.LoginActivity
 import com.umc.badjang.databinding.ActivityFindPwactivityBinding
-import com.umc.badjang.databinding.ActivityLoginBinding
 
 class FindPWActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindPwactivityBinding// viewBinding

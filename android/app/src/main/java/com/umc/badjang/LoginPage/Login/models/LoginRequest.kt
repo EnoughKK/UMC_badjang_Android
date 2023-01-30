@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage.models
+package com.umc.badjang.LoginPage.Login.models
 
 import com.google.gson.annotations.SerializedName
 

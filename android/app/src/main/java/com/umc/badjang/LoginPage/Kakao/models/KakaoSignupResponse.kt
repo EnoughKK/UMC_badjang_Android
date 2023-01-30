@@ -1,4 +1,4 @@
-package com.umc.badjang.LoginPage.models
+package com.umc.badjang.LoginPage.Kakao.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -9,6 +9,6 @@ data class KakaoSignupResponse (
     @SerializedName("result") val result: Result
 )
 data class Result(
-    @SerializedName("userId") val userId: Int,
+    @SerializedName("user_idx") val user_idx: Int,
     @SerializedName("jwt") val jwt: String
 )

@@ -1,6 +1,6 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
-import com.umc.badjang.LoginPage.models.KakaoSignupResponse
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupResponse
 
 interface KakaoSignupView {
     fun onKakaoPostSignUpSuccess(response: KakaoSignupResponse)

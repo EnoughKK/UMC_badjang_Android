@@ -19,13 +19,13 @@
         tools:targetApi="31">
         
         <activity
-            android:name=".LoginPage.ChangePWActvity"
+            android:name=".LoginPage.Login.ChangePWActvity"
             android:exported="false" />
         <activity
-            android:name=".LoginPage.FindPWActivity"
+            android:name=".LoginPage.Login.FindPWActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginPage.FindIDActivity"
+            android:name=".LoginPage.Login.FindIDActivity"
             android:exported="false" />
         <activity
             android:name=".LoginPage.SearchSchoolActivity"
@@ -38,12 +38,12 @@
             android:exported="false" />
 
         <activity
-            android:name=".LoginPage.TermofUseActivity"
-            android:parentActivityName=".LoginPage.SignUpActivity"
+            android:name=".LoginPage.SignUp.TermofUseActivity"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginPage.PrivacyActivity"
-            android:parentActivityName=".LoginPage.SignUpActivity"
+            android:name=".LoginPage.SignUp.PrivacyActivity"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".LoginPage.LoginActivity"
@@ -63,7 +63,7 @@
         </activity>
 
     <activity
-            android:name=".LoginPage.SignUpActivity"
+            android:name=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" />
 
 

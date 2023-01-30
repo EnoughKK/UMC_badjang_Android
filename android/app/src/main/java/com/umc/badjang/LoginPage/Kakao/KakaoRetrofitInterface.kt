@@ -1,7 +1,7 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
-import com.umc.badjang.LoginPage.models.KakaoSignupRequest
-import com.umc.badjang.LoginPage.models.KakaoSignupResponse
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupRequest
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

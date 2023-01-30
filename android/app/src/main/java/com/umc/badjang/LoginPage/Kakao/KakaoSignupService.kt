@@ -1,15 +1,15 @@
-package com.umc.badjang.LoginPage
+package com.umc.badjang.LoginPage.Kakao
 
 import android.util.Log
 import com.umc.badjang.ApplicationClass
-import com.umc.badjang.LoginPage.models.KakaoSignupRequest
-import com.umc.badjang.LoginPage.models.KakaoSignupResponse
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupRequest
+import com.umc.badjang.LoginPage.Kakao.models.KakaoSignupResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class KakaoSignupService(val view:KakaoSignupView) {
+class KakaoSignupService(val view: KakaoSignupView) {
     fun tryKakaoPostSignup(postSignupRequest: KakaoSignupRequest){
         val kakaoRetrofitInterface = ApplicationClass.sRetrofit.create(KakaoRetrofitInterface::class.java)
         kakaoRetrofitInterface.postKakaoSignup(postSignupRequest).enqueue(object:
