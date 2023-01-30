@@ -1,11 +1,13 @@
 package com.umc.badjang.HomePage
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +19,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
+import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
 
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+
 class HomeFragment : Fragment() {
     private lateinit var viewBinding: FragmentHomeBinding // viewBinding
+
+    // api 통신을 위한 retrofit
+    private var retrofit: Retrofit? = null
 
     val mySchoolSampleData = mutableListOf(mutableListOf("자기추천장학금", 215), mutableListOf("삼금문화장학재단 장학금", 215),
         mutableListOf("서울희망 대학 장학금", 215), mutableListOf("대산농촌재단 장학금", 215))
@@ -120,15 +131,24 @@ class HomeFragment : Fragment() {
         // recyclerview 세팅
         initRecycler()
 
+        // retrofit 세팅
+        retrofit = MainApiClient.mainApiRetrofit
+
+        // 인기글 조회 api
+        apiMainPopular()
+
+        // 전국소식 조회 api
+        apiMainNationalNews()
+
         // 우리학교 장학금 데이터 추가
         for(i: Int in 0..(mySchoolSampleData.size - 1)) {
             addMySchoolData(MainMySchoolData(i+1, mySchoolSampleData[i][0].toString(), 215))
         }
 
         // 인기글 데이터 추가
-        for(i: Int in 0..3) {
-            addPopularData(MainPopularData(i+1, "자기추천장학금 신청방법", 65,215))
-        }
+        //for(i: Int in 0..3) {
+        //    addPopularData(MainPopularData(i+1, "자기추천장학금 신청방법", 65,215))
+        //}
 
         // 전국 소식 데이터 추가
         val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
@@ -197,5 +217,46 @@ class HomeFragment : Fragment() {
             add(mainNationalNewsPost)
         }
         mainNationalNewsAdapter.notifyDataSetChanged()
+    }
+
+    // 인기글 조회 api
+    private fun apiMainPopular() {
+        retrofit!!.create(MainPopularApiService::class.java).getMainPopular()
+            .enqueue(object : Callback<MainPopularApiData> {
+                override fun onResponse(call: Call<MainPopularApiData>, response: Response<MainPopularApiData>) {
+                    //Log.d(TAG,"인기글 -------------------------------------------")
+                    //Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    var allPopularData: MainPopularApiData = response.body()!!
+                    var popularData: MutableList<MainPopularApiResult> = allPopularData.result
+                    for(i:Int in (0..popularData.size - 1)) {
+                        if(i >= 4) break
+                        addPopularData(MainPopularData(i+1, popularData[i].post_content, 65,215))
+                    }
+
+                }
+
+                override fun onFailure(call: Call<MainPopularApiData>, t: Throwable) {
+                    //Log.d(TAG,"-------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 전국소식 조회 api
+    private fun apiMainNationalNews() {
+        retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews()
+            .enqueue(object : Callback<MainNationalNewsApiData> {
+                override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
+                    Log.d(TAG,"전국소식 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<MainNationalNewsApiData>, t: Throwable) {
+                    Log.d(TAG,"-------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 }
