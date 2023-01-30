@@ -46,6 +46,10 @@ class SignUpActivity : AppCompatActivity() {
     private var count2 by Delegates.notNull<Int>() //서비스
     private var count3 by Delegates.notNull<Int>() //개인정보
     private var count4 by Delegates.notNull<Int>() //알림
+    private var term_flag by Delegates.notNull<Int>() //받은 데이터 서비스
+    private var privacy_flag by Delegates.notNull<Int>() //받은 데이터 개인정보
+
+
 
     private lateinit var string : String
 
@@ -74,6 +78,27 @@ class SignUpActivity : AppCompatActivity() {
         count2=0 //서비스
         count3=0 //개인정보
         count4=0 //알림
+
+        term_flag= intent.getIntExtra("Term_Btn",0).toInt()
+        privacy_flag= intent.getIntExtra("Privacy_Btn",0).toInt()
+        Log.e("서비스","${term_flag}")
+        Log.e("개인정보","${privacy_flag}")
+
+        //서비스 이용약관 동의 자동 체크
+        if( term_flag == 1)
+        {
+            binding.SignupAgree2.visibility = View.VISIBLE
+            binding.SignupDisagree2.visibility = View.INVISIBLE
+            count2=1
+        }
+
+        //개인정보 수집 이용약관 동의 자동 체크
+        if( privacy_flag == 1)
+        {
+            binding.SignupAgree3.visibility = View.VISIBLE
+            binding.SignupDisagree3.visibility = View.INVISIBLE
+            count3=1
+        }
 
         //모두
         binding.SignupAllDisagree.setOnClickListener {
@@ -112,6 +137,7 @@ class SignUpActivity : AppCompatActivity() {
             count4=0
         }
 
+
         //나이
         binding.SignupDisagree1.setOnClickListener {
             binding.SignupAgree1.visibility = View.VISIBLE
@@ -134,7 +160,6 @@ class SignUpActivity : AppCompatActivity() {
             binding.SignupAgree2.visibility = View.VISIBLE
             binding.SignupDisagree2.visibility = View.INVISIBLE
             count2=1
-
         }
         binding.SignupAgree2.setOnClickListener {
             binding.SignupAgree2.visibility = View.INVISIBLE
@@ -177,6 +202,16 @@ class SignUpActivity : AppCompatActivity() {
                 binding.SignupAllDisagree.visibility = View.VISIBLE
                 count=0
             }
+        }
+
+        // 서비스 이용약관 동의 창
+        binding.SignupAgreetext2.setOnClickListener {
+            startActivity(Intent(this, TermofUseActivity::class.java))
+        }
+
+        // 개인정보 수집 및 이용 동의 창
+        binding.SignupAgreetext3.setOnClickListener {
+            startActivity(Intent(this, PrivacyActivity::class.java))
         }
 
        binding.SignupBtn.setOnClickListener {
@@ -269,16 +304,9 @@ class SignUpActivity : AppCompatActivity() {
            })
        }
 
-        // 서비스 이용약관 동의 창
-        binding.SignupAgreetext2.setOnClickListener {
-            startActivity(Intent(this, TermofUseActivity::class.java))
-        }
 
-        // 개인정보 수집 및 이용 동의 창
-        binding.SignupAgreetext3.setOnClickListener {
-            startActivity(Intent(this, PrivacyActivity::class.java))
-        }
     }
+
 
     fun onSignUpFailure(code: Int) {
         when(code) {

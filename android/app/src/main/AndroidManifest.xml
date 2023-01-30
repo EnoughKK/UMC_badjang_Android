@@ -4,6 +4,7 @@
     package="com.umc.badjang">
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ApplicationClass"
@@ -38,6 +39,11 @@
 
         <activity
             android:name=".LoginPage.TermofUseActivity"
+            android:parentActivityName=".LoginPage.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage.PrivacyActivity"
+            android:parentActivityName=".LoginPage.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".LoginPage.LoginActivity"
@@ -56,7 +62,7 @@
 
         </activity>
 
-            <activity
+    <activity
             android:name=".LoginPage.SignUpActivity"
             android:exported="false" />
 
@@ -64,6 +70,7 @@
         <!-- 카카오 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

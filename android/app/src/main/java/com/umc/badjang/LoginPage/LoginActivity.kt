@@ -137,9 +137,9 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         //카카오톡 로그인 버튼
         binding.LoginKakaoBtn.setOnClickListener {
            kakaoLogin()
-         //startActivity(Intent(this,KakaoWebViewActivity::class.java))
+         //이거 아닌듯 = startActivity(Intent(this,KakaoWebViewActivity::class.java))
         }
-            //startActivity(Intent(this,KakaoWebViewActivity::class.java))
+
 
 
         // 구글 로그인 버튼
@@ -159,9 +159,6 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance()
 
     }
-
-
-
 
     // 로그아웃하지 않을 시 자동 로그인 , 회원가입시 바로 로그인 됨
     public override fun onStart() {
@@ -254,8 +251,26 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.i("LOGIN", "카카오계정으로 로그인 성공 ${token.accessToken}")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                val kakaoSignup =KakaoSignup(token.accessToken)
+                kakaoSignup.PostAccessToken()//액세스 토큰 보내기
+
+                //여기에서 엑세스 토큰을 받았는데, jwt가 없으면, 이 엑세스 토큰을 서버에 넘겨주는 과정 필요
+                //이 엑세스 토큰을 서버에 넘겨주면, response로 jwt를 받는다. jwt가 있으면 자동 로그인시킨다.
+                //카카오용 jwt를 따로 만들어서 저장하고, jwt 검사해서 만약 없으면, 회원가입 창으로 넘어가고,
+                //회원가입 창에서는 유저 정보를 입력해서 넘겨준다. - 그냥 회원 가입 하기
+                //있으면 자동으로 로그인 시킨다.
+                //저장되어있는 jwt가 없으면 추가정보 입력 화면으로 이동
+
+                if(ApplicationClass.sSharedPreferences.getString("J-ACCESS-TOKEN","")==""){
+                    Toast.makeText(this, "jwt 없음 -> 회원가입 필요합니다.", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, SignUpActivity::class.java))
+                    finish()
+                }
+                //저장되어있는 jwt가 있으면, 바로 자동 로그인
+                else{
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
             }
         }
 
@@ -275,9 +290,6 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                     UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
                 } else if (token != null) {
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-
                 }
             }
         } else {

@@ -4,14 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import com.umc.badjang.R
-import com.umc.badjang.databinding.ActivityKakaoWebViewBinding
 import com.umc.badjang.databinding.ActivityTermofuseBinding
 
 class TermofUseActivity : AppCompatActivity() {
     private lateinit var binding :ActivityTermofuseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTermofuseBinding.inflate(layoutInflater)
@@ -20,31 +17,23 @@ class TermofUseActivity : AppCompatActivity() {
 
         with(binding.webViewTerm) {
             settings.javaScriptEnabled = true
-            //webViewClient = WebViewClient()
+
             loadUrl(
-                "file:///assets/badjang_privacy.html"
-            )
-            android.util.Log.d("서비스 이용약관","loadUrl")
+                "file:///android_asset/badjang_termofuse.html")
+
+            Log.d("서비스 이용약관","loadUrl")
         }
 
         binding.UseUpBtn.setOnClickListener{
             startActivity(Intent(this,SignUpActivity::class.java))
         }
+
+
+        binding.UseBtn.setOnClickListener{
+            val intent = Intent(this, SignUpActivity::class.java)
+            //동의하기를 누르면 회원가입 창에서도 체크 표시된다.
+            intent.putExtra("Term_Btn", 1)
+            startActivity(intent)
+        }
     }
 }
-
-/*
-        //1.url
-        webView.loadUrl("https://m.naver.com")
-
-        //2.html코드 작성
-      	 val html = "<html><head><meta charset=\"UTF-8\"></head><body>Hello World! 안녕하세요!</body></html>"
-        webView.loadData(html, "text/html", "UTF-8")
-
-        //3.html 문서 호출
-        webView.loadUrl("file:///assets/badjang_privacy.html")//html파일의경로통해 해당 파일 호출
-
-        webView.settings.javaScriptEnabled=true
-
-        //webView.webChromeClient = WebChromeClient()
-*/
