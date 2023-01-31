@@ -288,10 +288,10 @@ class RetrofitManager {
 
     }
 
-    // 장학금 인덱스로 조회 (조회수 증가)
-    fun scholarshipViewCount(scholarshipIdx: Long?, completion: (RESPONSE_STATE, ArrayList<ScholarshipViewCountDTO>?) -> Unit){
+    // 장학금 인덱스로 조회 (조회수 증가)(패치)
+    fun PatchScholarshipView(scholarshipIdx: Long?, view: Int?, completion: (RESPONSE_STATE) -> Unit){
 
-        val call = iScholarshipViewCount?.PatchScholarshipViewCount(scholarshipIdx = scholarshipIdx).let {
+        val call = iScholarshipViewCount?.PatchScholarshipViewCount(scholarshipIdx = scholarshipIdx, view = view).let {
             it
         }?: return
 
@@ -301,39 +301,14 @@ class RetrofitManager {
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 Log.d(TAG, "RetrofitManager - onResponse() called / response : ${response.body()}")
 
-                response.body()?.let {
-
-                    var parsedSupportDataArray = ArrayList<ScholarshipViewCountDTO>()
-
-                    val body = it.asJsonObject
-                    val results = body.getAsJsonArray("result")
-
-                    results.forEach { resultItem ->
-                        val resultItemObject = resultItem.asJsonObject
-
-                        @NonNull
-                        val scholarship_idx = resultItemObject.get("scholarship_idx").asLong
-
-                        @NonNull
-                        val scholarship_view = resultItemObject.get("scholarship_view").asInt
-
-                        val supportItem = ScholarshipViewCountDTO(
-                            scholarship_idx = scholarship_idx,
-                            scholarship_view = scholarship_view
-                        )
-                        parsedSupportDataArray.add(supportItem)
-                    }
-
-                    completion(RESPONSE_STATE.OKAY, parsedSupportDataArray)
-                }
-
+                completion(RESPONSE_STATE.OKAY)
             }
 
             // 응답 실패시시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
 
-                completion(RESPONSE_STATE.FAIL, null)
+                completion(RESPONSE_STATE.FAIL)
             }
 
         })

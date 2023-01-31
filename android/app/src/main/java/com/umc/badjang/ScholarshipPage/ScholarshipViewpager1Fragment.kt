@@ -16,6 +16,7 @@ import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
 import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.databinding.RvScholarshipBinding
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipViewpager1Fragment:Fragment() {
@@ -94,7 +95,26 @@ class ScholarshipViewpager1Fragment:Fragment() {
 
         // 클릭 리스너 셋팅
         scholarshipAdapter.setItemClickListener(object: ScholarshipRVAdapter.OnClickInterface{
-            override fun onClick(view: View, position: Int) {
+            override fun onClick(view: View, position: Int, viewBinding: RvScholarshipBinding) {
+
+                val currentView = viewBinding.textViewViews.text.toString()
+                val IcurrentView: Int = currentView.toInt()
+                val scholarship_idx = scholarshipDatas[position].scholarship_idx
+
+                RetrofitManager.instance.PatchScholarshipView(scholarship_idx, IcurrentView + 1, completion = {
+                    responseState ->
+
+                    when(responseState) {
+                        RESPONSE_STATE.OKAY -> {
+                            Log.d(TAG, "view api 호출 성공 ")
+                        }
+                        RESPONSE_STATE.FAIL -> {
+                            Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, "view api 호출 실패")
+                        }
+                    }
+
+                })
 
                 // 장학금 디테일 페이지로 전환
                 activity?.changeFragment(ScholarshipDetailFragment())

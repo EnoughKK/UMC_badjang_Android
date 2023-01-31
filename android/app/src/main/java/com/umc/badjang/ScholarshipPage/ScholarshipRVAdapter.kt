@@ -19,7 +19,7 @@ class ScholarshipRVAdapter(private val context: Context):
     var datas = ArrayList<GetScholarshipDTO>()
 
     interface OnClickInterface{
-        fun onClick(view: View, position: Int)
+        fun onClick(view: View, position: Int, viewBinding: RvScholarshipBinding)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
@@ -35,7 +35,7 @@ class ScholarshipRVAdapter(private val context: Context):
     override fun onBindViewHolder(holder: ScholarshipRVAdapter.ScholarshipHolder, position: Int) {
         holder.bind(datas[position])
         holder.itemView.setOnClickListener {
-            mItemClickListener.onClick(it, position)
+            mItemClickListener.onClick(it, position, viewBinding)
         }
     }
 

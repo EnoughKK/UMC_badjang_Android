@@ -1,6 +1,7 @@
 package com.umc.badjang.Retrofit
 
 import com.google.gson.JsonElement
+import com.umc.badjang.Model.ScholarshipViewCountDTO
 import com.umc.badjang.utils.API
 import retrofit2.Call
 import retrofit2.http.*
@@ -26,5 +27,5 @@ interface ISholarshipViewCount{
     fun GetScholarshipViewCount(@Path("scholarshipIdx") scholarshipIdx: Long?) : Call<JsonElement>
 
     @PATCH(API.VIEWCOUNT_SCHOLARSHIP)
-    fun PatchScholarshipViewCount(@Path("scholarshipIdx") scholarshipIdx: Long?) : Call<JsonElement>
+    fun PatchScholarshipViewCount(@Path("scholarshipIdx") scholarshipIdx: Long?, @Field("view") view: Int?) : Call<JsonElement>
 }
