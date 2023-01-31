@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.R
 import com.umc.badjang.databinding.RvSubsidyBinding
 
@@ -12,11 +13,12 @@ class SubsidyRVAdapter (private val context: Context):
     RecyclerView.Adapter<SubsidyRVAdapter.SubsidyHolder>() {
 
     private lateinit var viewBinding: RvSubsidyBinding
+    private lateinit var mItemClickListener: OnClickInterface
 
-    var datas = mutableListOf<SubsidyRVDTO>()
+    var datas = ArrayList<GetSupportDTO>()
 
     interface OnClickInterface{
-        fun onClick(view: RvSubsidyBinding, position: Int)
+        fun onClick(view: View, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
@@ -31,6 +33,10 @@ class SubsidyRVAdapter (private val context: Context):
 
     override fun onBindViewHolder(holder: SubsidyRVAdapter.SubsidyHolder, position: Int) {
         holder.bind(datas[position])
+
+        holder.itemView.setOnClickListener {
+            mItemClickListener.onClick(it, position)
+        }
     }
 
     override fun getItemCount(): Int = datas.size
@@ -38,35 +44,43 @@ class SubsidyRVAdapter (private val context: Context):
     inner class SubsidyHolder(private val binding: RvSubsidyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SubsidyRVDTO) {
-            binding.universityLabel.text = item.universityLabel                   // 대학교 이름
-            binding.subsidyCategory.text = item.subsidyCategory             // 지원금 카테고리
-            binding.subsidyTitle.text = item.subsidyTitle                     // 지원금 이름
-            binding.subsidyContents.text = item.subsidyContents               // 지원금 상세내용
-            binding.textViewViews.text = item.subsidyViews.toString()         // 지원금 뷰어수
-            binding.textViewComments.text = item.subsidyComments.toString()   // 지원금 댓글수
+        fun bind(item: GetSupportDTO) {
+            binding.universityLabel.text = item.support_univ                  // 대학교 이름
+            binding.subsidyCategory.text = item.support_category              // 지원금 카테고리
+            binding.subsidyTitle.text = item.support_name                     // 지원금 이름
+            binding.subsidyContents.text = item.support_content               // 지원금 상세내용
+            binding.textViewViews.text = item.support_view.toString()         // 지원금 뷰어수
+            binding.textViewComments.text = item.support_comment.toString()   // 지원금 댓글수
+
+            //            if(item.bookMark == true){
+//                binding.btnStarUnChecked.visibility = View.INVISIBLE
+//                binding.btnStarChecked.visibility = View.VISIBLE
+//            } else {
+//                binding.btnStarUnChecked.visibility = View.VISIBLE
+//                binding.btnStarChecked.visibility = View.INVISIBLE
+//            }
 
             // 즐겨찾기 추가
-            binding.btnStarUnChecked.setOnClickListener {
-
-                // 즐겨찾기 버튼 활성화/비활성화
-                binding.btnStarUnChecked.visibility = View.INVISIBLE
-                binding.btnStarChecked.visibility = View.VISIBLE
-
-                item.bookMark = true // DTO에 즐겨찾기 추가? <- 테스트필요
-
-            }
-
-            // 즐겨찾기 해제
-            binding.btnStarChecked.setOnClickListener {
-
-                // 즐겨찾기 버튼 활성화/비활성화
-                binding.btnStarUnChecked.visibility = View.VISIBLE
-                binding.btnStarChecked.visibility = View.INVISIBLE
-
-                item.bookMark = false // DTO에 즐겨찾기 해제? <- 테스트필요
-
-            }
+//            binding.btnStarUnChecked.setOnClickListener {
+//
+//                // 즐겨찾기 버튼 활성화/비활성화
+//                binding.btnStarUnChecked.visibility = View.INVISIBLE
+//                binding.btnStarChecked.visibility = View.VISIBLE
+//
+//                item.bookMark = true // DTO에 즐겨찾기 추가? <- 테스트필요
+//
+//            }
+//
+//            // 즐겨찾기 해제
+//            binding.btnStarChecked.setOnClickListener {
+//
+//                // 즐겨찾기 버튼 활성화/비활성화
+//                binding.btnStarUnChecked.visibility = View.VISIBLE
+//                binding.btnStarChecked.visibility = View.INVISIBLE
+//
+//                item.bookMark = false // DTO에 즐겨찾기 해제? <- 테스트필요
+//
+//            }
 
             // 상세내용 더보기/접기
             binding.btnViewMore.setOnClickListener {
@@ -85,9 +99,11 @@ class SubsidyRVAdapter (private val context: Context):
                     }
                 }
             }
-
         }
-
     }
 
+    // 장학금 상세 페이지 이동
+    fun setItemClickListener(itemClickListener: OnClickInterface){
+        mItemClickListener = itemClickListener
+    }
 }

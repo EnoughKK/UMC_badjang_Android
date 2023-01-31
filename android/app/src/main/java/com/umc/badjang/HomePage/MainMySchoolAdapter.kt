@@ -2,6 +2,7 @@ package com.umc.badjang.HomePage
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
@@ -37,6 +38,18 @@ class MainMySchoolAdapter(private val context: Context) :
             binding.mainMySchoolPostNum.text = item.mySchoolNum.toString()     // 글 번호
             binding.mainMySchoolPostTitle.text = item.mySchoolTitle            // 글 제목
             binding.mainMySchoolViewNum.text = item.mySchoolViewNum.toString() // 조회수
+
+            // 즐겨찾기 체크 버튼 선택 시
+            binding.mainMySchoolStarCheckBtn.setOnClickListener {
+                binding.mainMySchoolStarCheckBtn.visibility = View.GONE
+                binding.mainMySchoolStarUncheckBtn.visibility = View.VISIBLE
+            }
+
+            // 즐겨찾기 해제 버튼 선택 시
+            binding.mainMySchoolStarUncheckBtn.setOnClickListener {
+                binding.mainMySchoolStarCheckBtn.visibility = View.VISIBLE
+                binding.mainMySchoolStarUncheckBtn.visibility = View.GONE
+            }
         }
     }
 }

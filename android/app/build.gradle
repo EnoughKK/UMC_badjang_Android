@@ -88,9 +88,6 @@ dependencies {
     //settings
     implementation 'androidx.preference:preference-ktx:1.2.0'
 
-    // http 통신 로그
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-
     // Retrofit 라이브러리
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // Gson 변환기 라이브러리
@@ -99,5 +96,8 @@ dependencies {
     //코루틴을 사용해서 네트워크 비동기 작업
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
+
+    // retrofit-logging-interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
 }

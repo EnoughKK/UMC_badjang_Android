@@ -82,16 +82,34 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/main_my_school_star_icon"
+        <ImageButton
+            android:id="@+id/main_my_school_star_check_btn"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_margin="3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
             android:layout_toRightOf="@+id/main_my_school_view"
-            android:scaleType="fitXY"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_star_unchecked"
-            android:layout_centerVertical="true"/>
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_star_unchecked" />
+
+        <ImageButton
+            android:id="@+id/main_my_school_star_uncheck_btn"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toRightOf="@+id/main_my_school_view"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_star_checked"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
