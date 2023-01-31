@@ -10,4 +10,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <!-- 메인 > 홈 > 즐겨찾기 탭 글자 크기 & 스타일 -->
+    <style name="bookmark_tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

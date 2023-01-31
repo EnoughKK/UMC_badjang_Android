@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="139dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/upround_box"
+            android:gravity="center"
+            android:text="탈퇴하기"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/Withdrawal_text"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_box6"
+            android:fontFamily="@font/notosanskr_regular"
+            android:hint="‘탈퇴하기’를 입력해주세요"
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Withdrawal_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/downround_left"
+            android:backgroundTint="#F0F4FF"
+            android:gravity="center"
+
+            android:text="취소"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Withdrawal_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/downround_right"
+            android:backgroundTint="#2173FD"
+            android:gravity="center"
+            android:text="확인"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

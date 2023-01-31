@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_layout"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <!-- 학교명 -->
+    <TextView
+        android:id="@+id/new_issue_institution_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/institution_label_round"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:text="OO대학교"
+        android:textColor="#000000"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
+    <!-- 알림 내용 -->
+    <TextView
+        android:id="@+id/new_issue_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginVertical="10dp"
+        android:text="자기추천 장학금이 등록되었습니다."
+        android:textSize="12dp"
+        android:textColor="#000000"/>
+
+</LinearLayout>

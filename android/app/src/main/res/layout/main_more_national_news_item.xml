@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 전국 소식 리스트 item -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_layout"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/national_news_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 기관명 -->
+        <TextView
+            android:id="@+id/national_news_institution_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/institution_label_round"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="OO대학교"
+            android:textColor="#000000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <!-- 즐겨찾기 버튼 -->
+        <ImageButton
+            android:id="@+id/national_news_bookmark_check_btn"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_star_unchecked" />
+
+        <ImageButton
+            android:id="@+id/national_news_bookmark_uncheck_btn"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_star_checked"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/national_news_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/national_news_tag">
+
+        <!-- 전국소식 접힌 버전 내용 -->
+        <RelativeLayout
+            android:id="@+id/national_news_close_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 전국소식 게시글 이미지 -->
+            <ImageView
+                android:id="@+id/national_news_close_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/popular_post_img" />
+
+            <!-- 전국소식 게시글 제목 -->
+            <TextView
+                android:id="@+id/national_news_close_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/national_news_close_img"
+                android:text="자기추천장학금"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!-- 전국소식 열린 버전 내용 -->
+        <RelativeLayout
+            android:id="@+id/national_news_open_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <!-- 전국소식 게시글 제목 -->
+            <TextView
+                android:id="@+id/national_news_open_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentLeft="true"
+                android:text="자기추천장학금"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <!-- 전국소식 게시글 이미지 -->
+            <ImageView
+                android:id="@+id/national_news_open_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/national_news_open_title"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:src="@drawable/popular_post_img" />
+
+            <!-- 전국 소식 게시글 내용 -->
+            <TextView
+                android:id="@+id/national_news_open_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="32dp"
+                android:text="내용\n내용"
+                android:textSize="12dp"
+                android:textColor="#000000"
+                android:layout_below="@id/national_news_open_img"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!-- 전국소식 아이콘 -->
+    <RelativeLayout
+        android:id="@+id/national_news_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_above="@id/national_news_line"
+        android:layout_alignParentRight="true">
+
+        <!-- 댓글수 -->
+        <RelativeLayout
+            android:id="@+id/national_news_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp">
+
+            <ImageView
+                android:id="@+id/national_news_comments_icon"
+                android:layout_width="15dp"
+                android:layout_height="10dp"
+                android:layout_margin="3dp"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_comments_count"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/national_news_comments_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@+id/national_news_comments_icon"
+                android:textColor="#000000"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+
+        <!-- 조회수 -->
+        <RelativeLayout
+            android:id="@+id/national_news_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/national_news_comments"
+            android:layout_marginRight="2dp">
+
+            <ImageView
+                android:id="@+id/national_news_view_icon"
+                android:layout_width="15dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_view_count" />
+
+            <TextView
+                android:id="@+id/national_news_view_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/national_news_view_icon"
+                android:textSize="10dp"
+                android:textColor="#000000"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/national_news_line"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/national_news_contents"
+        android:layout_marginTop="10dp"
+        android:background="@color/item_out_line" />
+
+    <!-- 더보기 버튼 -->
+    <TextView
+        android:id="@+id/national_news_open_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/national_news_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="5dp"
+        android:drawableRight="@drawable/polygon_down"
+        android:text="더보기"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+
+    <!-- 접기 버튼 -->
+    <TextView
+        android:id="@+id/national_news_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/national_news_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="5dp"
+        android:drawableRight="@drawable/polygon_up"
+        android:text="접기"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

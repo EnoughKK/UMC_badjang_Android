@@ -1,0 +1,99 @@
+package com.umc.badjang.ScholarshipPage
+
+import android.content.ContentValues
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.MainActivity
+import com.umc.badjang.Model.GetSupportDTO
+import com.umc.badjang.R
+import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
+import com.umc.badjang.utils.RESPONSE_STATE
+
+class SubsidyViewpager2Fragment:Fragment() {
+    private lateinit var viewBinding: FragmentSubsidyViewpager2Binding
+
+    var activity: MainActivity? = null
+
+    // 지원금 recyclerview adapter
+    private var supportDatas = ArrayList<GetSupportDTO>()
+    private lateinit var subsidyAdapter: SubsidyRVAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = getActivity() as MainActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        activity = null
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewBinding = FragmentSubsidyViewpager2Binding.inflate(layoutInflater);
+
+        // 데이터 가져오기 (api 셋팅)
+        loadData()
+
+        // 카테고리 선택
+        viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category, R.layout.spinner_layout)
+
+        // 정렬방식 선택
+        viewBinding.spinnerSort.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_sort, R.layout.spinner_layout)
+
+        return viewBinding.root
+    }
+
+    // 데이터 가져오기 (api 셋팅)
+    private fun loadData() {
+        RetrofitManager.instance.searchSupport(category = null, filter = null, order = null, completion = {
+                responseState, responseDataArrayList ->
+
+            when(responseState) {
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
+                    supportDatas = ArrayList<GetSupportDTO>(responseDataArrayList)
+
+                    // recyclerview 셋팅
+                    initRecycler()
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+                    Log.d(ContentValues.TAG, "api 호출 실패 : $responseDataArrayList")
+                }
+            }
+
+        })
+    }
+
+    // recyclerview 셋팅
+    private fun initRecycler() {
+
+        // 지원금 recyclerview 셋팅
+        subsidyAdapter = SubsidyRVAdapter(requireContext())
+        viewBinding.subsidyRvContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewBinding.subsidyRvContainer.adapter = subsidyAdapter
+        subsidyAdapter.datas = supportDatas
+
+        // 클릭 리스너 셋팅
+        subsidyAdapter.setItemClickListener(object: SubsidyRVAdapter.OnClickInterface{
+            override fun onClick(view: View, position: Int) {
+
+                // 지원금 디테일 페이지로 전환
+                activity?.changeFragment(ScholarshipDetailFragment())
+            }
+        })
+    }
+
+}

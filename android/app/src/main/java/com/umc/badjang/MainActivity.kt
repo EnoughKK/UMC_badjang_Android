@@ -5,11 +5,14 @@ import android.os.Bundle
 
 //develop 브랜치 추가
 import android.util.Log
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
+import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
+import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 
@@ -22,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         // 바인딩 초기화
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         // 하단 메뉴바를 위한 fragment
         supportFragmentManager.beginTransaction().replace(binding.fragmentLayout.id, HomeFragment()).commit()
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, HomeFragment()).commit()
                 }
                 R.id.scholarship -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, ScholarshipFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, ScholarshipLookupFragment()).commit()
                 }
                 R.id.post -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
@@ -65,4 +66,5 @@ class MainActivity : AppCompatActivity() {
             .add(binding.fragmentLayout.id, fragment)
             .commit()
     }
+
 }
