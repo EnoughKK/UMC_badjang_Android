@@ -53,12 +53,14 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //LoginRetrofit으로 전역변수로 지정된 sRetrifit으로 연결
         val loginRetrofit = ApplicationClass.sRetrofit.create(LoginRetrofit::class.java)
 
 
         //HashKey확인
         val KeyHash = Utility.getKeyHash(this)
+        Log.e("Hash", "--------------------------------------------------------")
         Log.e("Hash", "KeyHash: $KeyHash")
 
 
@@ -273,6 +275,17 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             }
         }
 
+        /*UserApiClient.instance.unlink { error ->
+            if (error != null) {
+                Toast.makeText(this, "회원 탈퇴 실패 $error", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(this, "회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                //val intent = Intent(this, MainActivity::class.java)
+                //startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                //finish()
+            }
+        }*/
+
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
             UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
@@ -289,6 +302,26 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                     UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
                 } else if (token != null) {
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    val kakaoSignup = KakaoSignup(token.accessToken)
+                    kakaoSignup.PostAccessToken()//액세스 토큰 보내기
+
+                    //여기에서 엑세스 토큰을 받았는데, jwt가 없으면, 이 엑세스 토큰을 서버에 넘겨주는 과정 필요
+                    //이 엑세스 토큰을 서버에 넘겨주면, response로 jwt를 받는다. jwt가 있으면 자동 로그인시킨다.
+                    //카카오용 jwt를 따로 만들어서 저장하고, jwt 검사해서 만약 없으면, 회원가입 창으로 넘어가고,
+                    //회원가입 창에서는 유저 정보를 입력해서 넘겨준다. - 그냥 회원 가입 하기
+                    //있으면 자동으로 로그인 시킨다.
+                    //저장되어있는 jwt가 없으면 추가정보 입력 화면으로 이동
+
+                    if(ApplicationClass.sSharedPreferences.getString("J-ACCESS-TOKEN","")==""){
+                        Log.e("로그인 jwt 없음", "jwt 없음")
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
+                    }
+                    //저장되어있는 jwt가 있으면, 바로 자동 로그인
+                    else{
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
                 }
             }
         } else {
