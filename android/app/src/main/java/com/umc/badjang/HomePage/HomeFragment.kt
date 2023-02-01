@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.Bookmarks.BookmarksFragment
@@ -23,6 +24,10 @@ import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,8 +40,13 @@ class HomeFragment : Fragment() {
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
-    val mySchoolSampleData = mutableListOf(mutableListOf("자기추천장학금", 215), mutableListOf("삼금문화장학재단 장학금", 215),
-        mutableListOf("서울희망 대학 장학금", 215), mutableListOf("대산농촌재단 장학금", 215))
+    val mySchoolSampleData = mutableListOf(mutableListOf("재학생 장학금 - 개척", 13), mutableListOf("재학생 장학금 - 희망,경상국립대학교", 8),
+        mutableListOf("2023학년도 1학기 특별장학금 신청 안내", 23), mutableListOf("2023년 동암장학회 장학생 선발 안내 ", 11))
+    val nationalNewsSampleData = mutableListOf(//mutableListOf("★★ 2023학년도 1학기 국가장학금 2차 신청 안내 ★★", "https://firebasestorage.googleapis.com/v0/b/badjang-88139.appspot.com/o/2023-1%ED%95%99%EA%B8%B0%20%EA%B5%AD%EA%B0%80%EC%9E%A5%ED%95%99%EA%B8%88%202%EC%B0%A8%20%EC%8B%A0%EC%B2%AD%EC%95%88%EB%82%B4%20%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg?alt=media&token=84d810f1-28af-45ef-aee8-98177fe7a965"),
+        //mutableListOf("충주 청년관광코디네이터 육성 사업", "https://firebasestorage.googleapis.com/v0/b/badjang-88139.appspot.com/o/%EC%B6%A9%EB%B6%81.png?alt=media&token=caa10371-0dc2-4017-9b36-94c562f53dbc"),
+        mutableListOf("청년테마별 취업지원", "https://www.jobaba.net/resource/images/web/2018/01/02/1514871744928_6915623648.png"),
+        mutableListOf("2023학년도 재단법인 플라톤 아카데미 인문 지혜 장학생 판플러스(PAN+) 모집 안내", "https://cyberimg.wku.ac.kr/ComBoard/img/upload/1115983888724/1115985252888/2023/01/1675061273364/org/bbs1.jpg"),
+        mutableListOf("2023년도 대만장학금 장학생 선발 안내", "https://www.pknu.ac.kr/images/front/sub/univ_logo00.png"))
 
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
@@ -138,12 +148,16 @@ class HomeFragment : Fragment() {
         apiMainPopular()
 
         // 전국소식 조회 api
-        apiMainNationalNews()
+        //apiMainNationalNews()
 
         // 우리학교 장학금 데이터 추가
-        for(i: Int in 0..(mySchoolSampleData.size - 1)) {
-            addMySchoolData(MainMySchoolData(i+1, mySchoolSampleData[i][0].toString(), 215))
-        }
+        /*for(i: Int in 0..(mySchoolSampleData.size - 1)) {
+            addMySchoolData(MainMySchoolData(i+1, mySchoolSampleData[i][0].toString(), mySchoolSampleData[i][1]))
+        }*/
+        addMySchoolData(MainMySchoolData(1, mySchoolSampleData[0][0].toString(), 13))
+        addMySchoolData(MainMySchoolData(2, mySchoolSampleData[1][0].toString(), 8))
+        addMySchoolData(MainMySchoolData(3, mySchoolSampleData[2][0].toString(), 23))
+        addMySchoolData(MainMySchoolData(4, mySchoolSampleData[3][0].toString(), 11))
 
         // 인기글 데이터 추가
         //for(i: Int in 0..3) {
@@ -151,15 +165,20 @@ class HomeFragment : Fragment() {
         //}
 
         // 전국 소식 데이터 추가
-        val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
-        for(i: Int in 0..3) {
-            addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
+        //val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
+        for(i: Int in 0..(nationalNewsSampleData.size - 1)) {
+            CoroutineScope(Dispatchers.Main).launch {
+                val img: Bitmap = withContext(Dispatchers.IO) {
+                    ImageLoader.loadImage(nationalNewsSampleData[i][1].toString())!!
+                }
+                addNationalNewsData(MainNationalNewsData(img, nationalNewsSampleData[i][0].toString()))
+            }
         }
     }
 
     // 추천 배너 슬라이드 이미지 변경하기
     fun setMainRecommendSlideImage(){
-        if(mainRecommendCurrentPosition == 5) mainRecommendCurrentPosition = 0
+        if(mainRecommendCurrentPosition == 3) mainRecommendCurrentPosition = 0
         viewBinding.mainRecommendSlideViewpager.setCurrentItem(mainRecommendCurrentPosition,true)
         mainRecommendCurrentPosition += 1
     }
@@ -231,7 +250,7 @@ class HomeFragment : Fragment() {
                     var popularData: MutableList<MainPopularApiResult> = allPopularData.result
                     for(i:Int in (0..popularData.size - 1)) {
                         if(i >= 4) break
-                        addPopularData(MainPopularData(i+1, popularData[i].post_content, 65,215))
+                        addPopularData(MainPopularData(i+1, popularData[i].post_content, i,(i*7+1)%10))
                     }
 
                 }
