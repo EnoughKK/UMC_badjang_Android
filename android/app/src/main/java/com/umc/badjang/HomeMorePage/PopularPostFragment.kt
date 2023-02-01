@@ -28,8 +28,6 @@ import retrofit2.Retrofit
 class PopularPostFragment : Fragment() {
     private lateinit var viewBinding: FragmentPopularPostBinding // viewBinding
 
-
-
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 

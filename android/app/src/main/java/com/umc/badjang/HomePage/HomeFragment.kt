@@ -126,6 +126,11 @@ class HomeFragment : Fragment() {
             activity?.changeFragment(NewIssueFragment())
         }
 
+        // 학교 필터 Floating 버튼 선택
+        viewBinding.mainSchoolFilterBtn.setOnClickListener {
+            SchoolFilterDialog(requireContext()).show()
+        }
+
         // 추천 배너 슬라이드 어댑터 연결하기
         mainRecommendSliderAdapter = MainRecommendSliderAdapter()
         viewBinding.mainRecommendSlideViewpager.adapter = mainRecommendSliderAdapter
