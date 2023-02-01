@@ -24,8 +24,18 @@ interface ISearchSupport {
 interface ISholarshipViewCount{
 
     @GET(API.VIEWCOUNT_SCHOLARSHIP)
-    fun GetScholarshipViewCount(@Path("scholarshipIdx") scholarshipIdx: Long?) : Call<JsonElement>
+    fun searchScholarshipIDx(@Path("scholarshipIdx") scholarshipIdx: Long?) : Call<JsonElement>
 
     @PATCH(API.VIEWCOUNT_SCHOLARSHIP)
     fun PatchScholarshipViewCount(@Path("scholarshipIdx") scholarshipIdx: Long?, @Field("view") view: Int?) : Call<JsonElement>
+}
+
+// 지원금인덱스로 지원금조회(조회수1증가) 인터페이스
+interface  ISupportViewCount{
+
+    @GET(API.VIEWCOUNT_SUPPORT)
+    fun searchSupportIDx(@Path("supportIdx") supportIdx: Long?) : Call<JsonElement>
+
+    @PATCH(API.VIEWCOUNT_SUPPORT)
+    fun PatchSupportViewCount(@Path("supportIdx") supportIdx: Long?, @Field("view") view: Int?) : Call<JsonElement>
 }

@@ -18,7 +18,7 @@ class SubsidyRVAdapter (private val context: Context):
     var datas = ArrayList<GetSupportDTO>()
 
     interface OnClickInterface{
-        fun onClick(view: View, position: Int)
+        fun onClick(view: View, position: Int, viewBinding: RvSubsidyBinding)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
@@ -35,7 +35,7 @@ class SubsidyRVAdapter (private val context: Context):
         holder.bind(datas[position])
 
         holder.itemView.setOnClickListener {
-            mItemClickListener.onClick(it, position)
+            mItemClickListener.onClick(it, position, viewBinding)
         }
     }
 

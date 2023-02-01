@@ -10,22 +10,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Model.GetScholarshipDTO
-import com.umc.badjang.R
+import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipDetailBinding
 import com.umc.badjang.utils.RESPONSE_STATE
 
-class ScholarshipDetailFragment:Fragment() {
+class SupportDetailFragment: Fragment() {
     private lateinit var viewBinding: FragmentScholarshipDetailBinding
 
-    private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
-    var scholarship_idx: Long = 1
+    private var supportDatas = ArrayList<GetSupportDTO>()
+    var support_idx: Long = 1
 
     var activity: MainActivity? = null
 
@@ -44,7 +42,7 @@ class ScholarshipDetailFragment:Fragment() {
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             //결과 값을 받는곳입니다.
-            scholarship_idx = bundle.getLong("bundleKey")
+            support_idx = bundle.getLong("bundleKey")
         }
     }
 
@@ -63,14 +61,15 @@ class ScholarshipDetailFragment:Fragment() {
         loadData()
 
         // 장학금 홈페이지 uri
-        val scholarshipUri = scholarshipDatas[0].scholarship_homepage
+        val supportUri = supportDatas[0].support_homepage
 
-        viewBinding.universityLabel.text = scholarshipDatas[0].scholarship_univ
-        viewBinding.scholarshipTitle.text = scholarshipDatas[0].scholarship_name
-        viewBinding.detailContents.text = scholarshipDatas[0].scholarship_content
+        viewBinding.universityLabel.text = supportDatas[0].support_univ
+        viewBinding.scholarshipTitle.text = supportDatas[0].support_name
+        viewBinding.detailContents.text = supportDatas[0].support_content
 
+        // 홈페이지 이동
         viewBinding.btnLink.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(scholarshipUri))
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(supportUri))
             startActivity(intent)
         }
 
@@ -85,13 +84,13 @@ class ScholarshipDetailFragment:Fragment() {
 
     // 데이터 로드
     private fun loadData() {
-        RetrofitManager.instance.searchScholarshipIDx(scholarshipIdx = scholarship_idx, completion = {
+        RetrofitManager.instance.searchSupportIDx(supportIdx = support_idx, completion = {
                 responseState, responseDataArrayList ->
 
             when(responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
-                    scholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+                    supportDatas = ArrayList<GetSupportDTO>(responseDataArrayList)
 
                 }
                 RESPONSE_STATE.FAIL -> {

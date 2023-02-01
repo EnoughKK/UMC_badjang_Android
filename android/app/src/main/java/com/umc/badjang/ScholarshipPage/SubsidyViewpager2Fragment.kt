@@ -9,13 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
+import com.umc.badjang.databinding.RvScholarshipBinding
+import com.umc.badjang.databinding.RvSubsidyBinding
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class SubsidyViewpager2Fragment:Fragment() {
@@ -88,7 +92,28 @@ class SubsidyViewpager2Fragment:Fragment() {
 
         // 클릭 리스너 셋팅
         subsidyAdapter.setItemClickListener(object: SubsidyRVAdapter.OnClickInterface{
-            override fun onClick(view: View, position: Int) {
+            override fun onClick(view: View, position: Int, viewBinding: RvSubsidyBinding) {
+
+                val currentView = viewBinding.textViewViews.text.toString()
+                val IcurrentView: Int = currentView.toInt()
+                val support_idx = supportDatas[position].support_idx
+
+                RetrofitManager.instance.PatchSupportView(support_idx, IcurrentView + 1, completion = {
+                        responseState ->
+
+                    when(responseState) {
+                        RESPONSE_STATE.OKAY -> {
+                            Log.d(ContentValues.TAG, "view api 호출 성공 ")
+                        }
+                        RESPONSE_STATE.FAIL -> {
+                            Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+                            Log.d(ContentValues.TAG, "view api 호출 실패")
+                        }
+                    }
+
+                })
+
+                setFragmentResult("requestKey", bundleOf("bundleKey" to support_idx))
 
                 // 지원금 디테일 페이지로 전환
                 activity?.changeFragment(ScholarshipDetailFragment())
