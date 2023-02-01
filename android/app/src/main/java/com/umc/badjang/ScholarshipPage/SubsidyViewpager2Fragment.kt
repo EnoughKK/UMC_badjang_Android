@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -47,21 +48,85 @@ class SubsidyViewpager2Fragment:Fragment() {
     ): View? {
         viewBinding = FragmentSubsidyViewpager2Binding.inflate(layoutInflater);
 
+        var category: String = ""
+        var filter: String = ""
+        var order: String = "desc"
+
         // 데이터 가져오기 (api 셋팅)
-        loadData()
+        loadData(category, filter, order)
 
         // 카테고리 선택
-        viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category, R.layout.spinner_layout)
+        viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category_support, R.layout.spinner_layout)
+        // 카테고리 클릭리스너
+        viewBinding.spinnerCategory.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+                when (viewBinding.spinnerCategory.getItemAtPosition(position)) {
+                    "전체" -> {
+                        category = "전체"
+                    }
+                    "성적우수장학금" -> {
+                        category = "성적우수장학금"
+                    }
+                    "특별감면장학금" -> {
+                        category = "특별감면장학금"
+                    }
+                    "가계곤란자 장학금" -> {
+                        category = "가계곤란자 장학금"
+                    }
+                    "근로 장학금" -> {
+                        category = "근로 장학금"
+                    }
+                    "정책참여" -> {
+                        category = "정책참여"
+                    }
+                    "코로나19" -> {
+                        category = "코로나19"
+                    }
+                    else -> {
+                        Log.d(ContentValues.TAG, "onItemSelected: null")
+                    }
+                }
+
+                loadData(category,filter,order)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
 
         // 정렬방식 선택
         viewBinding.spinnerSort.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_sort, R.layout.spinner_layout)
+        // 정렬 클릭리스너
+        viewBinding.spinnerSort.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+                when (viewBinding.spinnerSort.getItemAtPosition(position)) {
+                    "인기순" -> {
+                        filter = "인기순"
+                    }
+                    "날짜순" -> {
+                        filter = "날짜순"
+                    }
+                    "댓글순" -> {
+                        filter = "댓글순"
+                    }
+                }
+                loadData(category,filter,order)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
 
         return viewBinding.root
     }
 
     // 데이터 가져오기 (api 셋팅)
-    private fun loadData() {
-        RetrofitManager.instance.searchSupport(category = null, filter = null, order = null, completion = {
+    private fun loadData(category: String, filter: String, order: String) {
+        RetrofitManager.instance.searchSupport(category = category, filter = "", order = "", completion = {
                 responseState, responseDataArrayList ->
 
             when(responseState) {
@@ -94,20 +159,19 @@ class SubsidyViewpager2Fragment:Fragment() {
         subsidyAdapter.setItemClickListener(object: SubsidyRVAdapter.OnClickInterface{
             override fun onClick(view: View, position: Int, viewBinding: RvSubsidyBinding) {
 
-                val currentView = viewBinding.textViewViews.text.toString()
-                val IcurrentView: Int = currentView.toInt()
                 val support_idx = supportDatas[position].support_idx
 
-                RetrofitManager.instance.PatchSupportView(support_idx, IcurrentView + 1, completion = {
+                RetrofitManager.instance.searchSupportIDx(supportIdx = support_idx, completion = {
                         responseState ->
 
                     when(responseState) {
                         RESPONSE_STATE.OKAY -> {
-                            Log.d(ContentValues.TAG, "view api 호출 성공 ")
+                            Log.d(ContentValues.TAG, "지원금 뷰 api 호출 성공 : ${support_idx}")
+
                         }
                         RESPONSE_STATE.FAIL -> {
                             Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
-                            Log.d(ContentValues.TAG, "view api 호출 실패")
+                            Log.d(ContentValues.TAG, "api 호출 실패 : ")
                         }
                     }
 

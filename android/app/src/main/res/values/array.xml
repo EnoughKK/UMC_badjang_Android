@@ -2,9 +2,19 @@
 <resources>
     <string-array name="spinner_category">
         <item>전체</item>
-        <item>교내 신입생 입학성적 우수 장학금</item>
+        <item>국가장학</item>
+        <item>KRA와 함께하는 농어촌 희망재단 장학금</item>
+        <item>교내 신입생 입학성적 우수장학금</item>
         <item>교내 재학생 장학금</item>
-        <item>교외 장학금</item>
+        <item>교외장학</item>
+        <item>교내장학</item>
+        <item>학비대출</item>
+        <item>국가근로</item>
+        <item>성적우수장학금</item>
+        <item>특별감면장학금</item>
+        <item>가계곤란자 장학금</item>
+        <item>근로 장학금</item>
+        <item>기타</item>
     </string-array>
 
     <string-array name="spinner_sort">
@@ -12,4 +22,16 @@
         <item>날짜순</item>
         <item>댓글순</item>
     </string-array>
+
+    <string-array name="spinner_category_support">
+        <item>전체</item>
+        <item>성적우수장학금</item>
+        <item>가계곤란자 장학금</item>
+        <item>근로 장학금</item>
+        <item>정책참여</item>
+        <item>코로나</item>
+
+
+    </string-array>
+
 </resources>

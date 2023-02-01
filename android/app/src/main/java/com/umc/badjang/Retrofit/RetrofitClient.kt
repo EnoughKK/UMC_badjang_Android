@@ -18,7 +18,7 @@ object SearchScholarshipRC {
 
     // 레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
-        Log.d(TAG, "RetrofitClient - getClient() called")
+        Log.d(TAG, "RetrofitClient - getClient() called : searchScholarship")
 
         // 로깅 인터셉터 추가
 
@@ -72,7 +72,7 @@ object SearchSupportRC {
 
     // 레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
-        Log.d(TAG, "RetrofitClient - getClient() called")
+        Log.d(TAG, "RetrofitClient - getClient() called / searchSupport")
 
         // 로깅 인터셉터 추가
 
@@ -83,7 +83,7 @@ object SearchSupportRC {
         val loggingInterceptor = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
 
             override fun log(message: String) {
-                Log.d(TAG, "RetrofitClient - log() called / message: $message")
+                Log.d(TAG, "RetrofitClient2 - log() called / message: $message")
 
                 when {
                     message.isJsonObject() ->
@@ -126,7 +126,7 @@ object ScholarshipViewCountRC {
 
     // 레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
-        Log.d(TAG, "RetrofitClient - getClient() called")
+        Log.d(TAG, "RetrofitClient - getClient() called / scholarshipView")
 
         // 로깅 인터셉터 추가
 
@@ -137,7 +137,7 @@ object ScholarshipViewCountRC {
         val loggingInterceptor = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
 
             override fun log(message: String) {
-                Log.d(TAG, "RetrofitClient - log() called / message: $message")
+                Log.d(TAG, "RetrofitClient3 - log() called / message: $message")
 
                 when {
                     message.isJsonObject() ->
@@ -180,7 +180,7 @@ object SupportViewCountRC {
 
     // 레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
-        Log.d(TAG, "RetrofitClient - getClient() called")
+        Log.d(TAG, "RetrofitClient - getClient() called/ supportView")
 
         // 로깅 인터셉터 추가
 
@@ -191,7 +191,7 @@ object SupportViewCountRC {
         val loggingInterceptor = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
 
             override fun log(message: String) {
-                Log.d(TAG, "RetrofitClient - log() called / message: $message")
+                Log.d(TAG, "RetrofitClient4 - log() called / message: $message")
 
                 when {
                     message.isJsonObject() ->

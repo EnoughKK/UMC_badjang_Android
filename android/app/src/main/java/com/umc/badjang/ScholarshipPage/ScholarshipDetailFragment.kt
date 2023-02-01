@@ -25,7 +25,6 @@ class ScholarshipDetailFragment:Fragment() {
     private lateinit var viewBinding: FragmentScholarshipDetailBinding
 
     private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
-    var scholarship_idx: Long = 1
 
     var activity: MainActivity? = null
 
@@ -42,10 +41,7 @@ class ScholarshipDetailFragment:Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            //결과 값을 받는곳입니다.
-            scholarship_idx = bundle.getLong("bundleKey")
-        }
+
     }
 
     override fun onCreateView(
@@ -60,19 +56,24 @@ class ScholarshipDetailFragment:Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
-        loadData()
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            //결과 값을 받는곳입니다.
+            val scholarship_idx = bundle.getLong("bundleKey")
+        }
+
+
 
         // 장학금 홈페이지 uri
-        val scholarshipUri = scholarshipDatas[0].scholarship_homepage
+//        val scholarshipUri = scholarshipDatas[scholarship_idx.toInt()].scholarship_homepage
+//
+//        viewBinding.universityLabel.text = scholarshipDatas[scholarship_idx.toInt()].scholarship_univ
+//        viewBinding.scholarshipTitle.text = scholarshipDatas[scholarship_idx.toInt()].scholarship_name
+//        viewBinding.detailContents.text = scholarshipDatas[scholarship_idx.toInt()].scholarship_content
 
-        viewBinding.universityLabel.text = scholarshipDatas[0].scholarship_univ
-        viewBinding.scholarshipTitle.text = scholarshipDatas[0].scholarship_name
-        viewBinding.detailContents.text = scholarshipDatas[0].scholarship_content
-
-        viewBinding.btnLink.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(scholarshipUri))
-            startActivity(intent)
-        }
+//        viewBinding.btnLink.setOnClickListener {
+//            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(scholarshipUri))
+//            startActivity(intent)
+//        }
 
         return viewBinding.root
     }
@@ -81,26 +82,6 @@ class ScholarshipDetailFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-    }
-
-    // 데이터 로드
-    private fun loadData() {
-        RetrofitManager.instance.searchScholarshipIDx(scholarshipIdx = scholarship_idx, completion = {
-                responseState, responseDataArrayList ->
-
-            when(responseState) {
-                RESPONSE_STATE.OKAY -> {
-                    Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
-                    scholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
-
-                }
-                RESPONSE_STATE.FAIL -> {
-                    Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
-                    Log.d(ContentValues.TAG, "api 호출 실패 : $responseDataArrayList")
-                }
-            }
-
-        })
     }
 
 }

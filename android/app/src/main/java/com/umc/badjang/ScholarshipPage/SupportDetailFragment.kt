@@ -58,8 +58,6 @@ class SupportDetailFragment: Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
-        loadData()
-
         // 장학금 홈페이지 uri
         val supportUri = supportDatas[0].support_homepage
 
@@ -82,24 +80,5 @@ class SupportDetailFragment: Fragment() {
 
     }
 
-    // 데이터 로드
-    private fun loadData() {
-        RetrofitManager.instance.searchSupportIDx(supportIdx = support_idx, completion = {
-                responseState, responseDataArrayList ->
-
-            when(responseState) {
-                RESPONSE_STATE.OKAY -> {
-                    Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
-                    supportDatas = ArrayList<GetSupportDTO>(responseDataArrayList)
-
-                }
-                RESPONSE_STATE.FAIL -> {
-                    Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
-                    Log.d(ContentValues.TAG, "api 호출 실패 : $responseDataArrayList")
-                }
-            }
-
-        })
-    }
 
 }
