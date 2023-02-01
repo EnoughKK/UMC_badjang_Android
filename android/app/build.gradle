@@ -98,4 +98,6 @@ dependencies {
 
     // retrofit-logging-interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 }
