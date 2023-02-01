@@ -64,17 +64,17 @@ class SubsidyViewpager2Fragment:Fragment() {
                     "전체" -> {
                         category = "전체"
                     }
-                    "성적우수장학금" -> {
-                        category = "성적우수장학금"
+                    "취업지원" -> {
+                        category = "취업지원"
                     }
-                    "특별감면장학금" -> {
-                        category = "특별감면장학금"
+                    "창업지원" -> {
+                        category = "창업지원"
                     }
-                    "가계곤란자 장학금" -> {
-                        category = "가계곤란자 장학금"
+                    "주거·금융" -> {
+                        category = "주거·금융"
                     }
-                    "근로 장학금" -> {
-                        category = "근로 장학금"
+                    "생활·복지" -> {
+                        category = "생활·복지"
                     }
                     "정책참여" -> {
                         category = "정책참여"

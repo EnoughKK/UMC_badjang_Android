@@ -34,7 +34,4 @@ interface  ISupportViewCount{
     @GET(API.VIEWCOUNT_SUPPORT)
     fun searchSupportIDx(@Path("supportIdx") supportIdx: Long?) : Call<JsonElement>
 
-    @FormUrlEncoded
-    @PATCH(API.VIEWCOUNT_SUPPORT)
-    fun PatchSupportViewCount(@Path("supportIdx") supportIdx: Long?, @Field("view") view: Int?) : Call<JsonElement>
 }

@@ -56,15 +56,31 @@ class ScholarshipDetailFragment:Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
+        var scholarship_idx: Long = 2
+
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             //결과 값을 받는곳입니다.
-            val scholarship_idx = bundle.getLong("bundleKey")
+            scholarship_idx = bundle.getLong("bundleKey")
         }
 
+        RetrofitManager.instance.searchScholarshipIDx(scholarshipIdx = scholarship_idx, completion = {
+                responseState, responseDataArrayList->
 
+            when(responseState) {
+                RESPONSE_STATE.OKAY -> {
+                    scholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+                    Log.d(ContentValues.TAG, "뷰 api 호출 성공 : ${scholarshipDatas.size}")
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+                    Log.d(ContentValues.TAG, "api 호출 실패 : ")
+                }
+            }
+
+        })
 
         // 장학금 홈페이지 uri
-//        val scholarshipUri = scholarshipDatas[scholarship_idx.toInt()].scholarship_homepage
+//        val scholarshipUri = scholarshipDatas
 //
 //        viewBinding.universityLabel.text = scholarshipDatas[scholarship_idx.toInt()].scholarship_univ
 //        viewBinding.scholarshipTitle.text = scholarshipDatas[scholarship_idx.toInt()].scholarship_name

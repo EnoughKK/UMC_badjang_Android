@@ -59,17 +59,17 @@ class SupportDetailFragment: Fragment() {
         }
 
         // 장학금 홈페이지 uri
-        val supportUri = supportDatas[0].support_homepage
+//        val supportUri = supportDatas[0].support_homepage
 
-        viewBinding.universityLabel.text = supportDatas[0].support_univ
-        viewBinding.scholarshipTitle.text = supportDatas[0].support_name
-        viewBinding.detailContents.text = supportDatas[0].support_content
+//        viewBinding.universityLabel.text = supportDatas[0].support_univ
+//        viewBinding.scholarshipTitle.text = supportDatas[0].support_name
+//        viewBinding.detailContents.text = supportDatas[0].support_content
 
         // 홈페이지 이동
-        viewBinding.btnLink.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(supportUri))
-            startActivity(intent)
-        }
+//        viewBinding.btnLink.setOnClickListener {
+//            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(supportUri))
+//            startActivity(intent)
+//        }
 
         return viewBinding.root
     }

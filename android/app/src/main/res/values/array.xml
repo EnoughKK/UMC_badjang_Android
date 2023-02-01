@@ -25,11 +25,12 @@
 
     <string-array name="spinner_category_support">
         <item>전체</item>
-        <item>성적우수장학금</item>
-        <item>가계곤란자 장학금</item>
-        <item>근로 장학금</item>
+        <item>취업지원</item>
+        <item>창업지원</item>
+        <item>주거·금융</item>
+        <item>생활·복지</item>
         <item>정책참여</item>
-        <item>코로나</item>
+        <item>코로나19</item>
 
 
     </string-array>

@@ -45,7 +45,7 @@ class SubsidyRVAdapter (private val context: Context):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GetSupportDTO) {
-            binding.universityLabel.text = item.support_univ                  // 대학교 이름
+            binding.universityLabel.text = item.support_institution           // 대학교 이름
             binding.subsidyCategory.text = item.support_category              // 지원금 카테고리
             binding.subsidyTitle.text = item.support_name                     // 지원금 이름
             binding.subsidyContents.text = item.support_content               // 지원금 상세내용

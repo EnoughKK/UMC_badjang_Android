@@ -188,22 +188,6 @@ class ScholarshipViewpager1Fragment:Fragment() {
 
                 val scholarship_idx = scholarshipDatas[position].scholarship_idx
 
-                RetrofitManager.instance.searchScholarshipIDx(scholarshipIdx = scholarship_idx, completion = {
-                        responseState ->
-
-                    when(responseState) {
-                        RESPONSE_STATE.OKAY -> {
-                            Log.d(ContentValues.TAG, "뷰 api 호출 성공 : ")
-
-                        }
-                        RESPONSE_STATE.FAIL -> {
-                            Toast.makeText(requireContext(), "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
-                            Log.d(ContentValues.TAG, "api 호출 실패 : ")
-                        }
-                    }
-
-                })
-
                 setFragmentResult("requestKey", bundleOf("bundleKey" to scholarship_idx))
 
 
