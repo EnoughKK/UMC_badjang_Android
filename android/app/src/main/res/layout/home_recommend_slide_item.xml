@@ -11,9 +11,9 @@
         android:id="@+id/main_recommend_image"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/recommend_img"
+        android:scaleType="centerCrop"
         app:riv_corner_radius="10dp" />
+    <!--android:src="@drawable/recommend_img"-->
 
     <!-- 즐겨찾기 버튼 -->
     <ImageButton

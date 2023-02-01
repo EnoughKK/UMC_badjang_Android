@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface MainNationalNewsApiService {
 
-    @GET("menu/total")
+    @GET("menu/total/54")
     fun getMainNationalNews(
     ): Call<MainNationalNewsApiData>
 }
