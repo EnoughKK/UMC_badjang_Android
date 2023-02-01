@@ -39,12 +39,18 @@ class NationalNewsAdapter(private val context: Context) :
 
             // 전국소식 내용 - 닫힌 버전
             binding.nationalNewsCloseTitle.text = item.nationalNewsTitle             // 전국소식 제목
-            binding.nationalNewsCloseImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            if(item.nationalNewsImg != null)
+                binding.nationalNewsCloseImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            else
+                binding.nationalNewsCloseImg.visibility = View.GONE // 이미지가 없는 경우
 
             // 전국소식 내용 - 열린 버전
             binding.nationalNewsOpenTitle.text = item.nationalNewsTitle             // 전국소식 제목
             binding.nationalNewsOpenText.text = item.nationalNewsContent            // 전국소식내용
-            binding.nationalNewsOpenImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            if(item.nationalNewsImg != null)
+                binding.nationalNewsOpenImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            else
+                binding.nationalNewsOpenImg.visibility = View.GONE // 이미지가 없는 경우
 
             // 기타 정보
             binding.nationalNewsCommentsNum.text = item.nationalNewsCommentsCnt.toString() // 댓글 수

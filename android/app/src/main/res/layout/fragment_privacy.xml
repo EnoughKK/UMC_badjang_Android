@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings.PrivacyFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#D9D9D9" />
+
+    <LinearLayout
+        android:id="@+id/SettingsPrivacy_linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/SettingsPrivacy_UpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp"/>
+
+        <TextView
+            android:id="@+id/SettingsPrivacy_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개인정보 처리방침"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="#252525"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="86dp"/>
+
+
+    <ScrollView
+        android:id="@+id/SettingsPrivacy_Scroll"
+        android:layout_width="320dp"
+        android:layout_height="611dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="102dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_use3"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            />
+    </ScrollView>
+
+
+</FrameLayout>
