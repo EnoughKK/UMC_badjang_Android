@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Settings.SettingsFragment">
 
     <LinearLayout
@@ -10,23 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/Settings_UpBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="17dp"
             android:layout_marginTop="23dp"/>
 
         <TextView
             android:id="@+id/Settings_ID"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="설정"
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="19dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="5dp"/>
     </LinearLayout>
 
@@ -41,19 +43,30 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+
+            <View
                 android:id="@+id/Settings_MyInfo"
-                android:layout_width="320dp"
-                android:layout_height="56dp"
+                android:layout_width="match_parent"
                 android:background="@drawable/settingsbox"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="90dp"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:text="내 정보"
                 android:fontFamily="@font/notosanskr_regular"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:paddingStart="5dp"
                 android:gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="90dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="90dp"
+
+             />
 
             <ImageButton
                 android:id="@+id/Settings_MyInfoBtn"
@@ -61,7 +74,7 @@
                 android:layout_height="56dp"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
                 android:backgroundTint="@color/white"
-                android:layout_marginStart="322dp"
+                android:layout_marginStart="350dp"
                 android:layout_marginTop="90dp"/>
         </FrameLayout>
 
