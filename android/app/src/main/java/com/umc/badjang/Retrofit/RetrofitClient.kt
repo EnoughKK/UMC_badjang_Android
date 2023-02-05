@@ -137,7 +137,7 @@ object ScholarshipViewCountRC {
         val loggingInterceptor = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
 
             override fun log(message: String) {
-                Log.d(TAG, "RetrofitClient3 - log() called / message: $message")
+//                Log.d(TAG, "RetrofitClient3 - log() called / message: $message")
 
                 when {
                     message.isJsonObject() ->

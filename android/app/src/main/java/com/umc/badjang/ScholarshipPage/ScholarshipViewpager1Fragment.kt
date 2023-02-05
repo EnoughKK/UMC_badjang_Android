@@ -186,13 +186,10 @@ class ScholarshipViewpager1Fragment:Fragment() {
         scholarshipAdapter.setItemClickListener(object: ScholarshipRVAdapter.OnClickInterface{
             override fun onClick(view: View, position: Int) {
 
-                val scholarship_idx = scholarshipDatas[position].scholarship_idx
-
-                setFragmentResult("requestKey", bundleOf("bundleKey" to scholarship_idx))
-
+                val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
-                activity?.changeFragment(ScholarshipDetailFragment())
+                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx)
             }
         })
     }

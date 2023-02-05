@@ -11,7 +11,7 @@ object API {
 
     const val SEARCH_SUPPORT : String = "supports"
 
-    const val VIEWCOUNT_SCHOLARSHIP : String = "{scholarshipIdx}"
+    const val VIEWCOUNT_SCHOLARSHIP : String = "scholarships/{scholarshipIdx}"
 
     const val VIEWCOUNT_SUPPORT : String = "{supportIdx}"
 }
