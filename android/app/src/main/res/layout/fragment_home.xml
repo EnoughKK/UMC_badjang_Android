@@ -201,20 +201,20 @@
                     </RelativeLayout>
 
 
-                    <HorizontalScrollView
+                    <ScrollView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/main_national_news_recyclerview"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/main_national_news_item" />
 
-                    </HorizontalScrollView>
+                    </ScrollView>
 
                 </LinearLayout>
 

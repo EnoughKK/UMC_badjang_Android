@@ -20,6 +20,7 @@ import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
+public var mConnectUserId: Int? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding // viewBinding
