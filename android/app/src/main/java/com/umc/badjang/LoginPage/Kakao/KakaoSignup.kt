@@ -21,10 +21,6 @@ class KakaoSignup(accessToken: String): KakaoSignupView {
                 Log.d("jwt수신여부","jwt 수신 성공 -> ${response.result.jwt}")
                 Log.d("message","${response.message}")
                 ApplicationClass.sSharedPreferences.edit().putString("J-ACCESS-TOKEN",response.result.jwt).commit()
-
-                // 로그인 된 사용자의 idx를 SharedPreferences로 로컬 DB에 저장
-                //Log.d("user_idx", response.result.user_idx.toString())
-                ApplicationClass.prefs.setString("user_idx", response.result.user_idx.toString())
             }
             else {
                 Log.d("jwt수신여부","jwt 수신 실패-> ${response.code}")

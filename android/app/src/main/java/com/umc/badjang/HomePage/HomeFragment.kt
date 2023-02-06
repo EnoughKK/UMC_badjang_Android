@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 현재 로그인 된 사용자 idx 조회
-        mConnectUserId = ApplicationClass.prefs.getString("user_idx", "0").toInt()
+        mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
 
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
@@ -166,22 +166,6 @@ class HomeFragment : Fragment() {
         addMySchoolData(MainMySchoolData(2, mySchoolSampleData[1][0].toString(), 8))
         addMySchoolData(MainMySchoolData(3, mySchoolSampleData[2][0].toString(), 23))
         addMySchoolData(MainMySchoolData(4, mySchoolSampleData[3][0].toString(), 11))
-
-        // 인기글 데이터 추가
-        //for(i: Int in 0..3) {
-        //    addPopularData(MainPopularData(i+1, "자기추천장학금 신청방법", 65,215))
-        //}
-
-        // 전국 소식 데이터 추가
-        //val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
-        /*for(i: Int in 0..(nationalNewsSampleData.size - 1)) {
-            CoroutineScope(Dispatchers.Main).launch {
-                val img: Bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(nationalNewsSampleData[i][1].toString())!!
-                }
-                addNationalNewsData(MainNationalNewsData(img, nationalNewsSampleData[i][0].toString()))
-            }
-        }*/
     }
 
     // 추천 배너 슬라이드 이미지 변경하기

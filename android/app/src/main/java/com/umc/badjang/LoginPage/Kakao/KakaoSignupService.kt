@@ -20,10 +20,6 @@ class KakaoSignupService(val view: KakaoSignupView) {
                 if(response.body() != null) {
                     view.onKakaoPostSignUpSuccess(response.body() as KakaoSignupResponse)
                     Log.d("Success", "-----카카오 access token 통신성공-----")
-
-                    // 로그인 된 사용자의 idx를 SharedPreferences로 로컬 DB에 저장
-                    //Log.d("user_idx", response.body()!!.result.user_idx.toString())
-                    ApplicationClass.prefs.setString("user_idx", response.body()!!.result.user_idx.toString())
                 }
             }
 
