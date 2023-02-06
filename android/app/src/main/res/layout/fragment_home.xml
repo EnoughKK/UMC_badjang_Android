@@ -64,14 +64,14 @@
                         android:id="@+id/main_recommend_slide_indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
                         app:dotsColor="@color/main_theme"
-                        app:dotsStrokeColor="#D9D9D9"
                         app:dotsCornerRadius="8dp"
                         app:dotsSize="4dp"
                         app:dotsSpacing="2dp"
-                        app:dotsStrokeWidth="2dp"
-                        android:layout_gravity="center_horizontal"/>
+                        app:dotsStrokeColor="#D9D9D9"
+                        app:dotsStrokeWidth="2dp" />
 
                 </LinearLayout>
 
@@ -201,20 +201,20 @@
                     </RelativeLayout>
 
 
-                    <HorizontalScrollView
+                    <ScrollView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/main_national_news_recyclerview"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/main_national_news_item" />
 
-                    </HorizontalScrollView>
+                    </ScrollView>
 
                 </LinearLayout>
 

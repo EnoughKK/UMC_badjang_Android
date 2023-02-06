@@ -48,6 +48,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/Signup_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Signup_linearlayout1">
@@ -74,7 +75,21 @@
             android:textSize="15sp"
             android:inputType="textEmailAddress"
         />
+        <TextView
+            android:id="@+id/Signup_missEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일 형식에 맞게 입력해주세요"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-20dp"
+            android:visibility="invisible"/>
 </com.google.android.material.textfield.TextInputLayout>
+
 
 <!--비밀번호-->
     <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +98,9 @@
         app:passwordToggleEnabled="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
         app:errorEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Signup_PW"
@@ -94,6 +111,19 @@
             android:textSize="15sp"
             android:inputType="textPassword"
             />
+        <TextView
+            android:id="@+id/Signup_missPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-20dp"
+            android:visibility="invisible"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 <!--비밀번호 확인-->
@@ -103,7 +133,9 @@
         app:passwordToggleEnabled="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
         app:errorEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Signup_confirmPW"
@@ -114,6 +146,19 @@
             android:textSize="15sp"
             android:inputType="textPassword"
             />
+        <TextView
+            android:id="@+id/Signup_missconfirmPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="비밀번호가 일치하지 않습니다"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-20dp"
+            android:visibility="invisible"/>
     </com.google.android.material.textfield.TextInputLayout>
             <!--이름-->
     <com.google.android.material.textfield.TextInputLayout
@@ -121,11 +166,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/Signup_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,7 +178,21 @@
             android:fontFamily="@font/notosanskr_regular"
             android:textSize="15sp"
             android:inputType="text"
+            android:privateImeOptions="defaultInputmode=korean"
             />
+        <TextView
+            android:id="@+id/Signup_missName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름은 2~20자 사이로 입력해주세요"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-20dp"
+            android:visibility="invisible"/>
     </com.google.android.material.textfield.TextInputLayout>
 
             <!--생년월일-->
@@ -142,7 +201,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="8"
         app:errorEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Signup_BirthDate"
@@ -153,6 +214,19 @@
             android:textSize="15sp"
             android:inputType="date"
             />
+                <TextView
+                    android:id="@+id/Signup_missBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="생년월일 형식에 맞게 입력해주세요"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:textColor="#ED1C24"
+                    android:textSize="12sp"
+                    android:paddingStart="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="-20dp"
+                    android:visibility="invisible"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 <!--전화번호-->
@@ -161,9 +235,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         app:endIconMode = "clear_text"
-        app:errorEnabled="true">
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="11">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Signup_Phone"
             android:layout_width="match_parent"
@@ -173,6 +249,20 @@
             android:textSize="15sp"
             android:inputType="phone"
             />
+        <TextView
+            android:id="@+id/Signup_missPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전화번호 형식에 맞게 입력해주세요"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-20dp"
+            android:visibility="invisible"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
