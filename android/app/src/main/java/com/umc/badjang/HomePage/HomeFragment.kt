@@ -147,6 +147,9 @@ class HomeFragment : Fragment() {
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
 
+        // 우리학교 장학금 조회 api
+        apiMainMySchool()
+
         // 인기글 조회 api
         apiMainPopular()
 
@@ -241,6 +244,24 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // 우리학교 장학금 조회 api
+    private fun apiMainMySchool() {
+        val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
+        retrofit!!.create(MainMySchoolApiService::class.java).getMainMySchool(xAccessToken=jwt!!, userIdx=mConnectUserId!!)
+            .enqueue(object : Callback<MainMySchoolApiData> {
+                override fun onResponse(call: Call<MainMySchoolApiData>, response: Response<MainMySchoolApiData>) {
+                     Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                     Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<MainMySchoolApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
     // 인기글 조회 api
     private fun apiMainPopular() {
         retrofit!!.create(MainPopularApiService::class.java).getMainPopular()
@@ -259,7 +280,7 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<MainPopularApiData>, t: Throwable) {
-                    //Log.d(TAG,"-------------------------------------------")
+                    Log.d(TAG,"인기글 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
@@ -270,7 +291,7 @@ class HomeFragment : Fragment() {
         retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews(mConnectUserId!!)
             .enqueue(object : Callback<MainNationalNewsApiData> {
                 override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
-                    Log.d(TAG,"전국소식 -------------------------------------------")
+                    //Log.d(TAG,"전국소식 -------------------------------------------")
 
                     val allNationalNewsList = mutableListOf<AllNationalNewsList>()
 
@@ -301,7 +322,7 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<MainNationalNewsApiData>, t: Throwable) {
-                    Log.d(TAG,"-------------------------------------------")
+                    Log.d(TAG,"전국소식 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
