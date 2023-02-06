@@ -3,24 +3,22 @@ package com.umc.badjang.LoginPage.SignUp
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.LoginPage.LoginActivity
 import com.umc.badjang.LoginPage.MyDialog
 import com.umc.badjang.LoginPage.SignUp.models.SignUpRequest
 import com.umc.badjang.LoginPage.models.SignUpResponse
+import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivitySignupBinding
 import com.umc.badjang.databinding.DialogTermtodisagreeBinding
-import kotlinx.android.synthetic.main.activity_signup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,8 +37,11 @@ class SignUpActivity : AppCompatActivity() {
     private var term_flag by Delegates.notNull<Int>() //받은 데이터 서비스
     private var privacy_flag by Delegates.notNull<Int>() //받은 데이터 개인정보
 
-    private lateinit var string : String //알람 동의를 위한 스트링
-    private lateinit var dialog : Dialog //다이얼로그
+
+
+    private lateinit var string : String
+
+    private lateinit var dialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,6 +50,7 @@ class SignUpActivity : AppCompatActivity() {
         // 바인딩 초기화
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         //LoginRetrofit으로 전역변수로 지정된 sRetrifit으로 연결
         val signUpRetrofit = ApplicationClass.sRetrofit.create(SignUpRetrofit::class.java)
@@ -65,13 +67,26 @@ class SignUpActivity : AppCompatActivity() {
         count3=0 //개인정보
         count4=0 //알림
 
-        term_flag= intent.getIntExtra("Term_Btn",count2).toInt()
-        privacy_flag= intent.getIntExtra("Privacy_Btn",count3).toInt()
-
+        term_flag= intent.getIntExtra("Term_Btn",0).toInt()
+        privacy_flag= intent.getIntExtra("Privacy_Btn",0).toInt()
         Log.e("서비스","${term_flag}")
         Log.e("개인정보","${privacy_flag}")
-        Log.e("서비스","${count2}")
-        Log.e("개인정보","${count3}")
+
+        //서비스 이용약관 동의 자동 체크
+        if( term_flag == 1)
+        {
+            binding.SignupAgree2.visibility = View.VISIBLE
+            binding.SignupDisagree2.visibility = View.INVISIBLE
+            count2=1
+        }
+
+        //개인정보 수집 이용약관 동의 자동 체크
+        if( privacy_flag == 1)
+        {
+            binding.SignupAgree3.visibility = View.VISIBLE
+            binding.SignupDisagree3.visibility = View.INVISIBLE
+            count3=1
+        }
 
         //모두
         binding.SignupAllDisagree.setOnClickListener {
@@ -108,17 +123,6 @@ class SignUpActivity : AppCompatActivity() {
             count2=0
             count3=0
             count4=0
-        }
-
-        if(count2==1){
-            binding.SignupAgree2.visibility = View.VISIBLE
-            binding.SignupDisagree2.visibility = View.INVISIBLE
-            count2=1
-        }
-        if(count3==1){
-            binding.SignupAgree3.visibility = View.VISIBLE
-            binding.SignupDisagree3.visibility = View.INVISIBLE
-            count3=1
         }
 
 
@@ -188,33 +192,24 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-
         // 서비스 이용약관 동의 창
         binding.SignupAgreetext2.setOnClickListener {
             startActivity(Intent(this, TermofUseActivity::class.java))
-            if(TermofUseActivity().activity1 == null){
-                count2=1
-            }
         }
 
         // 개인정보 수집 및 이용 동의 창
         binding.SignupAgreetext3.setOnClickListener {
             startActivity(Intent(this, PrivacyActivity::class.java))
-            if(PrivacyActivity().activity2 == null){
-                count3=1
-            }
         }
 
        binding.SignupBtn.setOnClickListener {
-
-           binding.SignupScroll.scrollTo(0, binding.SignupPW.top)
-
-           var email = binding.SignupEmail.text.toString()
-           var password =binding.SignupPW.text.toString()
-           var name = binding.SignupName.text.toString()
-           var birthdate=binding.SignupBirthDate.text.toString()
-           var phoneNo=binding.SignupPhone.text.toString()
-           var type = "Regular"
+           //val emailResult = View.binding.SignupEmail.validEmail()
+           val email = binding.SignupEmail.text.toString()
+           val password =binding.SignupPW.text.toString()
+           val name = binding.SignupName.text.toString()
+           val birthdate=binding.SignupBirthDate.text.toString()
+           val phoneNo=binding.SignupPhone.text.toString()
+           val type = "Regular"
 
            /*(필수)항목 미체크시 다이얼로그 출력*/
            if(count1 == 0){
@@ -230,15 +225,27 @@ class SignUpActivity : AppCompatActivity() {
                dialogShow("개인정보 수집 및 이용 약관에\n" + "동의해주세요",binding.SignupAgreetext3,false)
            }
 
-           //오류 검사
-           if (!validEmail()or !validPassword()or!validConfirmPassword()or!validName()or!validBirthdate()or!validBirthdate()or!validPhone()  or (count1==0) or (count2==0)or(count3==0)) {
+           Log.e("회원가입","${count}${count1}${count2}${count3}${count4}")
 
+           if (!validEmail()) {
+               return@setOnClickListener
+           }
+           if (!validPassword()) {
+               return@setOnClickListener
+           }
+           if (!validConfirmPassword()) {
+               return@setOnClickListener
+           }
+           if (!validName()){
+               return@setOnClickListener
+           }
+           if (!validBirthdate()){
+               return@setOnClickListener
+           }
+           if (!validPhone()){
                return@setOnClickListener
            }
 
-           Log.e("회원가입","${count}${count1}${count2}${count3}${count4}")
-
-            //알람 동의 및 미동의
            if(count4==0){
                string="N"
            }
@@ -253,36 +260,29 @@ class SignUpActivity : AppCompatActivity() {
 
            signUpRetrofit.requestSignup(signUpRequest).enqueue(object :Callback<SignUpResponse>{
                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                   val receive_signup: SignUpResponse? = response.body()
+                   val result: SignUpResponse? = response.body()
 
-                   if(receive_signup?.isSuccess==true){
-
-                       if(receive_signup?.result!=null){
-                           val jwt = receive_signup.result.jwt
-                           //토큰값 저장
-                           val sharedPref = getSharedPreferences(getString(R.string.shared_preference_user_info),Context.MODE_PRIVATE)
-                           with(sharedPref.edit()){
-                               putString(getString(R.string.user_token), jwt.toString())
-                               apply()
-                           }
-                       }
+                   if(result?.isSuccess==true){
 
                        // 정상적으로 통신이 성고된 경우
-                       Log.d("회원가입", "onResponse 성공: " + receive_signup?.toString())
+                       Log.d("회원가입", "onResponse 성공: " + result?.toString())
 
-
+                       //토큰값 저장
+                       val sharedPref = getSharedPreferences(getString(R.string.shared_preference_user_info),Context.MODE_PRIVATE)
+                       with(sharedPref.edit()){
+                           putString(getString(R.string.user_token), result.toString())
+                           apply()
+                       }
                        Toast.makeText(this@SignUpActivity,"회원가입이 완료되었습니다!",Toast.LENGTH_SHORT).show()
-                       Intent(this@SignUpActivity,LoginActivity::class.java).apply{
+                       Intent(this@SignUpActivity,MainActivity::class.java).apply{
                            startActivity(this)
                        }
-                       finish()
 
                    }
-                   else if (receive_signup?.isSuccess==false){
+                   else if (result?.isSuccess==false){
                        // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
                        Log.d("회원가입", "onResponse 실패")
-                       onSignUpFailure(receive_signup.code)
-
+                       onSignUpFailure(result.code)
                    }
                }
 
@@ -293,21 +293,6 @@ class SignUpActivity : AppCompatActivity() {
        }
 
 
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        if(count2==1)
-        {
-            binding.SignupAgree2.visibility=View.VISIBLE
-            binding.SignupDisagree2.visibility=View.INVISIBLE
-            count2==1
-        }
-        if(count3==1){
-            binding.SignupAgree3.visibility=View.VISIBLE
-            binding.SignupDisagree3.visibility=View.INVISIBLE
-            count3==1
-        }
     }
 
 
@@ -412,42 +397,47 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun validEmail(): Boolean {
         val value: String = binding.SignupEmail.text.toString()
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
         return if (value.isEmpty()) {
-            binding.SignupMissEmail.text = "이메일을 입력해주세요."
-            binding.SignupMissEmail.visibility = View.VISIBLE
+            binding.SignupEmail.error = "이메일을 입력해주세요."
             false
         } else if (!value.matches(emailPattern.toRegex())) {
-            binding.SignupMissEmail.text = "이메일 형식에 맞게 입력해주세요."
-            binding.SignupMissEmail.visibility = View.VISIBLE
+            binding.SignupEmail.error = "이메일 형식이 잘 못 되었습니다."
             false
         } else {
-            binding.SignupEmail.isEnabled = false
-            binding.SignupMissEmail.visibility = View.INVISIBLE
             binding.SignupEmail.error = null
             true
         }
     }
+/*
+    private fun vaildEmail(): Boolean{
+        with(binding){
+            val input:String = .editText?.text.toString()
+            if(!Patterns.EMAIL_ADDRESS.matcher(input).matches()){
+                textInputLayout.helperText="이메일 형식에 맞게 입력해주세요."
+                return false
+            }else{
+                textInputLayout.helperText=""
+            }
+            return true
+        }
 
+    }
+*/
     private fun validPassword():Boolean{
         val value: String = binding.SignupPW.text.toString()
-        val passwordPattern = """^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).*$"""
+        val passwordPattern = "^[A-Za-z0-9]$"
 
         return if (value.isEmpty()) {
-            binding.SignupMissPW.text = "비밀번호를 입력해주세요."
-            binding.SignupMissPW.visibility = View.VISIBLE
+            binding.SignupPW.error = "비밀번호를 입력해주세요."
             false
         } else if (!value.matches(passwordPattern.toRegex())) {
-            binding.SignupMissPW.text = "비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
-            binding.SignupMissPW.visibility = View.VISIBLE
+            binding.SignupPW.error = "비밀번호에는 문자, 특수문자, 숫자가 포함되어야 합니다."
             false
         } else {
-            binding.SignupPW.isEnabled = false
-            binding.SignupMissPW.visibility = View.INVISIBLE
             binding.SignupPW.error = null
             true
         }
@@ -458,16 +448,12 @@ class SignUpActivity : AppCompatActivity() {
         val value: String = binding.SignupConfirmPW.text.toString()
 
         return if(value.isBlank()){
-            binding.SignupMissconfirmPW.text = "비밀번호 확인를 입력해주세요."
-            binding.SignupMissconfirmPW.visibility = View.VISIBLE
+            binding.SignupConfirmPW.error = "비밀번호 확인를 입력해주세요."
             false
-        } else if(value!= binding.SignupPW.text.toString()||value.length < 8 || value.length > 15){
-            binding.SignupMissconfirmPW.text = "비밀번호가 일치하지 않습니다"
-            binding.SignupMissconfirmPW.visibility = View.VISIBLE
+        } else if(value!= binding.SignupPW.text.toString()){
+            binding.SignupConfirmPW.error = "비밀번호가 일치하지 않습니다"
             false
         } else{
-            binding.SignupConfirmPW.isEnabled = false
-            binding.SignupMissconfirmPW.visibility = View.INVISIBLE
             binding.SignupConfirmPW.error = null
             true
         }
@@ -477,17 +463,13 @@ class SignUpActivity : AppCompatActivity() {
         val value: String = binding.SignupName.text.toString()
 
         return if (value.isBlank()) {
-            binding.SignupMissName.text = "이름을 입력해주세요."
-            binding.SignupMissName.visibility = View.VISIBLE
+            binding.SignupName.error = "이름을 입력해주세요."
             false
         } else if (value.length < 2 || value.length > 20) {
-            binding.SignupMissName.text = "이름은 2~20자 사이로 입력해주세요"
-            binding.SignupMissName.visibility = View.VISIBLE
+            binding.SignupConfirmPW.error = "이름은 2 ~ 20자 사이로 입력해주세요."
             false
         } else {
-            binding.SignupName.isEnabled = false
-            binding.SignupMissName.visibility = View.INVISIBLE
-            binding.SignupName.error = null
+            binding.SignupConfirmPW.error = null
             true
         }
     }
@@ -496,42 +478,33 @@ class SignUpActivity : AppCompatActivity() {
         val value: String = binding.SignupBirthDate.text.toString()
 
         return if (value.isBlank()) {
-            binding.SignupMissBirthDate.text = "생년월일을 입력해 주세요."
-            binding.SignupMissBirthDate.visibility = View.VISIBLE
+            binding.SignupBirthDate.error = "생년월일을 입력해 주세요."
             false
         } else if (value.length ==8) {
-            binding.SignupBirthDate.isEnabled = false
-            binding.SignupMissBirthDate.visibility = View.INVISIBLE
             binding.SignupBirthDate.error = null
             true
         } else {
-            binding.SignupMissBirthDate.text = "생년월일 형식에 맞게 입력해주세요"
-            binding.SignupMissBirthDate.visibility = View.VISIBLE
+            binding.SignupBirthDate.error = "생년월일 형식에 맞게 입력해주세요"
             false
         }
     }
 
-
     private fun validPhone():Boolean{
-
         val value: String = binding.SignupPhone.text.toString()
         val phonePattern = ".*[0-9].*"
 
         return if (value.isBlank()) {
-            binding.SignupMissPhone.text = "전화번호를 입력해 주세요."
-            binding.SignupMissPhone.visibility = View.VISIBLE
+            binding.SignupPhone.error = "전화번호를 입력해 주세요."
             false
         } else if (!value.matches(phonePattern.toRegex())||value.length != 11) {
-            binding.SignupMissPhone.text = "전화번호 형식에 맞게 입력해주세요"
-            binding.SignupMissPhone.visibility = View.VISIBLE
+            binding.SignupPhone.error = "전화번호 형식에 맞게 입력해주세요."
             false
         } else {
-            binding.SignupPhone.isEnabled = false
-            binding.SignupMissPhone.visibility = View.INVISIBLE
             binding.SignupPhone.error = null
             true
         }
     }
+
 
     //다이얼로그 띄우는 함수
     private fun dialogShow(msg: String, focus: View?, success: Boolean){
@@ -555,4 +528,5 @@ class SignUpActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
     }
+
 }

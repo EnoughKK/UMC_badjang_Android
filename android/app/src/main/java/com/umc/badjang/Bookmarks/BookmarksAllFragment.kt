@@ -39,28 +39,19 @@ class BookmarksAllFragment : Fragment() {
         val profileImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.non_profile)
         val popularPostImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
         val nationalNewsImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
-        addBookmarkData(
-            BookmarkPostData(
-                profileImg!!, "익명", "2022.12.28",
-                "이번에 2월에 졸업하는 사람도 해당되나요?", "다가오는 2월에 졸업하는 사람도 장학금을 받을 수 있는지 궁금합니다!\n알려주세요 ㅠㅠ",
-                null, 0, 1, 0
-            )
-        )
-        addBookmarkData(
-            BookmarkScholarshipData(
-                "경상국립대학교", null, "재학생 장학금 - 개척",
-                "- 최저기준\n" +
-                "   - 직전학기 10학점 이상 이수하고, 직전학기 평균평점 3.0 이상인 자\n" +
-                "   - 학과 추천에 의하여 선발 (학과별 자체 선정기준에 의함)\n", 1, 13
-            )
-        )
-        /*for(i: Int in 0..5) {
+        for(i: Int in 0..5) {
             if(i%2 == 0) {
                 addBookmarkData(
                     BookmarkPostData(
-                        profileImg!!, "익명", "2022.12.28",
-                        "이번에 2월에 졸업하는 사람도 해당되나요?", "다가오는 2월에 졸업하는 사람도 장학금을 받을 수 있는지 궁금합니다!\n알려주세요 ㅠㅠ",
-                        null, 0, 1, 0
+                        profileImg,
+                        "익명",
+                        "2022.12.28",
+                        "자기추천 장학금 신청방법",
+                        "자기추천 장학금 신청방법은 성적향상도(15), 진로탐색경험 (15),  대외활동(10), 자격층 취득(5), 지도교수상담(5) 총 50점 중 ...",
+                        popularPostImg,
+                        65,
+                        215,
+                        65
                     )
                 )
             }
@@ -76,7 +67,7 @@ class BookmarksAllFragment : Fragment() {
                     )
                 )
             }
-        }*/
+        }
     }
 
     // 즐겨찾기 리스트 recyclerview 세팅

@@ -18,7 +18,7 @@ class SubsidyRVAdapter (private val context: Context):
     var datas = ArrayList<GetSupportDTO>()
 
     interface OnClickInterface{
-        fun onClick(view: View, position: Int, viewBinding: RvSubsidyBinding)
+        fun onClick(view: View, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
@@ -35,7 +35,7 @@ class SubsidyRVAdapter (private val context: Context):
         holder.bind(datas[position])
 
         holder.itemView.setOnClickListener {
-            mItemClickListener.onClick(it, position, viewBinding)
+            mItemClickListener.onClick(it, position)
         }
     }
 
@@ -45,7 +45,7 @@ class SubsidyRVAdapter (private val context: Context):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GetSupportDTO) {
-            binding.universityLabel.text = item.support_institution           // 대학교 이름
+            binding.universityLabel.text = item.support_univ                  // 대학교 이름
             binding.subsidyCategory.text = item.support_category              // 지원금 카테고리
             binding.subsidyTitle.text = item.support_name                     // 지원금 이름
             binding.subsidyContents.text = item.support_content               // 지원금 상세내용

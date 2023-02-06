@@ -6,16 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.umc.badjang.databinding.FragmentMyPageBinding
-import com.umc.badjang.databinding.FragmentSettingsBinding
 
 class MyPageFragment : Fragment() {
-    private lateinit var viewBinding: FragmentSettingsBinding // viewBinding
+    private lateinit var viewBinding: FragmentMyPageBinding // viewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentSettingsBinding.inflate(layoutInflater);
+        viewBinding = FragmentMyPageBinding.inflate(layoutInflater);
 
         return viewBinding.root
     }

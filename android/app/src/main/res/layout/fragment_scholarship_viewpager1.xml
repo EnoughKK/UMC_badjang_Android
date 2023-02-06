@@ -23,23 +23,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scholarship_rvContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/scholarship_rvContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="10"
-            tools:listitem="@layout/rv_scholarship"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
-
-    </ScrollView>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
 </androidx.constraintlayout.widget.ConstraintLayout>
