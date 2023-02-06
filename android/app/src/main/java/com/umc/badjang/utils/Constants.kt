@@ -11,9 +11,15 @@ object API {
 
     const val SEARCH_SUPPORT : String = "supports"
 
-    const val VIEWCOUNT_SCHOLARSHIP : String = "{scholarshipIdx}"
+    const val VIEWCOUNT_SCHOLARSHIP : String = "scholarships/{scholarshipIdx}"
 
     const val VIEWCOUNT_SUPPORT : String = "{supportIdx}"
+
+    const val SUPPORT_OPI_BASE_URL : String = "https://www.youthcenter.go.kr/"
+
+    const val OPI_SUPPORT : String = "opi/empList.do"
+
+    const val OPI_SUPPORT_ID : String = "73444351051dbc5ea4541693"
 }
 
 enum class  RESPONSE_STATE {

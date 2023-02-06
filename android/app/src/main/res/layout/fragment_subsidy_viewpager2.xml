@@ -23,24 +23,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subsidy_RvContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        tools:itemCount="10"
+        tools:listitem="@layout/rv_subsidy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/subsidy_RvContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="10"
-            tools:listitem="@layout/rv_subsidy"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
-
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
