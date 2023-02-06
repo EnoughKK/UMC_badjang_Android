@@ -40,9 +40,6 @@ class HomeFragment : Fragment() {
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
-    val mySchoolSampleData = mutableListOf(mutableListOf("재학생 장학금 - 개척", 13), mutableListOf("재학생 장학금 - 희망,경상국립대학교", 8),
-        mutableListOf("2023학년도 1학기 특별장학금 신청 안내", 23), mutableListOf("2023년 동암장학회 장학생 선발 안내 ", 11))
-
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
     private var mainRecommendCurrentPosition = 0 // 슬라이드 이미지 현재 위치
@@ -155,15 +152,6 @@ class HomeFragment : Fragment() {
 
         // 전국소식 조회 api
         apiMainNationalNews()
-
-        // 우리학교 장학금 데이터 추가
-        /*for(i: Int in 0..(mySchoolSampleData.size - 1)) {
-            addMySchoolData(MainMySchoolData(i+1, mySchoolSampleData[i][0].toString(), mySchoolSampleData[i][1]))
-        }*/
-        addMySchoolData(MainMySchoolData(1, mySchoolSampleData[0][0].toString(), 13))
-        addMySchoolData(MainMySchoolData(2, mySchoolSampleData[1][0].toString(), 8))
-        addMySchoolData(MainMySchoolData(3, mySchoolSampleData[2][0].toString(), 23))
-        addMySchoolData(MainMySchoolData(4, mySchoolSampleData[3][0].toString(), 11))
     }
 
     // 추천 배너 슬라이드 이미지 변경하기
@@ -250,13 +238,43 @@ class HomeFragment : Fragment() {
         retrofit!!.create(MainMySchoolApiService::class.java).getMainMySchool(xAccessToken=jwt!!, userIdx=mConnectUserId!!)
             .enqueue(object : Callback<MainMySchoolApiData> {
                 override fun onResponse(call: Call<MainMySchoolApiData>, response: Response<MainMySchoolApiData>) {
-                     Log.d(TAG,"우리학교 장학금 -------------------------------------------")
-                     Log.d(TAG, "onResponse: ${response.body().toString()}")
+                     //Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                     //Log.d(TAG, "onResponse: ${response.body().toString()}")
 
+                    var allMySchoolData: MainMySchoolApiData = response.body()!!
+                    var mySchoolData: MutableList<MainMySchoolApiResult> = allMySchoolData.result
+
+                    // 우리학교 장학금 정보의 장학금 idx로 각 장학금 정보 조회
+                    for(i:Int in (0..mySchoolData.size - 1)) {
+                        if(i >= 4) break
+                        apiScholarship(mySchoolData[i].scholarship_idx.toLong())
+                    }
                 }
 
                 override fun onFailure(call: Call<MainMySchoolApiData>, t: Throwable) {
                     Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 장학금 idx로 장학금 정보 조회 api
+    private fun apiScholarship(scholarshipIdx: Long) {
+        retrofit!!.create(ScholarshipIdxApiService::class.java).getScholarshipData(scholarshipIdx)
+            .enqueue(object : Callback<ScholarshipIdxApiData> {
+                override fun onResponse(call: Call<ScholarshipIdxApiData>, response: Response<ScholarshipIdxApiData>) {
+                    //Log.d(TAG,"장학금 조회 -------------------------------------------")
+                    //Log.d(TAG, "onResponse: ${response.body().toString()}")
+                    addMySchoolData(
+                        MainMySchoolData(
+                            mySchoolDatas.size + 1,
+                            response.body()!!.result.scholarship_name,
+                            response.body()!!.result.scholarship_view
+                        ))
+                }
+
+                override fun onFailure(call: Call<ScholarshipIdxApiData>, t: Throwable) {
+                    Log.d(TAG,"장학금 조회 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
