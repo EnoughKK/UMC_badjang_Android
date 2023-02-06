@@ -69,18 +69,12 @@ class BookmarkAdapter(private val context: Context) :
 
             // 전국소식 내용 - 닫힌 버전
             binding.bookmarksScholarshipCloseTitle.text = item.bookmarkScholarshipTitle             // 전국소식 제목
-            if(item.bookmarkScholarshipImg != null)
-                binding.bookmarksScholarshipCloseImg.setImageBitmap(item.bookmarkScholarshipImg)        // 전국소식 이미지
-            else
-                binding.bookmarksScholarshipCloseImg.visibility = View.GONE
+            binding.bookmarksScholarshipCloseImg.setImageBitmap(item.bookmarkScholarshipImg)        // 전국소식 이미지
 
             // 전국소식 내용 - 열린 버전
             binding.bookmarksScholarshipOpenTitle.text = item.bookmarkScholarshipTitle             // 전국소식 제목
             binding.bookmarksScholarshipOpenText.text = item.bookmarkScholarshipContent            // 전국소식내용
-            if(item.bookmarkScholarshipImg != null)
-                binding.bookmarksScholarshipOpenImg.setImageBitmap(item.bookmarkScholarshipImg)        // 전국소식 이미지
-            else
-                binding.bookmarksScholarshipOpenImg.visibility = View.GONE
+            binding.bookmarksScholarshipOpenImg.setImageBitmap(item.bookmarkScholarshipImg)        // 전국소식 이미지
 
             // 기타 정보
             binding.bookmarksScholarshipCommentsNum.text = item.bookmarkScholarshipCommentsCnt.toString() // 댓글 수
@@ -133,10 +127,7 @@ class BookmarkAdapter(private val context: Context) :
             // 게시글 내용
             binding.bookmarksPostContentTitle.text = item.bookmarkPostTitle             // 인기글 제목
             binding.bookmarksPostContentText.text = item.bookmarkPostContent            // 인기글 내용
-            if(item.bookmarkPostImg != null)
-                binding.bookmarksPostContentImg.setImageBitmap(item.bookmarkPostImg)        // 인기글 이미지
-            else
-                binding.bookmarksPostContentImg.visibility = View.GONE
+            binding.bookmarksPostContentImg.setImageBitmap(item.bookmarkPostImg)        // 인기글 이미지
 
             // 기타 정보
             binding.bookmarksPostCommentsNum.text = item.bookmarkPostCommentsCnt.toString() // 댓글 수

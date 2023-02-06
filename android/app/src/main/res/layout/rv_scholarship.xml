@@ -51,15 +51,13 @@
 
             <TextView
                 android:id="@+id/scholarship_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="start"
                 android:text="자기추천장학금"
                 android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="@+id/university_label"
                 app:layout_constraintTop_toBottomOf="@+id/scholarship_category" />
 
@@ -70,8 +68,8 @@
                 android:text="215"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -162,13 +160,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_viewMore"
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_layout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <View
             android:layout_width="match_parent"

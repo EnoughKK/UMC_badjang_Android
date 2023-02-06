@@ -10,15 +10,15 @@
             android:title="장학금&#38;지원금"
             android:icon="@drawable/ic_select_menu_scholarship" />
 
-        <item android:id="@+id/post"
+        <item android:id="@+id/search"
             android:title="게시판"
             android:icon="@drawable/ic_select_menu_post" />
 
-        <item android:id="@+id/search"
+        <item android:id="@+id/mypage"
             android:title="검색"
             android:icon="@drawable/ic_select_menu_search" />
 
-        <item android:id="@+id/mypage"
+        <item android:id="@+id/post"
             android:title="마이페이지"
             android:icon="@drawable/ic_select_menu_mypage" />
 
