@@ -3,11 +3,229 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".MyPageFragment">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/Mypage_linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MyPage" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
+        <ImageButton
+            android:id="@+id/Mypage_UpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginLeft="17dp" />
+
+        <TextView
+            android:id="@+id/Mypage_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="마이 페이지"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginLeft="4dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#252525"
+        android:layout_marginTop="78dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Mypage_Viewed"
+        android:layout_width="match_parent"
+        android:background="@drawable/settingsbox"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="90dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="최근 본글"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/Mypage_ViewedBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="right"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Mypage_Announcement"
+        android:layout_width="match_parent"
+        android:background="@drawable/settingsbox"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="145dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="공지사항"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageButton
+                android:id="@+id/Mypage_AnnouncementBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="right"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/settingsbox"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="200dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Mypage_Inquiry"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="문의하기"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageButton
+                android:id="@+id/Mypage_InquiryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="right" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/settingsbox"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="255dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Mypage_Qna"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="자주 묻는 질문"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageButton
+                android:id="@+id/Mypage_QnaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="right" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/settingsbox"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="310dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Mypage_Settings"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="설정"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageButton
+                android:id="@+id/Mypage_SettingsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="right" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 </FrameLayout>
