@@ -20,6 +20,7 @@ import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
+public var mConnectUserId: Int? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding // viewBinding
@@ -113,6 +114,20 @@ class MainActivity : AppCompatActivity() {
 
     // fragment 전환
     fun changeFragment(fragment: Fragment){
+        // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.fragmentLayout.id, fragment)
+            .commit()
+    }
+
+    // fragment data 전송, 전환
+    fun SendDataFragment(fragment: Fragment, itemIdx: Long){
+
+        val bundle = Bundle()
+        bundle.putLong("ItemIdx", itemIdx)
+        fragment.arguments = bundle
+
         // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
         supportFragmentManager
             .beginTransaction()
