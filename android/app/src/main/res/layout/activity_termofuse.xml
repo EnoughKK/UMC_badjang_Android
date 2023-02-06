@@ -10,18 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="#D9D9D9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <LinearLayout
         android:id="@+id/Use_linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="10dp">
         <ImageButton
             android:id="@+id/Use_UpBtn"
             android:layout_width="wrap_content"
@@ -86,11 +79,11 @@
             android:layout_marginTop="20dp" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="#D9D9D9"
+            android:layout_height="10dp"
+            android:background="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="10dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

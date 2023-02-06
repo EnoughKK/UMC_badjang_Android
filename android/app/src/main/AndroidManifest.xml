@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
         
         <activity
             android:name=".LoginPage.Login.ChangePWActvity"
@@ -90,5 +91,17 @@
         <activity
             android:name=".LoginPage.LogoActivity"
             android:exported="false" />
+
+        <!--[start fcm 설정 추가]-->
+        <service
+            android:name="MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--[end fcm 설정 추가]-->
+
+
     </application>
 </manifest>

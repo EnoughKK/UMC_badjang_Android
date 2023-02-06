@@ -39,7 +39,7 @@ class BookmarksPostFragment : Fragment() {
         // 게시글 데이터 추가
         val profileImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.non_profile)
         val popularPostImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
-        for(i: Int in 0..1) {
+        for(i: Int in 0..0) {
             addBookmarksPostData(
                 PopularPostData(profileImg!!, "익명", "2022.12.28",
                     "이번에 2월에 졸업하는 사람도 해당되나요?", "다가오는 2월에 졸업하는 사람도 장학금을 받을 수 있는지 궁금합니다!\n알려주세요 ㅠㅠ",
