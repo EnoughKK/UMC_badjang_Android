@@ -37,8 +37,10 @@ class MainNationalNewsAdapter(private val context: Context) :
         fun bind(item: MainNationalNewsDataBitmap) {
             if(item.nationalNewsImage == null)
                 binding.mainNationalNewsImg.visibility = View.GONE
-            else
+            else {
                 binding.mainNationalNewsImg.setImageBitmap(item.nationalNewsImage) // 글 이미지
+                binding.mainNationalNewsImg.visibility = View.VISIBLE
+            }
             binding.mainNationalNewsTitle.text = item.nationalNewsTitle        // 글 제목
         }
     }

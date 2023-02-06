@@ -15,15 +15,15 @@ import com.umc.badjang.databinding.FragmentMySchoolBinding
 class MySchoolFragment : Fragment() {
     private lateinit var viewBinding: FragmentMySchoolBinding // viewBinding
 
-    private val sampleData = mutableListOf(NationalNewsData("경상국립대학교", null, "재학생 장학금 - 개척",
+    private val sampleData = mutableListOf(NationalNewsDataBitmap("경상국립대학교","재학생 장학금 - 개척",
         "- 최저기준\n" +
                 "   - 직전학기 10학점 이상 이수하고, 직전학기 평균평점 3.0 이상인 자\n" +
-                "   - 학과 추천에 의하여 선발 (학과별 자체 선정기준에 의함)\n", 1, 13),
-        NationalNewsData("경상국립대학교", null, "재학생 장학금 - 희망,경상국립대학교",
+                "   - 학과 추천에 의하여 선발 (학과별 자체 선정기준에 의함)\n", null, 1, 13),
+        NationalNewsDataBitmap("경상국립대학교",  "재학생 장학금 - 희망,경상국립대학교",
             "- 최저기준\n" +
                     "      - 직전학기 10학점 이상 이수하고, 직전학기 평균평점 2.0 이상인 자\n" +
-                    "   - 학과 추천에 의하여 선발 (학과별 자체 선정기준에 의함)\n", 0, 8),
-        NationalNewsData("경상국립대학교 / 학생과", null, "2023학년도 1학기 특별장학금 신청 안내",
+                    "   - 학과 추천에 의하여 선발 (학과별 자체 선정기준에 의함)\n", null,0, 8),
+        NationalNewsDataBitmap("경상국립대학교 / 학생과",  "2023학년도 1학기 특별장학금 신청 안내",
             "■ 2023학년도 1학기 특별장학금 신청 대상자는 붙임 안내문을 참고하여 기한 내 신청하여 주시기 바랍니다.\n\n" +
                     "  - 신청방법: 통합서비스(https://my. gnu.ac.kr) 에서 신청\n\n" +
                     "  - 신청대상 장학금 및 신청기한(매학기 필수 신청)\n\n\n" +
@@ -44,8 +44,8 @@ class MySchoolFragment : Fragment() {
                     "·’23. 3. 1. ~3. 31.까지\n\n" +
                     "  ⇒ ’23. 5월 중 학생 계좌 지급\n\n" +
                     "※ 등록금 사전감면 불가\n\n" +
-                    "  ※ 장학금 수혜대상자는 법정의무교육을 이수하여야 함: 폭력예방 교육(성폭력, 가정폭력), 장애인 인식 개선 교육\n", 2, 23),
-        NationalNewsData("동암장학회", null, "2023년 동암장학회 장학생 선발 안내",
+                    "  ※ 장학금 수혜대상자는 법정의무교육을 이수하여야 함: 폭력예방 교육(성폭력, 가정폭력), 장애인 인식 개선 교육\n", null,2, 23),
+        NationalNewsDataBitmap("동암장학회", "2023년 동암장학회 장학생 선발 안내",
             "1. 관련: 재단법인 동암장학회 2023-5(2023.01.17.)\n\n" +
                     "2. 동암장학회에서는 2022년 장학생을 선발하오니 관심있는 학생들은 신청하시기 바랍니다.\n\n" +
                     "  가. 선발인원: 00명(성적우수장학생, 생활장학생)\n\n" +
@@ -64,10 +64,10 @@ class MySchoolFragment : Fragment() {
                     "  라. 제출서류: [붙임 1] 선발공고 참고\n\n" +
                     "  마. 제출처: (우) 44259 울산광역시 북구 염포로 260-10 ㈜경동도시가스 내 (재)동암장학회 사무국 \n\n\n\n" +
                     "붙임 1. 2023년 동암장학회 장학생 선발 공고문 1부. \n\n" +
-                    "      2. 제출서류(서식) 1부. 끝.\n", 0, 11))
+                    "      2. 제출서류(서식) 1부. 끝.\n", null,0, 11))
 
     // 우리학교 장학금 recyclerview adapter
-    private val mySchoolDatas = mutableListOf<NationalNewsData>()
+    private val mySchoolDatas = mutableListOf<NationalNewsDataBitmap>()
     private lateinit var mySchoolAdapter: NationalNewsAdapter
 
     override fun onCreateView(
@@ -110,7 +110,7 @@ class MySchoolFragment : Fragment() {
     }
 
     // 우리학교 데이터 추가
-    private fun addMySchoolData(mySchoolData: NationalNewsData) {
+    private fun addMySchoolData(mySchoolData: NationalNewsDataBitmap) {
         mySchoolDatas.apply {
             add(mySchoolData)
         }

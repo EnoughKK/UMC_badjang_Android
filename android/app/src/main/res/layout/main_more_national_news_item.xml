@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
                 android:layout_toRightOf="@id/national_news_close_img"
                 android:text="자기추천장학금"
                 android:textColor="#000000"

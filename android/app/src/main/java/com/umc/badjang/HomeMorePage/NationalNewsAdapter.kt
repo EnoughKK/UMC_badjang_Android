@@ -13,7 +13,7 @@ class NationalNewsAdapter(private val context: Context) :
 
     private lateinit var viewBinding: MainMoreNationalNewsItemBinding
 
-    var datas = mutableListOf<NationalNewsData>()
+    var datas = mutableListOf<NationalNewsDataBitmap>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
             NationalNewsViewHolder {
@@ -34,23 +34,38 @@ class NationalNewsAdapter(private val context: Context) :
     inner class NationalNewsViewHolder(private val binding: MainMoreNationalNewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: NationalNewsData) {
-            binding.nationalNewsInstitutionLabel.text = item.nationalNewsInstitution // 기관명
+        fun bind(item: NationalNewsDataBitmap) {
 
-            // 전국소식 내용 - 닫힌 버전
-            binding.nationalNewsCloseTitle.text = item.nationalNewsTitle             // 전국소식 제목
-            if(item.nationalNewsImg != null)
-                binding.nationalNewsCloseImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            if(item.nationalNewsInstitution != null)
+                binding.nationalNewsInstitutionLabel.text = item.nationalNewsInstitution // 기관명
             else
-                binding.nationalNewsCloseImg.visibility = View.GONE // 이미지가 없는 경우
+                binding.nationalNewsInstitutionLabel.visibility = View.GONE // 기관명이 없는 경우
 
-            // 전국소식 내용 - 열린 버전
-            binding.nationalNewsOpenTitle.text = item.nationalNewsTitle             // 전국소식 제목
-            binding.nationalNewsOpenText.text = item.nationalNewsContent            // 전국소식내용
-            if(item.nationalNewsImg != null)
-                binding.nationalNewsOpenImg.setImageBitmap(item.nationalNewsImg)        // 전국소식 이미지
+            // 전국소식 내용
+            binding.nationalNewsCloseTitle.text = item.nationalNewsTitle             // 전국소식 제목 닫힌 버전
+            binding.nationalNewsOpenTitle.text = item.nationalNewsTitle              // 전국소식 제목 열린 버전
+
+            if(item.nationalNewsImg != null) {
+                // 전국소식 이미지 닫힌 버전
+                binding.nationalNewsCloseImg.setImageBitmap(item.nationalNewsImg)
+                binding.nationalNewsCloseImg.visibility = View.VISIBLE
+
+                // 전국소식 이미지 열린 버전
+                binding.nationalNewsOpenImg.setImageBitmap(item.nationalNewsImg)
+                binding.nationalNewsOpenImg.visibility = View.VISIBLE
+            }
+            else { // 이미지가 없는 경우
+                binding.nationalNewsCloseImg.visibility = View.GONE
+                binding.nationalNewsOpenImg.visibility = View.GONE
+            }
+
+            if(item.nationalNewsContent != null) {
+                binding.nationalNewsOpenText.text = item.nationalNewsContent         // 전국소식 내용
+                binding.nationalNewsOpenText.visibility = View.VISIBLE
+            }
             else
-                binding.nationalNewsOpenImg.visibility = View.GONE // 이미지가 없는 경우
+                binding.nationalNewsOpenText.visibility = View.GONE // 내용이 없는 경우
+
 
             // 기타 정보
             binding.nationalNewsCommentsNum.text = item.nationalNewsCommentsCnt.toString() // 댓글 수
