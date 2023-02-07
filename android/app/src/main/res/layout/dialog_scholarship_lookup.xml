@@ -28,20 +28,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <!--<EditText
             android:id="@+id/editText_search_school"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/dialog_selection_board"
-            android:hint="검색하기"
+            android:drawableEnd="@drawable/dialog_down"
+            android:hint="선택하기"
+            android:paddingRight="10dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/textview_school1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textview_school1"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck" />-->
+        <Spinner
+            android:id="@+id/spinner_search_school"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_school1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textview_school1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_school2"
@@ -55,19 +67,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selection_school" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_school"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/editText_search_school"
-            app:layout_constraintTop_toBottomOf="@id/editText_search_school" />
+            app:layout_constraintStart_toStartOf="@id/spinner_search_school"
+            app:layout_constraintTop_toBottomOf="@id/spinner_search_school"  />
 
         <TextView
             android:id="@+id/textview_major"
@@ -81,19 +90,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selection_major" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_major"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/editText_search_school"
-            app:layout_constraintTop_toBottomOf="@id/selection_school" />
+            app:layout_constraintStart_toStartOf="@id/spinner_search_school"
+            app:layout_constraintTop_toBottomOf="@id/selection_school"  />
 
         <TextView
             android:id="@+id/textview_grade"
@@ -107,19 +113,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selection_grade" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_grade"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/editText_search_school"
-            app:layout_constraintTop_toBottomOf="@id/selection_major" />
+            app:layout_constraintStart_toStartOf="@id/spinner_search_school"
+            app:layout_constraintTop_toBottomOf="@id/selection_major"  />
 
         <TextView
             android:id="@+id/textview_semester"
@@ -133,19 +136,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selection_semester" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_semester"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/editText_search_school"
-            app:layout_constraintTop_toBottomOf="@id/selection_grade" />
+            app:layout_constraintStart_toStartOf="@id/spinner_search_school"
+            app:layout_constraintTop_toBottomOf="@id/selection_grade"  />
 
         <View
             android:id="@+id/contour"
