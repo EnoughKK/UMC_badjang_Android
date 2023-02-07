@@ -17,9 +17,9 @@
         android:layout_marginTop="10dp">
         <ImageButton
             android:id="@+id/Use_UpBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="17dp" />
         <TextView
@@ -29,7 +29,7 @@
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -37,29 +37,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Use_linearlayout1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/Term_Scroll"
-        android:layout_width="match_parent"
-        android:layout_height="611dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/Term_Scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="611dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
 
-    <WebView
-        android:id="@+id/webView_term"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanskr_regular"
-        android:textColor="@color/black"
-        android:textSize="12sp"/>
+                    <WebView
+                        android:id="@+id/webView_term"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
 
-    </androidx.core.widget.NestedScrollView>
+                </androidx.core.widget.NestedScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Use_Btn"

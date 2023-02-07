@@ -15,9 +15,9 @@
 
         <ImageButton
             android:id="@+id/Settings_UpBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="17dp" />
 
@@ -29,14 +29,14 @@
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="75dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
@@ -84,7 +84,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="150dp"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="210dp"
         >
         <FrameLayout
             android:layout_width="match_parent"

@@ -16,15 +16,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.umc.badjang.HomePagaApi.MainPopularApiData
-import com.umc.badjang.HomePagaApi.MainPopularApiService
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.Model.supportOpiDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
-import com.umc.badjang.databinding.RvScholarshipBinding
 import com.umc.badjang.databinding.RvSubsidyBinding
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.RESPONSE_STATE

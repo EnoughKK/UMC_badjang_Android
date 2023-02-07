@@ -29,6 +29,7 @@ class LogoutDialog (context:Context) : Dialog(context){
     private val prefEdit = ApplicationClass.sSharedPreferences.edit()
 
     val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN,null)
+    //user_idx 불러옴
     val useridx = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX,0)
 
     val logoutRetrofit= ApplicationClass.sRetrofit.create(LogoutRetrofit::class.java)

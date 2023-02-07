@@ -19,14 +19,14 @@
 
         <ImageButton
             android:id="@+id/Signup_UpBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="17dp"
-            android:backgroundTint="#FFFFFF"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:background="@android:color/transparent"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
 
         <ScrollView
@@ -288,19 +288,20 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_AllDisagree"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_off"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageButton
                                 android:id="@+id/Signup_AllAgree"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
+                                android:background="@android:color/transparent"
                                 android:backgroundTint="@color/white"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
@@ -350,20 +351,20 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Disagree1"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_off"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageButton
                                 android:id="@+id/Signup_Agree1"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -396,10 +397,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Disagree2"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_off"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -407,10 +408,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Agree2"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -443,10 +444,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Disagree3"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_off"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -454,10 +455,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Agree3"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -490,10 +491,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Disagree4"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_off"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -501,10 +502,10 @@
 
                             <ImageButton
                                 android:id="@+id/Signup_Agree4"
-                                android:layout_width="wrap_content"
+                                android:layout_width="45dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:backgroundTint="@color/white"
+                                android:background="@android:color/transparent"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
                                 app:layout_constraintStart_toStartOf="parent"
