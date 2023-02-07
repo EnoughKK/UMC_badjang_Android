@@ -114,4 +114,8 @@ class ScholarshipRVAdapter(private val context: Context):
         mItemClickListener = itemClickListener
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
 }
