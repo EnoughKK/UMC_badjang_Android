@@ -1,13 +1,11 @@
 package com.umc.badjang
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.Settings.SettingsFragment
 import com.umc.badjang.databinding.FragmentMyPageBinding
 import retrofit2.Retrofit
@@ -17,7 +15,7 @@ class MyPageFragment : Fragment(){
     private lateinit var viewBinding: FragmentMyPageBinding // viewBinding
 
     //api 통신을 위한 retrofit
-    private var retrofit :Retrofit? =null
+    private var retrofit : Retrofit? =null
 
     // 프래그먼트 전환을 위해
     var activity: MainActivity? = null
@@ -44,9 +42,9 @@ class MyPageFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.MypageSettingsBtn.setOnClickListener{
-            activity?.changeFragment(SettingsFragment())
-
+            activity?.ch
         }
+
 
         // 이전 버튼 선택 시
         viewBinding.MypageUpBtn.setOnClickListener {

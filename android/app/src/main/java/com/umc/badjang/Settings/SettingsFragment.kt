@@ -46,6 +46,7 @@ class SettingsFragment : Fragment() {
             LogoutDialog(requireContext()).show()
         }
 
+
         // 이전 버튼 선택 시
         viewBinding.SettingsUpBtn.setOnClickListener {
             // 이전 페이지로 이동

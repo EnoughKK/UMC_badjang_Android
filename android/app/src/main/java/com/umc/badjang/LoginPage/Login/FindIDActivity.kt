@@ -41,7 +41,7 @@ class FindIDActivity : AppCompatActivity() {
             override fun onVerificationFailed(e: FirebaseException) {
             }
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-                this@FindIDActivity.verificationId = verificationId
+                //this@FindIDActivity.verificationId = verificationId
             }
         }
 

@@ -18,6 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
+import com.umc.badjang.Settings.AlarmFragment
+import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 public var mConnectUserId: Int? = null
@@ -113,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // fragment 전환
-    fun changeFragment(fragment: Fragment){
+    fun changeFragment(fragment: MyInfoFragment){
         // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
         supportFragmentManager
             .beginTransaction()
