@@ -10,18 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/Signup_view"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="#D9D9D9" />
 
     <LinearLayout
         android:id="@+id/Signup_linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/Signup_view">
+        android:layout_marginTop="10dp">
 
         <ImageButton
             android:id="@+id/Signup_UpBtn"
@@ -47,508 +41,521 @@
             android:layout_marginLeft="4dp" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/Signup_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Signup_linearlayout1">
+        <ScrollView
+            android:id="@+id/Signup_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Signup_linearlayout1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-<!--이메일-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-        app:errorEnabled="true">
-     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Signup_Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이메일"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="textEmailAddress"
-        />
-        <TextView
-            android:id="@+id/Signup_missEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이메일 형식에 맞게 입력해주세요"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#ED1C24"
-            android:textSize="12sp"
-            android:paddingStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-20dp"
-            android:visibility="invisible"/>
-</com.google.android.material.textfield.TextInputLayout>
-
-
-<!--비밀번호-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="15"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Signup_PW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="비밀번호"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="textPassword"
-            />
-        <TextView
-            android:id="@+id/Signup_missPW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#ED1C24"
-            android:textSize="12sp"
-            android:paddingStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-20dp"
-            android:visibility="invisible"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-<!--비밀번호 확인-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="15"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Signup_confirmPW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="비밀번호 확인"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="textPassword"
-            />
-        <TextView
-            android:id="@+id/Signup_missconfirmPW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="비밀번호가 일치하지 않습니다"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#ED1C24"
-            android:textSize="12sp"
-            android:paddingStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-20dp"
-            android:visibility="invisible"/>
-    </com.google.android.material.textfield.TextInputLayout>
-            <!--이름-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:errorEnabled="true">
-        <EditText
-            android:id="@+id/Signup_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이름"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="text"
-            android:privateImeOptions="defaultInputmode=korean"
-            />
-        <TextView
-            android:id="@+id/Signup_missName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이름은 2~20자 사이로 입력해주세요"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#ED1C24"
-            android:textSize="12sp"
-            android:paddingStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-20dp"
-            android:visibility="invisible"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-            <!--생년월일-->
-            <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="8"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Signup_BirthDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="생년월일(yyyymmdd)"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="date"
-            />
-                <TextView
-                    android:id="@+id/Signup_missBirthDate"
+                <!--이메일-->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="생년월일 형식에 맞게 입력해주세요"
-                    android:fontFamily="@font/notosanskr_regular"
-                    android:textColor="#ED1C24"
-                    android:textSize="12sp"
-                    android:paddingStart="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Signup_Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="이메일"
+                        android:inputType="textEmailAddress"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="이메일 형식에 맞게 입력해주세요"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--비밀번호-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="15"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Signup_PW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="비밀번호"
+                        android:inputType="textPassword"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missPW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--비밀번호 확인-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="15"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Signup_confirmPW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="비밀번호 확인"
+                        android:inputType="textPassword"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missconfirmPW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="비밀번호가 일치하지 않습니다"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--이름-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/Signup_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="이름"
+                        android:inputType="text"
+                        android:privateImeOptions="defaultInputmode=korean"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="이름은 2~20자 사이로 입력해주세요"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--생년월일-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="8"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Signup_BirthDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="생년월일(yyyymmdd)"
+                        android:inputType="date"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missBirthDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="생년월일 형식에 맞게 입력해주세요"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--전화번호-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="11"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Signup_Phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:hint="전화번호"
+                        android:inputType="phone"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/Signup_missPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:paddingStart="5dp"
+                        android:text="전화번호 형식에 맞게 입력해주세요"
+                        android:textColor="#ED1C24"
+                        android:textSize="12sp"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/Signup_linearlayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/round_box2"
+                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="-20dp"
-                    android:visibility="invisible"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintTop_toTopOf="parent">
 
-<!--전화번호-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-        app:endIconMode = "clear_text"
-        app:errorEnabled="true"
-        app:counterEnabled="true"
-        app:counterMaxLength="11">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Signup_Phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="전화번호"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textSize="15sp"
-            android:inputType="phone"
-            />
-        <TextView
-            android:id="@+id/Signup_missPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="전화번호 형식에 맞게 입력해주세요"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#ED1C24"
-            android:textSize="12sp"
-            android:paddingStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-20dp"
-            android:visibility="invisible"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/Signup_linearlayout2"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@drawable/round_box2"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp">
+                            <ImageButton
+                                android:id="@+id/Signup_AllDisagree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_off"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <ImageButton
-                    android:id="@+id/Signup_AllDisagree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_off"
+                            <ImageButton
+                                android:id="@+id/Signup_AllAgree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_on"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </FrameLayout>
+
+
+                        <TextView
+                            android:id="@+id/Signup_AllAgreetext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_vertical"
+                            android:text="약관에 전체 동의"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="290dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@color/black"
+                            android:backgroundTint="#E6E6E6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/Signup_Disagree1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_off"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/Signup_Agree1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_on"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/Signup_Agreetext1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_vertical"
+                            android:text="(필수) 만 14세 이상입니다"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/Signup_Disagree2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_off"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                            <ImageButton
+                                android:id="@+id/Signup_Agree2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_on"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/Signup_Agreetext2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_vertical"
+                            android:text="(필수) 서비스 이용약관 동의"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/Signup_Disagree3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_off"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="SpeakableTextPresentCheck" />
+
+                            <ImageButton
+                                android:id="@+id/Signup_Agree3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_on"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/Signup_Agreetext3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_vertical"
+                            android:text="(필수) 개인정보 수집 및 이용 동의"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/Signup_Disagree4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_off"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="SpeakableTextPresentCheck" />
+
+                            <ImageButton
+                                android:id="@+id/Signup_Agree4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:backgroundTint="@color/white"
+                                android:src="@drawable/property1_on"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/Signup_Agreetext4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_vertical"
+                            android:text="(선택) 알림 수신 동의"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Signup_Btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/round_box"
+                    android:backgroundTint="#2173FD"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="center"
+                    android:text="가입하기"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/Signup_AllAgree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_on"
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:visibility="invisible"/>
-            </FrameLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-            <TextView
-                android:id="@+id/Signup_AllAgreetext"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="약관에 전체 동의"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="290dp"
-                android:layout_height="1dp"
-                android:backgroundTint="#E6E6E6"
-                android:background="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <ImageButton
-                    android:id="@+id/Signup_Disagree1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_off"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp" />
-
-                <ImageButton
-                    android:id="@+id/Signup_Agree1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_on"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:visibility="invisible"/>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/Signup_Agreetext1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/notosanskr_regular"
-                android:text="(필수) 만 14세 이상입니다"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/Signup_Disagree2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_off"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/Signup_Agree2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_on"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:visibility="invisible"/>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/Signup_Agreetext2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/notosanskr_regular"
-                android:text="(필수) 서비스 이용약관 동의"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/Signup_Disagree3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_off"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/Signup_Agree3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_on"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:visibility="invisible"/>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/Signup_Agreetext3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/notosanskr_regular"
-                android:text="(필수) 개인정보 수집 및 이용 동의"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/Signup_Disagree4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_off"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/Signup_Agree4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/property1_on"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft= "15dp"
-                    android:visibility="invisible"/>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/Signup_Agreetext4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="(선택) 알림 수신 동의"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textSize="15sp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Signup_Btn"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/round_box"
-        android:backgroundTint="#2173FD"
-        android:text="가입하기"
-        android:fontFamily="@font/notosanskr_medium"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"/>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#D9D9D9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp" />
-
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 

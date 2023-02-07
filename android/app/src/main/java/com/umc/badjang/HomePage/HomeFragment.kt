@@ -3,36 +3,36 @@ package com.umc.badjang.HomePage
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
+import com.umc.badjang.mConnectUserId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var viewBinding: FragmentHomeBinding // viewBinding
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
     private lateinit var mainPopularAdapter: MainPopularAdapter
 
     // 전국소식 리스트 recyclerview adapter
-    private val nationalNewsDatas = mutableListOf<MainNationalNewsData>()
+    private val nationalNewsDatas = mutableListOf<MainNationalNewsDataBitmap>()
     private lateinit var mainNationalNewsAdapter: MainNationalNewsAdapter
 
     // 프래그먼트 전환을 위해
@@ -94,6 +94,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 현재 로그인 된 사용자 idx 조회
+        mConnectUserId = ApplicationClass.prefs.getString("user_idx", "0").toInt()
 
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
@@ -153,7 +156,7 @@ class HomeFragment : Fragment() {
         apiMainPopular()
 
         // 전국소식 조회 api
-        //apiMainNationalNews()
+        apiMainNationalNews()
 
         // 우리학교 장학금 데이터 추가
         /*for(i: Int in 0..(mySchoolSampleData.size - 1)) {
@@ -171,14 +174,14 @@ class HomeFragment : Fragment() {
 
         // 전국 소식 데이터 추가
         //val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
-        for(i: Int in 0..(nationalNewsSampleData.size - 1)) {
+        /*for(i: Int in 0..(nationalNewsSampleData.size - 1)) {
             CoroutineScope(Dispatchers.Main).launch {
                 val img: Bitmap = withContext(Dispatchers.IO) {
                     ImageLoader.loadImage(nationalNewsSampleData[i][1].toString())!!
                 }
                 addNationalNewsData(MainNationalNewsData(img, nationalNewsSampleData[i][0].toString()))
             }
-        }
+        }*/
     }
 
     // 추천 배너 슬라이드 이미지 변경하기
@@ -237,10 +240,26 @@ class HomeFragment : Fragment() {
 
     // 전국 소식 데이터 추가
     private fun addNationalNewsData(mainNationalNewsPost: MainNationalNewsData) {
-        nationalNewsDatas.apply {
-            add(mainNationalNewsPost)
+
+        if(mainNationalNewsPost.nationalNewsImage == null) {
+            nationalNewsDatas.apply {
+                add(MainNationalNewsDataBitmap(null, mainNationalNewsPost.nationalNewsTitle))
+            }
+            mainNationalNewsAdapter.notifyDataSetChanged()
         }
-        mainNationalNewsAdapter.notifyDataSetChanged()
+
+        else {
+            CoroutineScope(Dispatchers.Main).launch {
+                val img: Bitmap = withContext(Dispatchers.IO) {
+                    ImageLoader.loadImage(mainNationalNewsPost.nationalNewsImage!!)!!
+                }
+                nationalNewsDatas.apply {
+                    add(MainNationalNewsDataBitmap(img, mainNationalNewsPost.nationalNewsTitle))
+                }
+
+                mainNationalNewsAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     // 인기글 조회 api
@@ -269,12 +288,37 @@ class HomeFragment : Fragment() {
 
     // 전국소식 조회 api
     private fun apiMainNationalNews() {
-        retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews()
+        retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews(mConnectUserId!!)
             .enqueue(object : Callback<MainNationalNewsApiData> {
                 override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
                     Log.d(TAG,"전국소식 -------------------------------------------")
-                    Log.d(TAG, "onResponse: ${response.body().toString()}")
 
+                    val allNationalNewsList = mutableListOf<AllNationalNewsList>()
+
+                    var allNationalNewsData: MainNationalNewsApiData = response.body()!!
+                    var scholarshipData: MutableList<MainNationalNewsScholarship> = allNationalNewsData.result.scholarshipList
+                    var supportData: MutableList<MainNationalNewsSupport> = allNationalNewsData.result.supportList
+
+                    for(i:Int in (0..scholarshipData.size - 1)) {
+                        //if(i >= 5) break
+                        allNationalNewsList.add(AllNationalNewsList(
+                            MainNationalNewsData(scholarshipData[i].scholarship_image, scholarshipData[i].scholarship_name),
+                            scholarshipData[i].scholarship_createAt))
+                    }
+                    for(i:Int in (0..supportData.size - 1)) {
+                        allNationalNewsList.add(AllNationalNewsList(
+                            MainNationalNewsData(scholarshipData[i].scholarship_image, supportData[i].support_name),
+                            supportData[i].support_createAt))
+                    }
+
+                    // 생성일을 기준으로 정렬
+                    Collections.sort(allNationalNewsList)
+
+                    // 최신순 상위 5개
+                    for (i:Int in (0..allNationalNewsList.size - 1)) {
+                        if(i >= 5) break
+                        addNationalNewsData(allNationalNewsList[i].mNationalNewsData)
+                    }
                 }
 
                 override fun onFailure(call: Call<MainNationalNewsApiData>, t: Throwable) {
@@ -282,5 +326,27 @@ class HomeFragment : Fragment() {
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
+    }
+
+    // 전국소식 생성일 순으로 정렬
+    internal class AllNationalNewsList(mNationalNewsData: MainNationalNewsData, createAt: String) :
+        Comparable<AllNationalNewsList> {
+
+        val mNationalNewsData: MainNationalNewsData
+        private val createAt: String
+
+        override operator fun compareTo(nationalNews: AllNationalNewsList): Int {
+            if (nationalNews.createAt < createAt) {
+                return 1
+            } else if (nationalNews.createAt > createAt) {
+                return -1
+            }
+            return 0
+        }
+
+        init {
+            this.mNationalNewsData = mNationalNewsData
+            this.createAt = createAt
+        }
     }
 }
