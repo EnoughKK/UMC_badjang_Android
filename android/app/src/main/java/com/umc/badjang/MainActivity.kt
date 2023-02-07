@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // fragment 전환
-    fun changeFragment(fragment: MyInfoFragment){
+    fun changeFragment(fragment: Fragment){
         // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
         supportFragmentManager
             .beginTransaction()

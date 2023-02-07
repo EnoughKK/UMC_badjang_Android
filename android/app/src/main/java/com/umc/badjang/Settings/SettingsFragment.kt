@@ -45,6 +45,12 @@ class SettingsFragment : Fragment() {
         viewBinding.SettingsLogoutBtn.setOnClickListener {
             LogoutDialog(requireContext()).show()
         }
+        viewBinding.SettingsMyInfoBtn.setOnClickListener{
+            activity?.changeFragment(MyInfoFragment())
+        }
+        viewBinding.SettingsAlarmBtn.setOnClickListener{
+            activity?.changeFragment(AlarmFragment())
+        }
 
 
         // 이전 버튼 선택 시

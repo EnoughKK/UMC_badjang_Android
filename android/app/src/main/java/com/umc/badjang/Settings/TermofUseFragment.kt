@@ -42,7 +42,7 @@ class TermofUseFragment : Fragment() {
         with(viewBinding.SettingwebViewTerm){
             settings.javaScriptEnabled=true
 
-            loadUrl("file:///android_asset/badjang_privacy.html")
+            loadUrl("file:///android_asset/badjang_termofuse.html")
             Log.d("개인정보 이용약관","loadUrl")
         }
 

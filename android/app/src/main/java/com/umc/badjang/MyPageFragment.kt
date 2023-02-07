@@ -42,7 +42,7 @@ class MyPageFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.MypageSettingsBtn.setOnClickListener{
-            activity?.ch
+            activity?.changeFragment(SettingsFragment())
         }
 
 
