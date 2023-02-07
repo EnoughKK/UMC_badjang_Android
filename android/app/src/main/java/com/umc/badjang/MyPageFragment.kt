@@ -32,11 +32,16 @@ class MyPageFragment : Fragment(){
         activity = null
     }
 
+class MyPageFragment : Fragment() {
+    private lateinit var viewBinding: FragmentMyPageBinding // viewBinding
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentMyPageBinding.inflate(layoutInflater);
+
         return viewBinding.root
     }
 

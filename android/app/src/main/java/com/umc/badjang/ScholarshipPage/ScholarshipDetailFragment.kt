@@ -1,23 +1,16 @@
 package com.umc.badjang.ScholarshipPage
 
-import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.R
-import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipDetailBinding
 import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
@@ -27,7 +20,7 @@ class ScholarshipDetailFragment:Fragment() {
 
     private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
     var scholarshipIdx: Long = 1
-
+    
     var activity: MainActivity? = null
 
     override fun onAttach(context: Context) {
@@ -38,12 +31,6 @@ class ScholarshipDetailFragment:Fragment() {
     override fun onDetach() {
         super.onDetach()
         activity = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -89,7 +76,7 @@ class ScholarshipDetailFragment:Fragment() {
             }
 
         })
-
+        
         return viewBinding.root
     }
 

@@ -63,6 +63,16 @@ class MySchoolFragment : Fragment() {
 
         // 우리 학교 장학금 api
         apiMainMySchool()
+
+        // 우리학교 데이터 추가
+        val mySchoolImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
+        for(i: Int in 0..3) {
+            addMySchoolData(
+                NationalNewsData("OO대학교",
+                    mySchoolImg, "자기추천장학금", "대상\n- 대학에 재학 중 또는 입,복학예정인 혼인 중이 아닌 무주택자",
+                    65, 215))
+        }
+
     }
 
     // 우리학교 recyclerview 세팅

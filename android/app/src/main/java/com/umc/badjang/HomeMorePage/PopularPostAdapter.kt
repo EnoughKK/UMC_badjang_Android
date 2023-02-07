@@ -2,7 +2,6 @@ package com.umc.badjang.HomeMorePage
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
@@ -43,10 +42,7 @@ class PopularPostAdapter(private val context: Context) :
             // 인기글 내용
             binding.popularPostContentTitle.text = item.popularPostTitle             // 인기글 제목
             binding.popularPostContentText.text = item.popularPostContent            // 인기글 내용
-            if(item.popularPostImg != null)
-                binding.popularPostContentImg.setImageBitmap(item.popularPostImg)        // 인기글 이미지
-            else
-                binding.popularPostContentImg.visibility = View.GONE
+            binding.popularPostContentImg.setImageBitmap(item.popularPostImg)        // 인기글 이미지
 
             // 기타 정보
             binding.popularPostCommentsNum.text = item.popularPostCommentsCnt.toString() // 댓글 수

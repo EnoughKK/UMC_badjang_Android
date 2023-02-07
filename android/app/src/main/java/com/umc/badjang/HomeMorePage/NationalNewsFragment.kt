@@ -26,6 +26,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.util.*
+import com.umc.badjang.R
+import com.umc.badjang.databinding.FragmentNationalNewsBinding
 
 // 홈화면 > 전국소식
 class NationalNewsFragment : Fragment() {
@@ -91,6 +93,15 @@ class NationalNewsFragment : Fragment() {
 
         // recyclerview 세팅
         initRecycler()
+
+        // 전국소식 데이터 추가
+        val nationalNewsImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
+        for(i: Int in 0..3) {
+            addNationalNewsData(
+                NationalNewsData("OO대학교",
+                    nationalNewsImg, "자기추천장학금", "대상\n- 대학에 재학 중 또는 입,복학예정인 혼인 중이 아닌 무주택자",
+                    65, 215))
+        }
 
         // 이전 버튼 선택 시
         viewBinding.nationalNewsBackBtn.setOnClickListener {
