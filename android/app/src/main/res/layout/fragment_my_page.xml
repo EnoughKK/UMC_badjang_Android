@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,13 +12,16 @@
         android:id="@+id/Mypage_linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageButton
             android:id="@+id/Mypage_UpBtn"
-            android:layout_width="48dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@color/white"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="17dp" />
 
@@ -29,203 +33,455 @@
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginLeft="4dp" />
     </LinearLayout>
 
     <View
+        android:id="@+id/Mypage_v1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
-        android:layout_marginTop="75dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
-    <LinearLayout
-        android:id="@+id/Mypage_Viewed"
-        android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
+        android:layout_marginTop="78dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="90dp"
-        >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/Mypage_ll_profile"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="20dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="25dp"
+            android:layout_gravity="center_vertical"
+            android:elevation="0dp"
+            android:layout_marginStart="1dp">
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="최근 본글"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/Mypage_ViewedBtn"
-                android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right"/>
+                android:background="#D9D9D9"/>
+        </androidx.cardview.widget.CardView>
 
-        </FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/Mypage_tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="받장"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="top"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="00대학교"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textSize="15dp"
+                android:layout_marginTop="6dp"
+                android:textColor="#606060"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/group_584"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/Mypage_Announcement"
+        android:id="@+id/Mypage_ll_main_fun"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="150dp"
-        >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginTop="14dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
+                android:backgroundTint="#F0F4FF"
+                android:elevation="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="1dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/vector_bookmark"
+                    android:layout_gravity="center_vertical|center_horizontal"/>
+            </androidx.cardview.widget.CardView>
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="공지사항"
-                android:fontFamily="@font/notosanskr_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:textSize="12sp"
+                android:text="즐겨찾기"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/notosanskr_regular"
+                android:layout_marginTop="-5dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
 
-                />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/Mypage_AnnouncementBtn"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        </FrameLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
+                android:backgroundTint="#F0F4FF"
+                android:elevation="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/layer_2"
+                    android:layout_gravity="center_vertical|center_horizontal"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:textSize="12sp"
+                android:text="내가 작성한 글"
+                android:textColor="@color/black"
+                android:fontFamily="@font/notosanskr_regular"
+                android:layout_marginTop="-5dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
+                android:backgroundTint="#F0F4FF"
+                android:elevation="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/logo_1"
+                    android:layout_gravity="center_vertical|center_horizontal"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:textSize="12sp"
+                android:text="학교 및 지역"
+                android:textColor="@color/black"
+                android:fontFamily="@font/notosanskr_regular"
+                android:layout_marginTop="-5dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/Mypage_v2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_main_fun"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"/>
 
     <LinearLayout
+        android:id="@+id/Mypage_ll_Viewed"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="210dp"
-        >
-        <FrameLayout
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v2"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근 본글"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/Mypage_Inquiry"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="문의하기"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-                />
 
-            <ImageButton
-                android:id="@+id/Mypage_InquiryBtn"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right" />
-
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/Mypage_ViewedBtn"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/Mypage_v3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_Viewed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
 
     <LinearLayout
+        android:id="@+id/Mypage_ll_announcement"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="270dp"
-        >
-        <FrameLayout
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v3"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/Mypage_Qna"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="자주 묻는 질문"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-                />
 
-            <ImageButton
-                android:id="@+id/Mypage_QnaBtn"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right" />
-
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/Mypage_btn_announcement"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/Mypage_v4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_announcement"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
 
     <LinearLayout
+        android:id="@+id/Mypage_ll_inquiry"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="330dp"
-        >
-        <FrameLayout
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v4"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의하기"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/Mypage_Settings"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="설정"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-                />
 
-            <ImageButton
-                android:id="@+id/Mypage_SettingsBtn"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right" />
-
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/Mypage_btn_inquiry"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
-</FrameLayout>
+
+    <View
+        android:id="@+id/Mypage_v5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_inquiry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Mypage_ll_qna"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v5"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자주 묻는 질문"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+        <ImageButton
+            android:id="@+id/Mypage_btn_qna"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/Mypage_v6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_qna"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Mypage_ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_v6"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="설정"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+        <ImageButton
+            android:id="@+id/Mypage_btn_setting"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/Mypage_v7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/Mypage_ll_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

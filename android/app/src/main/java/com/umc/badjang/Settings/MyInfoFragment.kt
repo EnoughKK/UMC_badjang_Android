@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainer
 import com.umc.badjang.MainActivity
 import com.umc.badjang.databinding.FragmentMyinfoBinding
-import retrofit2.Retrofit
 
 class MyInfoFragment :Fragment() {
-    private lateinit var viewBinding: FragmentMyinfoBinding // viewBinding
-
-    //api 통신을 위한 retrofit
-    private var retrofit : Retrofit? =null
+    private lateinit var binding : FragmentMyinfoBinding
 
     // 프래그먼트 전환을 위해
     var activity: MainActivity? = null
@@ -29,37 +26,17 @@ class MyInfoFragment :Fragment() {
         activity = null
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentMyinfoBinding.inflate(layoutInflater)
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewBinding = FragmentMyinfoBinding.inflate(layoutInflater);
-        return viewBinding.root
+        return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // 이전 버튼 선택 시
-        viewBinding.MyInfoUpBtn.setOnClickListener {
+        binding.myInfoBtnPrev.setOnClickListener {
             // 이전 페이지로 이동
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             requireActivity().supportFragmentManager.popBackStack()
         }
-
-        //서비스 이용약관 클릭시
-        viewBinding.MyInfoTermofuseBtn.setOnClickListener{
-            activity?.changeFragment(TermofUseFragment())
-        }
-
-        //개인정보 이용약관 클릭시
-
-        viewBinding.MyInfoPrivacyBtn.setOnClickListener{
-            activity?.changeFragment(PrivacyFragment())
-        }
     }
-
-
 }

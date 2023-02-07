@@ -31,10 +31,7 @@ class SettingsFragment : Fragment() {
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewBinding = FragmentSettingsBinding.inflate(layoutInflater);
         return viewBinding.root
     }
@@ -42,16 +39,19 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.SettingsLlLogout.setOnClickListener {
+            LogoutDialog(requireContext()).show()
+        }
         viewBinding.SettingsLogoutBtn.setOnClickListener {
             LogoutDialog(requireContext()).show()
         }
-        viewBinding.SettingsMyInfoBtn.setOnClickListener{
+
+        viewBinding.SettingsMyInfoBtn.setOnClickListener {
             activity?.changeFragment(MyInfoFragment())
         }
-        viewBinding.SettingsAlarmBtn.setOnClickListener{
-            activity?.changeFragment(AlarmFragment())
+        viewBinding.SettingsMyInfo.setOnClickListener {
+            activity?.changeFragment(MyInfoFragment())
         }
-
 
         // 이전 버튼 선택 시
         viewBinding.SettingsUpBtn.setOnClickListener {
