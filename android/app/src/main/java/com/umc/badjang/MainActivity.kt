@@ -18,6 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
+import com.umc.badjang.Settings.AlarmFragment
+import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 public var mConnectUserId: Int? = null

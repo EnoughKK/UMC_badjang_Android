@@ -17,9 +17,9 @@ tools:context=".LoginPage.SignUp.PrivacyActivity">
         android:layout_marginTop="10dp">
         <ImageButton
             android:id="@+id/Privacy_UpBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="17dp" />
         <TextView
@@ -29,7 +29,7 @@ tools:context=".LoginPage.SignUp.PrivacyActivity">
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
     <!--개인정보 처리 방침 전체 페이지 스크롤-->
     <androidx.core.widget.NestedScrollView

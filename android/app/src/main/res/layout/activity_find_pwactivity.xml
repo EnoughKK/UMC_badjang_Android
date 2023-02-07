@@ -19,10 +19,10 @@
 
     <ImageButton
         android:id="@+id/FindPW_UpBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="48dp"
         android:layout_height="match_parent"
         android:src="@drawable/ic_baseline_arrow_back_24"
-        android:backgroundTint="@color/white"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
      android:layout_marginLeft="17dp"/>
@@ -37,7 +37,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="4dp"
+        android:layout_marginLeft="0dp"
         />
   </LinearLayout>
 

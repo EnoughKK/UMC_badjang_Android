@@ -15,9 +15,9 @@
 
         <ImageButton
             android:id="@+id/Mypage_UpBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="17dp" />
 
@@ -29,14 +29,14 @@
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="75dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
@@ -67,10 +67,10 @@
 
             <ImageButton
                 android:id="@+id/Mypage_ViewedBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
                 android:layout_gravity="right"/>
 
         </FrameLayout>
@@ -84,7 +84,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="150dp"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -105,10 +105,10 @@
 
             <ImageButton
                 android:id="@+id/Mypage_AnnouncementBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
                 android:layout_gravity="right"/>
 
         </FrameLayout>
@@ -121,7 +121,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="210dp"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -143,10 +143,10 @@
 
             <ImageButton
                 android:id="@+id/Mypage_InquiryBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
                 android:layout_gravity="right" />
 
         </FrameLayout>
@@ -159,7 +159,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="270dp"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -181,10 +181,10 @@
 
             <ImageButton
                 android:id="@+id/Mypage_QnaBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
                 android:layout_gravity="right" />
 
         </FrameLayout>
@@ -197,7 +197,7 @@
         android:layout_height="56dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="330dp"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -219,10 +219,10 @@
 
             <ImageButton
                 android:id="@+id/Mypage_SettingsBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
                 android:layout_gravity="right" />
 
         </FrameLayout>
