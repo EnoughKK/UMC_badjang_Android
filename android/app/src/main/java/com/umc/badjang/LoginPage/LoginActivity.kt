@@ -35,7 +35,6 @@ import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
 import retrofit2.*
 
-
 class LoginActivity : AppCompatActivity(),View.OnClickListener {
 
     //firebase Auth
@@ -95,10 +94,15 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
 
                         if(receive?.result!=null){
                             val jwt = receive?.result.jwt
+                            val useridx = receive?.result.user_idx
+
 
                             //토큰값 저장
                             ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", jwt).commit()
                             Log.e("토큰값 확인jwt","${jwt}")
+                            //user idx 저장
+                            ApplicationClass.bSharedPreferences.edit().putInt("USER-IDX",useridx).commit()
+                            Log.e("useridx 확인","${useridx}")
                         }
 
                         // 정상적으로 통신이 성고된 경우

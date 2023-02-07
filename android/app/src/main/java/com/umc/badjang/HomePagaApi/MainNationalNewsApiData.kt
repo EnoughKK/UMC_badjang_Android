@@ -14,7 +14,10 @@ data class MainNationalNewsApiData(
     val message: String,     // 메시지
 
     @SerializedName("result")
+    val result: MainNationalNewsApiResult, // 전국소식 정보
+
     val result: MutableList<MainNationalNewsApiResult>, // 전국소식 정보 list
+
 )
 
 data class MainNationalNewsApiResult(

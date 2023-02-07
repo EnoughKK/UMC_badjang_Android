@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.umc.badjang">
+
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--sms receiver 퍼미션 추가-->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:name=".ApplicationClass"
@@ -18,7 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-        
+        <receiver
+            android:name=".SMSReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".LoginPage.Login.ChangePWActvity"
             android:exported="false" />
@@ -37,42 +50,34 @@
         <activity
             android:name=".LoginPage.VerificationIDActivity"
             android:exported="false" />
-
         <activity
             android:name=".LoginPage.SignUp.TermofUseActivity"
-            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity" />
         <activity
             android:name=".LoginPage.SignUp.PrivacyActivity"
-            android:parentActivityName=".LoginPage.SignUp.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LoginPage.SignUp.SignUpActivity" />
         <activity
             android:name=".LoginPage.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-            
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoTitleBarTheme"
-            android:exported="true">
-
-        </activity>
-
-    <activity
+            android:exported="true"
+            android:theme="@style/NoTitleBarTheme"></activity>
+        <activity
             android:name=".LoginPage.SignUp.SignUpActivity"
-            android:exported="false" />
-
-
-        <!-- 카카오 로그인 -->
+            android:exported="false" /> <!-- 카카오 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -84,11 +89,22 @@
                     android:scheme="@string/kakao_native" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_native_key"/>
+            android:value="@string/kakao_native_key" />
+
         <activity
             android:name=".LoginPage.LogoActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- [start fcm 설정 추가] -->
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
+
 </manifest>

@@ -85,6 +85,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 현재 로그인 된 사용자 idx 조회
+        mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
+        
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
@@ -116,6 +119,11 @@ class HomeFragment : Fragment() {
             activity?.changeFragment(NewIssueFragment())
         }
 
+        // 학교 필터 Floating 버튼 선택
+        viewBinding.mainSchoolFilterBtn.setOnClickListener {
+            UniversityFilterDialog(requireContext(), requireActivity()).show()
+        }
+
         // 추천 배너 슬라이드 어댑터 연결하기
         mainRecommendSliderAdapter = MainRecommendSliderAdapter()
         viewBinding.mainRecommendSlideViewpager.adapter = mainRecommendSliderAdapter
@@ -133,6 +141,9 @@ class HomeFragment : Fragment() {
 
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
+
+        // 우리학교 장학금 조회 api
+        apiMainMySchool()
 
         // 인기글 조회 api
         apiMainPopular()
@@ -155,6 +166,7 @@ class HomeFragment : Fragment() {
         for(i: Int in 0..3) {
             addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
         }
+
     }
 
     // 추천 배너 슬라이드 이미지 변경하기
@@ -213,10 +225,74 @@ class HomeFragment : Fragment() {
 
     // 전국 소식 데이터 추가
     private fun addNationalNewsData(mainNationalNewsPost: MainNationalNewsData) {
-        nationalNewsDatas.apply {
-            add(mainNationalNewsPost)
+
+        if(mainNationalNewsPost.nationalNewsImage == null) {
+            nationalNewsDatas.apply {
+                add(MainNationalNewsDataBitmap(null, mainNationalNewsPost.nationalNewsTitle))
+            }
+            mainNationalNewsAdapter.notifyDataSetChanged()
         }
-        mainNationalNewsAdapter.notifyDataSetChanged()
+
+        else {
+            CoroutineScope(Dispatchers.Main).launch {
+                val img: Bitmap? = withContext(Dispatchers.IO) {
+                    ImageLoader.loadImage(mainNationalNewsPost.nationalNewsImage)
+                }
+                nationalNewsDatas.apply {
+                    add(MainNationalNewsDataBitmap(img, mainNationalNewsPost.nationalNewsTitle))
+                }
+
+                mainNationalNewsAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    // 우리학교 장학금 조회 api
+    private fun apiMainMySchool() {
+        val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
+        retrofit!!.create(MainMySchoolApiService::class.java).getMainMySchool(xAccessToken=jwt!!, userIdx=mConnectUserId!!)
+            .enqueue(object : Callback<MainMySchoolApiData> {
+                override fun onResponse(call: Call<MainMySchoolApiData>, response: Response<MainMySchoolApiData>) {
+                     //Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                     //Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    var allMySchoolData: MainMySchoolApiData = response.body()!!
+                    var mySchoolData: MutableList<MainMySchoolApiResult> = allMySchoolData.result
+
+                    // 우리학교 장학금 정보의 장학금 idx로 각 장학금 정보 조회
+                    for(i:Int in (0..mySchoolData.size - 1)) {
+                        if(i >= 4) break
+                        apiScholarship(mySchoolData[i].scholarship_idx.toLong())
+                    }
+                }
+
+                override fun onFailure(call: Call<MainMySchoolApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 장학금 idx로 장학금 정보 조회 api
+    private fun apiScholarship(scholarshipIdx: Long) {
+        retrofit!!.create(ScholarshipIdxApiService::class.java).getScholarshipData(scholarshipIdx)
+            .enqueue(object : Callback<ScholarshipIdxApiData> {
+                override fun onResponse(call: Call<ScholarshipIdxApiData>, response: Response<ScholarshipIdxApiData>) {
+                    //Log.d(TAG,"장학금 조회 -------------------------------------------")
+                    //Log.d(TAG, "onResponse: ${response.body().toString()}")
+                    addMySchoolData(
+                        MainMySchoolData(
+                            mySchoolDatas.size + 1,
+                            response.body()!!.result.scholarship_name,
+                            response.body()!!.result.scholarship_view
+                        ))
+                }
+
+                override fun onFailure(call: Call<ScholarshipIdxApiData>, t: Throwable) {
+                    Log.d(TAG,"장학금 조회 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 인기글 조회 api
@@ -224,8 +300,8 @@ class HomeFragment : Fragment() {
         retrofit!!.create(MainPopularApiService::class.java).getMainPopular()
             .enqueue(object : Callback<MainPopularApiData> {
                 override fun onResponse(call: Call<MainPopularApiData>, response: Response<MainPopularApiData>) {
-                    // Log.d(TAG,"인기글 -------------------------------------------")
-                    // Log.d(TAG, "onResponse: ${response.body().toString()}")
+                     Log.d(TAG,"인기글 -------------------------------------------")
+                     Log.d(TAG, "onResponse: ${response.body().toString()}")
 
                     var allPopularData: MainPopularApiData = response.body()!!
                     var popularData: MutableList<MainPopularApiResult> = allPopularData.result
@@ -237,7 +313,7 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<MainPopularApiData>, t: Throwable) {
-                    //Log.d(TAG,"-------------------------------------------")
+                    Log.d(TAG,"인기글 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
@@ -248,13 +324,42 @@ class HomeFragment : Fragment() {
         retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews()
             .enqueue(object : Callback<MainNationalNewsApiData> {
                 override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
+
+                    //Log.d(TAG,"전국소식 -------------------------------------------")
+
+                    val allNationalNewsList = mutableListOf<AllNationalNewsList>()
+
+                    var allNationalNewsData: MainNationalNewsApiData = response.body()!!
+                    var scholarshipData: MutableList<MainNationalNewsScholarship> = allNationalNewsData.result.scholarshipList
+                    var supportData: MutableList<MainNationalNewsSupport> = allNationalNewsData.result.supportList
+
+                    for(i:Int in (0..scholarshipData.size - 1)) {
+                        //if(i >= 5) break
+                        allNationalNewsList.add(AllNationalNewsList(
+                            MainNationalNewsData(scholarshipData[i].scholarship_image, scholarshipData[i].scholarship_name),
+                            scholarshipData[i].scholarship_createAt))
+                    }
+                    for(i:Int in (0..supportData.size - 1)) {
+                        allNationalNewsList.add(AllNationalNewsList(
+                            MainNationalNewsData(supportData[i].support_image, supportData[i].support_name),
+                            supportData[i].support_createAt))
+                    }
+
+                    // 생성일을 기준으로 정렬
+                    Collections.sort(allNationalNewsList)
+
+                    // 최신순 상위 5개
+                    for (i:Int in (0..allNationalNewsList.size - 1)) {
+                        if(i >= 5) break
+                        addNationalNewsData(allNationalNewsList[i].mNationalNewsData)
+                    }
                     Log.d(TAG,"전국소식 -------------------------------------------")
                     Log.d(TAG, "onResponse: ${response.body().toString()}")
 
                 }
 
                 override fun onFailure(call: Call<MainNationalNewsApiData>, t: Throwable) {
-                    Log.d(TAG,"-------------------------------------------")
+                    Log.d(TAG,"전국소식 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })

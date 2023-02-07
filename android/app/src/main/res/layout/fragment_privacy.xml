@@ -3,26 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Settings.PrivacyFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="#D9D9D9" />
 
     <LinearLayout
         android:id="@+id/SettingsPrivacy_linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="10dp">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/SettingsPrivacy_UpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="23dp"/>
+            android:background="@android:color/transparent"
+            android:layout_marginStart="17dp" />
 
         <TextView
             android:id="@+id/SettingsPrivacy_ID"
@@ -32,33 +29,52 @@
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginLeft="0dp" />
     </LinearLayout>
     <View
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="86dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="75dp"/>
 
 
-    <ScrollView
-        android:id="@+id/SettingsPrivacy_Scroll"
-        android:layout_width="320dp"
+    <!--개인정보 처리 방침 전체 페이지 스크롤-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SettingsPrivacy_linearLayout1"
+        android:layout_marginTop="90dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!--개인정보 처리 방침만 스크롤-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/SettingPrivacy_Scroll"
+        android:layout_width="match_parent"
         android:layout_height="611dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="102dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:fadeScrollbars="false">
 
-        <TextView
+        <WebView
+            android:id="@+id/SettingwebView_privacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/terms_use3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:fontFamily="@font/notosanskr_regular"
-            android:textColor="#000000"
-            android:textSize="12sp"
-            />
-    </ScrollView>
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </FrameLayout>

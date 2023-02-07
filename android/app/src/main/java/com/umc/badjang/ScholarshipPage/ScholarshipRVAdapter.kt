@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.databinding.RvScholarshipBinding
+import kotlin.properties.Delegates
 
 class ScholarshipRVAdapter(private val context: Context):
     RecyclerView.Adapter<ScholarshipRVAdapter.ScholarshipHolder>() {
 
     private lateinit var viewBinding: RvScholarshipBinding
     private lateinit var mItemClickListener: OnClickInterface
+
+    var mScholarshipIDx: Long = 1
 
     var datas = ArrayList<GetScholarshipDTO>()
 
@@ -46,6 +49,8 @@ class ScholarshipRVAdapter(private val context: Context):
 
         fun bind(item: GetScholarshipDTO) {
             Log.d("로그", "${datas.size}")
+
+            mScholarshipIDx = item.scholarship_idx!!
 
             binding.universityLabel.text = item.scholarship_univ                  // 대학교 이름
             binding.scholarshipCategory.text = item.scholarship_category          // 장학금 카테고리
@@ -107,6 +112,10 @@ class ScholarshipRVAdapter(private val context: Context):
     // 장학금 상세 페이지 이동
     fun setItemClickListener(itemClickListener: OnClickInterface){
         mItemClickListener = itemClickListener
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
 }

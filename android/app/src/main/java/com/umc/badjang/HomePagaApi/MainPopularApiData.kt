@@ -28,7 +28,7 @@ data class MainPopularApiResult(
     val post_content: String,  // 내용
 
     @SerializedName("post_image")
-    val post_image: String,    // 이미지
+    val post_image: String?,    // 이미지
 
     @SerializedName("post_createAt")
     val post_createAt: String, // 생성 일시

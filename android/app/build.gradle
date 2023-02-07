@@ -83,6 +83,9 @@ dependencies {
     // Also add the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation 'com.google.gms:google-services:4.3.8'
 
     //settings
@@ -100,4 +103,16 @@ dependencies {
     // retrofit-logging-interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    
+    // xml parser
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+
+    //클라우딩 메시지
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.7'
 }

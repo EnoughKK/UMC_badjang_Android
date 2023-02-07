@@ -26,8 +26,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scholarship_rvContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
+        android:layout_height="0dp"
+        tools:itemCount="10"
+        tools:listitem="@layout/rv_scholarship"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+        
 </androidx.constraintlayout.widget.ConstraintLayout>

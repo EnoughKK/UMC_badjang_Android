@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "university_name":  "경상국립대학교",
+      "university_info": [
+        {
+          "college_name": "본부대학(Ⅰ)",
+          "university_department": ["기계융합공학과"]
+        },
+        {
+          "college_name": "본부대학(Ⅱ)",
+          "university_department": ["휴먼헬스케어학과"]
+        },
+        {
+          "college_name": "인문대학",
+          "university_department": ["독어독문학과", "국어국문학과", "러시아학과", "불어불문학과", "사학과",
+          "영어영문학부 영어영문학전공", "영어영문학부 영어전공", "중어중문학과", "민속무용학과", "철학과", "한문학과"]
+        },
+        {
+          "college_name": "사회과학대학",
+          "university_department": ["경제학부", "사회복지학부", "사회학과", "심리학과", "정치외교학과", "행정학과", "아동가족학과"]
+
+        }
+      ]
+    },
+    {
+      "university_name": "부경대학교",
+      "university_info": [
+        {
+          "college_name": "본부",
+          "university_department": ["글로벌자율전공학부", "글로벌자율전공학부"]
+        }
+      ]
+    }
+  ]
+}

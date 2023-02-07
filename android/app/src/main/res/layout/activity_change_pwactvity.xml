@@ -7,163 +7,121 @@
     android:layout_height="match_parent"
     tools:context=".LoginPage.Login.ChangePWActvity">
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="24dp"
-      android:background="#D9D9D9"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
-
   <!--상단바-->
   <LinearLayout
       android:id="@+id/ChangePW_linearlayout1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="24dp"
+      android:layout_marginTop="10dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/ChangePW_UpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
         android:src="@drawable/ic_baseline_arrow_back_24"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="23dp"/>
+        android:layout_marginLeft="17dp" />
 
     <TextView
         android:id="@+id/ChangePW_ID"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="비밀번호 찾기"
         android:fontFamily="@font/notosanskr_bold"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginLeft="0dp" />
   </LinearLayout>
 
-  <!--변경할 비밀번호 찾기-->
-
-  <FrameLayout
-      android:id="@+id/ChangePW_layout1"
-      android:layout_width="wrap_content"
+  <!--비밀번호-->
+  <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="235dp">
-    <EditText
-        android:id="@+id/ChangePW_password1"
-        android:layout_width="320dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="191dp"
+      android:layout_marginRight="20dp"
+      app:counterEnabled="true"
+      app:counterMaxLength="15"
+      app:errorEnabled="true"
+
+      app:passwordToggleEnabled="true">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ChangePW_PW"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_regular"
         android:hint="변경할 비밀번호"
-        android:fontFamily="@font/notosanskr_regular"
-        android:textSize="15sp"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textSize="15sp" />
 
-    <ImageButton
-        android:id="@+id/ChangePW_show1"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
-        android:src="@drawable/ic_baseline_remove_red_eye"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="25dp"/>
-
-    <ImageButton
-        android:id="@+id/ChangePW_unshow1"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
-        android:src="@drawable/ic_vector"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="25dp"
-        android:visibility="invisible"/>
-  </FrameLayout>
-
-  <TextView
-      android:id="@+id/ChangePW_misspassword1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
-      android:fontFamily="@font/notosanskr_regular"
-      android:textColor="#ED1C24"
-      android:textSize="12sp"
-      android:paddingStart="5dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="288dp"/>
-
-  <!--변경할 비밀번호 확인-->
-  <FrameLayout
-      android:id="@+id/ChangePW_layout2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="310dp">
-    <EditText
-        android:id="@+id/ChangePW_password2"
-        android:layout_width="320dp"
+    <TextView
+        android:id="@+id/ChangePW_missPW"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="비밀번호 확인"
+        android:layout_marginTop="-30dp"
         android:fontFamily="@font/notosanskr_regular"
-        android:textSize="15sp"
-        android:inputType="textPassword" />
-
-    <ImageButton
-        android:id="@+id/ChangePW_show2"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
-        android:src="@drawable/ic_baseline_remove_red_eye"
+        android:paddingStart="5dp"
+        android:text="비밀번호에는 문자, 특수문자, 숫자가 포함되어야합니다"
+        android:textColor="#ED1C24"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="25dp"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
+        //android:visibility="invisible"
 
-    <ImageButton
-        android:id="@+id/ChangePW_unshow2"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
-        android:src="@drawable/ic_vector"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="25dp" />
-  </FrameLayout>
+  </com.google.android.material.textfield.TextInputLayout>
 
-  <TextView
-      android:id="@+id/ChangePW_misspassword2"
-      android:layout_width="wrap_content"
+  <!--비밀번호 확인-->
+  <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="비밀번호가 일치하지 않습니다"
-      android:fontFamily="@font/notosanskr_regular"
-      android:textColor="#ED1C24"
-      android:textSize="12sp"
-      android:paddingStart="5dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="360dp"/>
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="286dp"
+      android:layout_marginRight="20dp"
+      app:counterEnabled="true"
+      app:counterMaxLength="15"
+      app:errorEnabled="true"
+      app:passwordToggleEnabled="true">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ChangePW_confirmPW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_regular"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/ChangePW_missconfirmPW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:fontFamily="@font/notosanskr_regular"
+        android:paddingStart="5dp"
+        android:text="비밀번호가 일치하지 않습니다"
+        android:textColor="#ED1C24"
+        android:textSize="12sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    //android:visibility="invisible"
+  </com.google.android.material.textfield.TextInputLayout>
 
   <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/ChangePW_Btn"
-      android:layout_width="320dp"
-      android:layout_height="40dp"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
       android:background="@drawable/round_box"
       android:backgroundTint="#2173FD"
       android:text="변경하기"
@@ -172,15 +130,8 @@
       android:textSize="15sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="410dp"/>
-
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="#D9D9D9"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginTop="752dp" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
