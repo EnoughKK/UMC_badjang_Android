@@ -24,7 +24,6 @@ class RetrofitManager {
     private val iSearchSupport : ISearchSupport? = SearchSupportRC.getClient(API.BASE_URL)?.create(ISearchSupport::class.java)
     private val iScholarshipViewCount : ISholarshipViewCount? = ScholarshipViewCountRC.getClient(API.BASE_URL)?.create(ISholarshipViewCount::class.java)
     private val iSupportViewCount : ISupportViewCount? = SupportViewCountRC.getClient(API.BASE_URL)?.create(ISupportViewCount::class.java)
-    private val iSupportOpi : ISupportOpenApi? = SupportOpenAPIRC.getClient(API.SUPPORT_OPI_BASE_URL)?.create(ISupportOpenApi::class.java)
 
     // 장학금 조회 (필터사용)
     fun searchScholarship(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
@@ -448,8 +447,15 @@ class RetrofitManager {
     }
 
     // 지원금 open API
-    fun supportOpi(openApiVlak: String?, display: Int?, pageIndex: Int?){
-
-    }
+//    fun supportOpi(openApiVlak: String?, display: Int?, pageIndex: Int?, completion: (RESPONSE_STATE)){
+//
+//        val call = iSupportOpi?.supportOPI(openApiVlak = API.OPI_SUPPORT_KEY, display = display, pageIndex = pageIndex).let{
+//            it
+//        }?: return
+//
+//        call.enqueue(object : retrofit2.Callback<JsonElement>{
+//
+//        })
+//    }
 
 }

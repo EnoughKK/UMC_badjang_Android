@@ -2,7 +2,6 @@ package com.umc.badjang.Retrofit
 
 import com.google.gson.JsonElement
 import com.umc.badjang.Model.ScholarshipViewCountDTO
-import com.umc.badjang.Model.Support
 import com.umc.badjang.utils.API
 import retrofit2.Call
 import retrofit2.http.*
@@ -35,9 +34,3 @@ interface ISupportViewCount{
     fun searchSupportIDx(@Path("supportIdx") supportIdx: Long?) : Call<JsonElement>
 }
 
-// 지원금 오픈 api 인터페이스
-interface ISupportOpenApi {
-
-    @GET(API.OPI_SUPPORT)
-    fun supportOPI(@Query("openApiVlak") openApiVlak: String, @Query("display") display: Int, @Query("pageIndex") pageIndex: Int) : Call<Support>
-}
