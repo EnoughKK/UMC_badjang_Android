@@ -123,7 +123,7 @@ class HomeFragment : Fragment() {
 
         // 학교 필터 Floating 버튼 선택
         viewBinding.mainSchoolFilterBtn.setOnClickListener {
-            SchoolFilterDialog(requireContext()).show()
+            UniversityFilterDialog(requireContext(), requireActivity()).show()
         }
 
         // 추천 배너 슬라이드 어댑터 연결하기
@@ -285,8 +285,8 @@ class HomeFragment : Fragment() {
         retrofit!!.create(MainPopularApiService::class.java).getMainPopular()
             .enqueue(object : Callback<MainPopularApiData> {
                 override fun onResponse(call: Call<MainPopularApiData>, response: Response<MainPopularApiData>) {
-                    // Log.d(TAG,"인기글 -------------------------------------------")
-                    // Log.d(TAG, "onResponse: ${response.body().toString()}")
+                     Log.d(TAG,"인기글 -------------------------------------------")
+                     Log.d(TAG, "onResponse: ${response.body().toString()}")
 
                     var allPopularData: MainPopularApiData = response.body()!!
                     var popularData: MutableList<MainPopularApiResult> = allPopularData.result
