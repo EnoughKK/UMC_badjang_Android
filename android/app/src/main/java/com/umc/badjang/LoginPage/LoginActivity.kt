@@ -68,13 +68,13 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
         //아이디찾기 창으로
-        binding.LoginFindID.setOnClickListener{
-            startActivity(Intent(this, FindIDActivity::class.java))
-        }
+//        binding.LoginFindID.setOnClickListener{
+//            startActivity(Intent(this, FindIDActivity::class.java))
+//        }
         //비밀번호찾기 창으로
-        binding.LoginFindPW.setOnClickListener{
-            startActivity(Intent(this, FindPWActivity::class.java))
-        }
+//        binding.LoginFindPW.setOnClickListener{
+//            startActivity(Intent(this, FindPWActivity::class.java))
+//        }
 
         // 로그인 버튼
         binding.LoginBtn.setOnClickListener {
