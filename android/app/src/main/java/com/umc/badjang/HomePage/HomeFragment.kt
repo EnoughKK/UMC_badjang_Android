@@ -3,40 +3,42 @@ package com.umc.badjang.HomePage
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
-
+import com.umc.badjang.mConnectUserId
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var viewBinding: FragmentHomeBinding // viewBinding
 
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
-
-    val mySchoolSampleData = mutableListOf(mutableListOf("자기추천장학금", 215), mutableListOf("삼금문화장학재단 장학금", 215),
-        mutableListOf("서울희망 대학 장학금", 215), mutableListOf("대산농촌재단 장학금", 215))
 
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
@@ -57,7 +59,7 @@ class HomeFragment : Fragment() {
     private lateinit var mainPopularAdapter: MainPopularAdapter
 
     // 전국소식 리스트 recyclerview adapter
-    private val nationalNewsDatas = mutableListOf<MainNationalNewsData>()
+    private val nationalNewsDatas = mutableListOf<MainNationalNewsDataBitmap>()
     private lateinit var mainNationalNewsAdapter: MainNationalNewsAdapter
 
     // 프래그먼트 전환을 위해
@@ -87,7 +89,7 @@ class HomeFragment : Fragment() {
 
         // 현재 로그인 된 사용자 idx 조회
         mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
-        
+
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
@@ -150,28 +152,11 @@ class HomeFragment : Fragment() {
 
         // 전국소식 조회 api
         apiMainNationalNews()
-
-        // 우리학교 장학금 데이터 추가
-        for(i: Int in 0..(mySchoolSampleData.size - 1)) {
-            addMySchoolData(MainMySchoolData(i+1, mySchoolSampleData[i][0].toString(), 215))
-        }
-
-        // 인기글 데이터 추가
-        //for(i: Int in 0..3) {
-        //    addPopularData(MainPopularData(i+1, "자기추천장학금 신청방법", 65,215))
-        //}
-
-        // 전국 소식 데이터 추가
-        val img: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.national_news_img1)
-        for(i: Int in 0..3) {
-            addNationalNewsData(MainNationalNewsData(img, "국가근로장학금"))
-        }
-
     }
 
     // 추천 배너 슬라이드 이미지 변경하기
     fun setMainRecommendSlideImage(){
-        if(mainRecommendCurrentPosition == 5) mainRecommendCurrentPosition = 0
+        if(mainRecommendCurrentPosition == 3) mainRecommendCurrentPosition = 0
         viewBinding.mainRecommendSlideViewpager.setCurrentItem(mainRecommendCurrentPosition,true)
         mainRecommendCurrentPosition += 1
     }
@@ -307,7 +292,7 @@ class HomeFragment : Fragment() {
                     var popularData: MutableList<MainPopularApiResult> = allPopularData.result
                     for(i:Int in (0..popularData.size - 1)) {
                         if(i >= 4) break
-                        addPopularData(MainPopularData(i+1, popularData[i].post_content, 65,215))
+                        addPopularData(MainPopularData(i+1, popularData[i].post_content, i,(i*7+1)%10))
                     }
 
                 }
@@ -321,10 +306,9 @@ class HomeFragment : Fragment() {
 
     // 전국소식 조회 api
     private fun apiMainNationalNews() {
-        retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews()
+        retrofit!!.create(MainNationalNewsApiService::class.java).getMainNationalNews(mConnectUserId!!)
             .enqueue(object : Callback<MainNationalNewsApiData> {
                 override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
-
                     //Log.d(TAG,"전국소식 -------------------------------------------")
 
                     val allNationalNewsList = mutableListOf<AllNationalNewsList>()
@@ -353,9 +337,6 @@ class HomeFragment : Fragment() {
                         if(i >= 5) break
                         addNationalNewsData(allNationalNewsList[i].mNationalNewsData)
                     }
-                    Log.d(TAG,"전국소식 -------------------------------------------")
-                    Log.d(TAG, "onResponse: ${response.body().toString()}")
-
                 }
 
                 override fun onFailure(call: Call<MainNationalNewsApiData>, t: Throwable) {
@@ -363,5 +344,27 @@ class HomeFragment : Fragment() {
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
+    }
+
+    // 전국소식 생성일 순으로 정렬
+    internal class AllNationalNewsList(mNationalNewsData: MainNationalNewsData, createAt: String) :
+        Comparable<AllNationalNewsList> {
+
+        val mNationalNewsData: MainNationalNewsData
+        private val createAt: String
+
+        override operator fun compareTo(nationalNews: AllNationalNewsList): Int {
+            if (nationalNews.createAt < createAt) {
+                return 1
+            } else if (nationalNews.createAt > createAt) {
+                return -1
+            }
+            return 0
+        }
+
+        init {
+            this.mNationalNewsData = mNationalNewsData
+            this.createAt = createAt
+        }
     }
 }

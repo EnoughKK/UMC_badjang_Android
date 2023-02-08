@@ -11,6 +11,7 @@ class KakaoSignup(accessToken: String): KakaoSignupView {
         //액세스 토큰이 널이 아니면 서버로 전송해줘야함. 그러면 서버에서는 jwt를 보내줄 것임.
         if(accesstoken != null || accesstoken != ""){
             KakaoSignupService(this).tryKakaoPostSignup(KakaoSignupRequest(accesstoken))
+            Log.d("accesstoken", accesstoken)
         }
     }
     override fun onKakaoPostSignUpSuccess(response: KakaoSignupResponse) {

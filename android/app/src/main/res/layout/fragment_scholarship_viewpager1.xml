@@ -31,5 +31,5 @@
         tools:listitem="@layout/rv_scholarship"
         app:layout_constraintTop_toBottomOf="@+id/spinner_category"
         app:layout_constraintBottom_toBottomOf="parent"/>
-        
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,9 +23,10 @@ class RetrofitManager {
     private val iSearchScholarship : ISearchScholarship? = SearchScholarshipRC.getClient(API.BASE_URL)?.create(ISearchScholarship::class.java)
     private val iSearchSupport : ISearchSupport? = SearchSupportRC.getClient(API.BASE_URL)?.create(ISearchSupport::class.java)
     private val iScholarshipViewCount : ISholarshipViewCount? = ScholarshipViewCountRC.getClient(API.BASE_URL)?.create(ISholarshipViewCount::class.java)
+    private val iSupportViewCount : ISupportViewCount? = SupportViewCountRC.getClient(API.BASE_URL)?.create(ISupportViewCount::class.java)
 
     // 장학금 조회 (필터사용)
-    fun searchScholarship(category: Int?, filter: Int?, order: Int?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
+    fun searchScholarship(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
 
         val call = iSearchScholarship?.searchScolarhip(category = category, filter = filter, order = order).let {
             it
@@ -35,7 +36,7 @@ class RetrofitManager {
 
             // 응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-//                Log.d(TAG, "RetrofitManager - onResponse() called / response : ${response.body()}")
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : ${response.body()}")
 
                 response.body()?.let {
 
@@ -157,7 +158,7 @@ class RetrofitManager {
     }
 
     // 장학금 조회 (필터사용)
-    fun searchSupport(category: Int?, filter: Int?, order: Int?, completion: (RESPONSE_STATE, ArrayList<GetSupportDTO>?) -> Unit){
+    fun searchSupport(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetSupportDTO>?) -> Unit){
 
         val call = iSearchSupport?.searchSupport(category = category, filter = filter, order = order).let {
             it
@@ -288,22 +289,21 @@ class RetrofitManager {
 
     }
 
-    // 장학금 인덱스로 조회 (조회수 증가)
-    fun scholarshipViewCount(scholarshipIdx: Long?, completion: (RESPONSE_STATE, ArrayList<ScholarshipViewCountDTO>?) -> Unit){
+    // 장학금 인덱스로 조회
+    fun searchScholarshipIDx(scholarshipIdx: Long?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
 
-        val call = iScholarshipViewCount?.PatchScholarshipViewCount(scholarshipIdx = scholarshipIdx).let {
+        val call = iScholarshipViewCount?.searchScholarshipIDx(scholarshipIdx = scholarshipIdx).let {
             it
         }?: return
 
         call.enqueue(object  : retrofit2.Callback<JsonElement>{
 
-            // 응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 Log.d(TAG, "RetrofitManager - onResponse() called / response : 장학금 인덱스로 조회 ${response.body()}}")
 
                 response.body()?.let {
 
-                    var parsedSupportDataArray = ArrayList<ScholarshipViewCountDTO>()
+                    var parsedScholarshipDataArray = ArrayList<GetScholarshipDTO>()
 
                     val body = it.asJsonObject
                     val resultItemObject = body.get("result").asJsonObject
@@ -406,29 +406,40 @@ class RetrofitManager {
 
                     completion(RESPONSE_STATE.OKAY, parsedScholarshipDataArray)
 
-                        @NonNull
-                        val scholarship_idx = resultItemObject.get("scholarship_idx").asLong
-
-                        @NonNull
-                        val scholarship_view = resultItemObject.get("scholarship_view").asInt
-
-                        val supportItem = ScholarshipViewCountDTO(
-                            scholarship_idx = scholarship_idx,
-                            scholarship_view = scholarship_view
-                        )
-                        parsedSupportDataArray.add(supportItem)
-                    }
-
-                    completion(RESPONSE_STATE.OKAY, parsedSupportDataArray)
                 }
+            }
+            // 응답 실패시시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
 
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+
+        })
+
+    }
+
+    // 지원금 인덱스로 조회
+    fun searchSupportIDx(supportIdx: Long?, completion: (RESPONSE_STATE) -> Unit){
+
+        val call = iSupportViewCount?.searchSupportIDx(supportIdx = supportIdx).let {
+            it
+        }?: return
+
+        call.enqueue(object  : retrofit2.Callback<JsonElement>{
+
+            // 응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : 지원금 인덱스로 조회")
+
+                completion(RESPONSE_STATE.OKAY)
             }
 
             // 응답 실패시시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
 
-                completion(RESPONSE_STATE.FAIL, null)
+                completion(RESPONSE_STATE.FAIL)
             }
 
         })
