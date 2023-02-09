@@ -1,0 +1,57 @@
+{
+  "results": [
+    {
+      "province_name": "서울특별시"
+    },
+    {
+      "province_name": "부산광역시"
+    },
+    {
+      "province_name": "대구광역시"
+    },
+    {
+      "province_name": "인천광역시"
+    },
+    {
+      "province_name": "광주광역시"
+    },
+    {
+      "province_name": "대전광역시"
+    },
+    {
+      "province_name": "울산광역시"
+    },
+    {
+      "province_name": "세종특별자치시"
+    },
+    {
+      "province_name": "경기도"
+    },
+    {
+      "province_name": "강원도"
+    },
+    {
+      "province_name": "충청북도"
+    },
+    {
+      "province_name": "충청남도"
+    },
+    {
+      "province_name": "전라북도"
+    },
+    {
+      "province_name": "전라남도"
+    },
+    {
+      "province_name": "경상북도"
+    },
+    {
+      "province_name": "경상남도",
+      "city_name": ["창원시", "진주시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시",
+      "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"]
+    },
+    {
+      "province_name": "제주특별자치도"
+    }
+  ]
+}

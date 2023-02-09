@@ -28,22 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--<EditText
-            android:id="@+id/editText_search_school"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textview_school1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_school1"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />-->
         <Spinner
             android:id="@+id/spinner_search_school"
             android:layout_width="0dp"
@@ -179,17 +163,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selection_local1" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_local1"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintStart_toEndOf="@id/textview_local1"
             app:layout_constraintTop_toBottomOf="@id/textview_localName" />
 
@@ -206,17 +187,14 @@
             app:layout_constraintStart_toEndOf="@+id/selection_local1"
             app:layout_constraintTop_toTopOf="@+id/selection_local2" />
 
-        <TextView
+        <Spinner
             android:id="@+id/selection_local2"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_selection_board"
-            android:drawableEnd="@drawable/dialog_down"
-            android:hint="선택하기"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
+            android:background="@drawable/university_spinner_background"
+            android:spinnerMode="dropdown"
             app:layout_constraintStart_toEndOf="@id/textview_local2"
             app:layout_constraintTop_toBottomOf="@id/textview_localName" />
 
