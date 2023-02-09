@@ -257,8 +257,14 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     }
                 }
 
-                if(selectProvince == "선택하기")
+                // 시군구 선택지가 없는 경우
+                if(cityNameList!!.size == 1)
+                    selectCity = selectProvince
+
+                if(selectProvince == "선택하기") {
                     selectProvince = null
+                    selectCity = null
+                }
 
                 val cityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, cityNameList!!)
                 binding.selectionLocal2.adapter = cityAdapter
@@ -273,15 +279,18 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         // 시군구 선택하기 누르면 spinner 리스트
         binding.selectionLocal2.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // 선택된 시군구 정보
-                selectCity = binding.selectionLocal2.getSelectedItem().toString()
+                if(selectCity != selectProvince) {
+                    // 선택된 시군구 정보
+                    selectCity = binding.selectionLocal2.getSelectedItem().toString()
 
-                if(selectCity == "선택하기")
-                    selectCity = null
+                    if (selectCity == "선택하기")
+                        selectCity = null
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectCity = null
+                if(selectCity != selectProvince)
+                    selectCity = null
             }
         }
 
