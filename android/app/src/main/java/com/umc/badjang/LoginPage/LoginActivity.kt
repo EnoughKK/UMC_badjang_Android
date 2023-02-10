@@ -33,6 +33,7 @@ import com.umc.badjang.LoginPage.Login.models.LoginResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
+import com.umc.badjang.databinding.DialogLogoutBinding
 import retrofit2.*
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener {
@@ -273,8 +274,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 }
                 //저장되어있는 jwt가 있으면, 바로 자동 로그인
                 else{
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    dialogShow("추가 정보 입력",binding.loginToSns,false)
                 }
             }
         }
@@ -323,8 +323,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                     }
                     //저장되어있는 jwt가 있으면, 바로 자동 로그인
                     else{
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        dialogShow("추가 정보 입력",binding.loginToSns,false)
                     }
                 }
             }
@@ -399,5 +398,26 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
     }
+
+    //다이얼로그 띄우는 함수
+    private fun dialogShow(msg: String, focus: View?, success: Boolean){
+        val dialog = SnsDialog(msg)
+        // 버튼 클릭 이벤트 설정
+        dialog.setButtonClickListener(object: SnsDialog.OnButtonClickListener {
+            override fun onButtonClicked() {
+                //팝업창이 닫힐 때 실행되었으면 하는 코드 넣기 - 포커스 이동
+                focus?.requestFocus()
+                if(success){
+                    val intent = Intent(this@LoginActivity,MainActivity::class.java)
+                    //지금 까지 쌓여있는 모든 액티비티 지우기
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                }
+            }
+        })
+        dialog.show(supportFragmentManager, "SnsDialog")
+    }
+
+
 }
 

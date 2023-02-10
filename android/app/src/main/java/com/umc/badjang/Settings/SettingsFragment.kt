@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Settings.Logout.LogoutDialog
+import com.umc.badjang.Settings.Myinfo.MyInfoFragment
 import com.umc.badjang.databinding.FragmentSettingsBinding
 import retrofit2.Retrofit
 

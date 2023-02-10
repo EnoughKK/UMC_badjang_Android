@@ -1,4 +1,4 @@
-package com.umc.badjang.Settings
+package com.umc.badjang.Settings.Myinfo
 
 import android.content.Context
 import android.os.Bundle

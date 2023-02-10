@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.Settings.SettingsFragment
 import com.umc.badjang.databinding.FragmentMyPageBinding
 import retrofit2.Retrofit
@@ -31,6 +30,7 @@ class MyPageFragment : Fragment(){
         super.onDetach()
         activity = null
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
