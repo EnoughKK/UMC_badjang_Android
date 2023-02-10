@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.HomePage.MainNationalNewsData
@@ -34,6 +35,9 @@ class NationalNewsFragment : Fragment() {
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
+
     // 전국소식 리스트 recyclerview adapter
     private val nationalNewsDatas = mutableListOf<NationalNewsDataBitmap>()
     private lateinit var nationalNewsAdapter: NationalNewsAdapter
@@ -53,6 +57,9 @@ class NationalNewsFragment : Fragment() {
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
 
+        // 현재 로그인 된 사용자 jwt 조회
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
+
         // recyclerview 세팅
         initRecycler()
 
@@ -69,7 +76,14 @@ class NationalNewsFragment : Fragment() {
 
     // 전국소식 recyclerview 세팅
     private fun initRecycler() {
-        nationalNewsAdapter = NationalNewsAdapter(requireContext())
+        nationalNewsAdapter = NationalNewsAdapter(
+            requireContext(),
+            onClickScholarshipBookmark = {
+                apiBookmarkScholarship(it)
+            },
+            onClickSupportBookmark = {
+                apiBookmarkSupport(it)
+            })
         viewBinding.nationalNewsRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.nationalNewsRecyclerview.adapter = nationalNewsAdapter
@@ -81,6 +95,8 @@ class NationalNewsFragment : Fragment() {
         if(nationalNews.nationalNewsImg == null) {
             nationalNewsDatas.apply {
                 add(NationalNewsDataBitmap(
+                    nationalNews.scholarshipIdx,
+                    nationalNews.supportIdx,
                     nationalNews.nationalNewsInstitution,
                     nationalNews.nationalNewsTitle,
                     nationalNews.nationalNewsContent,
@@ -98,6 +114,8 @@ class NationalNewsFragment : Fragment() {
                 }
                 nationalNewsDatas.apply {
                     add(NationalNewsDataBitmap(
+                        nationalNews.scholarshipIdx,
+                        nationalNews.supportIdx,
                         nationalNews.nationalNewsInstitution,
                         nationalNews.nationalNewsTitle,
                         nationalNews.nationalNewsContent,
@@ -110,6 +128,30 @@ class NationalNewsFragment : Fragment() {
                 nationalNewsAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    // 전국소식 장학금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkScholarship(scholarshipIdx: Int) {
+        retrofit!!.create(BookmarkScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
+            .enqueue(object : Callback<BookmarkResponseApiData> {
+                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
+                    Log.d(ContentValues.TAG,"전국소식 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"전국소식 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 전국소식 지원금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkSupport(supportIdx: Int) {
+        Log.d("지원금 즐겨찾기", "---------------------------")
+        Log.d("지원금 즐겨찾기", supportIdx.toString())
     }
 
     // 전국소식 조회 api
@@ -130,6 +172,8 @@ class NationalNewsFragment : Fragment() {
                         allNationalNewsList.add(
                             NationalNewsList(
                                 NationalNewsData(
+                                    scholarshipData[i].scholarship_idx,
+                                    null,
                                     scholarshipData[i].scholarship_institution,
                                     scholarshipData[i].scholarship_name,
                                     scholarshipData[i].scholarship_content,
@@ -145,6 +189,8 @@ class NationalNewsFragment : Fragment() {
                         allNationalNewsList.add(
                             NationalNewsList(
                                 NationalNewsData(
+                                    null,
+                                    supportData[i].support_idx,
                                     supportData[i].support_institution,
                                     supportData[i].support_name,
                                     supportData[i].support_content,

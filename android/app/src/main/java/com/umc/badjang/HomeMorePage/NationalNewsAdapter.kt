@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
 import com.umc.badjang.databinding.MainMoreNationalNewsItemBinding
 
-class NationalNewsAdapter(private val context: Context) :
+class NationalNewsAdapter(
+    private val context: Context,
+    val onClickScholarshipBookmark: (scholarshipIdx: Int) -> Unit,
+    val onClickSupportBookmark: (supportIdx: Int) -> Unit?) :
     RecyclerView.Adapter<NationalNewsAdapter.NationalNewsViewHolder>() {
 
     private lateinit var viewBinding: MainMoreNationalNewsItemBinding
@@ -75,12 +78,18 @@ class NationalNewsAdapter(private val context: Context) :
             binding.nationalNewsBookmarkCheckBtn.setOnClickListener {
                 binding.nationalNewsBookmarkCheckBtn.visibility = View.GONE
                 binding.nationalNewsBookmarkUncheckBtn.visibility = View.VISIBLE
+
+                if(item.scholarshipIdx != null) onClickScholarshipBookmark(item.scholarshipIdx)
+                else if(item.supportIdx != null) onClickSupportBookmark(item.supportIdx)
             }
 
             // 즐겨찾기 해제 버튼 선택 시
             binding.nationalNewsBookmarkUncheckBtn.setOnClickListener {
                 binding.nationalNewsBookmarkCheckBtn.visibility = View.VISIBLE
                 binding.nationalNewsBookmarkUncheckBtn.visibility = View.GONE
+
+                if(item.scholarshipIdx != null) onClickScholarshipBookmark(item.scholarshipIdx)
+                else if(item.supportIdx != null) onClickSupportBookmark(item.supportIdx)
             }
 
             // 더보기 버튼 선택 시
