@@ -188,7 +188,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                 // 선택된 학년 정보
                 selectGrade = binding.selectionGrade.getSelectedItem().toString().substring(0, 1)
 
-                if(selectGrade == "선택하기")
+                if(selectGrade == "선")
                     selectGrade = null
             }
 
@@ -212,7 +212,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                 // 선택된 학기 정보
                 selectSemester = binding.selectionSemester.getSelectedItem().toString().substring(0, 1)
 
-                if(selectSemester == "선택하기")
+                if(selectSemester == "선")
                     selectSemester = null
             }
 
@@ -301,26 +301,23 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
 
         // 적용하기 버튼 선택
         binding.btnConfirm.setOnClickListener {
-            // 모든 값이 선택된 경우
-            if(checkAllSelect()) {
-                // 저장할 데이터
-                val body = UniversityFilterAddData(
-                    mConnectUserId!!,
-                    selectUniversity,
-                    selectCollege,
-                    selectDepartment,
-                    selectGrade,
-                    selectSemester,
-                    selectProvince,
-                    selectCity
-                )
+            // 저장할 데이터
+            val body = UniversityFilterAddData(
+                mConnectUserId!!,
+                selectUniversity,
+                selectCollege,
+                selectDepartment,
+                selectGrade,
+                selectSemester,
+                selectProvince,
+                selectCity
+            )
 
-                // api에 데이터 저장 요청
-                addUniversityAreaInfo(body)
+            // api에 데이터 저장 요청
+            addUniversityAreaInfo(body)
 
-                // Dialog 닫기
-                dismiss()
-            }
+            // Dialog 닫기
+            dismiss()
         }
 
     }
@@ -415,6 +412,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                 override fun onResponse(call: Call<UniversityFilterResponse>, response: Response<UniversityFilterResponse>) {
                     Log.d(ContentValues.TAG,"대학, 지역 정보 저장 요청 -------------------------------------------")
                     Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+                    //Log.d(ContentValues.TAG, body.toString())
 
                     showToast("저장되었습니다.")
                 }
