@@ -40,6 +40,9 @@ class HomeFragment : Fragment() {
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
+
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
     private var mainRecommendCurrentPosition = 0 // 슬라이드 이미지 현재 위치
@@ -87,8 +90,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 현재 로그인 된 사용자 idx 조회
+        // 현재 로그인 된 사용자 idx, jwt 조회
         mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
 
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
@@ -174,7 +178,11 @@ class HomeFragment : Fragment() {
     // recyclerview 세팅
     private fun initRecycler() {
         // 우리학교 장학금 recyclerview 세팅
-        mainMySchoolAdapter = MainMySchoolAdapter(requireContext())
+        mainMySchoolAdapter = MainMySchoolAdapter(
+            requireContext(),
+            onClickBookmark = {
+                apiBookmarkMySchool(it)
+            })
         viewBinding.mainMySchoolRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.mainMySchoolRecyclerview.adapter = mainMySchoolAdapter
         mainMySchoolAdapter.datas = mySchoolDatas
@@ -232,9 +240,26 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // 우리학교 장학금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkMySchool(scholarshipIdx: Int) {
+        retrofit!!.create(BookmarkScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
+            .enqueue(object : Callback<BookmarkResponseApiData> {
+                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
     // 우리학교 장학금 조회 api
     private fun apiMainMySchool() {
-        val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
         retrofit!!.create(MainMySchoolApiService::class.java).getMainMySchool(xAccessToken=jwt!!, userIdx=mConnectUserId!!)
             .enqueue(object : Callback<MainMySchoolApiData> {
                 override fun onResponse(call: Call<MainMySchoolApiData>, response: Response<MainMySchoolApiData>) {
@@ -268,6 +293,7 @@ class HomeFragment : Fragment() {
                     addMySchoolData(
                         MainMySchoolData(
                             mySchoolDatas.size + 1,
+                            scholarshipIdx.toInt(),
                             response.body()!!.result.scholarship_name,
                             response.body()!!.result.scholarship_view
                         ))

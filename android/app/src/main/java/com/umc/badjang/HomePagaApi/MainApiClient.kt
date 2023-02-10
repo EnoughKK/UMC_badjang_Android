@@ -10,7 +10,7 @@ object MainApiClient {
 
     val mainApiRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        //.addConverterFactory(ScalarsConverterFactory.create())
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
