@@ -2,6 +2,7 @@ package com.umc.badjang.HomePage
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
@@ -12,7 +13,7 @@ class MainNationalNewsAdapter(private val context: Context) :
 
     private lateinit var viewBinding: MainNationalNewsItemBinding
 
-    var datas = mutableListOf<MainNationalNewsData>()
+    var datas = mutableListOf<MainNationalNewsDataBitmap>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) :
             MainNationalNewsViewHolder {
@@ -33,8 +34,13 @@ class MainNationalNewsAdapter(private val context: Context) :
     inner class MainNationalNewsViewHolder(private val binding: MainNationalNewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MainNationalNewsData) {
-            binding.mainNationalNewsImg.setImageBitmap(item.nationalNewsImage) // 글 이미지
+        fun bind(item: MainNationalNewsDataBitmap) {
+            if(item.nationalNewsImage == null)
+                binding.mainNationalNewsImg.visibility = View.GONE
+            else {
+                binding.mainNationalNewsImg.setImageBitmap(item.nationalNewsImage) // 글 이미지
+                binding.mainNationalNewsImg.visibility = View.VISIBLE
+            }
             binding.mainNationalNewsTitle.text = item.nationalNewsTitle        // 글 제목
         }
     }

@@ -5,14 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FindIDActivity">
+    tools:context=".LoginPage.Login.FindIDActivity">
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="24dp"
-      android:background="#D9D9D9"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
 
   <LinearLayout
       android:id="@+id/FindID_linearLayout1"
@@ -20,98 +14,122 @@
       android:layout_height="wrap_content"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginTop="24dp">
+      android:layout_marginTop="10dp">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/FindID_UpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
         android:src="@drawable/ic_baseline_arrow_back_24"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="23dp"/>
+        android:layout_marginLeft="17dp" />
 
     <TextView
         android:id="@+id/FindID_ID"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="아이디 찾기"
         android:fontFamily="@font/notosanskr_bold"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginStart="0dp"/>
   </LinearLayout>
 
   <LinearLayout
-      android:id="@+id/FindID_linearLayout2"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
-      android:orientation="horizontal"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="240dp">
-
-    <EditText
-        android:id="@+id/FindID_Phone"
-        android:layout_width="206dp"
-        android:layout_height="56dp"
-        android:hint="전화번호"
-        android:fontFamily="@font/notosanskr_regular"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/FindID_receiveBtn"
-        android:layout_width="99dp"
-        android:layout_height="44dp"
-        android:background="@drawable/round_box4"
-        android:backgroundTint="#7FB3FD"
-        android:text="인증번호 받기"
-        android:fontFamily="@font/notosanskr_bold"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-5dp"/>
-  </LinearLayout>
-
-  <TextView
-      android:id="@+id/FindID_missPhone"
-      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="전화번호 형식에 맞게 입력해주세요"
-      android:fontFamily="@font/notosanskr_regular"
-      android:textColor="#ED1C24"
-      android:textSize="12sp"
-      android:paddingStart="5dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="288dp"/>
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="210dp"
+      android:orientation="vertical">
+
+
+      <LinearLayout
+          android:id="@+id/FindID_linearLayout2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:orientation="horizontal"
+          >
+        <!--전화번호-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="11"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_weight="13">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/FindID_Phone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/notosanskr_regular"
+          android:hint="전화번호"
+          android:inputType="phone"
+          android:textSize="15sp"
+          android:layout_weight="13"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/FindID_receiveBtn"
+            android:layout_width="99dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-5dp"
+            android:background="@drawable/round_box4"
+            android:backgroundTint="#7FB3FD"
+            android:fontFamily="@font/notosanskr_bold"
+            android:text="인증번호 받기"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_weight="1"/>
+
+      </LinearLayout>
+
+      <TextView
+          android:id="@+id/FindID_missPhone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="-30dp"
+          android:fontFamily="@font/notosanskr_regular"
+          android:paddingStart="5dp"
+          android:text="전화번호 형식에 맞게 입력해주세요"
+          android:textColor="#ED1C24"
+          android:textSize="12sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"/>
+  </LinearLayout>
 
   <LinearLayout
       android:id="@+id/FindID_linearLayout3"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
+      android:layout_height="56dp"
       android:orientation="horizontal"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_marginTop="320dp"
       >
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
       <EditText
           android:id="@+id/FindID_Authnum"
-          android:layout_width="320dp"
+          android:layout_width="match_parent"
           android:layout_height="56dp"
           android:hint="인증번호"
           android:fontFamily="@font/notosanskr_regular"
@@ -122,21 +140,22 @@
       <TextView
           android:id="@+id/FindID_Time"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:text="04:59"
           android:fontFamily="@font/notosanskr_regular"
           android:textColor="#ED1C24"
           android:textSize="12sp"
+          android:layout_gravity="right"
+          android:gravity="center"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginStart="280dp"
-          android:layout_marginTop="5dp"/>
+          android:layout_marginRight="10dp"/>
     </FrameLayout>
   </LinearLayout>
 
   <TextView
       android:id="@+id/FindID_missAuthnum"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="인증번호가 일치하지 않습니다"
       android:fontFamily="@font/notosanskr_regular"
@@ -145,13 +164,14 @@
       android:paddingStart="5dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="365dp"/>
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="368dp"/>
 
   <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/FindID_AuthBtn"
-      android:layout_width="320dp"
-      android:layout_height="40dp"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
       android:background="@drawable/round_box"
       android:backgroundTint="#2173FD"
       android:text="인증하기"
@@ -160,28 +180,25 @@
       android:textSize="15sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="40dp"
-      android:layout_marginTop="410dp"/>
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="420dp"/>
 
   <TextView
       android:id="@+id/FindID_PWPage"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="비밀번호를 잃어버리셨나요?"
       android:fontFamily="@font/notosanskr_regular"
       android:textColor="#6C6C6C"
       android:textSize="10sp"
+      android:clickable="true"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginStart="141dp"
-      android:layout_marginTop="448dp"/>
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:gravity="center"
+      android:layout_marginTop="470dp"/>
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="#D9D9D9"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginTop="752dp" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

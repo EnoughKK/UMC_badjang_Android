@@ -28,6 +28,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="start"
         android:background="#ffffff"
+        app:itemBackground="@drawable/bottom_menu_item_selector"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/bottom_menu_selector_color"
         app:itemTextColor="@drawable/bottom_menu_selector_color"
