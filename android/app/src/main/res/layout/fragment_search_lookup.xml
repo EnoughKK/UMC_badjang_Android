@@ -18,6 +18,7 @@
             layout="@layout/search_toolbar" />
 
         <View
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
@@ -80,5 +81,56 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- 검색 히스토리 뷰 -->
+    <LinearLayout
+        android:id="@+id/linear_search_history_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:background="#fff"
+        android:layout_marginTop="70dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:id="@+id/search_history_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="최근 검색어"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingLeft="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+               />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_history_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="50dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
 
 </FrameLayout>
