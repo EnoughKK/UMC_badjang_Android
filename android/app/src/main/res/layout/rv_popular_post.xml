@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/rectangle_653"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="익명"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/user_image"
+        app:layout_constraintTop_toTopOf="@id/user_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022.12.28"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/user_image"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="새로 만든 게시판"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_image" />
+
+    <TextView
+        android:id="@+id/post_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000 장학금"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/user_image"
+        app:layout_constraintStart_toStartOf="@id/user_image"/>
+
+    <TextView
+        android:id="@+id/post_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="받은 사람 있을까요?"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/post_title"
+        app:layout_constraintStart_toStartOf="@id/user_image"/>
+
+    <TextView
+        android:id="@+id/post_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="215"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imageview_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_view_count"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/post_views"
+        app:layout_constraintTop_toTopOf="@+id/post_views" />
+
+    <TextView
+        android:id="@+id/post_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="65"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_views" />
+
+    <ImageView
+        android:id="@+id/imageview_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_good_count"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/post_good"
+        app:layout_constraintTop_toTopOf="@+id/post_views" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
