@@ -56,7 +56,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginEnd="20dp"
+        android:background="?attr/selectableItemBackground">
 
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"
@@ -67,6 +68,7 @@
             android:layout_marginStart="1dp">
 
             <ImageView
+                android:id="@+id/MyPage_iv_profileimg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#D9D9D9"/>
@@ -82,7 +84,7 @@
             <TextView
                 android:id="@+id/Mypage_tv_nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="31dp"
                 android:text="받장"
                 android:fontFamily="@font/notosanskr_regular"
                 android:textSize="15sp"
@@ -90,6 +92,7 @@
                 android:textColor="@color/black"
                 android:gravity="top"/>
             <TextView
+                android:id="@+id/Mypage_tv_univ"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="00대학교"
@@ -130,13 +133,15 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mypage_cv_bookmark"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="25dp"
                 android:backgroundTint="#F0F4FF"
                 android:elevation="0dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginStart="1dp">
+                android:layout_marginStart="1dp"
+                android:background="?attr/selectableItemBackground">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -167,13 +172,15 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mypage_cv_my_write"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="25dp"
                 android:backgroundTint="#F0F4FF"
                 android:elevation="0dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:background="?attr/selectableItemBackground">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -204,13 +211,15 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mypage_cv_school_local"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="25dp"
                 android:backgroundTint="#F0F4FF"
                 android:elevation="0dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:background="?attr/selectableItemBackground">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -253,7 +262,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -301,7 +311,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -349,7 +360,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -397,7 +409,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -445,7 +458,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"

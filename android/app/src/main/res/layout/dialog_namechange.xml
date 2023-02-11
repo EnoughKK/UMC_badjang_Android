@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="320dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="320dp"
         android:layout_height="139dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/upround_box"
+        android:backgroundTint="@color/white">
 
         <TextView
             android:layout_width="match_parent"
@@ -31,6 +33,16 @@
             android:hint="변경할 이름을 입력해주세요"
             android:paddingStart="10dp"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/Namechange_name_error"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=""
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            android:layout_marginStart="20dp"/>
 
     </LinearLayout>
 
