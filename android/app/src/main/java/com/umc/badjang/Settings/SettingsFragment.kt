@@ -38,23 +38,25 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewBinding.SettingsLlLogout.setOnClickListener {
+        viewBinding.settingsBtnLogout.setOnClickListener {
             LogoutDialog(requireContext()).show()
         }
-        viewBinding.SettingsLogoutBtn.setOnClickListener {
+        viewBinding.settingsLlLogout.setOnClickListener {
             LogoutDialog(requireContext()).show()
         }
 
-        viewBinding.SettingsMyInfoBtn.setOnClickListener {
+        viewBinding.settingsLlMyInfo.setOnClickListener {
             activity?.changeFragment(MyInfoFragment())
         }
-        viewBinding.SettingsMyInfo.setOnClickListener {
+        viewBinding.settingsBtnMyInfo.setOnClickListener {
             activity?.changeFragment(MyInfoFragment())
+        }
+        viewBinding.settingsLlAlarm.setOnClickListener {
+            activity?.changeFragment(AlarmFragment())
         }
 
         // 이전 버튼 선택 시
-        viewBinding.SettingsUpBtn.setOnClickListener {
+        viewBinding.settingsBtnPrev.setOnClickListener {
             // 이전 페이지로 이동
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             requireActivity().supportFragmentManager.popBackStack()

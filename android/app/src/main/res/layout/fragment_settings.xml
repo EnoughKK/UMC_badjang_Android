@@ -1,152 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Settings.SettingsFragment">
+    tools:context=".Settings.SettingsFragment"
+    android:clickable="true">
 
     <LinearLayout
         android:id="@+id/Settings_linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="78dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/Settings_UpBtn"
+        <ImageView
+            android:id="@+id/settings_btn_prev"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            android:layout_marginLeft="17dp" />
+            android:layout_marginStart="17dp"
+            android:layout_gravity="center_vertical"/>
 
         <TextView
             android:id="@+id/Settings_ID"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="설정"
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="4dp" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="18dp"/>
     </LinearLayout>
 
     <View
+        android:id="@+id/settings_v1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
         android:layout_marginTop="78dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
-        android:id="@+id/Settings_MyInfo"
+        android:id="@+id/settings_ll_my_info"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="90dp">
-        <FrameLayout
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_v1"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 정보"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="내 정보"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/Settings_MyInfoBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
-                android:layout_gravity="right"/>
 
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/settings_btn_my_info"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Settings_Alarm"
+    <View
+        android:id="@+id/settings_v2"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="145dp"
-        >
-        <FrameLayout
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/settings_ll_my_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <LinearLayout
+        android:id="@+id/settings_ll_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_v2"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알람설정"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="알림설정"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-                />
 
-            <ImageButton
-                android:id="@+id/Settings_AlarmBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
-                android:layout_gravity="right"/>
-
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/settings_btn_alarm"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Settings_ll_logout"
+    <View
+        android:id="@+id/settings_v3"
         android:layout_width="match_parent"
-        android:background="@drawable/settingsbox"
-        android:layout_height="56dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="200dp">
-        <FrameLayout
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/settings_ll_alarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <LinearLayout
+        android:id="@+id/settings_ll_logout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_v3"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/Settings_Logout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="로그아웃"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/Settings_LogoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:backgroundTint="@color/white"
-                android:layout_gravity="right"
-                android:clickable="true"/>
 
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/settings_btn_logout"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="right|center_vertical"/>
 
     </LinearLayout>
-</FrameLayout>
+
+    <View
+        android:id="@+id/settings_v4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C0C0C0"
+        app:layout_constraintTop_toBottomOf="@id/settings_ll_logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -102,11 +102,14 @@
                 android:id="@+id/popular_post_comments_icon"
                 android:layout_width="15dp"
                 android:layout_height="10dp"
-                android:layout_margin="3dp"
-                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/ic_comments_count"
-                android:layout_centerVertical="true"/>
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_comments_count" />
 
             <TextView
                 android:id="@+id/popular_post_comments_num"
