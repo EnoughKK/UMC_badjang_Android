@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Settings.SettingsFragment"
     android:clickable="true">
 
     <LinearLayout
-        android:id="@+id/noti_detail_ll"
+        android:id="@+id/qna_ll_title"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/noti_detail_iv_prev"
+            android:id="@+id/qna_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back_24"
@@ -25,10 +24,10 @@
             android:layout_gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/noti_detail_tv"
+            android:id="@+id/qna_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="공지사항"
+            android:text="문의하기"
             android:fontFamily="@font/notosanskr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -38,7 +37,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/noti_detail_v1"
+        android:id="@+id/qna_v1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#252525"
@@ -49,48 +48,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/noti_detail_tv_title"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/qna_tl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="장학금 등록 안내"
-        android:fontFamily="@font/notosanskr_bold"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noti_detail_v1"
-        android:layout_marginTop="5dp"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/qna_v1"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="#2173FD"
+        app:tabIndicatorColor="#2173FD"
+        app:tabIndicatorHeight="2dp"
+        app:tabGravity="fill"
+        android:layout_marginTop="10dp"
+        app:tabTextAppearance="@style/bookmark_tab_text"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
 
-    <ImageView
-        android:id="@+id/noti_detail_iv"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의한 내용" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변 완료" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/qna_vp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/noti_detail_tv_title"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/qna_tl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="centerCrop"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="#dcdcdc"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/noti_detail_tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="장학금 등록 안내"
-        android:fontFamily="@font/notosanskr_bold"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noti_detail_iv"
+    <ImageButton
+        android:id="@+id/qna_ib_write"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:src="@drawable/group_562"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp" />
-
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
