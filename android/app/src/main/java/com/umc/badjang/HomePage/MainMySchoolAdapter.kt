@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
 import com.umc.badjang.databinding.MainMySchoolItemBinding
 
-class MainMySchoolAdapter(private val context: Context) :
+class MainMySchoolAdapter(
+        private val context: Context,
+        val onClickBookmark: (scholarshipIdx: Int) -> Unit) :
     RecyclerView.Adapter<MainMySchoolAdapter.MainMySchoolViewHolder>() {
 
     private lateinit var viewBinding: MainMySchoolItemBinding
@@ -43,12 +45,16 @@ class MainMySchoolAdapter(private val context: Context) :
             binding.mainMySchoolStarCheckBtn.setOnClickListener {
                 binding.mainMySchoolStarCheckBtn.visibility = View.GONE
                 binding.mainMySchoolStarUncheckBtn.visibility = View.VISIBLE
+
+                onClickBookmark(item.mySchoolScholarshipIdx) // 즐겨찾기 선택한 장학금 idx 넘겨주기
             }
 
             // 즐겨찾기 해제 버튼 선택 시
             binding.mainMySchoolStarUncheckBtn.setOnClickListener {
                 binding.mainMySchoolStarCheckBtn.visibility = View.VISIBLE
                 binding.mainMySchoolStarUncheckBtn.visibility = View.GONE
+
+                onClickBookmark(item.mySchoolScholarshipIdx) // 즐겨찾기 선택한 장학금 idx 넘겨주기
             }
         }
     }

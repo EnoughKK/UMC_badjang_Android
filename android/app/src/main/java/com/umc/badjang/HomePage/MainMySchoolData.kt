@@ -4,6 +4,7 @@ package com.umc.badjang.HomePage
 
 data class MainMySchoolData(
     val mySchoolNum: Int,
+    val mySchoolScholarshipIdx: Int,
     val mySchoolTitle: String,
     val mySchoolViewNum: Int
 )
