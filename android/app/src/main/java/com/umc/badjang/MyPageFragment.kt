@@ -14,10 +14,12 @@ import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomePage.UniversityFilterDialog
 import com.umc.badjang.MyPage.ChangeProfileActivity
+import com.umc.badjang.MyPage.FQA.FQAFragment
 import com.umc.badjang.MyPage.Model.MyProfileRes
 import com.umc.badjang.MyPage.MyProfileRetrofitInterface
 import com.umc.badjang.MyPage.MyWrite.MyWriteFragment
 import com.umc.badjang.MyPage.Noti.NotiFragment
+import com.umc.badjang.MyPage.QNA.QNAFragment
 import com.umc.badjang.Settings.SettingsFragment
 import com.umc.badjang.databinding.FragmentMyPageBinding
 import retrofit2.Call
@@ -106,10 +108,10 @@ class MyPageFragment : Fragment() {
             activity?.changeFragment(NotiFragment())
         }
         viewBinding.MypageLlInquiry.setOnClickListener {
-
+            activity?.changeFragment(QNAFragment())
         }
         viewBinding.MypageLlQna.setOnClickListener {
-
+            activity?.changeFragment(FQAFragment())
         }
         // 이전 버튼 선택 시
         viewBinding.MypageUpBtn.setOnClickListener {

@@ -1,4 +1,4 @@
-package com.umc.badjang.MyPage.MyWrite
+package com.umc.badjang.MyPage.QNA
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.MyWrite.model.MyWriteRes
+import com.umc.badjang.databinding.FragmentQuestionBinding
 import com.umc.badjang.databinding.FragmentWriteBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-data class WriteData(
+data class QData(
     val user_name : String,
     val user_profileimage_url : String,
     val post_createAt:String,
@@ -34,11 +35,11 @@ data class WriteData(
     val post_anonymity: String )
 
 class WriteFragment : Fragment() {
-    private lateinit var binding: FragmentWriteBinding // viewBinding
-    lateinit var rvAdapter : MyWriteAdapter
+    private lateinit var binding: FragmentQuestionBinding // viewBinding
+    lateinit var rvAdapter : QAdapter
     //api 통신을 위한 retrofit
-    private var retrofit : Retrofit? =null
-    var dataList = arrayListOf<WriteData>()
+    private var retrofit : Retrofit? = null
+    var dataList = arrayListOf<QData>()
     var activity: MainActivity? = null
 
     override fun onAttach(context: Context) {
@@ -55,24 +56,24 @@ class WriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWriteBinding.inflate(layoutInflater);
+        binding = FragmentQuestionBinding.inflate(layoutInflater);
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getMyWrite()
+//        getMyWrite()
 
-        rvAdapter = MyWriteAdapter(dataList, requireContext())
-        binding.writeRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        //val decoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        //binding.writeRv.addItemDecoration(decoration)
-        binding.writeRv.adapter = rvAdapter
+//        rvAdapter = QAdapter(dataList, requireContext())
+//        binding.questionRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+//        //val decoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+//        //binding.writeRv.addItemDecoration(decoration)
+//        binding.questionRv.adapter = rvAdapter
 
     }
     private fun getMyWrite(){
         //Log.d("postScholarship", "호출은 된다.")
-        val myWriteInterface = ApplicationClass.sRetrofit.create(MyWriteRetrofitInterface::class.java)
+        val myWriteInterface = ApplicationClass.sRetrofit.create(QNARetrofitInterface::class.java)
         myWriteInterface.getMyWrite().enqueue(object :
             Callback<MyWriteRes> {
             @SuppressLint("SetTextI18n")
@@ -93,7 +94,7 @@ class WriteFragment : Fragment() {
                             }else{
                                 name = "익명"
                             }
-                            dataList.add(WriteData(result.result[i].user_name, result.result[i].user_profileimage_url,
+                            dataList.add(QData(result.result[i].user_name, result.result[i].user_profileimage_url,
                                 result.result[i].post_createAt, result.result[i].post_idx,result.result[i].post_name,
                                 result.result[i].post_content, img, result.result[i].post_view, result.result[i].post_recommend,
                                 result.result[i].post_comment, result.result[i].post_category, name))
