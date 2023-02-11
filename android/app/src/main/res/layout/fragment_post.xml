@@ -86,8 +86,8 @@
                         android:layout_height="wrap_content"
                         android:text="더보기"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="textview_allPost"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/textview_allPost"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="43dp"
@@ -121,16 +121,15 @@
                         android:layout_height="wrap_content"
                         android:text="더보기"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="textview_popularPost"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/textview_popularPost"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="327dp"
                         android:layout_height="28dp"
-                        android:layout_marginTop="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textview_popularPost"
-                        app:layout_constraintTop_toTopOf="@+id/textview_popularPost" />
+                        app:layout_constraintTop_toBottomOf="@+id/textview_popularPost" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,8 +157,8 @@
                         android:layout_height="wrap_content"
                         android:text="더보기"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="textview_allPost"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/textview_schoolPost"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="43dp"
