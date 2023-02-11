@@ -11,6 +11,7 @@ import android.view.WindowManager
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
+import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.Settings.Myinfo.models.MyinfoRequest
 import com.umc.badjang.Settings.Myinfo.models.MyinfoResponse
 import com.umc.badjang.databinding.DialogPhonechangeBinding
@@ -90,7 +91,7 @@ class MyinfoPhoneDialog (context: Context) : Dialog(context) {
                         val fragmentManager = (activity as MainActivity).supportFragmentManager
 
                         val transaction =fragmentManager.beginTransaction()
-                        transaction.add(R.id.MyInfo_Phone,myInfoFragment)
+                        transaction.add(R.id.my_info_tv_phone_number,myInfoFragment)
                         transaction.commit()
                         Log.d("fragment로 전번 전송","${transaction}")
                     }

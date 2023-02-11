@@ -32,6 +32,9 @@ class MySchoolFragment : Fragment() {
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
+
     // 우리학교 장학금 recyclerview adapter
     private val mySchoolDatas = mutableListOf<NationalNewsDataBitmap>()
     private lateinit var mySchoolAdapter: NationalNewsAdapter
@@ -47,6 +50,9 @@ class MySchoolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 현재 로그인 된 사용자 jwt 조회
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
 
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
@@ -67,7 +73,14 @@ class MySchoolFragment : Fragment() {
 
     // 우리학교 recyclerview 세팅
     private fun initRecycler() {
-        mySchoolAdapter = NationalNewsAdapter(requireContext())
+        mySchoolAdapter = NationalNewsAdapter(
+            requireContext(),
+            onClickScholarshipBookmark = {
+                apiBookmarkMySchool(it)
+            },
+            onClickSupportBookmark = {
+                null
+            })
         viewBinding.mySchoolRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.mySchoolRecyclerview.adapter = mySchoolAdapter
@@ -79,6 +92,8 @@ class MySchoolFragment : Fragment() {
         if(mySchoolData.nationalNewsImg == null) {
             mySchoolDatas.apply {
                 add(NationalNewsDataBitmap(
+                    mySchoolData.scholarshipIdx,
+                    mySchoolData.supportIdx,
                     mySchoolData.nationalNewsInstitution,
                     mySchoolData.nationalNewsTitle,
                     mySchoolData.nationalNewsContent,
@@ -96,6 +111,8 @@ class MySchoolFragment : Fragment() {
                 }
                 mySchoolDatas.apply {
                     add(NationalNewsDataBitmap(
+                        mySchoolData.scholarshipIdx,
+                        mySchoolData.supportIdx,
                         mySchoolData.nationalNewsInstitution,
                         mySchoolData.nationalNewsTitle,
                         mySchoolData.nationalNewsContent,
@@ -108,6 +125,24 @@ class MySchoolFragment : Fragment() {
                 mySchoolAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    // 우리학교 장학금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkMySchool(scholarshipIdx: Int) {
+        retrofit!!.create(BookmarkScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
+            .enqueue(object : Callback<BookmarkResponseApiData> {
+                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
+                    Log.d(ContentValues.TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 우리학교 장학금 조회 api
@@ -148,6 +183,8 @@ class MySchoolFragment : Fragment() {
 
                     addMySchoolData(
                         NationalNewsData(
+                            scholarshipData.scholarship_idx.toInt(),
+                            null,
                             scholarshipData.scholarship_institution,
                             scholarshipData.scholarship_name,
                             scholarshipData.scholarship_content,
