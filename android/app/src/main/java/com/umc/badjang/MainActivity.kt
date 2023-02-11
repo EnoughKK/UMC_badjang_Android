@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
-import com.umc.badjang.Searchpage.SearchFragment
+import com.umc.badjang.Searchpage.RecentSearchFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 public var mConnectUserId: Int? = null
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
                 }
                 R.id.search -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, RecentSearchFragment()).commit()
                 }
                 R.id.mypage -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, MyPageFragment()).commit()

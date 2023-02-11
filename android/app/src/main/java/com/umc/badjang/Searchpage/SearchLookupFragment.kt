@@ -3,22 +3,21 @@ package com.umc.badjang.Searchpage
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
-import com.umc.badjang.databinding.FragmentSearchresultAllBinding
+import com.umc.badjang.databinding.FragmentSearchLookupBinding
 
-class SearchFragment : Fragment() {
-    private lateinit var viewBinding: FragmentSearchresultAllBinding// viewBinding
-
+class SearchLookupFragment : Fragment() {
+    private lateinit var viewBinding: FragmentSearchLookupBinding// viewBinding
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var  fragmentStateAdapter: FragmentStateAdapter
@@ -40,7 +39,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentSearchresultAllBinding.inflate(layoutInflater);
+        viewBinding = FragmentSearchLookupBinding.inflate(layoutInflater);
 
         return viewBinding.root
     }
@@ -48,8 +47,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val search_toolbar: Toolbar = requireActivity().findViewById(R.id.search_mainbar)
+        (activity as AppCompatActivity).setSupportActionBar(search_toolbar)
 
         initViewPager()
 
@@ -59,7 +58,7 @@ class SearchFragment : Fragment() {
     fun initViewPager() {
 
         viewPager = viewBinding.searchViewPager
-        //fragmentStateAdapter = FragmentStateAdapter(requireActivity())
+        fragmentStateAdapter = SFragmentStateAdapter(requireActivity())
         viewPager.adapter = fragmentStateAdapter
 
         tabLayout = viewBinding.searchTabLayout

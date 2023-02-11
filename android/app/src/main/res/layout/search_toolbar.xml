@@ -39,6 +39,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
             app:queryHint="검색어를 입력해주세요" />
