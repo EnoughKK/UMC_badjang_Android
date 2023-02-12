@@ -1,4 +1,4 @@
-package com.umc.badjang.HomePagaApi
+package com.umc.badjang.BookmarkApi
 
 import retrofit2.Call
 import retrofit2.http.GET

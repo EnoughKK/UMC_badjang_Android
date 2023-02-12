@@ -17,6 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.BookmarkApi.BookmarkResponseApiData
+import com.umc.badjang.BookmarkApi.BookmarkCheckScholarshipApiService
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiData
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiService
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
@@ -242,7 +246,7 @@ class HomeFragment : Fragment() {
 
     // 우리학교 장학금 즐겨찾기 추가 및 취소 api
     private fun apiBookmarkMySchool(position: Int) {
-        retrofit!!.create(BookmarkScholarshipApiService::class.java)
+        retrofit!!.create(BookmarkCheckScholarshipApiService::class.java)
             .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=mySchoolDatas[position].mySchoolScholarshipIdx)
             .enqueue(object : Callback<BookmarkResponseApiData> {
                 override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {

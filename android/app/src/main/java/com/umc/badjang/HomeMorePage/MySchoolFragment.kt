@@ -2,7 +2,6 @@ package com.umc.badjang.HomeMorePage
 
 import android.content.ContentValues
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.BookmarkApi.BookmarkResponseApiData
+import com.umc.badjang.BookmarkApi.BookmarkCheckScholarshipApiService
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiData
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiService
 import com.umc.badjang.HomePagaApi.*
-import com.umc.badjang.HomePage.MainMySchoolData
-import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentMySchoolBinding
 import com.umc.badjang.mConnectUserId
 import kotlinx.coroutines.CoroutineScope
@@ -131,7 +132,7 @@ class MySchoolFragment : Fragment() {
 
     // 우리학교 장학금 즐겨찾기 추가 및 취소 api
     private fun apiBookmarkMySchool(position: Int) {
-        retrofit!!.create(BookmarkScholarshipApiService::class.java)
+        retrofit!!.create(BookmarkCheckScholarshipApiService::class.java)
             .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=mySchoolDatas[position].scholarshipIdx!!)
             .enqueue(object : Callback<BookmarkResponseApiData> {
                 override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
