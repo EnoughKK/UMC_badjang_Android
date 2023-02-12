@@ -12,6 +12,7 @@ data class NationalNewsData (
     val nationalNewsImg: String?,          // 전국소식 게시물 이미지
     val nationalNewsCommentsCnt: Int,      // 댓글수
     val nationalNewsViewCnt: Int,          // 조회수
+    var bookmarkCheck: Boolean
 )
 
 data class NationalNewsDataBitmap (
@@ -23,4 +24,5 @@ data class NationalNewsDataBitmap (
     val nationalNewsImg: Bitmap?,          // 전국소식 게시물 이미지
     val nationalNewsCommentsCnt: Int,      // 댓글수
     val nationalNewsViewCnt: Int,          // 조회수
+    var bookmarkCheck: Boolean
 )

@@ -38,6 +38,9 @@ class NationalNewsFragment : Fragment() {
     // 현재 로그인 된 사용자 jwt
     private var jwt: String? = null
 
+    // 정렬을 위한 전국소식 리스트
+    private var allNationalNewsList: MutableList<NationalNewsList>? = null
+
     // 전국소식 리스트 recyclerview adapter
     private val nationalNewsDatas = mutableListOf<NationalNewsDataBitmap>()
     private lateinit var nationalNewsAdapter: NationalNewsAdapter
@@ -102,7 +105,9 @@ class NationalNewsFragment : Fragment() {
                     nationalNews.nationalNewsContent,
                     null,
                     nationalNews.nationalNewsCommentsCnt,
-                    nationalNews.nationalNewsViewCnt))
+                    nationalNews.nationalNewsViewCnt,
+                    nationalNews.bookmarkCheck
+                ))
             }
             nationalNewsAdapter.notifyDataSetChanged()
         }
@@ -121,7 +126,8 @@ class NationalNewsFragment : Fragment() {
                         nationalNews.nationalNewsContent,
                         img,
                         nationalNews.nationalNewsCommentsCnt,
-                        nationalNews.nationalNewsViewCnt
+                        nationalNews.nationalNewsViewCnt,
+                        nationalNews.bookmarkCheck
                     ))
                 }
 
@@ -131,14 +137,16 @@ class NationalNewsFragment : Fragment() {
     }
 
     // 전국소식 장학금 즐겨찾기 추가 및 취소 api
-    private fun apiBookmarkScholarship(scholarshipIdx: Int) {
+    private fun apiBookmarkScholarship(position: Int) {
         retrofit!!.create(BookmarkScholarshipApiService::class.java)
-            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=nationalNewsDatas[position].scholarshipIdx!!)
             .enqueue(object : Callback<BookmarkResponseApiData> {
                 override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
                     Log.d(ContentValues.TAG,"전국소식 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
                     Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
+                    nationalNewsDatas[position].bookmarkCheck = !nationalNewsDatas[position].bookmarkCheck
+                    nationalNewsAdapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
@@ -161,55 +169,38 @@ class NationalNewsFragment : Fragment() {
                 override fun onResponse(call: Call<MainNationalNewsApiData>, response: Response<MainNationalNewsApiData>) {
                     Log.d(ContentValues.TAG,"전국소식 -------------------------------------------")
 
-                    val allNationalNewsList = mutableListOf<NationalNewsList>()
+                    allNationalNewsList = mutableListOf<NationalNewsList>()
 
                     var allNationalNewsData: MainNationalNewsApiData = response.body()!!
                     var scholarshipData: MutableList<MainNationalNewsScholarship> = allNationalNewsData.result.scholarshipList
                     var supportData: MutableList<MainNationalNewsSupport> = allNationalNewsData.result.supportList
 
                     for(i:Int in (0..scholarshipData.size - 1)) {
-                        //if(i >= 5) break
-                        allNationalNewsList.add(
-                            NationalNewsList(
-                                NationalNewsData(
-                                    scholarshipData[i].scholarship_idx,
-                                    null,
-                                    scholarshipData[i].scholarship_institution,
-                                    scholarshipData[i].scholarship_name,
-                                    scholarshipData[i].scholarship_content,
-                                    scholarshipData[i].scholarship_image,
-                                    scholarshipData[i].scholarship_comment,
-                                    scholarshipData[i].scholarship_view
-                                ),
-                                scholarshipData[i].scholarship_createAt
-                            )
+                        apiCheckNationalNewsBookmark(
+                            scholarshipData[i].scholarship_idx,
+                            scholarshipData[i].scholarship_institution,
+                            scholarshipData[i].scholarship_name,
+                            scholarshipData[i].scholarship_content,
+                            scholarshipData[i].scholarship_image,
+                            scholarshipData[i].scholarship_comment,
+                            scholarshipData[i].scholarship_view,
+                            scholarshipData[i].scholarship_createAt
                         )
                     }
                     for(i:Int in (0..supportData.size - 1)) {
-                        allNationalNewsList.add(
-                            NationalNewsList(
-                                NationalNewsData(
-                                    null,
-                                    supportData[i].support_idx,
-                                    supportData[i].support_institution,
-                                    supportData[i].support_name,
-                                    supportData[i].support_content,
-                                    supportData[i].support_image,
-                                    supportData[i].support_comment,
-                                    supportData[i].support_view
-                                ),
-                                supportData[i].support_createAt
+                        addNationalNewsData(
+                            NationalNewsData(
+                                null,
+                                supportData[i].support_idx,
+                                supportData[i].support_institution,
+                                supportData[i].support_name,
+                                supportData[i].support_content,
+                                supportData[i].support_image,
+                                supportData[i].support_comment,
+                                supportData[i].support_view,
+                                false
                             )
                         )
-                    }
-
-                    // 생성일을 기준으로 정렬
-                    Collections.sort(allNationalNewsList)
-
-                    // 최신순 상위 5개
-                    for (i:Int in (0..allNationalNewsList.size - 1)) {
-                        //if(i >= 5) break
-                        addNationalNewsData(allNationalNewsList[i].mNationalNewsData)
                     }
                 }
 
@@ -219,6 +210,54 @@ class NationalNewsFragment : Fragment() {
                 }
             })
     }
+
+    // 전국소식 즐겨찾기 유무 체크
+    private fun apiCheckNationalNewsBookmark(
+        scholarshipIdx: Int?, scholarshipInstitution: String?, scholarshipName: String, scholarshipContent: String?,
+        scholarshipImage: String?, scholarshipComment: Int, scholarshipView: Int, createAt: String) {
+
+        retrofit!!.create(CheckScholarshipBookmarkApiService::class.java)
+            .checkScholarshipBookmark(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx!!)
+            .enqueue(object : Callback<CheckScholarshipBookmarkApiData> {
+                override fun onResponse(call: Call<CheckScholarshipBookmarkApiData>, response: Response<CheckScholarshipBookmarkApiData>) {
+                    //Log.d(ContentValues.TAG,"전국소식 즐겨찾기 -------------------------------------------")
+                    //Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                    var checkBookmark = false
+                    if(response.body()!!.result.bookmark_check == "Y") checkBookmark = true
+
+                    addNationalNewsData(
+                        NationalNewsData(
+                            scholarshipIdx,
+                            null,
+                            scholarshipInstitution,
+                            scholarshipName,
+                            scholarshipContent,
+                            scholarshipImage,
+                            scholarshipComment,
+                            scholarshipView,
+                            checkBookmark
+                        )
+                    )
+
+                    // 생성일을 기준으로 정렬
+                    //Collections.sort(allNationalNewsList)
+
+                    // 최신순
+                    /*for (i:Int in (0..allNationalNewsList!!.size - 1)) {
+                        //if(i >= 5) break
+                        addNationalNewsData(allNationalNewsList!![i].mNationalNewsData)
+                    }*/
+
+                }
+
+                override fun onFailure(call: Call<CheckScholarshipBookmarkApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"전국소식 즐겨찾기 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
     // 전국소식 생성일 순으로 정렬
     internal class NationalNewsList(mNationalNewsData: NationalNewsData, createAt: String) :
         Comparable<NationalNewsList> {
