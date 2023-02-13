@@ -10,7 +10,7 @@ import com.umc.badjang.databinding.MainMoreNationalNewsItemBinding
 
 class NationalNewsAdapter(
     private val context: Context,
-    val onClickScholarshipBookmark: (scholarshipIdx: Int) -> Unit,
+    val onClickScholarshipBookmark: (position: Int) -> Unit,
     val onClickSupportBookmark: (position: Int) -> Unit?) :
     RecyclerView.Adapter<NationalNewsAdapter.NationalNewsViewHolder>() {
 

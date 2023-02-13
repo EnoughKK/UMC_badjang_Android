@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.BookmarkApi.BookmarkAllApiService
 import com.umc.badjang.BookmarkApi.BookmarkAllData
+import com.umc.badjang.BookmarkApi.BookmarkCheckScholarshipApiService
+import com.umc.badjang.BookmarkApi.BookmarkResponseApiData
 import com.umc.badjang.HomeMorePage.PopularPostData
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.R
@@ -74,7 +76,13 @@ class BookmarksAllFragment : Fragment() {
 
     // 즐겨찾기 리스트 recyclerview 세팅
     private fun initRecycler() {
-        bookmarkAllAdapter = BookmarkAdapter(requireContext())
+        bookmarkAllAdapter = BookmarkAdapter(
+            requireContext(),
+            onClickScholarshipBookmark = {
+                apiBookmarkScholarship(it)
+            },
+            true
+        )
         viewBinding.bookmarksAllRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.bookmarksAllRecyclerview.adapter = bookmarkAllAdapter
@@ -129,6 +137,7 @@ class BookmarksAllFragment : Fragment() {
         if(bookmarkScholarshipItem.bookmarkScholarshipImg == null) {
             bookmarkAllDatas.apply {
                 add(BookmarkScholarshipData(
+                    bookmarkScholarshipItem.bookmarkScholarshipIdx,
                     bookmarkScholarshipItem.bookmarkScholarshipInstitution,
                     null,
                     bookmarkScholarshipItem.bookmarkScholarshipTitle,
@@ -147,6 +156,7 @@ class BookmarksAllFragment : Fragment() {
 
                 bookmarkAllDatas.apply {
                     add(BookmarkScholarshipData(
+                        bookmarkScholarshipItem.bookmarkScholarshipIdx,
                         bookmarkScholarshipItem.bookmarkScholarshipInstitution,
                         img,
                         bookmarkScholarshipItem.bookmarkScholarshipTitle,
@@ -159,6 +169,26 @@ class BookmarksAllFragment : Fragment() {
             }
         }
 
+    }
+
+    // 장학금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkScholarship(scholarship: BookmarkScholarshipData) {
+        retrofit!!.create(BookmarkCheckScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarship.bookmarkScholarshipIdx!!.toInt())
+            .enqueue(object : Callback<BookmarkResponseApiData> {
+                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
+                    Log.d(ContentValues.TAG,"장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                    //mySchoolDatas[position].bookmarkCheck = !mySchoolDatas[position].bookmarkCheck
+                    //mySchoolAdapter.notifyDataSetChanged()
+                }
+
+                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 즐겨찾기 전체 조회 api
@@ -192,6 +222,7 @@ class BookmarksAllFragment : Fragment() {
                     for(i:Int in (0..bookmarkScholarshipList.size - 1)) {
                         addBookmarkScholarshipData(
                             BookmarkScholarshipDataString(
+                                bookmarkScholarshipList[i].scholarship_idx,
                                 bookmarkScholarshipList[i].scholarship_institution,
                                 bookmarkScholarshipList[i].scholarship_image,
                                 bookmarkScholarshipList[i].scholarship_name,
@@ -207,6 +238,7 @@ class BookmarksAllFragment : Fragment() {
                     for(i:Int in (0..bookmarkSupportList.size - 1)) {
                         addBookmarkScholarshipData(
                             BookmarkScholarshipDataString(
+                                null,
                                 bookmarkSupportList[i].support_institution,
                                 bookmarkSupportList[i].support_image,
                                 bookmarkSupportList[i].support_name,

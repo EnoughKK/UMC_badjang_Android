@@ -7,6 +7,7 @@ interface BookmarkItem
 
 // 장학금, 지원금 데이터
 data class BookmarkScholarshipData (
+    val bookmarkScholarshipIdx: Long?,
     val bookmarkScholarshipInstitution: String?, // 장학금, 지원금 기관명
     val bookmarkScholarshipImg: Bitmap?,         // 장학금, 지원금 게시물 이미지
     val bookmarkScholarshipTitle: String,       // 장학금, 지원금 게시물 제목
@@ -16,6 +17,7 @@ data class BookmarkScholarshipData (
 ): BookmarkItem
 
 data class BookmarkScholarshipDataString (
+    val bookmarkScholarshipIdx: Long?,
     val bookmarkScholarshipInstitution: String?, // 장학금, 지원금 기관명
     val bookmarkScholarshipImg: String?,         // 장학금, 지원금 게시물 이미지
     val bookmarkScholarshipTitle: String,       // 장학금, 지원금 게시물 제목
