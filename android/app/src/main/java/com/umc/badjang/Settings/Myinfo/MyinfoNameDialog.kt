@@ -91,8 +91,8 @@ class MyinfoNameDialog (context: Context) : Dialog(context) {
                     }
                     else->{
                         Log.e("이름변경 실패","${response.message()}")
-                        binding.NamechangeMissname.visibility= View.VISIBLE
-                        binding.NamechangeMissname.text="${response.message()}"
+                        binding.NamechangeNameError.visibility= View.VISIBLE
+                        binding.NamechangeNameError.text="${response.message()}"
                     }
                 }
 

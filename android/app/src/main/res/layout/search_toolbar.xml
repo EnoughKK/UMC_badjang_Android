@@ -16,34 +16,42 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-        <ImageButton
-            android:id="@+id/Search_UpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="5dp"
-            android:layout_marginLeft="19dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:background="@android:color/transparent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"/>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/Search_Searchview"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/search_main_bar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/Search_UpBtn"
-            android:background="@drawable/searchview_background"
-            app:queryBackground="@drawable/searchview_background"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            tools:ignore="MissingConstraints">
 
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="8dp"
-            app:queryHint="검색어를 입력해주세요" />
+            <ImageButton
+                android:id="@+id/Search_UpBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="19dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            <EditText
+                android:id="@+id/search_word"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/searchview_background"
+                android:drawableStart="@drawable/ic_select_menu_search"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:hint="검색어를 입력하세요."
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:targetApi="O" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
 
     </RelativeLayout>

@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
         <include
-            android:id="@+id/search_mainbar"
+            android:id="@+id/search_main_bar"
             layout="@layout/search_toolbar" />
 
         <View
@@ -23,7 +22,8 @@
             android:layout_height="1dp"
             android:background="@color/black"
             android:layout_marginHorizontal="20dp"
-            app:layout_constraintTop_toBottomOf="@id/search_mainbar"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="70dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_marginHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_mainbar">
+            app:layout_constraintTop_toTopOf="@id/search_view">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_tabLayout"
@@ -90,9 +90,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:background="#fff"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,7 +102,7 @@
             android:layout_marginLeft="20dp"
             >
             <TextView
-                android:id="@+id/search_history_id"
+                android:id="@+id/search_history_recycler_view_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="최근 검색어"
@@ -114,12 +114,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                />
 
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_history_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:layout_constraintTop_toBottomOf="@id/search_history_id"/>
+                app:layout_constraintTop_toBottomOf="@id/search_history_recycler_view_label"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
