@@ -9,17 +9,9 @@ object API {
 
     const val SEARCH_SCHOLARSHIP : String = "scholarships"
 
-    const val SEARCH_SUPPORT : String = "supports"
-
     const val VIEWCOUNT_SCHOLARSHIP : String = "scholarships/{scholarshipIdx}"
 
-    const val VIEWCOUNT_SUPPORT : String = "{supportIdx}"
-
-    const val SUPPORT_OPI_BASE_URL : String = "https://www.youthcenter.go.kr/"
-
-    const val OPI_SUPPORT : String = "opi/empList.do"
-
-    const val OPI_SUPPORT_KEY : String = "73444351051dbc5ea4541693"
+    const val SCHOLARSHIP_COMMENTS: String = "scholarships/comment"
 }
 
 object supportApiUrl {

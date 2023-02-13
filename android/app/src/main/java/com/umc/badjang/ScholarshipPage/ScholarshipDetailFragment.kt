@@ -10,16 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetScholarshipDTO
-import com.umc.badjang.R
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipDetailBinding
-import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipDetailFragment:Fragment() {
@@ -71,6 +66,7 @@ class ScholarshipDetailFragment:Fragment() {
 //                    Log.d(ContentValues.TAG, "디테일 페이지 api 호출 성공 : ${scholarshipDatas[0].scholarship_homepage}")
 
                     val scholarshipUri = scholarshipDatas[0].scholarship_homepage
+                    val scholarshipName = scholarshipDatas[0].scholarship_name.toString()
 
                     viewBinding.universityLabel.text = scholarshipDatas[0].scholarship_univ
                     viewBinding.scholarshipTitle.text = scholarshipDatas[0].scholarship_name
@@ -80,6 +76,11 @@ class ScholarshipDetailFragment:Fragment() {
                     viewBinding.btnLink.setOnClickListener {
                         var intent = Intent(Intent.ACTION_VIEW, Uri.parse(scholarshipUri))
                         startActivity(intent)
+                    }
+
+                    viewBinding.btnComments.setOnClickListener {
+                        // 장학금 디테일 페이지로 전환
+                        activity?.SendDataFragment(ScholarshipCommentsFragment(), scholarshipIdx, scholarshipName)
                     }
                 }
                 RESPONSE_STATE.FAIL -> {

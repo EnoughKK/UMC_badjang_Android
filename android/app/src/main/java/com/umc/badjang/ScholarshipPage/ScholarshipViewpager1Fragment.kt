@@ -1,6 +1,5 @@
 package com.umc.badjang.ScholarshipPage
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
@@ -11,16 +10,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
-import com.umc.badjang.databinding.RvScholarshipBinding
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipViewpager1Fragment:Fragment() {
@@ -189,7 +185,7 @@ class ScholarshipViewpager1Fragment:Fragment() {
                 val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
-                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx)
+                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx, "")
             }
         })
     }

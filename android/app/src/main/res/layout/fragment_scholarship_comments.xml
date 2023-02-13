@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
     android:paddingTop="10dp"
     android:background="@color/white">
 
@@ -56,23 +57,43 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments_rvContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
         tools:layout_editor_absoluteX="1dp" />
 
-    <EditText
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/scholarship_commentsbar"
-        android:drawableEnd="@drawable/ic_send"
-        android:hint="댓글을 입력해주세요"
-        android:textColorHint="#898989"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="20dp" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/scholarship_commentsbar"
+            android:hint="댓글을 입력해주세요"
+            android:textColorHint="#898989"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TouchTargetSizeCheck"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_send" />
+
+
+    </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

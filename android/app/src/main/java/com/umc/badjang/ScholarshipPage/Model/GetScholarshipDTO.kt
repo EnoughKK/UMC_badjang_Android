@@ -1,4 +1,4 @@
-package com.umc.badjang.Model
+package com.umc.badjang.ScholarshipPage.Model
 
 // 장학금 조회 (필터사용) DTO
 class GetScholarshipDTO (

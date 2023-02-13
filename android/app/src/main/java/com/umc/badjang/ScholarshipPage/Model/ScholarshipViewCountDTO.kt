@@ -1,4 +1,4 @@
-package com.umc.badjang.Model
+package com.umc.badjang.ScholarshipPage.Model
 
 class ScholarshipViewCountDTO (
     var scholarship_idx: Long?,
