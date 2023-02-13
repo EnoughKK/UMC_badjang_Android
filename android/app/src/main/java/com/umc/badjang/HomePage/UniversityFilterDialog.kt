@@ -15,10 +15,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.umc.badjang.ApplicationClass
-import com.umc.badjang.HomePagaApi.MainApiClient
-import com.umc.badjang.HomePagaApi.UniversityFilterAddData
-import com.umc.badjang.HomePagaApi.UniversityFilterApiService
-import com.umc.badjang.HomePagaApi.UniversityFilterResponse
+import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.R
 import com.umc.badjang.databinding.DialogScholarshipLookupBinding
 import com.umc.badjang.mConnectUserId
@@ -35,8 +32,23 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
 
+    // jwt
+    private var jwt: String? = null
+
+    // 사용자가 이전에 선택한 정보
+    private var userSelections: MyInfoForFilterApiResult? = null
+
     // Toast
     private var mToast: Toast? = null
+
+    // Spinner 어댑터
+    private var universityAdapter: ArrayAdapter<String>? = null
+    private var collegeAdapter: ArrayAdapter<String>? = null
+    private var departmentAdapter: ArrayAdapter<String>? = null
+    private var gradeAdapter: ArrayAdapter<String>? = null
+    private var semesterAdapter: ArrayAdapter<String>? = null
+    private var provinceAdapter: ArrayAdapter<String>? = null
+    private var cityAdapter: ArrayAdapter<String>? = null
 
     // 학교, 단과대학, 학과 선택 정보
     private var selectUniversity: String? = null
@@ -66,6 +78,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
 
         // 현재 로그인 된 사용자 idx 조회
         mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
 
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
@@ -85,8 +98,15 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         for(i:Int in (0..universityResults.size - 1)) {
             universityNameList.add(universityResults[i].university_name)
         }
-        val universityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, universityNameList)
+        universityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, universityNameList)
         binding.spinnerSearchSchool.adapter = universityAdapter
+
+        // 단과대학 선택 리스트
+        collegeNameList = mutableListOf<String>()
+        collegeNameList!!.add("선택하기")
+
+        collegeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, collegeNameList!!)
+        binding.selectionSchool.adapter = collegeAdapter
 
         // 학교 선택하기 누르면 spinner 리스트
         binding.spinnerSearchSchool.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
@@ -115,8 +135,14 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     collegeNameList!!.add(universityInfo!![i].college_name)
                 }
 
-                val collegeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, collegeNameList!!)
+                collegeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, collegeNameList!!)
                 binding.selectionSchool.adapter = collegeAdapter
+
+                if(userSelections != null) {
+                    if(userSelections!!.user_college != null) {
+                        binding.selectionSchool.setSelection(collegeAdapter!!.getPosition(userSelections!!.user_college))
+                    }
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -126,6 +152,13 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
             }
         }
 
+        // 학과 선택 리스트
+        departmentList = mutableListOf<String>()
+        departmentList!!.add("선택하기")
+
+        departmentAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, departmentList!!)
+        binding.selectionMajor.adapter = departmentAdapter
+
         // 단과대학 선택하기 누르면 spinner 리스트
         binding.selectionSchool.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -133,7 +166,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                 selectCollege = binding.selectionSchool.getSelectedItem().toString()
                 selectDepartment = null
 
-                // 선택된 단과대학의 학교 정보 가져오기 - 학교 선택 리스트
+                // 선택된 단과대학의 학과 정보 가져오기 - 학과 선택 리스트
                 departmentList = mutableListOf<String>()
                 departmentList!!.add("선택하기")
                 for(i:Int in (0..universityInfo!!.size - 1)) {
@@ -143,11 +176,18 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     }
                 }
 
+                departmentAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, departmentList!!)
+                binding.selectionMajor.adapter = departmentAdapter
+
+                // 사용자가 이전에 학과를 선택했던 정보가 있다면
+                if(userSelections != null) {
+                    if (userSelections!!.user_department != null) {
+                        binding.selectionMajor.setSelection(departmentAdapter!!.getPosition(userSelections!!.user_department))
+                    }
+                }
+
                 if(selectCollege == "선택하기")
                     selectCollege = null
-
-                val departmentAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, departmentList!!)
-                binding.selectionMajor.adapter = departmentAdapter
 
             }
 
@@ -179,7 +219,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         for(i:Int in (1..4)) {
             gradeList.add(i.toString()+"학년")
         }
-        val gradeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, gradeList)
+        gradeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, gradeList)
         binding.selectionGrade.adapter = gradeAdapter
 
         // 학년 선택하기 누르면 spinner 리스트
@@ -203,7 +243,7 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         semesterList.add("1학기")
         semesterList.add("2학기")
 
-        val semesterAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, semesterList)
+        semesterAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, semesterList)
         binding.selectionSemester.adapter = semesterAdapter
 
         // 학기 선택하기 누르면 spinner 리스트
@@ -236,8 +276,15 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         for(i:Int in (0..areaResults.size - 1)) {
             provinceNameList.add(areaResults[i].province_name)
         }
-        val provinceAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, provinceNameList)
+        provinceAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, provinceNameList)
         binding.selectionLocal1.adapter = provinceAdapter
+
+        // 시/군/구 선택 리스트
+        cityNameList = mutableListOf<String>()
+        cityNameList!!.add("선택하기")
+
+        cityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, cityNameList!!)
+        binding.selectionLocal2.adapter = cityAdapter
 
         // 도 선택하기 누르면 spinner 리스트
         binding.selectionLocal1.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
@@ -257,6 +304,15 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     }
                 }
 
+                cityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, cityNameList!!)
+                binding.selectionLocal2.adapter = cityAdapter
+
+                // 사용자가 이전에 시군구를 선택했던 정보가 있다면
+                if(userSelections != null) {
+                    if (userSelections!!.user_city != null)
+                        binding.selectionLocal2.setSelection(cityAdapter!!.getPosition(userSelections!!.user_city))
+                }
+
                 // 시군구 선택지가 없는 경우
                 if(cityNameList!!.size == 1)
                     selectCity = selectProvince
@@ -265,9 +321,6 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     selectProvince = null
                     selectCity = null
                 }
-
-                val cityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, cityNameList!!)
-                binding.selectionLocal2.adapter = cityAdapter
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -293,6 +346,9 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                     selectCity = null
             }
         }
+
+        // 사용자가 이전에 선택한 정보 가져오기
+        apiGetSelectInfo()
 
         // 취소 버튼 선택
         binding.btnCancel.setOnClickListener {
@@ -332,40 +388,6 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-    // 선택 안 한 값이 있는지 확인
-    fun checkAllSelect(): Boolean {
-        if(selectUniversity == null) {
-            showToast("학교를 선택해주세요.")
-            return false
-        }
-        else if(selectCollege == null) {
-            showToast("단과대학을 선택해주세요.")
-            return false
-        }
-        else if(selectDepartment == null) {
-            showToast("학과를 선택해주세요.")
-            return false
-        }
-        else if(selectGrade == null) {
-            showToast("학년을 선택해주세요.")
-            return false
-        }
-        else if(selectSemester == null) {
-            showToast("학기를 선택해주세요.")
-            return false
-        }
-        else if(selectProvince == null) {
-            showToast("도를 선택해주세요.")
-            return false
-        }
-        else if(selectCity == null) {
-            showToast("시/군/구를 선택해주세요.")
-            return false
-        }
-
-        return true
-    }
-
     // Toast 중복 방지
     fun showToast(message: String?) {
         if (mToast == null) {
@@ -374,6 +396,43 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
             mToast!!.setText(message)
         }
         mToast!!.show()
+    }
+
+    // 이전 선택 정보 가져오기
+    fun apiGetSelectInfo() {
+        retrofit!!.create(MyInfoForFilterApiService::class.java).getMyInfoForFilter(xAccessToken = jwt!!)
+            .enqueue(object : Callback<MyInfoForFilterApiData> {
+                override fun onResponse(call: Call<MyInfoForFilterApiData>, response: Response<MyInfoForFilterApiData>) {
+                    Log.d(ContentValues.TAG, "대학, 지역 이전 선택 정보 가져오기 -------------------------------------------")
+                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                    userSelections = response.body()!!.result
+                    setInfo()
+                }
+
+                override fun onFailure(call: Call<MyInfoForFilterApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG, "대학, 지역 이전 선택 정보 가져오기 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    fun setInfo() {
+        // 사용자가 이전에 학교를 선택했던 정보가 있다면
+        if(userSelections!!.user_univ != null)
+            binding.spinnerSearchSchool.setSelection(universityAdapter!!.getPosition(userSelections!!.user_univ))
+
+        // 사용자가 이전에 학년을 선택했던 정보가 있다면
+        if(userSelections!!.user_grade != null)
+            binding.selectionGrade.setSelection(gradeAdapter!!.getPosition(userSelections!!.user_grade+"학년"))
+
+        // 사용자가 이전에 학기를 선택했던 정보가 있다면
+        if(userSelections!!.user_semester != null)
+            binding.selectionSemester.setSelection(semesterAdapter!!.getPosition(userSelections!!.user_semester+"학기"))
+
+        // 사용자가 이전에 도를 선택했던 정보가 있다면
+        if(userSelections!!.user_province != null)
+            binding.selectionLocal1.setSelection(provinceAdapter!!.getPosition(userSelections!!.user_province))
     }
 
     // 대학 정보 JSON 파일 읽기
@@ -406,7 +465,6 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
 
     // 대학, 지역 선택 정보 서버에 저장 - api로 전달
     fun addUniversityAreaInfo(body: UniversityFilterAddData) {
-        val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
         retrofit!!.create(UniversityFilterApiService::class.java).addUniversityInfo(xAccessToken=jwt!!, body)
             .enqueue(object : Callback<UniversityFilterResponse> {
                 override fun onResponse(call: Call<UniversityFilterResponse>, response: Response<UniversityFilterResponse>) {
