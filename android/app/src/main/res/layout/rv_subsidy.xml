@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/university_label" />
 
     <TextView
-        android:id="@+id/subsidy_title"
+        android:id="@+id/supportmore_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="자기추천지원금"
@@ -56,7 +56,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/subsidy_title"
+        app:layout_constraintTop_toBottomOf="@id/supportmore_title"
         app:layout_constraintBottom_toTopOf="@id/btn_viewMore">
 
         <TextView

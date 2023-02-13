@@ -24,7 +24,6 @@ class ApplicationClass : Application() {
         // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
         lateinit var sSharedPreferences: SharedPreferences
         lateinit var bSharedPreferences: SharedPreferences
-        lateinit var cSharedPreferences: SharedPreferences //이름, 생년월일, 전화번호. 이메일
 
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
@@ -44,8 +43,6 @@ class ApplicationClass : Application() {
         bSharedPreferences = getSharedPreferences("BasketSp", MODE_PRIVATE)
         sSharedPreferences =
             applicationContext.getSharedPreferences("UMC_badjang_App", MODE_PRIVATE)
-
-        cSharedPreferences=getSharedPreferences("user_name", MODE_PRIVATE)
 
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()

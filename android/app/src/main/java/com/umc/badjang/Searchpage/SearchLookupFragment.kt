@@ -2,25 +2,41 @@ package com.umc.badjang.Searchpage
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
+import com.umc.badjang.Searchpage.models.SearchData
 import com.umc.badjang.databinding.FragmentSearchLookupBinding
+import kotlinx.android.synthetic.main.fragment_search.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class SearchLookupFragment : Fragment() {
+class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnClickListener {
     private lateinit var viewBinding: FragmentSearchLookupBinding// viewBinding
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+    //어댑터
     private lateinit var  fragmentStateAdapter: FragmentStateAdapter
+
+    // 검색 기록 배열
+    private var searchHistoryList = ArrayList<SearchData>()
+
+    //서치뷰
+    private lateinit var mySearchView: SearchView
+    //서치뷰 에딧 텍스트
+    private lateinit var mySearchViewEditText: EditText
 
     // 프래그먼트 전환을 위해
     var activity: MainActivity? = null
@@ -52,6 +68,18 @@ class SearchLookupFragment : Fragment() {
 
         initViewPager()
 
+
+        // 저장된 검색 기록 가져오기
+        this.searchHistoryList = SharedPrefManager.getSearchHistoryList() as ArrayList<SearchData>
+
+        this.searchHistoryList.forEach {
+            Log.d("검색기록", "저장된 검색 기록 - it.term : ${it.term} , it.timestamp: ${it.timestamp}")
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     //검색했을 때 나오는 viewpager 초기화
@@ -73,6 +101,35 @@ class SearchLookupFragment : Fragment() {
                 3 -> tab.text = "게시글"
             }
         }.attach()
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        Log.d("검색입력","onQueryTextSubmit() : $query")
+
+        if (!query.isNullOrEmpty()){
+            val newSearchData = SearchData(term = query, timestamp = Date().toString())
+            this.searchHistoryList.add(newSearchData)
+            SharedPrefManager.storeSearchHistoryList(this.searchHistoryList)
+        }
+
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Log.d("검색입력","onQueryTextChange() : $newText")
+
+        val userInputText = newText.let{
+            it
+        }?: ""
+
+        if(userInputText.count()==50){
+            Toast.makeText(ApplicationClass.instance,"검색어는 50자까지 입력 가능합니다!",Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+
+    override fun onClick(p0: View?) {
+        TODO("Not yet implemented")
     }
 
 }

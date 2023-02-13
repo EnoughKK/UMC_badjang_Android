@@ -21,7 +21,7 @@ import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.Settings.AlarmFragment
 import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
-import com.umc.badjang.Searchpage.RecentSearchFragment
+import com.umc.badjang.Searchpage.SearchLookupFragment
 
 
 public var mConnectUserId: Int? = null
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
                 }
                 R.id.search -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, RecentSearchFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchLookupFragment()).commit()
                 }
                 R.id.mypage -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, MyPageFragment()).commit()

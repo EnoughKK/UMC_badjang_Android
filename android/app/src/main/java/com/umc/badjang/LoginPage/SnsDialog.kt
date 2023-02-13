@@ -98,6 +98,9 @@ class SnsDialog(private val text : String) : DialogFragment() {
                 }
 
                 override fun onResponse(call: Call<SNSResponse>, response: Response<SNSResponse>) {
+                    Log.e("카카오 jwt","${jwt}")
+                    Log.e("user_idx","${useridx}")
+
                     Log.d("소셜 정보추가 서버", response.body().toString())
                     when (response.body()!!.code) {
                         1000 -> {
