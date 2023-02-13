@@ -17,6 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.BookmarkApi.BookmarkResponseApiData
+import com.umc.badjang.BookmarkApi.BookmarkCheckScholarshipApiService
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiData
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiService
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
@@ -241,14 +245,16 @@ class HomeFragment : Fragment() {
     }
 
     // 우리학교 장학금 즐겨찾기 추가 및 취소 api
-    private fun apiBookmarkMySchool(scholarshipIdx: Int) {
-        retrofit!!.create(BookmarkScholarshipApiService::class.java)
-            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
+    private fun apiBookmarkMySchool(position: Int) {
+        retrofit!!.create(BookmarkCheckScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=mySchoolDatas[position].mySchoolScholarshipIdx)
             .enqueue(object : Callback<BookmarkResponseApiData> {
                 override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
                     Log.d(TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
                     Log.d(TAG, "onResponse: ${response.body().toString()}")
 
+                    mySchoolDatas[position].mySchoolBookmark = !mySchoolDatas[position].mySchoolBookmark
+                    mainMySchoolAdapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
@@ -290,17 +296,47 @@ class HomeFragment : Fragment() {
                 override fun onResponse(call: Call<ScholarshipIdxApiData>, response: Response<ScholarshipIdxApiData>) {
                     //Log.d(TAG,"장학금 조회 -------------------------------------------")
                     //Log.d(TAG, "onResponse: ${response.body().toString()}")
-                    addMySchoolData(
-                        MainMySchoolData(
-                            mySchoolDatas.size + 1,
-                            scholarshipIdx.toInt(),
-                            response.body()!!.result.scholarship_name,
-                            response.body()!!.result.scholarship_view
-                        ))
+                    apiCheckMySchoolBookmark(
+                        mySchoolDatas.size + 1,
+                        scholarshipIdx.toInt(),
+                        response.body()!!.result.scholarship_name,
+                        response.body()!!.result.scholarship_view
+                    )
                 }
 
                 override fun onFailure(call: Call<ScholarshipIdxApiData>, t: Throwable) {
                     Log.d(TAG,"장학금 조회 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 우리학교 장학금 즐겨찾기 유무 체크
+    private fun apiCheckMySchoolBookmark(
+        mySchoolNum: Int, mySchoolScholarshipIdx: Int, mySchoolTitle: String, mySchoolViewNum: Int) {
+
+        retrofit!!.create(CheckScholarshipBookmarkApiService::class.java)
+            .checkScholarshipBookmark(xAccessToken=jwt!!, scholarshipIdx=mySchoolScholarshipIdx)
+            .enqueue(object : Callback<CheckScholarshipBookmarkApiData> {
+                override fun onResponse(call: Call<CheckScholarshipBookmarkApiData>, response: Response<CheckScholarshipBookmarkApiData>) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    var checkBookmark = false
+                    if(response.body()!!.result.bookmark_check == "Y") checkBookmark = true
+                    addMySchoolData(
+                        MainMySchoolData(
+                            mySchoolNum,
+                            mySchoolScholarshipIdx,
+                            mySchoolTitle,
+                            mySchoolViewNum,
+                            checkBookmark
+                        ))
+
+                }
+
+                override fun onFailure(call: Call<CheckScholarshipBookmarkApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })

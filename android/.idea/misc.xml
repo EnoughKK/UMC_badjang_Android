@@ -179,6 +179,9 @@
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/custom_spinner_item.xml" value="0.1125" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/dialog_scholarship_lookup.xml" value="0.2388888888888889" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/dialog_schoolcheck.xml" value="0.2388888888888889" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_bookmarks_all.xml" value="0.1125" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_bookmarks_scholarship.xml" value="0.1125" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_bookmarks_support.xml" value="0.1125" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_my_page.xml" value="0.25364583333333335" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_my_school.xml" value="0.25364583333333335" />
@@ -186,6 +189,7 @@
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_scholarship.xml" value="0.16510416666666666" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_scholarship_detail.xml" value="0.1" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/fragment_search.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/main_bookmarks_scholarship_item.xml" value="0.1125" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/main_more_national_news_item.xml" value="0.1" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/main_my_school_item.xml" value="0.2526041666666667" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/main_national_news_item.xml" value="0.25364583333333335" />

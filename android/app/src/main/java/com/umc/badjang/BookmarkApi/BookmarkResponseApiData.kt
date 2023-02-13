@@ -1,4 +1,4 @@
-package com.umc.badjang.HomePagaApi
+package com.umc.badjang.BookmarkApi
 
 import com.google.gson.annotations.SerializedName
 
