@@ -55,7 +55,7 @@
             android:exported="false"
             android:parentActivityName=".LoginPage.SignUp.SignUpActivity" />
         <activity
-            android:name=".LoginPage.LoginActivity"
+            android:name=".Splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,6 +63,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginPage.LoginActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -93,6 +94,7 @@
         <activity
             android:name=".LoginPage.LogoActivity"
             android:exported="false" /> <!-- [start fcm 설정 추가] -->
+        <activity android:name=".MyPage.ChangeProfileActivity"/>
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
