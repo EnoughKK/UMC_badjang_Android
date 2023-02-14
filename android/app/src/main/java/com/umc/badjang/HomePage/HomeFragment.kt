@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentHomeBinding.inflate(layoutInflater);
+        viewBinding = FragmentHomeBinding.inflate(layoutInflater)
 
         return viewBinding.root
     }
