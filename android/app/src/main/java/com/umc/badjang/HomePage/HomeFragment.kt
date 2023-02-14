@@ -1,5 +1,6 @@
 package com.umc.badjang.HomePage
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
@@ -46,6 +47,9 @@ class HomeFragment : Fragment() {
 
     // 현재 로그인 된 사용자 jwt
     private var jwt: String? = null
+
+    // 현재 로그인 된 사용자 닉네임
+    private var mUserName: String? = null
 
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
@@ -152,6 +156,11 @@ class HomeFragment : Fragment() {
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
 
+        // 유저 정보 가져와서 닉네임 표시
+        apiGetUserInfo()
+        if(mUserName == null) mUserName = "회원"
+        viewBinding.mainRecommendTitle.text = mUserName + " 님을 위한 추천"
+
         // 우리학교 장학금 조회 api
         apiMainMySchool()
 
@@ -242,6 +251,25 @@ class HomeFragment : Fragment() {
                 mainNationalNewsAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    // 사용자 정보 가져오기
+    fun apiGetUserInfo() {
+        retrofit!!.create(MyInfoForFilterApiService::class.java).getMyInfoForFilter(xAccessToken = jwt!!)
+            .enqueue(object : Callback<MyInfoForFilterApiData> {
+                override fun onResponse(call: Call<MyInfoForFilterApiData>, response: Response<MyInfoForFilterApiData>) {
+                    Log.d(TAG, "유저 정보 가져오기 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    // 유저 닉네임 정보
+                    mUserName = response.body()!!.result.user_name
+                }
+
+                override fun onFailure(call: Call<MyInfoForFilterApiData>, t: Throwable) {
+                    Log.d(TAG, "유저 정보 가져오기 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 우리학교 장학금 즐겨찾기 추가 및 취소 api
