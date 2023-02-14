@@ -2,7 +2,9 @@ package com.umc.badjang.Searchpage
 
 import android.content.ContentValues
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -18,16 +20,19 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
+import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.Searchpage.models.DeleteSearchResponse
 import com.umc.badjang.Searchpage.models.RecentSearchResponse
 import com.umc.badjang.Searchpage.models.SearchData
 import com.umc.badjang.databinding.FragmentSearchLookupBinding
 import com.umc.badjang.utils.Constants.TAG
+import com.umc.badjang.utils.RESPONSE_STATE
 import com.umc.badjang.utils.toSimpleString
 import kotlinx.android.synthetic.main.fragment_search_lookup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -37,20 +42,25 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
     private lateinit var viewBinding: FragmentSearchLookupBinding// viewBinding
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
-    //어댑터
+    //어댑터 - 유저데이터 들어갈 리싸이클러뷰 어뎁터
     private lateinit var  fragmentStateAdapter: SFragmentStateAdapter
-    private lateinit var  mySearchHistoryRecyclerViewAdapter: SearchHistoryRecyclerViewAdapter
 
 
     val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN,null)
     //user_idx 불러옴
     val useridx = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX,0)
 
+    val text = ApplicationClass.cSharedPreferences.getString(ApplicationClass.QUREY_TEXT,null)
+
     val searchRetrofit= ApplicationClass.sRetrofit.create(SearchRetrofit::class.java)
 
+    //유저 검색 기록 배열
+    //private var SearchUserArrayList = ArrayList<SearchUser>()
 
     // 검색 기록 배열
     private var searchHistoryList = ArrayList<SearchData>()
+    private lateinit var  mySearchHistoryRecyclerViewAdapter: SearchHistoryRecyclerViewAdapter
+
 
     //서치뷰
     private lateinit var mySearchView: SearchView
@@ -76,16 +86,10 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentSearchLookupBinding.inflate(layoutInflater);
-
-        return viewBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val search_toolbar: Toolbar = requireActivity().findViewById(R.id.search_main_bar)
-        (activity as AppCompatActivity).setSupportActionBar(search_toolbar)
-
+       //툴바 적용
+        val myToolbar = viewBinding.searchMainBar
+        (context as AppCompatActivity).setSupportActionBar(myToolbar)
+        setHasOptionsMenu(true)
 
         // 저장된 검색 기록 가져오기
         this.searchHistoryList = SharedPrefManager.getSearchHistoryList() as ArrayList<SearchData>
@@ -93,7 +97,12 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         this.searchHistoryList.forEach {
             Log.d("검색기록", "저장된 검색 기록 - it.term : ${it.term} , it.timestamp: ${it.timestamp}")
         }
-        handleSearchViewUI()
+
+        return viewBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // 검색 리사이클러뷰 준비
         this.searchHistoryRecyclerViewSetting(this.searchHistoryList)
@@ -110,7 +119,7 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         this.mySearchHistoryRecyclerViewAdapter.submitList(searchHistoryList)
 
         //리니어 레이아웃으로 가져오기
-        val myLinearLayoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
+        val myLinearLayoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         myLinearLayoutManager.stackFromEnd=true //최근 검색어가 가장 위에 쌓임
 
         search_history_recycler_view.apply{
@@ -118,6 +127,37 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
             this.scrollToPosition(mySearchHistoryRecyclerViewAdapter.itemCount - 1)
             adapter = mySearchHistoryRecyclerViewAdapter
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_top_bar, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+        Log.d(TAG, "onCreateOptionMenu")
+
+        this.mySearchView = menu?.findItem(R.id.search_menu_item)?.actionView as SearchView
+        this.mySearchView.apply {
+            this.queryHint = "검색어를 입력하세요."
+            this.setOnQueryTextFocusChangeListener { view, hasExpanded ->
+                when (hasExpanded) {
+                    true -> {
+                        Log.d(TAG, "서치뷰 열림")
+                        search_history_recycler_view.visibility = View.VISIBLE
+                    }
+                    false -> {
+                        Log.d(TAG, "서치뷰 닫힘")
+                        search_history_recycler_view.visibility = View.INVISIBLE
+                    }
+                }
+                this.setOnQueryTextListener(this@SearchLookupFragment)
+             mySearchViewEditText = this.findViewById(androidx.appcompat.R.id.search_src_text)
+            mySearchViewEditText.apply {
+                this.filters = arrayOf(InputFilter.LengthFilter(50))
+                this.setTextColor(Color.BLACK)
+                this.setHintTextColor(Color.GRAY)
+            }
+        }
+    }
+
     }
 
 
@@ -146,12 +186,12 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         Log.d("검색입력","onQueryTextSubmit() : $query")
 
         if (!query.isNullOrEmpty()){
-          viewBinding.searchMainBar.searchMainBar.title = query
 
             this.insertSearchTermHistory(query)
             this.searchAPICall(query)
         }
-        this.viewBinding.searchMainBar.searchMainBar.collapseActionView()
+
+        this.viewBinding.searchMainBar.collapseActionView()
         return true
     }
 
@@ -168,11 +208,6 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         return true
     }
 
-    override fun onClick(view: View?) {
-        when(view){
-
-        }
-    }
 
     //검색 아이템삭제 버튼 이벤트
     override fun onSearchItemDeleteClicked(position: Int) {
@@ -199,10 +234,11 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         val queryString : String = this.searchHistoryList[position].term
 
         searchAPICall(queryString)
-        viewBinding.searchMainBar.searchMainBar.title = queryString
         this.insertSearchTermHistory(searchTerm = queryString)
-        this.viewBinding.searchMainBar.searchMainBar.collapseActionView()
+        search_history_recycler_view.visibility=View.INVISIBLE
+        this.viewBinding.searchMainBar.collapseActionView()
     }
+
 
 
     // 검색 api 호출
@@ -313,4 +349,7 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
 
     }
 
+    override fun onClick(view: View?) {
+
+    }
 }

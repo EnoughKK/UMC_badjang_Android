@@ -4,14 +4,17 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.google.gson.JsonElement
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.Model.ScholarshipViewCountDTO
+import com.umc.badjang.Searchpage.SearchRetrofit
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Query
 
 class RetrofitManager {
 
@@ -24,6 +27,9 @@ class RetrofitManager {
     private val iSearchSupport : ISearchSupport? = SearchSupportRC.getClient(API.BASE_URL)?.create(ISearchSupport::class.java)
     private val iScholarshipViewCount : ISholarshipViewCount? = ScholarshipViewCountRC.getClient(API.BASE_URL)?.create(ISholarshipViewCount::class.java)
     private val iSupportViewCount : ISupportViewCount? = SupportViewCountRC.getClient(API.BASE_URL)?.create(ISupportViewCount::class.java)
+
+    //검색파트 레트로핏 인터페이스
+    private val searchRetrofit = ApplicationClass.sRetrofit.create(SearchRetrofit::class.java)
 
     // 장학금 조회 (필터사용)
     fun searchScholarship(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
@@ -457,5 +463,33 @@ class RetrofitManager {
 //
 //        })
 //    }
+
+    //검색파트 - 전체 검색
+    fun allsearch(query: String?, completion: (RESPONSE_STATE) -> Unit){
+
+       val query_string = query .let {
+            it
+       }?: ""
+
+        val call = searchRetrofit?.allsearch(query = query_string).let {
+            it
+        }?: return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : 검색파트 전체 조회")
+                completion(RESPONSE_STATE.OKAY)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+                completion(RESPONSE_STATE.FAIL)
+            }
+
+        })
+    }
+
+
+
 
 }

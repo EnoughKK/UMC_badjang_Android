@@ -12,11 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <include
-            android:id="@+id/search_main_bar"
-            layout="@layout/search_toolbar" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:liftOnScroll="true"
+            app:liftOnScrollTargetViewId="@id/search_viewPager"
+            >
 
-        <View
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/search_main_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:menu="@menu/search_top_bar"
+            app:navigationIcon="@drawable/logo"
+            app:title="검색" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"

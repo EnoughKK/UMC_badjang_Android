@@ -12,23 +12,39 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Model.GetScholarshipDTO
+import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipRVAdapter
+import com.umc.badjang.ScholarshipPage.SubsidyRVAdapter
+import com.umc.badjang.SearchMorePage.MorePostFragment
+import com.umc.badjang.SearchMorePage.MoreScholarshipFragment
+import com.umc.badjang.SearchMorePage.MoreSupportFragment
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
+import com.umc.badjang.databinding.FragmentSearchViewpager1Binding
+import com.umc.badjang.databinding.FragmentSearchViewpager2Binding
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class SearchViewpager1Fragment: Fragment() {
-    private lateinit var viewBinding: FragmentScholarshipViewpager1Binding
+    private lateinit var viewBinding: FragmentSearchViewpager1Binding
 
     var activity: MainActivity? = null
 
     // 장학금 recyclerview adapter
     private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
     private lateinit var scholarshipAdapter: ScholarshipRVAdapter
+
+    //지원금 recyclerview adapter
+    private var supportDatas = ArrayList<GetSupportDTO>()
+    private lateinit var supportAdapter: SubsidyRVAdapter
+
+    //게시글 recyclerview adapter
+    private var postDatas = ArrayList<PopularPostData>()
+    private lateinit var postAdapter: PopularPostAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,103 +65,31 @@ class SearchViewpager1Fragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        viewBinding = FragmentScholarshipViewpager1Binding.inflate(layoutInflater);
+        viewBinding = FragmentSearchViewpager1Binding.inflate(layoutInflater);
 
-        var category: String = ""
-        var filter: String = ""
-        var order: String = "desc"
 
-        // 데이터 가져오기 (api 셋팅)
-        loadData(category,filter,order)
-
-        // 카테고리 선택
-        viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category, R.layout.spinner_layout)
-        // 카테고리 클릭리스너
-        viewBinding.spinnerCategory.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
-                when (viewBinding.spinnerCategory.getItemAtPosition(position)) {
-                    "전체" -> {
-                        category = "전체"
-                    }
-                    "국가장학" -> {
-                        category = "국가장학"
-                    }
-                    "KRA와 함께하는 농어촌 희망재단 장학금" -> {
-                        category = "KRA와 함께하는 농어촌 희망재단 장학금"
-                    }
-                    "교내 신입생 입학성적 우수장학금" -> {
-                        category = "교내 신입생 입학성적 우수장학금"
-                    }
-                    "교내 재학생 장학금" -> {
-                        category = "교내 재학생 장학금"
-                    }
-                    "교외장학" -> {
-                        category = "교외장학"
-                    }
-                    "교내장학" -> {
-                        category = "교내장학"
-                    }
-                    "학비대출" -> {
-                        category = "학비대출"
-                    }
-                    "국가근로" -> {
-                        category = "국가근로"
-                    }
-                    "성적우수장학금" -> {
-                        category = "성적우수장학금"
-                    }
-                    "특별감면장학금" -> {
-                        category = "특별감면장학금"
-                    }
-                    "가계곤란자 장학금" -> {
-                        category = "가계곤란자 장학금"
-                    }
-                    "근로 장학금" -> {
-                        category = "근로 장학금"
-                    }
-                    "기타" -> {
-                        category = "기타"
-                    }
-                    else -> {
-                        Log.d(ContentValues.TAG, "onItemSelected: null")
-                    }
-                }
-
-                loadData(category,filter,order)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-        }
-
-        // 정렬방식 선택
-        viewBinding.spinnerSort.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_sort, R.layout.spinner_layout)
-        // 정렬 클릭리스너
-        viewBinding.spinnerSort.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
-                when (viewBinding.spinnerSort.getItemAtPosition(position)) {
-                    "인기순" -> {
-                        filter = "인기순"
-                    }
-                    "날짜순" -> {
-                        filter = "날짜순"
-                    }
-                    "댓글순" -> {
-                        filter = "댓글순"
-                    }
-                }
-                loadData(category,filter,order)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-        }
 
         return viewBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        // 장학금 더보기 버튼 선택
+        viewBinding.searchScholarshipMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(MoreScholarshipFragment())
+        })
+        //지원금 더보기 버튼 선택
+        viewBinding.searchSupportMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(MoreSupportFragment())
+        })
+        //게시판 더보기 버튼 선택
+        viewBinding.searchPostMore.setOnClickListener(View.OnClickListener {
+            activity?.changeFragment(MorePostFragment())
+        })
+
     }
 
     // 데이터 가져오기 (api 셋팅)
