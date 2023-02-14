@@ -179,14 +179,14 @@ class PostWriteFragment : Fragment() {
                     anonymity
                 )
 
-                //Log.d("Test", body.toString())
+                Log.d("Test", body.toString())
 
                 // 게시글 작성
                 //apiAddPost(body)
 
                 // 이전 페이지로 이동
-                requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                requireActivity().supportFragmentManager.popBackStack()
+                //requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                //requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }

@@ -167,7 +167,7 @@ class HomeFragment : Fragment() {
         apiMainMySchool()
 
         // 인기글 조회 api
-        //apiMainPopular()
+        apiMainPopular()
 
         // 전국소식 조회 api
         apiMainNationalNews()
