@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import com.bumptech.glide.Glide
+//import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomePage.UniversityFilterDialog
 import com.umc.badjang.MyPage.ChangeProfileActivity
@@ -180,7 +180,7 @@ class MyPageFragment : Fragment() {
                         viewBinding.MypageTvNickname.text = name
                         viewBinding.MypageTvUniv.text = univ
                         if(profileimage_url != null){
-                            Glide.with(requireActivity()).load(profileimage_url).into(viewBinding.MyPageIvProfileimg)
+//                            Glide.with(requireActivity()).load(profileimage_url).into(viewBinding.MyPageIvProfileimg)
                         }
                     }
                     else{
