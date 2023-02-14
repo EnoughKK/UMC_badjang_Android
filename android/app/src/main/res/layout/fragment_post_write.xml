@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".PostWritePage.PostWriteFragment">
 
     <LinearLayout
@@ -19,12 +20,12 @@
                 android:id="@+id/post_write_back_btn"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="17dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_back_btn"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/ic_back_btn" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,22 +39,22 @@
                 android:layout_centerVertical="true"/>
 
             <Button
-                android:id="@+id/btn_confirm"
+                android:id="@+id/post_write_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:background="@drawable/btn_post_write"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="7dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginRight="19dp"
                 android:layout_marginBottom="7dp"
+                android:background="@drawable/btn_post_write"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="7dp"
                 android:text="작성완료"
                 android:textColor="@color/white"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"/>
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -82,7 +83,7 @@
                     <CheckBox
                         android:id="@+id/anonymity_checkbox"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginVertical="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:button="@android:color/transparent"
@@ -92,23 +93,36 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
                         android:layout_marginLeft="5dp"
-                        android:text="익명"
-                        android:textSize="14dp"
-                        android:textColor="#707070"
+                        android:layout_marginTop="15dp"
                         android:layout_toEndOf="@+id/anonymity_checkbox"
-                        android:layout_centerVertical="true"/>
+                        android:text="익명"
+                        android:textColor="#707070"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:id="@+id/post_write_imageview"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_below="@id/anonymity_checkbox"
+                        android:visibility="gone"/>
 
                     <ImageButton
                         android:id="@+id/post_write_add_image"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginRight="19dp"
+                        android:layout_marginTop="13dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_camera"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
+                        android:layout_alignParentTop="true"/>
 
                 </RelativeLayout>
 
@@ -117,7 +131,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="2dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="2dp"
                     android:background="@color/header_line" />
 
                 <!-- 제목 입력 -->

@@ -26,6 +26,7 @@ import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
+import com.umc.badjang.PostWritePage.PostWriteFragment
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
 import com.umc.badjang.mConnectUserId
@@ -131,6 +132,7 @@ class HomeFragment : Fragment() {
         val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
         newIssueBtn.setOnClickListener {
             activity?.changeFragment(NewIssueFragment())
+            //activity?.changeFragment(PostWriteFragment()) // 게시글 작성 페이지 테스트용
         }
 
         // 학교 필터 Floating 버튼 선택
@@ -165,7 +167,7 @@ class HomeFragment : Fragment() {
         apiMainMySchool()
 
         // 인기글 조회 api
-        apiMainPopular()
+        //apiMainPopular()
 
         // 전국소식 조회 api
         apiMainNationalNews()
