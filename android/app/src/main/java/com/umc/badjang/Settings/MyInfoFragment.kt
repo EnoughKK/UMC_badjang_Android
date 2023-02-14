@@ -41,7 +41,7 @@ class MyInfoFragment :Fragment() {
     private var type : String = ""
     private var birth : String = ""
     private var phone : String = ""
-    private var push_yn : String = ""
+    private var push_yn : String? = ""
     private var on_off : String = ""
     private var univ : String? = ""
     private var college : String? = ""
@@ -50,6 +50,10 @@ class MyInfoFragment :Fragment() {
     private var semester : String? = ""
     private var province : String? = ""
     private var city : String? = ""
+    private val bookmark_yn : String = ""
+    private val new_post_yn : String = ""
+    private val inq_answer_yn : String = ""
+    private val comment_yn : String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

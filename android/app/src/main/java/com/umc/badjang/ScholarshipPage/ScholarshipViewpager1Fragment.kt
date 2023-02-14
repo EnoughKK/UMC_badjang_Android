@@ -17,6 +17,7 @@ import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
+import com.umc.badjang.mScholarshipDatas
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipViewpager1Fragment:Fragment() {
@@ -154,7 +155,8 @@ class ScholarshipViewpager1Fragment:Fragment() {
             when(responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
-                    scholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+                    mScholarshipDatas.clear()
+                    mScholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
 
                     // recyclerview 셋팅
                     initRecycler()
@@ -169,20 +171,20 @@ class ScholarshipViewpager1Fragment:Fragment() {
     }
 
     // recyclerview 셋팅
-    private fun initRecycler() {
+    public fun initRecycler() {
         Log.d(TAG, "복사 성공 : ${scholarshipDatas?.size}")
 
         // 장학금 recyclerview 셋팅
         scholarshipAdapter = ScholarshipRVAdapter(requireContext())
         viewBinding.scholarshipRvContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.scholarshipRvContainer.adapter = scholarshipAdapter
-        scholarshipAdapter.datas = scholarshipDatas
+        scholarshipAdapter.datas = mScholarshipDatas
 
         // 클릭 리스너 셋팅
         scholarshipAdapter.setItemClickListener(object: ScholarshipRVAdapter.OnClickInterface{
             override fun onClick(view: View, position: Int) {
 
-                val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
+                val scholarshipIdx: Long = mScholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
                 activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx, "")

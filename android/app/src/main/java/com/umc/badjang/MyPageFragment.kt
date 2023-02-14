@@ -10,14 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-//import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomePage.UniversityFilterDialog
 import com.umc.badjang.MyPage.ChangeProfileActivity
+import com.umc.badjang.MyPage.FQA.FQAFragment
 import com.umc.badjang.MyPage.Model.MyProfileRes
 import com.umc.badjang.MyPage.MyProfileRetrofitInterface
 import com.umc.badjang.MyPage.MyWrite.MyWriteFragment
 import com.umc.badjang.MyPage.Noti.NotiFragment
+import com.umc.badjang.MyPage.QNA.QNAFragment
 import com.umc.badjang.Settings.SettingsFragment
 import com.umc.badjang.databinding.FragmentMyPageBinding
 import retrofit2.Call
@@ -41,7 +43,7 @@ class MyPageFragment : Fragment() {
     var type : String = ""
     var birth : String = ""
     var phone : String = ""
-    var push_yn : String = ""
+    var push_yn : String? = ""
     var on_off : String = ""
     var univ : String? = ""
     var college : String? = ""
@@ -50,6 +52,10 @@ class MyPageFragment : Fragment() {
     var semester : String? = ""
     var province : String? = ""
     var city : String? = ""
+    val bookmark_yn : String = ""
+    val new_post_yn : String = ""
+    val inq_answer_yn : String = ""
+    val comment_yn : String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -106,10 +112,10 @@ class MyPageFragment : Fragment() {
             activity?.changeFragment(NotiFragment())
         }
         viewBinding.MypageLlInquiry.setOnClickListener {
-
+            activity?.changeFragment(QNAFragment())
         }
         viewBinding.MypageLlQna.setOnClickListener {
-
+            activity?.changeFragment(FQAFragment())
         }
         // 이전 버튼 선택 시
         viewBinding.MypageUpBtn.setOnClickListener {
@@ -180,7 +186,7 @@ class MyPageFragment : Fragment() {
                         viewBinding.MypageTvNickname.text = name
                         viewBinding.MypageTvUniv.text = univ
                         if(profileimage_url != null){
-//                            Glide.with(requireActivity()).load(profileimage_url).into(viewBinding.MyPageIvProfileimg)
+                            Glide.with(requireActivity()).load(profileimage_url).into(viewBinding.MyPageIvProfileimg)
                         }
                     }
                     else{

@@ -138,15 +138,18 @@ class ScholarshipCommentsFragment: Fragment() {
                 if (curUserIdx == mConnectUserId) {
                     Log.d("로그", "onItemLongClick: ${mConnectUserId}")
 
+                    // 팝업창 열기
                     val popup = PopupMenu(requireContext(), view)
                     popup.menuInflater.inflate(R.menu.comments_edit, popup.menu)
 
                     popup.setOnMenuItemClickListener { item ->
                         when(item.itemId) {
 
+                            //삭제 버튼 클릭시
                             R.id.btn_delete -> {
                                 DeleteComments(curCommentsIdx, deleteCommentsPost)
                                 Log.d("삭제", "DeleteComments: ${mConnectUserId}")
+                                loadData(commentsAdapter.datas[0].scholarship_idx!!)
                             }
                         }
                         true
@@ -155,10 +158,12 @@ class ScholarshipCommentsFragment: Fragment() {
                 }
                 else {
 
-                    // 신고하기 다이얼로그kk
+                    // 신고하기 다이얼로그
+                    val popup = PopupMenu(requireContext(), view)
+                    popup.menuInflater.inflate(R.menu.alert_menu, popup.menu)
+                    popup.show()
                 }
 
-                loadData(commentsAdapter.datas[0].scholarship_idx!!)
             }
         })
     }

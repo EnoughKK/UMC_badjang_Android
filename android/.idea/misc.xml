@@ -43,7 +43,7 @@
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_national_news.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_post.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_comments.xml" value="0.33" />
-        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_detail.xml" value="0.33" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_detail.xml" value="0.35912162162162165" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_lookup.xml" value="0.33" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_scholarship_viewpager1.xml" value="0.5484375" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/main_my_school_item.xml" value="0.5536458333333333" />
@@ -59,6 +59,7 @@
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/spinner_layout.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/termtodisagree_dialog.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/toastmsg_layout.xml" value="0.5536458333333333" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/menu/alert_menu.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/menu/category_menu_option.xml" value="0.5351851851851852" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/menu/comments_edit.xml" value="0.5526041666666667" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/menu/menu_option.xml" value="0.5351851851851852" />

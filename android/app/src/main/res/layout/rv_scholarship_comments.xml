@@ -5,16 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="64dp"
+        android:layout_height="67dp"
+        android:src="@drawable/ic_good_count"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/textView_userid"
+        android:id="@+id/userid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
         android:text="익명"
         android:textSize="12sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/user_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -28,8 +38,8 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@+id/textView_userid"
-        app:layout_constraintTop_toBottomOf="@id/textView_userid" />
+        app:layout_constraintStart_toStartOf="@+id/userid"
+        app:layout_constraintTop_toBottomOf="@id/userid" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

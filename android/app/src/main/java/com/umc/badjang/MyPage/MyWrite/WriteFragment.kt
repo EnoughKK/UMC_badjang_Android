@@ -24,14 +24,14 @@ data class WriteData(
     val user_profileimage_url : String,
     val post_createAt:String,
     val post_idx: Int,
-                     val post_name: String,
-                     val post_content: String,
-                     val post_image: String,
-                     val post_view: Int,
-                     val post_recommend: Int,
-                     val post_comment: Int,
-                     val post_category: String,
-                     val post_anonymity: String )
+    val post_name: String,
+    val post_content: String,
+    val post_image: String,
+    val post_view: Int,
+    val post_recommend: Int,
+    val post_comment: Int,
+    val post_category: String,
+    val post_anonymity: String )
 
 class WriteFragment : Fragment() {
     private lateinit var binding: FragmentWriteBinding // viewBinding
@@ -89,7 +89,7 @@ class WriteFragment : Fragment() {
                             }
                             var name = ""
                             if(result.result[i].post_anonymity == "N"){
-                                name = "이름"
+                                name = result.result[i].user_name
                             }else{
                                 name = "익명"
                             }

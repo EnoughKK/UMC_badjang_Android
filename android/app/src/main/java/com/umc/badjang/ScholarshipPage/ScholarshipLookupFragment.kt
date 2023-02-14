@@ -1,23 +1,49 @@
 package com.umc.badjang.ScholarshipPage
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.ContentValues
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.umc.badjang.ApplicationClass
+import com.umc.badjang.HomePagaApi.MainApiClient
+import com.umc.badjang.HomePagaApi.MyInfoForFilterApiData
+import com.umc.badjang.HomePagaApi.MyInfoForFilterApiResult
+import com.umc.badjang.HomePagaApi.MyInfoForFilterApiService
+import com.umc.badjang.HomePage.*
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
+import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.ScholarshipFilterDTO
+import com.umc.badjang.databinding.DialogScholarshipLookupBinding
 import com.umc.badjang.databinding.FragmentScholarshipLookupBinding
+import com.umc.badjang.mConnectUserId
+import com.umc.badjang.utils.RESPONSE_STATE
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import java.io.IOException
 
 class ScholarshipLookupFragment: Fragment() {
     private lateinit var viewBinding: FragmentScholarshipLookupBinding // viewBinding
-
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var fragmentStateAdapter: FragmentStateAdapter
@@ -44,6 +70,8 @@ class ScholarshipLookupFragment: Fragment() {
         // 플로팅 버튼
         viewBinding.floatingBtnSearchFilter.setOnClickListener {
 
+            // 다이얼로그 화면
+            ScholarshipFilterDialog(requireContext(), requireActivity()).show()
         }
 
         return viewBinding.root

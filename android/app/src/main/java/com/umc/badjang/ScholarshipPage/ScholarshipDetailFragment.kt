@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.umc.badjang.MainActivity
 import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.Retrofit.RetrofitManager
@@ -71,6 +72,14 @@ class ScholarshipDetailFragment:Fragment() {
                     viewBinding.universityLabel.text = scholarshipDatas[0].scholarship_univ
                     viewBinding.scholarshipTitle.text = scholarshipDatas[0].scholarship_name
                     viewBinding.detailContents.text = scholarshipDatas[0].scholarship_content
+
+                    // 장학금 이미지
+                    if(scholarshipDatas[0].scholarship_image != "https://firebasestorage.googleapis.com/v0/b/badjang-88139.appspot.com/o/%EC%9D%B4%EB%AF%B8%EC%A7%80%20x.png?alt=media&token=67666132-9ba2-4f48-bb40-8aa178fcbad7")
+                        viewBinding.scholarshipImage.visibility = View.VISIBLE
+
+                    Glide.with(requireContext())
+                        .load(scholarshipDatas[0].scholarship_image)
+                        .into(viewBinding.scholarshipImage)
 
                     // 홈페이지 이동
                     viewBinding.btnLink.setOnClickListener {

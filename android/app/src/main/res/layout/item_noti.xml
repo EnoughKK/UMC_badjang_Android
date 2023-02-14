@@ -19,8 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        app:layout_constraintEnd_toStartOf="@id/item_noti_iv_img"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintWidth_percent="0.7"
         android:maxLines="1"
         android:ellipsize="end"/>
 
@@ -36,8 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/item_noti_tv_title"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        app:layout_constraintEnd_toStartOf="@id/item_noti_iv_img"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintWidth_percent="0.7"
         android:maxLines="3"
         android:ellipsize="end"/>
 

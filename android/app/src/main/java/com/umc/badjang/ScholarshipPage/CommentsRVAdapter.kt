@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.umc.badjang.R
 import com.umc.badjang.ScholarshipPage.Model.ScholarshipCommentsDTO
 import com.umc.badjang.databinding.RvScholarshipCommentsBinding
@@ -73,7 +74,14 @@ class CommentsRVAdapter(private val context: Context):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ScholarshipCommentsDTO) {
+            binding.userid.text = item.user_name
             binding.comments.text = item.scholarship_comment_content
+
+            Glide.with(context)
+                .load(item.user_profileimage_url)
+                .circleCrop()
+                .into(binding.userProfile)
+
         }
     }
 

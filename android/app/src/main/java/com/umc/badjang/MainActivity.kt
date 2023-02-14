@@ -17,12 +17,16 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
 import com.umc.badjang.PostPage.PostFragment
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.Model.ScholarshipFilterDTO
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
+import com.umc.badjang.ScholarshipPage.ScholarshipViewpager1Fragment
 import com.umc.badjang.Settings.AlarmFragment
 import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 public var mConnectUserId: Int? = null
+public var mScholarshipDatas = ArrayList<GetScholarshipDTO>()
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding // viewBinding

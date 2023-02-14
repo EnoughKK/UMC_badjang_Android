@@ -72,7 +72,7 @@ class DetailNotiFragment : Fragment() {
                     val result = response.body() as GetDetailNotiResponse
                     if(result.message == "요청에 성공하였습니다."){
                         var img = ""
-                        if(result.result.notice_image == null){
+                        if(result.result.notice_image == null || result.result.notice_image ==""){
                             binding.notiDetailIv.visibility = View.GONE
                         }else{
                             Glide.with(requireActivity()).load(result.result.notice_image).into(binding.notiDetailIv)
