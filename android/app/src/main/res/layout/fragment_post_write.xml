@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".PostWritePage.PostWriteFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/post_write_header"
@@ -60,11 +61,161 @@
             android:id="@+id/toolbar_line"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_below="@id/post_write_header"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="2dp"
             android:background="@color/header_line" />
 
-    </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- 익명 체크박스 -->
+                    <CheckBox
+                        android:id="@+id/anonymity_checkbox"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginVertical="15dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/post_anonymity_checkbox"
+                        android:checked="false"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="익명"
+                        android:textSize="14dp"
+                        android:textColor="#707070"
+                        android:layout_toEndOf="@+id/anonymity_checkbox"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageButton
+                        android:id="@+id/post_write_add_image"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="19dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_camera"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/post_write_line1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="@color/header_line" />
+
+                <!-- 제목 입력 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/post_write_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="21dp"
+                        android:layout_marginVertical="20dp"
+                        android:background="@android:color/transparent"
+                        android:hint="제목을 입력해주세요."
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/post_write_title_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="0/50"
+                        android:textSize="12dp"
+                        android:textColor="#696969"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/post_write_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="#696969" />
+
+                <!-- 내용 입력 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/post_write_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="270dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:gravity="top"
+                        android:background="@android:color/transparent"
+                        android:hint="내용을 입력해주세요."
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:id="@+id/post_write_content_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="0/500"
+                        android:textSize="12dp"
+                        android:textColor="#696969"
+                        android:layout_below="@+id/post_write_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/post_write_line3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="#DBDBDB" />
+
+                <!-- 이용 규칙 -->
+                <TextView
+                    android:id="@+id/post_write_rule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="아래는 이 커뮤니티의 이용 규칙으로 게시글 작성 전 꼭 확인해주시길 부탁드립니다."
+                    android:textSize="12dp"
+                    android:textColor="#696969"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
 </FrameLayout>

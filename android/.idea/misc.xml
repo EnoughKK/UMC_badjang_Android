@@ -91,12 +91,14 @@
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/btn_post_write.xml" value="0.1485" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/dialog_border.xml" value="0.1485" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/dialog_selection_board.xml" value="0.1235" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_check_icon.xml" value="0.1485" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_good.xml" value="0.152" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_header_bell.xml" value="0.152" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_main_more_btn.xml" value="0.152" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_select_menu_home.xml" value="0.152" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_select_menu_mypage.xml" value="0.152" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/ic_view_count.xml" value="0.152" />
+        <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/post_anonymity_checkbox.xml" value="0.1485" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/drawable/university_spinner_background.xml" value="0.1235" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/activity_main.xml" value="0.2388888888888889" />
         <entry key="..\:/android/UMC_badjang_Android/android/app/src/main/res/layout/activity_signup.xml" value="0.2388888888888889" />
@@ -126,7 +128,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
