@@ -1,9 +1,14 @@
 package com.umc.badjang.Retrofit
 
 import com.google.gson.JsonElement
+import com.umc.badjang.ScholarshipPage.Model.DeleteCommentsDTO
+import com.umc.badjang.ScholarshipPage.Model.NewCommentsDTO
 import com.umc.badjang.utils.API
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 // 장학금 조회 (필터사용) 인터페이스
 interface ISearchScholarship {
@@ -23,5 +28,13 @@ interface IScholarshipComments {
 
     @GET(API.SCHOLARSHIP_COMMENTS)
     fun scholarshipComments(@Query("scholarship_idx") scholarshipIdx: Int?) : Call<JsonElement>
+
+    @POST(API.NEW_COMMENTS)
+    fun newComments(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Body params: NewCommentsDTO) : Call<NewCommentsDTO>
+
+    @PATCH(API.DELETE_COMMENTS)
+    fun deleteComments(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarship_comment_idx") scholarship_comment_idx: Long?, @Body params: DeleteCommentsDTO) : Call<DeleteCommentsDTO>
+
+
 }
 

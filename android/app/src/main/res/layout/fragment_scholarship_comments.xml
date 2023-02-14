@@ -72,6 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
+            android:id="@+id/comments"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_margin="20dp"
@@ -84,6 +85,7 @@
             tools:layout_editor_absoluteX="20dp" />
 
         <ImageButton
+            android:id="@+id/input_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"

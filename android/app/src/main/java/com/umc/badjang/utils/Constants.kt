@@ -12,6 +12,10 @@ object API {
     const val VIEWCOUNT_SCHOLARSHIP : String = "scholarships/{scholarshipIdx}"
 
     const val SCHOLARSHIP_COMMENTS: String = "scholarships/comment"
+
+    const val NEW_COMMENTS: String = "scholarships/comment/new-comment"
+
+    const val DELETE_COMMENTS: String = "scholarships/comment/delete/{scholarship_comment_idx}"
 }
 
 object supportApiUrl {

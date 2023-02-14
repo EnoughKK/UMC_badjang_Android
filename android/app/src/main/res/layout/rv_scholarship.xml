@@ -21,57 +21,97 @@
             android:layout_height="wrap_content"
             android:minHeight="108dp">
 
-            <TextView
-                android:id="@+id/university_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/university_label_round"
-                android:padding="4dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:text="부경대학교"
-                android:textColor="#000000"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/scholarship_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="교내 재학생 장학금"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="@+id/university_label"
-                app:layout_constraintTop_toBottomOf="@+id/university_label" />
-
-            <TextView
-                android:id="@+id/scholarship_title"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scholarship_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="start"
-                android:text="자기추천장학금"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintStart_toStartOf="@+id/university_label"
-                app:layout_constraintTop_toBottomOf="@+id/scholarship_category" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textView_views">
+
+                <TextView
+                    android:id="@+id/university_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/university_label_round"
+                    android:padding="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="부경대학교"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/scholarship_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="교내 재학생 장학금"
+                    android:textSize="12sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/university_label"
+                    app:layout_constraintTop_toBottomOf="@+id/university_label" />
+
+                <TextView
+                    android:id="@+id/scholarship_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="start"
+                    android:text="자기추천장학금"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/university_label"
+                    app:layout_constraintTop_toBottomOf="@+id/scholarship_category" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/expandable_view"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/scholarship_title"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/scholarship_contents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="재학생의 자신의 개발 가능성을 토대로 자신을 추천하여
+장학금을 수혜받을 수 있도록 자기추천장학금을 시행하오니
+관심있는 학생들의 많은 참여바랍니다. \n\n대상 \n  8학기 이내 재학생
+\n  직전학기 이수학점 14학점이상, 평점평균 2.0이상 이수자 "
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <TextView
                 android:id="@+id/textView_views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="215"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -106,34 +146,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView_comments"
                 app:layout_constraintTop_toTopOf="@+id/textView_views"
                 app:srcCompat="@drawable/comments" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/expandable_view"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/scholarship_title"
-                app:layout_constraintBottom_toTopOf="@id/textView_views">
-
-                <TextView
-                    android:id="@+id/scholarship_contents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="재학생의 자신의 개발 가능성을 토대로 자신을 추천하여
-장학금을 수혜받을 수 있도록 자기추천장학금을 시행하오니
-관심있는 학생들의 많은 참여바랍니다. \n\n대상 \n  8학기 이내 재학생
-\n  직전학기 이수학점 14학점이상, 평점평균 2.0이상 이수자 "
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,14 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.google.gson.JsonElement
 import com.google.protobuf.Api
-import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
-import com.umc.badjang.ScholarshipPage.Model.GetSupportDTO
-import com.umc.badjang.ScholarshipPage.Model.ScholarshipCommentsDTO
+import com.umc.badjang.ApplicationClass
+import com.umc.badjang.ScholarshipPage.Model.*
+import com.umc.badjang.mConnectUserId
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class RetrofitManager {
@@ -304,6 +305,7 @@ class RetrofitManager {
 
                     val body = it.asJsonObject
                     val results = body.getAsJsonArray("result")
+                    var viewType: Int
 
                     results.forEach { resultItem ->
                         val resultItemObject = resultItem.asJsonObject
@@ -323,13 +325,20 @@ class RetrofitManager {
                         @NonNull
                         val scholarship_comment_updateAt = resultItemObject.get("scholarship_comment_updateAt").asString
 
+                        if(user_idx == mConnectUserId) {
+                            viewType = 1
+                        } else {
+                            viewType = 2
+                        }
+
 
                         val scholarshipItem = ScholarshipCommentsDTO(
                             scholarship_idx = scholarship_idx,
                             scholarship_comment_idx = scholarship_comment_idx,
                             user_idx = user_idx,
                             scholarship_comment_content = scholarship_comment_content,
-                            scholarship_comment_updateAt = scholarship_comment_updateAt
+                            scholarship_comment_updateAt = scholarship_comment_updateAt,
+                            viewType = viewType
                         )
                         parsedScholarshipDataArray.add(scholarshipItem)
 
@@ -346,6 +355,47 @@ class RetrofitManager {
             }
 
         })
+    }
+
+    fun newComments(xAccessToken : String?, params : NewCommentsDTO) {
+
+        val call = iScholarshipComments?.newComments(xAccessToken = xAccessToken!!, params = params).let {
+            it
+        }?: return
+
+        call.enqueue(object  : Callback<NewCommentsDTO> {
+
+            override fun onResponse(call: Call<NewCommentsDTO>, response: Response<NewCommentsDTO>) {
+                Log.d(TAG, "onResponse: 새로운 댓글 생성")
+            }
+
+            override fun onFailure(call: Call<NewCommentsDTO>, t: Throwable) {
+                Log.d(TAG, "onFailure: 새로운 댓글 생성 실패 t: $t")
+            }
+
+        })
+
+    }
+
+    fun deleteComments(xAccessToken : String?, scholarship_comment_idx: Long?, params: DeleteCommentsDTO) {
+
+        val call = iScholarshipComments?.deleteComments(xAccessToken = xAccessToken!!, scholarship_comment_idx = scholarship_comment_idx, params = params).let {
+            it
+        }?: return
+
+        call.enqueue(object  : Callback<DeleteCommentsDTO>{
+            override fun onResponse(call: Call<DeleteCommentsDTO>, response: Response<DeleteCommentsDTO>) {
+
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : 댓글 삭제 ${params.toString()}}")
+                Log.d(TAG, "onResponse: 댓글 삭제")
+            }
+
+            override fun onFailure(call: Call<DeleteCommentsDTO>, t: Throwable) {
+
+            }
+
+        })
+
     }
 
 }

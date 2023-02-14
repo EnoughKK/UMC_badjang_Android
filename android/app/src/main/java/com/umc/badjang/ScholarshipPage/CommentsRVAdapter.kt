@@ -9,22 +9,21 @@ import com.umc.badjang.R
 import com.umc.badjang.ScholarshipPage.Model.ScholarshipCommentsDTO
 import com.umc.badjang.databinding.RvScholarshipCommentsBinding
 import com.umc.badjang.databinding.RvScholarshipMycommentsBinding
-import com.umc.badjang.mConnectUserId
-import kotlin.properties.Delegates
+
 
 class CommentsRVAdapter(private val context: Context):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var datas = ArrayList<ScholarshipCommentsDTO>()
 
-    private var userIdx by Delegates.notNull<Int>()
-
-    private lateinit var viewBinding1: RvScholarshipCommentsBinding
-    private lateinit var viewBinding2: RvScholarshipMycommentsBinding
     private lateinit var mItemClickListener: CommentsRVAdapter.OnClickInterface
 
     interface OnClickInterface{
         fun onItemLongClick(view: View, position: Int)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return datas[position].viewType
     }
 
     override fun onCreateViewHolder(
@@ -32,32 +31,40 @@ class CommentsRVAdapter(private val context: Context):
         viewType: Int,
     ): RecyclerView.ViewHolder {
 
-        val view1 = LayoutInflater.from(context).inflate(R.layout.rv_scholarship_comments, parent, false)   // 다른 사람 댓글
-        val view2 = LayoutInflater.from(context).inflate(R.layout.rv_scholarship_mycomments, parent, false) // 내 댓글
+        val view: View?
 
-        viewBinding1 = RvScholarshipCommentsBinding.bind(view1)
-        viewBinding2 = RvScholarshipMycommentsBinding.bind(view2)
-
-        userIdx = datas[0].user_idx!!
-
-        if (userIdx == mConnectUserId) {
-            return MyCommentsHolder(RvScholarshipMycommentsBinding.bind(view2))
-        } else {
-            return CommentsHolder(RvScholarshipCommentsBinding.bind(view1))
+        return when(viewType) {
+            1 -> {
+                view = LayoutInflater.from(context).inflate(R.layout.rv_scholarship_mycomments, parent, false)
+                MyCommentsHolder(RvScholarshipMycommentsBinding.bind(view))
+            }
+            else -> {
+                view = LayoutInflater.from(context).inflate(R.layout.rv_scholarship_comments, parent, false)
+                CommentsHolder(RvScholarshipCommentsBinding.bind(view))
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        if (userIdx == mConnectUserId){
-            (holder as MyCommentsHolder).bind(datas[position])
-        } else {
-            (holder as CommentsHolder).bind(datas[position])
+        when(datas[position].viewType) {
+            1 -> {
+                (holder as MyCommentsHolder).bind(datas[position])
+                holder.setIsRecyclable(false)
+                holder.itemView.setOnClickListener {
+                    mItemClickListener.onItemLongClick(it, position)
+                }
+            }
+            else -> {
+                (holder as CommentsHolder).bind(datas[position])
+                holder.setIsRecyclable(false)
+                holder.itemView.setOnClickListener {
+                    mItemClickListener.onItemLongClick(it, position)
+                }
+            }
         }
 
-        holder.itemView.setOnClickListener {
-            mItemClickListener.onItemLongClick(it, position)
-        }
+
     }
 
     override fun getItemCount(): Int = datas.size
@@ -78,7 +85,7 @@ class CommentsRVAdapter(private val context: Context):
         }
     }
 
-    fun setItemClickListener(itemClickListener: CommentsRVAdapter.OnClickInterface){
-        mItemClickListener = itemClickListener
+    fun setItemClickListener(onItemLongClickListener: CommentsRVAdapter.OnClickInterface){
+        mItemClickListener = onItemLongClickListener
     }
 }
