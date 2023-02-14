@@ -170,7 +170,7 @@ class PostWriteFragment : Fragment() {
                 var anonymity = "N"
                 if(viewBinding.anonymityCheckbox.isChecked) anonymity = "Y"
 
-                val body = PostWriteApiBody(
+                val body = PostWriteApiData(
                     mConnectUserId!!,
                     category!!,
                     title,
@@ -182,7 +182,7 @@ class PostWriteFragment : Fragment() {
                 Log.d("Test", body.toString())
 
                 // 게시글 작성
-                //apiAddPost(body)
+                apiAddPost(body)
 
                 // 이전 페이지로 이동
                 //requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
@@ -247,16 +247,16 @@ class PostWriteFragment : Fragment() {
     }
 
     // 게시글 작성
-    private fun apiAddPost(post: PostWriteApiBody) {
-        retrofit!!.create(PostWriteApiService::class.java).addPost(xAccessToken=jwt!!, userIdx=mConnectUserId!!, params=post)
-            .enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+    private fun apiAddPost(post: PostWriteApiData) {
+        retrofit!!.create(PostWriteApiService::class.java).addPost(xAccessToken=jwt!!, userIdx=mConnectUserId!!, post)
+            .enqueue(object : Callback<PostWriteApiResponse> {
+                override fun onResponse(call: Call<PostWriteApiResponse>, response: Response<PostWriteApiResponse>) {
                     Log.d(ContentValues.TAG,"게시글 작성 -------------------------------------------")
                     Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<PostWriteApiResponse>, t: Throwable) {
                     Log.d(ContentValues.TAG,"게시글 작성 -------------------------------------------")
                     Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                 }

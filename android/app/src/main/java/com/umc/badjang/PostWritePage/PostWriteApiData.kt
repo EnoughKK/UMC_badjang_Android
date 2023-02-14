@@ -3,7 +3,7 @@ package com.umc.badjang.PostWritePage
 import com.google.gson.annotations.SerializedName
 
 // 서버에 저장할 게시글 작성 정보
-data class PostWriteApiBody(
+data class PostWriteApiData(
     @SerializedName("user_idx")
     val user_idx: Int,             // 유저 번호
 

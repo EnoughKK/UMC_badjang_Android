@@ -11,6 +11,6 @@ interface PostWriteApiService {
     fun addPost(
         @Header("X-ACCESS-TOKEN") xAccessToken: String,
         @Path("user_idx") userIdx: Int,
-        @Body params: PostWriteApiBody
-    ): Call<String>
+        @Body params: PostWriteApiData
+    ): Call<PostWriteApiResponse>
 }
