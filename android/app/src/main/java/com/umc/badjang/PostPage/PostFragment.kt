@@ -11,8 +11,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
+import com.umc.badjang.MyPage.Model.MyProfileRes
+import com.umc.badjang.MyPage.MyProfileRetrofitInterface
 import com.umc.badjang.PostPage.AllBoard.AllBoardFragment
 import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
 import com.umc.badjang.PostPage.Board.Model.GetSchoolPostBoardResponse
@@ -82,6 +85,7 @@ class PostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        getMyProfile()
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         dataList.add(AllPostData(1, "자유게시판"))
         dataList.add(AllPostData(2, "인기게시판"))
@@ -115,6 +119,7 @@ class PostFragment : Fragment() {
         }
 
     }
+
     private fun getSchoolPostBoard(){
         //Log.d("postScholarship", "호출은 된다.")
         val getSchoolPostBoardInterface = ApplicationClass.sRetrofit.create(PostBoardRetrofitInterface::class.java)
@@ -189,6 +194,35 @@ class PostFragment : Fragment() {
         })
 
     }
+
+    private fun getMyProfile(){
+        //Log.d("postScholarship", "호출은 된다.")
+        val scholarshipInterface = ApplicationClass.sRetrofit.create(MyProfileRetrofitInterface::class.java)
+        scholarshipInterface.getMyProfileRes().enqueue(object :
+            Callback<MyProfileRes> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(call: Call<MyProfileRes>, response: Response<MyProfileRes>) {
+                if (response.isSuccessful) {
+                    val result = response.body() as MyProfileRes
+                    if(result.message == "요청에 성공하였습니다."){
+                        binding.mainRecommendTitle.text = result.result.user_name + "님을 위한 추천"
+                    }
+                    else{
+                        Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                        Log.d("getProfile", "onResponse : Error message ${response.message()}")
+                    }
+                }
+                else{
+                    Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<MyProfileRes>, t: Throwable) {
+                Log.d("getProfile", t.message ?: "통신오류")
+            }
+        })
+
+    }
+
     private fun initRecycler() {
 
     }

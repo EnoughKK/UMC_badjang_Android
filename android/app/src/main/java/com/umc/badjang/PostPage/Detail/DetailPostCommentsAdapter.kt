@@ -2,6 +2,8 @@ package com.umc.badjang.PostPage.Detail
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,22 +63,80 @@ class DetailPostCommentsAdapter(private val dataSet: ArrayList<CommentData>, var
             }else{
                 binding.itemCommentsGoodIcon.setImageResource(R.drawable.ic_recommend_stroke)
             }
+            var school_name = ""
+            if(item.school_idx == 1){
+                school_name = "부경대학교"
+            }else if(item.school_idx == 2){
+                school_name = "경상국립대학교"
+            }else if(item.school_idx == 3){
+                school_name = "한국해양대학교"
+            }else if(item.school_idx == 4){
+                school_name = "부산대학교"
+            }
             binding.itemCommentsTvOther.setOnClickListener {
-                if(binding.itemCommentsTvOther.text =="삭제하기"){
-                    var dialog = DeleteDialog(context)
-                    ApplicationClass.bSharedPreferences.edit().putInt("post_idx",item.post_idx).commit()
-                    ApplicationClass.bSharedPreferences.edit().putInt("comment_idx",item.comment_idx).commit()
-                    //bSharedPreferences.edit().putString("comment_idx","").commit()
-                    dialog.show()
-                    dialog.setOnDismissListener {
-                        if(ApplicationClass.bSharedPreferences.getString("delete_content",null) == "삭제"){
-                            //requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                            //requireActivity().supportFragmentManager.popBackStack()
+                if(item.school_idx != 0){
+                    if(binding.itemCommentsTvOther.text =="삭제하기"){
+                        var dialog = SchoolCommentDeleteDialog(context, item.school_idx, item.post_idx, item.comment_idx)
+                        dialog.show()
+                        dialog.setOnDismissListener {
+                            if(ApplicationClass.bSharedPreferences.getString("delete_school_comment_content",null) == "삭제"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    //실행할 코드
+                                    var fragment = DetailPostFragment()
+                                    val bundle = Bundle()
+                                    bundle.putInt("post_idx", item.post_idx)
+
+                                    bundle.putString("board_name", school_name)
+                                    fragment.arguments = bundle
+                                    (context as MainActivity).changeReplaceFragment(fragment)
+                                }, 300)
+
+                            }
+                        }
+                    }else{
+                        var dialog = CommentReportDialog(context)
+                        //bSharedPreferences.edit().putString("comment_idx","").commit()
+                        dialog.show()
+                        dialog.setOnDismissListener {
+
                         }
                     }
                 }else{
+                    if(binding.itemCommentsTvOther.text =="삭제하기"){
+                        var dialog = CommentDeleteDialog(context, item.post_idx, item.post_category)
+                        ApplicationClass.bSharedPreferences.edit().putInt("post_idx",item.post_idx).commit()
+                        ApplicationClass.bSharedPreferences.edit().putInt("comment_idx",item.comment_idx).commit()
+                        //bSharedPreferences.edit().putString("comment_idx","").commit()
+                        dialog.show()
+                        dialog.setOnDismissListener {
+                            if(ApplicationClass.bSharedPreferences.getString("delete_comment_content",null) == "삭제"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    //실행할 코드
+                                    var fragment = DetailPostFragment()
+                                    val bundle = Bundle()
+                                    bundle.putInt("post_idx", item.post_idx)
+                                    bundle.putString("board_name", item.post_category)
+                                    fragment.arguments = bundle
+                                    (context as MainActivity).changeReplaceFragment(fragment)
+                                }, 300)
 
+                            }
+                        }
+                    }else{
+                        var dialog = CommentReportDialog(context)
+                        ApplicationClass.bSharedPreferences.edit().putInt("post_idx",item.post_idx).commit()
+                        ApplicationClass.bSharedPreferences.edit().putInt("comment_idx",item.comment_idx).commit()
+                        //bSharedPreferences.edit().putString("comment_idx","").commit()
+                        dialog.show()
+                        dialog.setOnDismissListener {
+                            if(ApplicationClass.bSharedPreferences.getString("delete_content",null) == "삭제"){
+                                //requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                                //requireActivity().supportFragmentManager.popBackStack()
+                            }
+                        }
+                    }
                 }
+
             }
             // 작성자 프로필
 //            Glide.with(context).load(item.user_profileimage_url).into(binding.boardWritePostProfileImg)

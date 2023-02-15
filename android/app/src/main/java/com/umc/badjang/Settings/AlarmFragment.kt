@@ -118,16 +118,25 @@ class AlarmFragment :Fragment() {
                         }else{
                             city = result.result.user_city
                         }
-                        if(push_yn == "Y"){
-                            binding.alarmSettingSBookmark.isChecked = true
+                        if(result.result.new_post_yn == "Y"){
                             binding.alarmSettingSNewWrite.isChecked = true
+                        }else{
+                            binding.alarmSettingSNewWrite.isChecked = false
+                        }
+                        if(result.result.inq_answer_yn == "Y"){
                             binding.alarmSettingSQna.isChecked = true
+                        }else{
+                            binding.alarmSettingSQna.isChecked = false
+                        }
+                        if(result.result.comment_yn == "Y"){
                             binding.alarmSettingSChat.isChecked = true
                         }else{
-                            binding.alarmSettingSBookmark.isChecked = false
-                            binding.alarmSettingSNewWrite.isChecked = false
-                            binding.alarmSettingSQna.isChecked = false
                             binding.alarmSettingSChat.isChecked = false
+                        }
+                        if(result.result.bookmark_yn == "Y"){
+                            binding.alarmSettingSBookmark.isChecked = true
+                        }else{
+                            binding.alarmSettingSBookmark.isChecked = false
                         }
                     }
                     else{

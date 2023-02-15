@@ -11,6 +11,7 @@ import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
 import com.umc.badjang.PostPage.Detail.DetailPostFragment
+import com.umc.badjang.PostWritePage.BitmapConverter
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
@@ -48,7 +49,7 @@ class PostBoardAdapter(private val dataSet: ArrayList<BoardData>, var context :C
                 bundle.putInt("post_idx", item.post_idx)
                 bundle.putString("board_name", item.post_category)
                 fragment.arguments = bundle
-                (context as MainActivity).changeFragment(fragment)
+                (context as MainActivity).changeReplaceFragment(fragment)
             }
             // 작성자 프로필
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)
@@ -62,7 +63,10 @@ class PostBoardAdapter(private val dataSet: ArrayList<BoardData>, var context :C
             if(item.post_image == ""){
                 binding.popularPostContentImg.visibility = View.GONE
             }else{
-                Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
+                var converter = BitmapConverter()
+                var bitmap2 = converter.StringToBitmap(item.post_image)
+                binding.popularPostContentImg.setImageBitmap(bitmap2)
+                //Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
             }
         }
     }

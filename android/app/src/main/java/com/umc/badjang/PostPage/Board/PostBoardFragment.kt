@@ -23,6 +23,7 @@ import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
 import com.umc.badjang.PostPage.Board.Model.GetPostBoardResponse
 import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PopularPostData
+import com.umc.badjang.PostPage.PostFragment
 import com.umc.badjang.PostWritePage.PostWriteFragment
 import com.umc.badjang.databinding.FragmentPostBoardBinding
 import retrofit2.Call
@@ -190,13 +191,14 @@ class PostBoardFragment : Fragment() {
             bundle.putInt("category_idx", category_idx) // 게시판 카테고리 idx
             bundle.putString("category_name", category_name) // 게시판 카테고리 이름
             fragment.arguments = bundle
-            (context as MainActivity).changeFragment(fragment)
+            (context as MainActivity).changeReplaceFragment(fragment)
         }
 
         binding.postBoardPrev.setOnClickListener {
             // 이전 페이지로 이동
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-            requireActivity().supportFragmentManager.popBackStack()
+            (context as MainActivity).changeReplaceFragment(PostFragment())
+//            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+//            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
@@ -350,6 +352,13 @@ class PostBoardFragment : Fragment() {
                                     result.result[i].post_category, result.result[i].post_school_name,
                                     result.result[i].post_createAt, result.result[i].recommend_check)
                             )
+                        }
+                        var newList = arrayListOf<SchoolData>()
+                        for(i in 0 until schoolDataList.size){
+                            newList.add(schoolDataList[schoolDataList.size -1 - i])
+                        }
+                        for(i in 0 until schoolDataList.size){
+                            schoolDataList[i] = newList[i]
                         }
                         schoolAdapter.notifyDataSetChanged()
                     }

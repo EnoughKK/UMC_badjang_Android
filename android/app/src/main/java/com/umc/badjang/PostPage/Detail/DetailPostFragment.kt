@@ -3,6 +3,8 @@ package com.umc.badjang.PostPage.Detail
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.umc.badjang.PostPage.Board.*
 import com.umc.badjang.PostPage.Board.Model.GetSchoolPostBoardResponse
 import com.umc.badjang.PostPage.Detail.Model.*
 import com.umc.badjang.PostPage.SchoolPostData
+import com.umc.badjang.PostWritePage.BitmapConverter
 import com.umc.badjang.R
 import com.umc.badjang.Settings.NameChangeDialog
 import com.umc.badjang.databinding.FragmentDetailPostBinding
@@ -39,7 +42,9 @@ data class CommentData(
     val comment_status : String,
     val user_name : String?,
     val user_profileimage_url : String,
-    val recommend_status : Int
+    val recommend_status : Int,
+    val post_category:String,
+    val school_idx:Int
 )
 
 class DetailPostFragment : Fragment() {
@@ -52,6 +57,7 @@ class DetailPostFragment : Fragment() {
     var post_idx = 0
     var board_name = ""
     var comment_idx = 0
+    var idx = 0
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = getActivity() as MainActivity
@@ -69,29 +75,37 @@ class DetailPostFragment : Fragment() {
         binding = FragmentDetailPostBinding.inflate(layoutInflater);
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //이전 화면 Adapter 에서 게시글 idx 받아오는 코드
         post_idx = requireArguments().getInt("post_idx")
         board_name = requireArguments().getString("board_name").toString()
         binding.detailPostTvTitle.text = board_name
+
+
+        //bSharedPreferences.edit().putString("board_name",board_name).commit()
         //학교게시판
         if(board_name.contains("대학교")){
-            var idx = 0
+
             if(board_name.contains("부경대학교")){
                 idx = 1
+                bSharedPreferences.edit().putString("board_name","부경대학교").commit()
             }else if(board_name.contains("경상국립대학교")){
                 idx = 2
+                bSharedPreferences.edit().putString("board_name","경상국립대학교").commit()
             }else if(board_name.contains("한국해양대학교")){
                 idx = 3
+                bSharedPreferences.edit().putString("board_name","한국해양대학교").commit()
             }else if(board_name.contains("부산대학교")){
                 idx = 4
+                bSharedPreferences.edit().putString("board_name","부산대학교").commit()
             }
-            getSchoolOnePost(idx,post_idx)
             rvAdapter = DetailPostCommentsAdapter(dataList, requireContext())
-            getComments(post_idx, bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0))
+            getSchoolOnePost(idx,post_idx)
+
+            //getComments(post_idx, bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0))
             binding.detailPostRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            binding.detailPostRv.addOnLayoutChangeListener(onLayoutChangeListener)
             binding.detailPostRv.adapter = rvAdapter
         }
         else{ //자유게시판
@@ -103,47 +117,112 @@ class DetailPostFragment : Fragment() {
         }
 
         binding.detailPostTvOther.setOnClickListener {
-            if(binding.detailPostTvOther.text == "삭제하기"){
-                var dialog = DeleteDialog(requireContext())
-                bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
-                //bSharedPreferences.edit().putString("comment_idx","").commit()
-                dialog.show()
-                dialog.setOnDismissListener {
-                    if(bSharedPreferences.getString("delete_content",null) == "삭제"){
-                        requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                        requireActivity().supportFragmentManager.popBackStack()
+            if(board_name.contains("대학교")){
+                if(binding.detailPostTvOther.text == "삭제하기"){
+                    bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
+                    var dialog = SchoolDeleteDialog(requireContext(), post_idx, idx)
+
+                    //bSharedPreferences.edit().putString("comment_idx","").commit()
+                    dialog.show()
+                    dialog.setOnDismissListener {
+                        if(bSharedPreferences.getString("delete_school_content",null) == "삭제"){
+//                        requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+//                        requireActivity().supportFragmentManager.popBackStack()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                //실행할 코드
+                                var fragment = PostBoardFragment()
+                                val bundle = Bundle()
+                                bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+                                fragment.arguments = bundle
+                                (requireActivity() as MainActivity).changeReplaceFragment(fragment)
+                            }, 300)
+
+                        }
+                    }
+                }else{
+                    var dialog = ReportDialog(requireContext())
+                    //ApplicationClass.bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
+                    dialog.show()
+                    dialog.setOnDismissListener {
+
                     }
                 }
             }else{
-                var dialog = ReportDialog(requireContext())
-                //ApplicationClass.bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
-                dialog.show()
-                dialog.setOnDismissListener {
+                if(binding.detailPostTvOther.text == "삭제하기"){
+                    var dialog = DeleteDialog(requireContext())
+                    bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
+                    //bSharedPreferences.edit().putString("comment_idx","").commit()
+                    dialog.show()
+                    dialog.setOnDismissListener {
+                        if(bSharedPreferences.getString("delete_content",null) == "삭제"){
+//                        requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+//                        requireActivity().supportFragmentManager.popBackStack()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                //실행할 코드
+                                var fragment = PostBoardFragment()
+                                val bundle = Bundle()
+                                bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+                                fragment.arguments = bundle
+                                (requireActivity() as MainActivity).changeReplaceFragment(fragment)
+                            }, 300)
 
+                        }
+                    }
+                }else{
+                    var dialog = ReportDialog(requireContext())
+                    //ApplicationClass.bSharedPreferences.edit().putInt("post_idx",post_idx).commit()
+                    dialog.show()
+                    dialog.setOnDismissListener {
+
+                    }
                 }
             }
+
         }
         binding.detailPostIvSendComment.setOnClickListener {
-            if(binding.detailPostEtComment.length() != 0){
-                var checked = ""
-                if(binding.detailPostCheckboxAnonymous.isChecked){
-                    checked = "Y"
-                }else{
-                    checked = "N"
-                }
-                postComment(post_idx = post_idx,
-                    user_idx = bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0),
-                    PostCommentReq(post_idx = post_idx, user_idx = bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0),
-                        comment_content = binding.detailPostEtComment.text.toString(),
-                        comment_anonymity = checked, comment_status = "Y")
-                )
+            if(idx != 0){
+                if(binding.detailPostEtComment.length() != 0){
+                    var checked = ""
+                    if(binding.detailPostCheckboxAnonymous.isChecked){
+                        checked = "Y"
+                    }else{
+                        checked = "N"
+                    }
+                    postSchoolComment(schoolNameIdx = idx,
+                        post_idx = post_idx,
+                        PostSchoolCommentReq(comment_content = binding.detailPostEtComment.text.toString(), comment_anonymity = checked)
+                    )
 
+                }
+            }else{
+                if(binding.detailPostEtComment.length() != 0){
+                    var checked = ""
+                    if(binding.detailPostCheckboxAnonymous.isChecked){
+                        checked = "Y"
+                    }else{
+                        checked = "N"
+                    }
+                    postComment(post_idx = post_idx,
+                        user_idx = bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0),
+                        PostCommentReq(post_idx = post_idx, user_idx = bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0),
+                            comment_content = binding.detailPostEtComment.text.toString(),
+                            comment_anonymity = checked, comment_status = "Y")
+                    )
+
+                }
             }
+
         }
         binding.detailPostPrev.setOnClickListener {
             // 이전 페이지로 이동
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-            requireActivity().supportFragmentManager.popBackStack()
+            var fragment = PostBoardFragment()
+            val bundle = Bundle()
+            bundle.putString("name", bSharedPreferences.getString("board_name", ""))
+            fragment.arguments = bundle
+            (context as MainActivity).changeReplaceFragment(fragment)
+
+//            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+//            requireActivity().supportFragmentManager.popBackStack()
         }
 
     }
@@ -165,7 +244,7 @@ class DetailPostFragment : Fragment() {
                                     result.result[i].comment_recommend, result.result[i].comment_anonymity,
                                     result.result[i].comment_createAt, result.result[i].comment_updatedAt,
                                     result.result[i].comment_status, result.result[i].user_name,
-                                    result.result[i].user_profileimage_url,result.result[i].recommend_status)
+                                    result.result[i].user_profileimage_url,result.result[i].recommend_status, board_name,idx)
                             )
                         }
                         rvAdapter = DetailPostCommentsAdapter(dataList, requireContext())
@@ -312,7 +391,10 @@ class DetailPostFragment : Fragment() {
                         if(result.result.getOneOfSchoolBoardRes[0].post_image == "" || result.result.getOneOfSchoolBoardRes[0].post_image == null){
                             binding.detailPostContentImg.visibility = View.GONE
                         }else{
-                            Glide.with(requireActivity()).load(result.result.getOneOfSchoolBoardRes[0].post_image).into(binding.detailPostContentImg)
+                            var converter = BitmapConverter()
+                            var bitmap2 = converter.StringToBitmap(result.result.getOneOfSchoolBoardRes[0].post_image)
+                            binding.detailPostContentImg.setImageBitmap(bitmap2)
+                            //Glide.with(requireActivity()).load(result.result.getOneOfSchoolBoardRes[0].post_image).into(binding.detailPostContentImg)
                         }
                         binding.detailPostViewNum.text = result.result.getOneOfSchoolBoardRes[0].post_view.toString()
                         binding.detailPostGoodNum.text = result.result.getOneOfSchoolBoardRes[0].post_recommend.toString()
@@ -323,6 +405,7 @@ class DetailPostFragment : Fragment() {
                         }else{
                             binding.detailPostBookmarkIcon.setImageResource(R.drawable.ic_star_unchecked)
                         }
+
                         for(i in 0 until result.result.getSchoolBoardCommentRes.size){
                             dataList.add(
                                 CommentData(result.result.getSchoolBoardCommentRes[i].comment_idx, result.result.getSchoolBoardCommentRes[i].user_idx,
@@ -330,7 +413,7 @@ class DetailPostFragment : Fragment() {
                                     result.result.getSchoolBoardCommentRes[i].comment_recommend, result.result.getSchoolBoardCommentRes[i].comment_anonymity,
                                     result.result.getSchoolBoardCommentRes[i].comment_createAt, "",
                                     "", result.result.getSchoolBoardCommentRes[i].user_name,
-                                    result.result.getSchoolBoardCommentRes[i].user_profileimage_url,result.result.getSchoolBoardCommentRes[i].recommend_check)
+                                    result.result.getSchoolBoardCommentRes[i].user_profileimage_url,result.result.getSchoolBoardCommentRes[i].recommend_check, board_name,idx)
                             )
                         }
                         rvAdapter.notifyDataSetChanged()
@@ -351,8 +434,57 @@ class DetailPostFragment : Fragment() {
 
     }
 
+    private fun postSchoolComment(schoolNameIdx: Int, post_idx: Int, postSchoolCommentReq: PostSchoolCommentReq){
+        //Log.d("postScholarship", "호출은 된다.")
+        val getCommentsInterface = ApplicationClass.sRetrofit.create(DetailPostRetrofitInterface::class.java)
+        getCommentsInterface.postSchoolComment(schoolNameIdx, post_idx, postSchoolCommentReq).enqueue(object :
+            Callback<PostSchoolCommentResponse> {
+            @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
+            override fun onResponse(call: Call<PostSchoolCommentResponse>, response: Response<PostSchoolCommentResponse>) {
+                if (response.isSuccessful) {
+                    val result = response.body() as PostSchoolCommentResponse
+                    if(result.message == "댓글이 추가되었습니다."){
+                        dataList = arrayListOf()
+                        binding.detailPostEtComment.text = null
+                        binding.detailPostCheckboxAnonymous.isChecked = false
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            //실행할 코드
+                            dataList = arrayListOf<CommentData>()
+                            rvAdapter = DetailPostCommentsAdapter(dataList, requireContext())
+                            getSchoolOnePost(idx,post_idx)
+                            //getComments(post_idx, bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0))
+                            binding.detailPostRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+                            binding.detailPostRv.addOnLayoutChangeListener(onLayoutChangeListener)
+                            binding.detailPostRv.adapter = rvAdapter
+                        }, 300)
+
+                        getOnePost(bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0), post_idx)
+                    }
+                    else{
+                        Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                        Log.d("getProfile", "onResponse : Error message ${response.message()}")
+                    }
+                }
+                else{
+                    Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<PostSchoolCommentResponse>, t: Throwable) {
+                Log.d("getProfile", t.message ?: "통신오류")
+            }
+        })
+
+    }
+
     override fun onResume() {
         super.onResume()
-        getOnePost(bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0), post_idx)
+        //getOnePost(bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0), post_idx)
     }
+    private val onLayoutChangeListener =
+        View.OnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
+            // 키보드가 올라와 높이가 변함
+            if (bottom < oldBottom) {
+                binding.detailPostRv.scrollBy(0, oldBottom - bottom) // 스크롤 유지를 위해 추가
+            }
+        }
 }

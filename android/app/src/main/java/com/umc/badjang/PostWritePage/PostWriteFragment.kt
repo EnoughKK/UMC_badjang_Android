@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -20,8 +22,11 @@ import com.umc.badjang.HomePagaApi.MainApiClient
 import com.umc.badjang.HomePagaApi.MainMySchoolApiData
 import com.umc.badjang.HomePagaApi.MainMySchoolApiResult
 import com.umc.badjang.HomePagaApi.MainMySchoolApiService
+import com.umc.badjang.MainActivity
+import com.umc.badjang.PostPage.Board.PostBoardFragment
 import com.umc.badjang.databinding.FragmentPostWriteBinding
 import com.umc.badjang.mConnectUserId
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,8 +82,13 @@ class PostWriteFragment : Fragment() {
         // 이전 버튼 선택 시
         viewBinding.postWriteBackBtn.setOnClickListener {
             // 이전 페이지로 이동
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-            requireActivity().supportFragmentManager.popBackStack()
+            var fragment = PostBoardFragment()
+            val bundle = Bundle()
+            bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+            fragment.arguments = bundle
+            (requireActivity() as MainActivity).changeReplaceFragment(fragment)
+//            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+//            requireActivity().supportFragmentManager.popBackStack()
         }
 
         // 제목 입력 글자 수 제한
@@ -201,10 +211,15 @@ class PostWriteFragment : Fragment() {
                     // 학교 게시판 게시글 작성
                     apiAddSchoolPost(body)
                 }
-
                 // 이전 페이지로 이동
-                requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                requireActivity().supportFragmentManager.popBackStack()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    //실행할 코드
+                    var fragment = PostBoardFragment()
+                    val bundle = Bundle()
+                    bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+                    fragment.arguments = bundle
+                    (requireActivity() as MainActivity).changeReplaceFragment(fragment)
+                }, 300)
             }
         }
     }
