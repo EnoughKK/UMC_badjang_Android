@@ -68,11 +68,11 @@ class PostWriteFragment : Fragment() {
         retrofit = MainApiClient.mainApiRetrofit
 
         // 이전 페이지에서 카테고리 데이터 받아오기
-        //categoryIdx = requireArguments().getInt("category_idx", 0)
-        //category = requireArguments().getString("category_name", "null")
+        categoryIdx = requireArguments().getInt("category_idx", 0)
+        category = requireArguments().getString("category_name", "null")
 
-        //if(category == null || category == "null")
-        category = "자유게시판"
+        //categoryIdx = 2
+        //category = "경상국립대학교"
 
         // 이전 버튼 선택 시
         viewBinding.postWriteBackBtn.setOnClickListener {
@@ -170,23 +170,41 @@ class PostWriteFragment : Fragment() {
                 var anonymity = "N"
                 if(viewBinding.anonymityCheckbox.isChecked) anonymity = "Y"
 
-                val body = PostWriteApiData(
-                    mConnectUserId!!,
-                    category!!,
-                    title,
-                    content,
-                    selectImage,
-                    anonymity
-                )
+                // 자유게시판 게시글 작성
+                if(category == "자유게시판") {
 
-                Log.d("Test", body.toString())
+                    val body = PostWriteApiData(
+                        mConnectUserId!!,
+                        category!!,
+                        title,
+                        content,
+                        selectImage,
+                        anonymity
+                    )
 
-                // 게시글 작성
-                apiAddPost(body)
+                    Log.d("Test", body.toString())
+
+                    // 자유게시판 게시글 작성
+                    apiAddPost(body)
+                }
+                // 학교 게시판 게시글 작성
+                else {
+                    val body = SchoolPostWriteApiData(
+                        title,
+                        content,
+                        selectImage,
+                        anonymity
+                    )
+
+                    Log.d("Test", body.toString())
+
+                    // 학교 게시판 게시글 작성
+                    apiAddSchoolPost(body)
+                }
 
                 // 이전 페이지로 이동
-                //requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                //requireActivity().supportFragmentManager.popBackStack()
+                requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }
@@ -246,21 +264,37 @@ class PostWriteFragment : Fragment() {
         }
     }
 
-    // 게시글 작성
+    // 게시글 작성 - 자유 게시판
     private fun apiAddPost(post: PostWriteApiData) {
         retrofit!!.create(PostWriteApiService::class.java).addPost(xAccessToken=jwt!!, userIdx=mConnectUserId!!, post)
             .enqueue(object : Callback<PostWriteApiResponse> {
                 override fun onResponse(call: Call<PostWriteApiResponse>, response: Response<PostWriteApiResponse>) {
-                    Log.d(ContentValues.TAG,"게시글 작성 -------------------------------------------")
+                    Log.d(ContentValues.TAG,"자유 게시판 게시글 작성 -------------------------------------------")
                     Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
                 }
 
                 override fun onFailure(call: Call<PostWriteApiResponse>, t: Throwable) {
-                    Log.d(ContentValues.TAG,"게시글 작성 -------------------------------------------")
+                    Log.d(ContentValues.TAG,"자유 게시판 게시글 작성 -------------------------------------------")
                     Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                 }
             })
     }
 
+    // 게시글 작성 - 학교 게시판
+    private fun apiAddSchoolPost(schoolPost: SchoolPostWriteApiData) {
+        retrofit!!.create(SchoolPostWriteApiService::class.java).addSchoolPost(xAccessToken=jwt!!, schoolNameIdx=categoryIdx!!, schoolPost)
+            .enqueue(object : Callback<SchoolPostWriteApiResponse> {
+                override fun onResponse(call: Call<SchoolPostWriteApiResponse>, response: Response<SchoolPostWriteApiResponse>) {
+                    Log.d(ContentValues.TAG,"학교 게시판 게시글 작성 -------------------------------------------")
+                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                }
+
+                override fun onFailure(call: Call<SchoolPostWriteApiResponse>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"학교 게시판 게시글 작성 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
 }
