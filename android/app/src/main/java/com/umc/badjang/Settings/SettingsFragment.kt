@@ -39,6 +39,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.settingsBtnLogout.setOnClickListener {
+//            var dialog = LogoutDialog(requireContext())
+//            dialog.show()
+//            dialog.setOnDismissListener {
+//                getMyProfile()
+//            }
             LogoutDialog(requireContext()).show()
         }
         viewBinding.settingsLlLogout.setOnClickListener {

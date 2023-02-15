@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
                 }
                 R.id.search -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, TSearchFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchLookupFragment()).commit()
                 }
                 R.id.mypage -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, MyPageFragment()).commit()

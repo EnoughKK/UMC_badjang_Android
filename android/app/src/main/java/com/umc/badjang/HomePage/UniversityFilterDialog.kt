@@ -101,13 +101,6 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
         universityAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, universityNameList)
         binding.spinnerSearchSchool.adapter = universityAdapter
 
-        // 단과대학 선택 리스트
-        collegeNameList = mutableListOf<String>()
-        collegeNameList!!.add("선택하기")
-
-        collegeAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, collegeNameList!!)
-        binding.selectionSchool.adapter = collegeAdapter
-
         // 학교 선택하기 누르면 spinner 리스트
         binding.spinnerSearchSchool.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -140,7 +133,10 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
 
                 if(userSelections != null) {
                     if(userSelections!!.user_college != null) {
-                        binding.selectionSchool.setSelection(collegeAdapter!!.getPosition(userSelections!!.user_college))
+                        if(collegeAdapter!!.getPosition(userSelections!!.user_college) != -1) {
+                            binding.selectionSchool.setSelection(collegeAdapter!!.getPosition(userSelections!!.user_college))
+                            selectCollege = userSelections!!.user_college
+                        }
                     }
                 }
             }
@@ -152,19 +148,13 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
             }
         }
 
-        // 학과 선택 리스트
-        departmentList = mutableListOf<String>()
-        departmentList!!.add("선택하기")
-
-        departmentAdapter = ArrayAdapter(context, R.layout.custom_spinner_item, departmentList!!)
-        binding.selectionMajor.adapter = departmentAdapter
-
         // 단과대학 선택하기 누르면 spinner 리스트
         binding.selectionSchool.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 단과대학
                 selectCollege = binding.selectionSchool.getSelectedItem().toString()
                 selectDepartment = null
+
 
                 // 선택된 단과대학의 학과 정보 가져오기 - 학과 선택 리스트
                 departmentList = mutableListOf<String>()
@@ -182,7 +172,10 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
                 // 사용자가 이전에 학과를 선택했던 정보가 있다면
                 if(userSelections != null) {
                     if (userSelections!!.user_department != null) {
-                        binding.selectionMajor.setSelection(departmentAdapter!!.getPosition(userSelections!!.user_department))
+                        if(departmentAdapter!!.getPosition(userSelections!!.user_department) != -1) {
+                            binding.selectionMajor.setSelection(departmentAdapter!!.getPosition(userSelections!!.user_department))
+                            selectDepartment = userSelections!!.user_department
+                        }
                     }
                 }
 
@@ -309,8 +302,10 @@ class UniversityFilterDialog(context: Context, activity: Activity) : Dialog(cont
 
                 // 사용자가 이전에 시군구를 선택했던 정보가 있다면
                 if(userSelections != null) {
-                    if (userSelections!!.user_city != null)
-                        binding.selectionLocal2.setSelection(cityAdapter!!.getPosition(userSelections!!.user_city))
+                    if (userSelections!!.user_city != null) {
+                        if( cityAdapter!!.getPosition(userSelections!!.user_city) != -1)
+                            binding.selectionLocal2.setSelection(cityAdapter!!.getPosition(userSelections!!.user_city))
+                    }
                 }
 
                 // 시군구 선택지가 없는 경우

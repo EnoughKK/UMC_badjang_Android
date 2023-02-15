@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
@@ -42,11 +43,12 @@ class PostBoardAdapter(private val dataSet: ArrayList<BoardData>, var context :C
         fun bind(item: BoardData) {
 
             binding.postContentCl.setOnClickListener {
-//                var fragment = DetailNotiFragment()
-//                val bundle = Bundle()
-//                bundle.putInt("idx", item.)
-//                fragment.arguments = bundle
-//                (context as MainActivity).changeFragment(fragment)
+                var fragment = DetailPostFragment()
+                val bundle = Bundle()
+                bundle.putInt("post_idx", item.post_idx)
+                bundle.putString("board_name", item.post_category)
+                fragment.arguments = bundle
+                (context as MainActivity).changeFragment(fragment)
             }
             // 작성자 프로필
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)

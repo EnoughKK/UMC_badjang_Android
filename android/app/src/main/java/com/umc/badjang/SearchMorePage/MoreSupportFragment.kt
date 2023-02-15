@@ -17,6 +17,7 @@ import com.umc.badjang.ApplicationClass
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.HomePage.MainMySchoolData
 import com.umc.badjang.R
+import com.umc.badjang.databinding.FragmentMoreSupportBinding
 import com.umc.badjang.databinding.FragmentMySchoolBinding
 import com.umc.badjang.mConnectUserId
 import kotlinx.coroutines.CoroutineScope
@@ -30,7 +31,7 @@ import retrofit2.Retrofit
 
 // 검색화면 > 장학금
 class  MoreSupportFragment : Fragment() {
-    private lateinit var viewBinding: FragmentMySchoolBinding // viewBinding
+    private lateinit var viewBinding: FragmentMoreSupportBinding// viewBinding
 
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
@@ -46,7 +47,7 @@ class  MoreSupportFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentMySchoolBinding.inflate(layoutInflater);
+        viewBinding = FragmentMoreSupportBinding.inflate(layoutInflater);
 
         return viewBinding.root
     }
@@ -61,7 +62,7 @@ class  MoreSupportFragment : Fragment() {
         retrofit = MainApiClient.mainApiRetrofit
 
         // 이전 버튼 선택 시
-        viewBinding.mySchoolBackBtn.setOnClickListener {
+        viewBinding.searchmoreSupportBackBtn.setOnClickListener {
             // 이전 페이지로 이동
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             requireActivity().supportFragmentManager.popBackStack()
@@ -84,9 +85,9 @@ class  MoreSupportFragment : Fragment() {
             onClickSupportBookmark = {
                 null
             })
-        viewBinding.mySchoolRecyclerview.layoutManager =
+        viewBinding.searchmoreSupportRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewBinding.mySchoolRecyclerview.adapter = mySchoolAdapter
+        viewBinding.searchmoreSupportRecyclerview.adapter = mySchoolAdapter
         mySchoolAdapter.datas = mySchoolDatas
     }
 /*

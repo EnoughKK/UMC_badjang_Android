@@ -124,7 +124,7 @@ class PopularPostFragment : Fragment() {
                     //Log.d(ContentValues.TAG,"인기글 내용 -------------------------------------------")
                     //Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
-                    val postData =response.body()!!.result[0]
+                    val postData = response.body()!!.result[0]
 
                     // 익명
                     if(postData.post_anonymity == "Y") {

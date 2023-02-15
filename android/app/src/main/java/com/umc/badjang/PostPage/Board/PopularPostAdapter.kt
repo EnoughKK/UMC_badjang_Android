@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PopularPostData
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
@@ -41,13 +42,13 @@ class PopularPostAdapter(private val dataSet: ArrayList<PopularPostData>, var co
 
     inner class ViewHolder(private val binding: RvPopularPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PopularPostData) {
-
             binding.popularPostCl.setOnClickListener {
-//                var fragment = DetailNotiFragment()
-//                val bundle = Bundle()
-//                bundle.putInt("idx", item.)
-//                fragment.arguments = bundle
-//                (context as MainActivity).changeFragment(fragment)
+                var fragment = DetailPostFragment()
+                val bundle = Bundle()
+                bundle.putInt("post_idx", item.post_idx)
+                bundle.putString("board_name", item.post_category)
+                fragment.arguments = bundle
+                (context as MainActivity).changeFragment(fragment)
             }
             // 작성자 프로필
             Glide.with(context).load(item.user_profileimage_url).into(binding.userImage)
@@ -57,12 +58,12 @@ class PopularPostAdapter(private val dataSet: ArrayList<PopularPostData>, var co
             else{
                 binding.userName.text = "익명"
             }
-            binding.writeDate.text = item.popular_createAt.substring(0,4)+"."+item.popular_createAt.substring(5,7)+"."+item.popular_createAt.substring(8,10)
+            binding.writeDate.text = item.post_createAt.substring(0,4)+"."+item.post_createAt.substring(5,7)+"."+item.post_createAt.substring(8,10)
             binding.postTitle.text = item.post_name
-            binding.postContents.text = item.popular_content
+            binding.postContents.text = item.post_content
             binding.postGood.text = item.post_recommend.toString()
             binding.postViews.text = item.post_view.toString()
-            binding.postCategory.text = item.board_category
+            binding.postCategory.text = item.post_category
 
         }
     }

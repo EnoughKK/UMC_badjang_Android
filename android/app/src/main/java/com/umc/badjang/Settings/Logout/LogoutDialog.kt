@@ -13,11 +13,13 @@ import android.content.Intent
 import android.content.Intent.*
 import android.util.Log
 import android.widget.Toast
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.ApplicationClass.Companion.QUREY_TEXT
 import com.umc.badjang.ApplicationClass.Companion.USER_IDX
 import com.umc.badjang.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.umc.badjang.LoginPage.LoginActivity
+import com.umc.badjang.MainActivity
 import com.umc.badjang.Settings.Logout.models.LogoutRequest
 import com.umc.badjang.Settings.Logout.models.LogoutResponse
 import com.umc.badjang.databinding.DialogLogoutBinding
@@ -95,6 +97,7 @@ class LogoutDialog (context:Context) : Dialog(context){
                         //지금 까지 쌓여있는 모든 액티비티 지우기
                         intent.setFlags(FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK and FLAG_ACTIVITY_CLEAR_TOP)
                         context.startActivity(intent)
+                        (this as MainActivity).finish()
                     }
                     else->{
                         Log.e("로그아웃 실패","${response.message()}")

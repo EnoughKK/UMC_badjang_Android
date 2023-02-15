@@ -18,6 +18,13 @@
         android:orientation="horizontal">
 
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/search_main_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            tools:ignore="MissingConstraints">
+
             <ImageButton
                 android:id="@+id/Search_UpBtn"
                 android:layout_width="wrap_content"
@@ -31,17 +38,19 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_baseline_arrow_back_24" />
 
-            <androidx.appcompat.widget.SearchView
+            <EditText
                 android:id="@+id/search_word"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/searchview_background"
+                android:drawableStart="@drawable/ic_select_menu_search"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                app:queryHint="검색어를 입력하세요."
-                android:imeOptions="actionSearch"
+                android:hint="검색어를 입력하세요."
                 android:inputType="text" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </LinearLayout>
 
