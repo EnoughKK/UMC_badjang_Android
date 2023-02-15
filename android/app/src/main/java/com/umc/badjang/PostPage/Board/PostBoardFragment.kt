@@ -185,7 +185,7 @@ class PostBoardFragment : Fragment() {
                 category_idx = 0
                 category_name = "자유게시판"
             }
-
+            ApplicationClass.bSharedPreferences.edit().putString("board_name",category_name).commit()
             var fragment = PostWriteFragment()
             val bundle = Bundle()
             bundle.putInt("category_idx", category_idx) // 게시판 카테고리 idx
