@@ -2,6 +2,7 @@ package com.umc.badjang.PostPage.Board
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,8 +18,10 @@ import com.umc.badjang.MyPage.QNA.QData
 import com.umc.badjang.MyPage.QNA.QNARetrofitInterface
 import com.umc.badjang.PostPage.AllPostData
 import com.umc.badjang.PostPage.Board.Model.GetAllPopularPostBoardResponse
+import com.umc.badjang.PostPage.Board.Model.GetAllSchoolPostResponse
 import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
 import com.umc.badjang.PostPage.Board.Model.GetPostBoardResponse
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PopularPostData
 import com.umc.badjang.databinding.FragmentPostBoardBinding
 import retrofit2.Call
@@ -44,24 +47,40 @@ data class BoardData(val post_idx : Int,
                      val user_profileimage_url : String)
 
 data class PopularPostBoardData(val popular_idx : Int,
-                           val post_idx : Int,
-                           val user_idx : Int,
-                           val school_name_idx : Int,
-                           val popular_createAt : String,
-                           val popular_updateAt : String,
-                           val popular_status : String,
-                           val count : Int,
-                           val user_name : String?,
-                           val board_category : String,
-                           val post_anonymity : String,
-                           val user_profileimage_url : String,
-                           val popular_content : String,
-                           val post_image : String?,
-                           val post_view : Int,
-                           val post_recommend : Int,
-                           val post_name : String,
-                            val  post_comment : Int
+                                val post_idx : Int,
+                                val user_idx : Int,
+                                val school_name_idx : Int,
+                                val post_content: String,
+                                val post_createAt : String,
+                                val post_updateAt : String,
+                                val postp_status : String,
+                                val count : Int,
+                                val user_name : String?,
+                                val post_category : String,
+                                val post_anonymity : String,
+                                val user_profileimage_url : String,
+                                val post_image : String?,
+                                val post_view : Int,
+                                val post_recommend : Int,
+                                val post_name : String,
+                                val post_comment : Int
 )
+
+data class SchoolData(val post_idx : Int,
+                     val user_idx : Int,
+                      val user_name : String,
+                      val user_profileimage_url : String,
+                     val post_name : String,
+                     val post_content : String,
+                     val post_image : String?,
+                     val post_view : Int,
+                     val post_recommend : Int,
+                     val post_comment : Int,
+                      val post_anonymity : String,
+                      val post_category:String,
+                      val post_school_name : String,
+                     val post_createAt : String,
+                     val recommend_check : Int)
 
 class PostBoardFragment : Fragment() {
     private lateinit var binding: FragmentPostBoardBinding // viewBinding
@@ -70,8 +89,13 @@ class PostBoardFragment : Fragment() {
     private lateinit var popularAdapter : PopularPostBoardAdapter
     private var dataList = arrayListOf<BoardData>()
     private var popularDataList = arrayListOf<PopularPostBoardData>()
-    var activity: MainActivity? = null
 
+    private lateinit var schoolAdapter : SchoolAdapter
+    private var schoolDataList = arrayListOf<SchoolData>()
+
+    var activity: MainActivity? = null
+    var category_idx = -1
+    var category_name = ""
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = getActivity() as MainActivity
@@ -101,11 +125,71 @@ class PostBoardFragment : Fragment() {
             binding.postBoardRv.adapter = rvAdapter
         }else if(requireArguments().getString("name") == "인기게시판"){
             binding.postBoardTvTitle.text = requireArguments().getString("name")
-
+            binding.postBoardIvWrite.visibility = View.GONE
+            binding.postBoardIvWrite.isClickable = false
             popularAdapter = PopularPostBoardAdapter(popularDataList, requireContext())
             getPopularPostBoard()
             binding.postBoardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             binding.postBoardRv.adapter = popularAdapter
+        }else if(requireArguments().getString("name") == "부경대학교"){
+            binding.postBoardTvTitle.text = requireArguments().getString("name") + " 게시판"
+//            binding.postBoardIvWrite.visibility = View.GONE
+//            binding.postBoardIvWrite.isClickable = false
+            schoolAdapter = SchoolAdapter(schoolDataList, requireContext())
+            getSchoolPost(1)
+            binding.postBoardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            binding.postBoardRv.adapter = schoolAdapter
+        }else if(requireArguments().getString("name") == "경상국립대학교"){
+            binding.postBoardTvTitle.text = requireArguments().getString("name") + " 게시판"
+//            binding.postBoardIvWrite.visibility = View.GONE
+//            binding.postBoardIvWrite.isClickable = false
+            schoolAdapter = SchoolAdapter(schoolDataList, requireContext())
+            getSchoolPost(2)
+            binding.postBoardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            binding.postBoardRv.adapter = schoolAdapter
+        }else if(requireArguments().getString("name") == "한국해양대학교"){
+            binding.postBoardTvTitle.text = requireArguments().getString("name") + " 게시판"
+//            binding.postBoardIvWrite.visibility = View.GONE
+//            binding.postBoardIvWrite.isClickable = false
+            schoolAdapter = SchoolAdapter(schoolDataList, requireContext())
+            getSchoolPost(3)
+            binding.postBoardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            binding.postBoardRv.adapter = schoolAdapter
+        }else if(requireArguments().getString("name") == "부산대학교"){
+            binding.postBoardTvTitle.text = requireArguments().getString("name") + " 게시판"
+//            binding.postBoardIvWrite.visibility = View.GONE
+//            binding.postBoardIvWrite.isClickable = false
+            schoolAdapter = SchoolAdapter(schoolDataList, requireContext())
+            getSchoolPost(4)
+            binding.postBoardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            binding.postBoardRv.adapter = schoolAdapter
+        }
+
+        // 게시글 작성하기 버튼 클릭 리스너
+        binding.postBoardIvWrite.setOnClickListener {
+            if(requireArguments().getString("name") == "부산대학교"){
+                category_idx = 4
+                category_name = "학교게시판"
+            }else if(requireArguments().getString("name") == "한국해양대학교"){
+                category_idx = 3
+                category_name = "학교게시판"
+            }else if(requireArguments().getString("name") == "경상국립대학교"){
+                category_idx = 2
+                category_name = "학교게시판"
+            }else if(requireArguments().getString("name") == "부경대학교"){
+                category_idx = 1
+                category_name = "학교게시판"
+            }else if(requireArguments().getString("name") == "자유게시판"){
+                category_idx = 0
+                category_name = "자유게시판"
+            }
+
+            var fragment = PostWriteFragment()
+            val bundle = Bundle()
+            bundle.putInt("category_idx", category_idx) // 게시판 카테고리 idx
+            bundle.putString("category_name", category_name) // 게시판 카테고리 이름
+            fragment.arguments = bundle
+            (context as MainActivity).changeFragment(fragment)
         }
 
         binding.postBoardPrev.setOnClickListener {
@@ -114,6 +198,7 @@ class PostBoardFragment : Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
+
     private fun getPostBoard(user_idx: Int){
         //Log.d("postScholarship", "호출은 된다.")
         val getPostBoardInterface = ApplicationClass.sRetrofit.create(PostBoardRetrofitInterface::class.java)
@@ -138,6 +223,8 @@ class PostBoardFragment : Fragment() {
                             }else{
                                 name = "익명"
                             }
+                            category_idx = 0
+                            category_name = "자유게시판"
                             dataList.add(
                                 BoardData(result.result[i].post_idx, result.result[i].user_idx,
                                 result.result[i].post_category, result.result[i].post_name,result.result[i].post_content,
@@ -198,13 +285,14 @@ class PostBoardFragment : Fragment() {
                             }
                             popularDataList.add(PopularPostBoardData(result.result[i].popular_idx,
                                 result.result[i].post_idx, result.result[i].user_idx,
-                                result.result[i].school_name_idx, result.result[i].popular_createAt,
-                                result.result[i].popular_updateAt, result.result[i].popular_status,
+                                result.result[i].school_name_idx, result.result[i].post_content,
+                                result.result[i].post_createAt,
+                                result.result[i].post_updateAt, result.result[i].postp_status,
                                 result.result[i].count, result.result[i].user_name,
-                                result.result[i].board_category, result.result[i].post_anonymity,
-                                result.result[i].user_profileimage_url, result.result[i].popular_content,
-                                result.result[i].post_image, result.result[i].post_view,
-                                result.result[i].post_recommend, result.result[i].post_name, result.result[i].post_comment)
+                                result.result[i].post_category, result.result[i].post_anonymity,
+                                result.result[i].user_profileimage_url, result.result[i].post_image,
+                                result.result[i].post_view, result.result[i].post_recommend,
+                                result.result[i].post_name, result.result[i].post_comment)
                             )
                         }
 
@@ -224,5 +312,63 @@ class PostBoardFragment : Fragment() {
             }
         })
 
+    }
+    private fun getSchoolPost(schoolNameIdx: Int){
+        //Log.d("postScholarship", "호출은 된다.")
+        val getSchoolPostInterface = ApplicationClass.sRetrofit.create(PostBoardRetrofitInterface::class.java)
+        getSchoolPostInterface.getSchoolAllPost(schoolNameIdx).enqueue(object :
+            Callback<GetAllSchoolPostResponse> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(call: Call<GetAllSchoolPostResponse>, response: Response<GetAllSchoolPostResponse>) {
+                if (response.isSuccessful) {
+                    val result = response.body() as GetAllSchoolPostResponse
+                    if(result.message == "요청에 성공하였습니다."){
+                        for(i in 0 until result.result.size){
+                            var img = ""
+                            if(result.result[i].post_image == null || result.result[i].post_image == ""){
+                                img = ""
+                            }else{
+                                img = result.result[i].post_image.toString()
+                            }
+                            var name = ""
+                            if(result.result[i].post_anonymity == "N"){
+                                //name = result.result[i].user_name
+                                name = result.result[i].user_name.toString()
+                            }else{
+                                name = "익명"
+                            }
+                            category_idx = schoolNameIdx
+                            category_name = "학교게시판"
+                            schoolDataList.add(
+                                SchoolData(result.result[i].post_idx, result.result[i].user_idx,
+                                    name, result.result[i].user_profileimage_url,
+                                    result.result[i].post_name,
+                                    result.result[i].post_content, img,
+                                    result.result[i].post_view, result.result[i].post_recommend,
+                                    result.result[i].post_comment, result.result[i].post_anonymity,
+                                    result.result[i].post_category, result.result[i].post_school_name,
+                                    result.result[i].post_createAt, result.result[i].recommend_check)
+                            )
+                        }
+                        schoolAdapter.notifyDataSetChanged()
+                    }
+                    else{
+                        Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                        Log.d("getProfile", "onResponse : Error message ${response.message()}")
+                    }
+                }
+                else{
+                    Log.d("getProfile", "onResponse : Error code ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<GetAllSchoolPostResponse>, t: Throwable) {
+                Log.d("getProfile", t.message ?: "통신오류")
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //getPostBoard(ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX,0))
     }
 }

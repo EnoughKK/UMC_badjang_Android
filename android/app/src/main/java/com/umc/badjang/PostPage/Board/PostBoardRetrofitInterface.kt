@@ -1,9 +1,6 @@
 package com.umc.badjang.PostPage.Board
 
-import com.umc.badjang.PostPage.Board.Model.GetAllPopularPostBoardResponse
-import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
-import com.umc.badjang.PostPage.Board.Model.GetPostBoardResponse
-import com.umc.badjang.PostPage.Board.Model.GetSchoolPostBoardResponse
+import com.umc.badjang.PostPage.Board.Model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,4 +17,7 @@ interface PostBoardRetrofitInterface {
 
     @GET("/popularBoardAll")
     fun getPopularPostBoard(): Call<GetAllPopularPostBoardResponse>
+
+    @GET("/board/school/{schoolNameIdx}")
+    fun getSchoolAllPost(@Path("schoolNameIdx") schoolNameIdx:Int): Call<GetAllSchoolPostResponse>
 }

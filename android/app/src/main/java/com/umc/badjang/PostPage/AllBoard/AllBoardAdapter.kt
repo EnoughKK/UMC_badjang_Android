@@ -1,4 +1,4 @@
-package com.umc.badjang.PostPage.Board
+package com.umc.badjang.PostPage.AllBoard
 
 import android.content.Context
 import android.os.Bundle
@@ -10,11 +10,12 @@ import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
+import com.umc.badjang.PostPage.AllPostData
 import com.umc.badjang.PostPage.SchoolPostData
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
-class SchoolPostBoardAdapter(private val dataSet: ArrayList<SchoolPostData>, var context :Context) :
+class AllBoardAdapter(private val dataSet: ArrayList<AllPostData>, var context :Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var binding: RvAllPostBinding
@@ -40,16 +41,16 @@ class SchoolPostBoardAdapter(private val dataSet: ArrayList<SchoolPostData>, var
     }
 
     inner class ViewHolder(private val binding: RvAllPostBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SchoolPostData) {
+        fun bind(item: AllPostData) {
 
             binding.allPostCl.setOnClickListener {
-                var fragment = PostBoardFragment()
-                val bundle = Bundle()
-                bundle.putString("name", item.post_school_name)
-                fragment.arguments = bundle
-                (context as MainActivity).changeFragment(fragment)
+//                var fragment = DetailNotiFragment()
+//                val bundle = Bundle()
+//                bundle.putInt("idx", item.)
+//                fragment.arguments = bundle
+//                (context as MainActivity).changeFragment(fragment)
             }
-            binding.allPostBoardName.text = item.post_school_name + " 게시판"
+            binding.allPostBoardName.text = item.board_name
         }
     }
 
