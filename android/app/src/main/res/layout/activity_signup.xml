@@ -302,7 +302,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
                                 android:background="@android:color/transparent"
-                                android:backgroundTint="@color/white"
                                 android:src="@drawable/property1_on"
                                 android:visibility="invisible"
                                 app:layout_constraintStart_toStartOf="parent"

@@ -20,6 +20,7 @@ object API {
     const val OPI_SUPPORT : String = "opi/empList.do"
 
     const val OPI_SUPPORT_KEY : String = "73444351051dbc5ea4541693"
+
 }
 
 object supportApiUrl {
@@ -35,5 +36,6 @@ object supportApiUrl {
 
 enum class  RESPONSE_STATE {
     OKAY,
-    FAIL
+    FAIL,
+    NO_CONTENT
 }

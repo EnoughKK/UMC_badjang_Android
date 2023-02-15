@@ -19,6 +19,7 @@ class ScholarshipLookupFragment: Fragment() {
     private lateinit var viewBinding: FragmentScholarshipLookupBinding // viewBinding
 
     private lateinit var viewPager: ViewPager2
+    //네개의 항목을 위한 tablayout
     private lateinit var tabLayout: TabLayout
     private lateinit var fragmentStateAdapter: FragmentStateAdapter
 

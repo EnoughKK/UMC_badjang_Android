@@ -1,0 +1,78 @@
+[33meae3498[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/#21/find_api[m[33m)[m HEAD@{0}: pull origin Develop: Merge made by the 'ort' strategy.
+[33m99f5854[m HEAD@{1}: reset: moving to ORIG_HEAD
+[33m99f5854[m HEAD@{2}: checkout: moving from develop to feature/#21/find_api
+[33mbd1f113[m[33m ([m[1;32mdevelop[m[33m)[m HEAD@{3}: checkout: moving from feature/#21/find_api to develop
+[33m99f5854[m HEAD@{4}: reset: moving to ORIG_HEAD
+[33maa93615[m HEAD@{5}: reset: moving to ORIG_HEAD
+[33m99f5854[m HEAD@{6}: reset: moving to ORIG_HEAD
+[33maa93615[m HEAD@{7}: reset: moving to ORIG_HEAD
+[33m99f5854[m HEAD@{8}: reset: moving to ORIG_HEAD
+[33maa93615[m HEAD@{9}: commit: issue #21 feature : main 내려받기
+[33m9603652[m HEAD@{10}: pull origin main: Merge made by the 'ort' strategy.
+[33m99f5854[m HEAD@{11}: commit (merge): issue #21 fix : 이름변경 dialog 추가
+[33mb16ab83[m HEAD@{12}: checkout: moving from develop to feature/#21/find_api
+[33mbd1f113[m[33m ([m[1;32mdevelop[m[33m)[m HEAD@{13}: pull origin Develop: Merge made by the 'ort' strategy.
+[33m3af6133[m HEAD@{14}: checkout: moving from feature/#21/find_api to develop
+[33mb16ab83[m HEAD@{15}: commit: issue #21 fix : 전번인증 sms api로 변경
+[33mf3378f4[m HEAD@{16}: pull origin Develop: Fast-forward
+[33m5358741[m[33m ([m[1;31morigin/feature/#21/find_api[m[33m)[m HEAD@{17}: checkout: moving from develop to feature/#21/find_api
+[33m3af6133[m HEAD@{18}: pull origin Develop: Merge made by the 'ort' strategy.
+[33m60383f1[m HEAD@{19}: checkout: moving from feature/#21/find_api to develop
+[33m5358741[m[33m ([m[1;31morigin/feature/#21/find_api[m[33m)[m HEAD@{20}: commit: issue #21 fix : 설정페이지 layout 수정 및 개인정보, 서비스 페이지 연결
+[33m82aa7b7[m HEAD@{21}: checkout: moving from develop to feature/#21/find_api
+[33m60383f1[m HEAD@{22}: checkout: moving from feature/#21/find_api to develop
+[33m82aa7b7[m HEAD@{23}: commit: issue #21 fix : layout 수정 imagebutton
+[33m05f2c5b[m HEAD@{24}: pull origin Develop: Merge made by the 'ort' strategy.
+[33mc58b0c0[m HEAD@{25}: checkout: moving from develop to feature/#21/find_api
+[33m60383f1[m HEAD@{26}: pull origin Develop: Merge made by the 'ort' strategy.
+[33m523e985[m HEAD@{27}: checkout: moving from feature/#21/find_api to develop
+[33mc58b0c0[m HEAD@{28}: commit: issue #21 feature : 전화번호 인증 구현2
+[33mf5e31e3[m HEAD@{29}: commit: issue #21 feature : 전화번호 인증 구현
+[33m3e063db[m HEAD@{30}: checkout: moving from develop to feature/#21/find_api
+[33m523e985[m HEAD@{31}: pull origin Develop: Merge made by the 'ort' strategy.
+[33mf84fbd5[m HEAD@{32}: checkout: moving from feature/#21/find_api to develop
+[33m3e063db[m HEAD@{33}: commit: issue #21 fix: logout api설정 및 fcm token 불러오기 구현2
+[33m1adfd07[m HEAD@{34}: commit: issue #21 fix: logout api설정 및 fcm token 불러오기 구현
+[33m85be8a6[m HEAD@{35}: commit: issue #21 fix: 아이디 찾기 및 비밀번호 찾기 레이아웃 수정
+[33m09c09d6[m HEAD@{36}: commit: develop 정리(2023/02/02)
+[33mb536848[m HEAD@{37}: commit (merge): develop 정리(2023/02/02)
+[33m17d678f[m HEAD@{38}: checkout: moving from develop to feature/#21/find_api
+[33mf84fbd5[m HEAD@{39}: commit (merge): develop 정리(2023/02/02)
+[33m5645d7d[m HEAD@{40}: checkout: moving from feature/#21/find_api to develop
+[33m17d678f[m HEAD@{41}: checkout: moving from develop to feature/#21/find_api
+[33m5645d7d[m HEAD@{42}: commit (merge): develop 정리
+[33m4a21c9c[m HEAD@{43}: checkout: moving from feature/#21/find_api to develop
+[33m17d678f[m HEAD@{44}: commit (merge): issue #21 feature: 소셜로그인 추가정보 layout 구현
+[33m4a21c9c[m HEAD@{45}: checkout: moving from develop to feature/#21/find_api
+[33m4a21c9c[m HEAD@{46}: checkout: moving from feature/#7/settings_layout to develop
+[33me6b8ee0[m[33m ([m[1;31morigin/feature/#7/settings_layout[m[33m, [m[1;32mfeature/#7/settings_layout[m[33m)[m HEAD@{47}: pull origin Develop: Merge made by the 'ort' strategy.
+[33mfc26d89[m HEAD@{48}: commit: issue #7 fix: signup api 구현 완료
+[33me3d6638[m HEAD@{49}: commit: issue #7 fix: login response result 설정 변경
+[33m3aae4a7[m HEAD@{50}: commit: issue #7 fix: login jwt 저장
+[33mf8080b7[m HEAD@{51}: commit: issue #7 feature, fix: kakaologin api
+[33m1fe57de[m HEAD@{52}: commit (merge): issue #7 feature: login api
+[33m385426f[m HEAD@{53}: checkout: moving from develop to feature/#7/settings_layout
+[33m4a21c9c[m HEAD@{54}: commit: value change
+[33mb694ef7[m HEAD@{55}: checkout: moving from feature/#7/settings_layout to develop
+[33m385426f[m HEAD@{56}: commit: issue #07 fix: 대부분 수정 다함
+[33ma377c58[m HEAD@{57}: commit: issue #07 feature: 카카오톡과 구글 로그인
+[33ma6b327e[m HEAD@{58}: commit: issue #07 fix: 눈모양 수정
+[33md7f9ac6[m HEAD@{59}: checkout: moving from feature/#2/login_layout to feature/#7/settings_layout
+[33m6c0720b[m[33m ([m[1;32mfeature/#2/login_layout[m[33m)[m HEAD@{60}: checkout: moving from feature/#7/settings_layout to feature/#2/login_layout
+[33md7f9ac6[m HEAD@{61}: commit: issue #07 feature: settings layout
+[33mb694ef7[m HEAD@{62}: checkout: moving from develop to feature/#7/settings_layout
+[33mb694ef7[m HEAD@{63}: pull origin Develop: Fast-forward
+[33m9c23d4c[m HEAD@{64}: checkout: moving from feature/#2/login_layout to develop
+[33m6c0720b[m[33m ([m[1;32mfeature/#2/login_layout[m[33m)[m HEAD@{65}: commit: issue #02 fix: strings.xml 수정
+[33m7371e2e[m HEAD@{66}: commit: issue #02 feature: 로그인 회원가입 레이아웃 완성
+[33m9c23d4c[m HEAD@{67}: checkout: moving from develop to feature/#2/login_layout
+[33m9c23d4c[m HEAD@{68}: checkout: moving from feature/#{2}/login_layout to develop
+[33m9c23d4c[m HEAD@{69}: checkout: moving from develop to feature/#{2}/login_layout
+[33m9c23d4c[m HEAD@{70}: checkout: moving from feature to develop
+[33m9c23d4c[m HEAD@{71}: checkout: moving from develop to feature
+[33m9c23d4c[m HEAD@{72}: checkout: moving from feature to develop
+[33m9c23d4c[m HEAD@{73}: checkout: moving from develop to feature
+[33m9c23d4c[m HEAD@{74}: commit: develop branch 추가
+[33m0127c00[m[33m ([m[1;32mmain[m[33m)[m HEAD@{75}: checkout: moving from main to develop
+[33m0127c00[m[33m ([m[1;32mmain[m[33m)[m HEAD@{76}: commit: viewbing 추가
+[33mf7103f1[m HEAD@{77}: clone: from https://github.com/EnoughKK/UMC_badjang_Android.git

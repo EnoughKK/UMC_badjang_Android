@@ -4,14 +4,18 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.google.gson.JsonElement
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.Model.GetScholarshipDTO
 import com.umc.badjang.Model.GetSupportDTO
 import com.umc.badjang.Model.ScholarshipViewCountDTO
+import com.umc.badjang.Searchpage.SearchRetrofit
+import com.umc.badjang.Searchpage.models.ScholarshipData
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Query
 
 class RetrofitManager {
 
@@ -24,6 +28,9 @@ class RetrofitManager {
     private val iSearchSupport : ISearchSupport? = SearchSupportRC.getClient(API.BASE_URL)?.create(ISearchSupport::class.java)
     private val iScholarshipViewCount : ISholarshipViewCount? = ScholarshipViewCountRC.getClient(API.BASE_URL)?.create(ISholarshipViewCount::class.java)
     private val iSupportViewCount : ISupportViewCount? = SupportViewCountRC.getClient(API.BASE_URL)?.create(ISupportViewCount::class.java)
+
+    //검색파트 레트로핏 인터페이스
+    private val searchRetrofit = ApplicationClass.sRetrofit.create(SearchRetrofit::class.java)
 
     // 장학금 조회 (필터사용)
     fun searchScholarship(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
@@ -457,5 +464,143 @@ class RetrofitManager {
 //
 //        })
 //    }
+
+    fun scholarshipsearch(query: String?, completion: (RESPONSE_STATE, ArrayList<ScholarshipData>?) -> Unit){
+
+        val term = query.let{
+            it
+        }?: ""
+
+        val call = searchRetrofit?.scholarshipsearch(query = term).let{
+            it
+        }?: return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            //응답 실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG,"RetrofitManager - onFailure() called / t $t")
+
+                completion(RESPONSE_STATE.FAIL,null)
+            }
+
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG,"RetrofitManager - onResponse() called / response : ${response.body()}")
+
+                when(response.code()){
+                    1000 -> {
+                        response.body()?.let {
+                            var ScholarshipDataArray = ArrayList<ScholarshipData>()
+                            val body = it.asJsonObject
+                            val results = body.getAsJsonArray("result")
+                            val code = body.get("code").asInt
+                            if(code == 3000){
+                                completion(RESPONSE_STATE.NO_CONTENT, null)
+                            }
+                            else {
+                                results.forEach { resultItem ->
+                                    val resultItemObject = resultItem.asJsonObject
+
+                                    @NonNull
+                                    val scholarship_idx = resultItemObject.get("scholarship_idx").asLong
+
+                                    @NonNull
+                                    val scholarship_name = resultItemObject.get("scholarship_name").asString
+
+                                    @Nullable
+                                    val scholarship_institution: String
+                                    if (resultItemObject.get("scholarship_institution").isJsonNull){
+                                        scholarship_institution = "기관정보 없음"
+                                    } else {
+                                        scholarship_institution = resultItemObject.get("scholarship_institution").asString
+                                    }
+
+                                    val scholarship_content: String
+                                    if (resultItemObject.get("scholarship_content").isJsonNull){
+                                        scholarship_content = "내용 없음"
+                                    } else {
+                                        scholarship_content = resultItemObject.get("scholarship_content").asString
+                                    }
+
+                                    val scholarship_image: String
+                                    if (resultItemObject.get("scholarship_image").isJsonNull){
+                                        scholarship_image = ""
+                                    } else {
+                                        scholarship_image = resultItemObject.get("scholarship_image").asString
+                                    }
+
+                                    val scholarship_homepage: String
+                                    if (resultItemObject.get("scholarship_homepage").isJsonNull){
+                                        scholarship_homepage = ""
+                                    } else {
+                                        scholarship_homepage = resultItemObject.get("scholarship_homepage").asString
+                                    }
+
+                                    val scholarship_view = resultItemObject.get("scholarship_view").asInt
+
+                                    val scholarship_comment = resultItemObject.get("scholarship_comment").asInt
+
+                                    val scholarship_scale: String
+                                    if (resultItemObject.get("scholarship_scale").isJsonNull){
+                                        scholarship_scale = ""
+                                    } else {
+                                        scholarship_scale = resultItemObject.get("scholarship_scale").asString
+                                    }
+
+                                    val scholarship_term: String
+                                    if (resultItemObject.get("scholarship_term").isJsonNull){
+                                        scholarship_term = ""
+                                    } else {
+                                        scholarship_term = resultItemObject.get("scholarship_term").asString
+                                    }
+
+                                    val scholarship_presentation: String
+                                    if (resultItemObject.get("scholarship_presentation").isJsonNull){
+                                        scholarship_presentation = ""
+                                    } else {
+                                        scholarship_presentation = resultItemObject.get("scholarship_presentation").asString
+                                    }
+
+                                    val scholarship_univ: String
+                                    if (resultItemObject.get("scholarship_univ").isJsonNull){
+                                        scholarship_univ = "대학이름 없음"
+                                    } else {
+                                        scholarship_univ = resultItemObject.get("scholarship_univ").asString
+                                    }
+
+                                    val scholarship_category: String
+                                    if (resultItemObject.get("scholarship_category").isJsonNull){
+                                        scholarship_category = "카테고리 없음"
+                                    } else {
+                                        scholarship_category = resultItemObject.get("scholarship_category").asString
+                                    }
+
+                                    val scholarshipItem = ScholarshipData(
+                                        scholarship_idx = scholarship_idx,
+                                        scholarship_name = scholarship_name,
+                                        scholarship_institution = scholarship_institution,
+                                        scholarship_content = scholarship_content,
+                                        scholarship_image = scholarship_image,
+                                        scholarship_homepage = scholarship_homepage,
+                                        scholarship_view = scholarship_view,
+                                        scholarship_comment = scholarship_comment,
+                                        scholarship_scale = scholarship_scale,
+                                        scholarship_term = scholarship_term,
+                                        scholarship_presentation = scholarship_presentation,
+                                    )
+                                    ScholarshipDataArray.add(scholarshipItem)
+                                }
+                                completion(RESPONSE_STATE.OKAY,ScholarshipDataArray)
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+        })
+    }
 
 }

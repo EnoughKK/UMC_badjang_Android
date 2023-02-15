@@ -50,7 +50,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
             android:src="@drawable/ic_star_checked"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 

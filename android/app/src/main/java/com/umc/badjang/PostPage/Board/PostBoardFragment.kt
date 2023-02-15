@@ -23,6 +23,7 @@ import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
 import com.umc.badjang.PostPage.Board.Model.GetPostBoardResponse
 import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PopularPostData
+import com.umc.badjang.PostWritePage.PostWriteFragment
 import com.umc.badjang.databinding.FragmentPostBoardBinding
 import retrofit2.Call
 import retrofit2.Callback

@@ -109,6 +109,7 @@
           android:text="전화번호 형식에 맞게 입력해주세요"
           android:textColor="#ED1C24"
           android:textSize="12sp"
+          android:visibility="invisible"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"/>
   </LinearLayout>
@@ -147,6 +148,7 @@
           android:textSize="12sp"
           android:layout_gravity="right"
           android:gravity="center"
+          android:visibility="invisible"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           android:layout_marginRight="10dp"/>
@@ -162,6 +164,7 @@
       android:textColor="#ED1C24"
       android:textSize="12sp"
       android:paddingStart="5dp"
+      android:visibility="invisible"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       android:layout_marginLeft="20dp"
