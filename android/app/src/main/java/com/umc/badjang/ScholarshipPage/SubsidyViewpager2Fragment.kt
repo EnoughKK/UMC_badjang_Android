@@ -10,28 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetSupportDTO
-import com.umc.badjang.Model.supportOpiDTO
+import com.umc.badjang.ScholarshipPage.Model.supportOpiDTO
 import com.umc.badjang.R
-import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
-import com.umc.badjang.databinding.RvSubsidyBinding
-import com.umc.badjang.utils.API
-import com.umc.badjang.utils.RESPONSE_STATE
 import com.umc.badjang.utils.supportApiUrl
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
-import retrofit2.Callback
-import retrofit2.Retrofit
 import javax.xml.parsers.DocumentBuilderFactory
 
 // 창업지원 데이터

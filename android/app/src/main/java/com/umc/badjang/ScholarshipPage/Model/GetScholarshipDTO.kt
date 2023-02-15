@@ -1,4 +1,4 @@
-package com.umc.badjang.Model
+package com.umc.badjang.ScholarshipPage.Model
 
 // 장학금 조회 (필터사용) DTO
 class GetScholarshipDTO (
@@ -14,5 +14,6 @@ class GetScholarshipDTO (
     var scholarship_term: String?,            // 신청기간
     var scholarship_presentation: String?,    // 심사발표
     var scholarship_univ: String?,            // 학교
-    var scholarship_category: String?         // 카테고리
+    var scholarship_category: String?,        // 카테고리
+    var isBookmarked: Boolean? = false
 )
