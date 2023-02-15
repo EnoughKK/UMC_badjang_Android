@@ -11,6 +11,7 @@ import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
 import com.umc.badjang.PostPage.PopularPostData
+import com.umc.badjang.PostWritePage.BitmapConverter
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
@@ -67,7 +68,10 @@ class PopularPostBoardAdapter(private val dataSet: ArrayList<PopularPostBoardDat
             if(item.post_image == "" || item.post_image == null){
                 binding.popularPostContentImg.visibility = View.GONE
             }else{
-                Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
+                var converter = BitmapConverter()
+                var bitmap2 = converter.StringToBitmap(item.post_image)
+                binding.popularPostContentImg.setImageBitmap(bitmap2)
+                //Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
             }
         }
     }

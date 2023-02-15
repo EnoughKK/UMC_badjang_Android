@@ -21,6 +21,7 @@ import com.umc.badjang.PostPage.Board.*
 import com.umc.badjang.PostPage.Board.Model.GetSchoolPostBoardResponse
 import com.umc.badjang.PostPage.Detail.Model.*
 import com.umc.badjang.PostPage.SchoolPostData
+import com.umc.badjang.PostWritePage.BitmapConverter
 import com.umc.badjang.R
 import com.umc.badjang.Settings.NameChangeDialog
 import com.umc.badjang.databinding.FragmentDetailPostBinding
@@ -390,7 +391,10 @@ class DetailPostFragment : Fragment() {
                         if(result.result.getOneOfSchoolBoardRes[0].post_image == "" || result.result.getOneOfSchoolBoardRes[0].post_image == null){
                             binding.detailPostContentImg.visibility = View.GONE
                         }else{
-                            Glide.with(requireActivity()).load(result.result.getOneOfSchoolBoardRes[0].post_image).into(binding.detailPostContentImg)
+                            var converter = BitmapConverter()
+                            var bitmap2 = converter.StringToBitmap(result.result.getOneOfSchoolBoardRes[0].post_image)
+                            binding.detailPostContentImg.setImageBitmap(bitmap2)
+                            //Glide.with(requireActivity()).load(result.result.getOneOfSchoolBoardRes[0].post_image).into(binding.detailPostContentImg)
                         }
                         binding.detailPostViewNum.text = result.result.getOneOfSchoolBoardRes[0].post_view.toString()
                         binding.detailPostGoodNum.text = result.result.getOneOfSchoolBoardRes[0].post_recommend.toString()

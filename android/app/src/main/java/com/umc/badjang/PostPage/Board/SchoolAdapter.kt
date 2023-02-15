@@ -11,6 +11,7 @@ import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
 import com.umc.badjang.PostPage.Detail.DetailPostFragment
+import com.umc.badjang.PostWritePage.BitmapConverter
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
@@ -62,7 +63,10 @@ class SchoolAdapter(private val dataSet: ArrayList<SchoolData>, var context :Con
             if(item.post_image == ""){
                 binding.popularPostContentImg.visibility = View.GONE
             }else{
-                Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
+                var converter = BitmapConverter()
+                var bitmap2 = converter.StringToBitmap(item.post_image)
+                binding.popularPostContentImg.setImageBitmap(bitmap2)
+                //Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
             }
             if(item.recommend_check == 1){
                 binding.popularPostGoodIcon.setImageResource(R.drawable.ic_good_count_blue)
