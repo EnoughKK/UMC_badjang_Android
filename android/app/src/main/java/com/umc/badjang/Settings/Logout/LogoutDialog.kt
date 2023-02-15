@@ -13,9 +13,13 @@ import android.content.Intent
 import android.content.Intent.*
 import android.util.Log
 import android.widget.Toast
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.ApplicationClass.Companion.QUREY_TEXT
+import com.umc.badjang.ApplicationClass.Companion.USER_IDX
 import com.umc.badjang.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.umc.badjang.LoginPage.LoginActivity
+import com.umc.badjang.MainActivity
 import com.umc.badjang.Settings.Logout.models.LogoutRequest
 import com.umc.badjang.Settings.Logout.models.LogoutResponse
 import com.umc.badjang.databinding.DialogLogoutBinding
@@ -67,6 +71,11 @@ class LogoutDialog (context:Context) : Dialog(context){
         //remove가 안 먹히는 것 같으니까 그냥 null값으로 저장
         prefEdit.putString(X_ACCESS_TOKEN,null).apply()
         prefEdit.commit()
+        prefEdit.putInt(USER_IDX,0).apply()
+        prefEdit.commit()
+        prefEdit.putString(QUREY_TEXT,null).apply()
+        prefEdit.commit()
+
         Log.d("logout","마이페이지-설정-로그아웃 jwt = $jwt")
         val clear_jwt=ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN,null)
         //초기화 확인
@@ -88,6 +97,7 @@ class LogoutDialog (context:Context) : Dialog(context){
                         //지금 까지 쌓여있는 모든 액티비티 지우기
                         intent.setFlags(FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK and FLAG_ACTIVITY_CLEAR_TOP)
                         context.startActivity(intent)
+                        (this as MainActivity).finish()
                     }
                     else->{
                         Log.e("로그아웃 실패","${response.message()}")

@@ -24,6 +24,9 @@ object API {
     const val SCHOLARSHIP_BOOKMARK: String = "scholarships/{scholarshipIdx}/bookmark_check"
 
     const val BOOKMARK_EDIT: String = "scholarships/{scholarshipIdx}/bookmark"
+
+    const val OPI_SUPPORT_KEY : String = "73444351051dbc5ea4541693"
+
 }
 
 object supportApiUrl {
@@ -39,5 +42,6 @@ object supportApiUrl {
 
 enum class  RESPONSE_STATE {
     OKAY,
-    FAIL
+    FAIL,
+    NO_CONTENT
 }

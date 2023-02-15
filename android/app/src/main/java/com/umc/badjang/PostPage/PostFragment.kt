@@ -13,11 +13,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
+import com.umc.badjang.PostPage.AllBoard.AllBoardFragment
 import com.umc.badjang.PostPage.Board.Model.GetPopularPostBoardResponse
 import com.umc.badjang.PostPage.Board.Model.GetSchoolPostBoardResponse
 import com.umc.badjang.PostPage.Board.PopularPostAdapter
+import com.umc.badjang.PostPage.Board.PostBoardFragment
 import com.umc.badjang.PostPage.Board.PostBoardRetrofitInterface
 import com.umc.badjang.PostPage.Board.SchoolPostBoardAdapter
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentPostBinding
 import retrofit2.Call
@@ -29,19 +32,21 @@ data class PopularPostData(val popular_idx : Int,
                            val post_idx : Int,
                            val user_idx : Int,
                            val school_name_idx : Int,
-                           val popular_createAt : String,
-                           val popular_updateAt : String,
-                           val popular_status : String,
+                           val post_content: String,
+                           val post_createAt : String,
+                           val post_updateAt : String,
+                           val postp_status : String,
                            val count : Int,
                            val user_name : String?,
-                           val board_category : String,
+                           val post_category : String,
                            val post_anonymity : String,
                            val user_profileimage_url : String,
-                           val popular_content : String,
                            val post_image : String?,
                            val post_view : Int,
                            val post_recommend : Int,
-                           val post_name : String)
+                           val post_name : String,
+                            val post_comment : Int)
+
 data class SchoolPostData(val school_name_idx : Int,
                           val post_school_name : String)
 class PostFragment : Fragment() {
@@ -97,6 +102,18 @@ class PostFragment : Fragment() {
         binding.popularPostRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
         binding.popularPostRv.adapter = popularAdapter
 
+        binding.allPostTvMore.setOnClickListener {
+            (context as MainActivity).changeFragment(AllBoardFragment())
+        }
+
+        binding.popularPostTvMore.setOnClickListener {
+            var fragment = PostBoardFragment()
+            val bundle = Bundle()
+            bundle.putString("name", "인기게시판")
+            fragment.arguments = bundle
+            (context as MainActivity).changeFragment(fragment)
+        }
+
     }
     private fun getSchoolPostBoard(){
         //Log.d("postScholarship", "호출은 된다.")
@@ -145,13 +162,14 @@ class PostFragment : Fragment() {
                             popularDataList.add(
                                 PopularPostData(result.result[i].popular_idx,
                                     result.result[i].post_idx, result.result[i].user_idx,
-                                    result.result[i].school_name_idx, result.result[i].popular_createAt,
-                                    result.result[i].popular_updateAt, result.result[i].popular_status,
+                                    result.result[i].school_name_idx, result.result[i].post_content,
+                                    result.result[i].post_createAt,
+                                    result.result[i].post_updateAt, result.result[i].postp_status,
                                     result.result[i].count, result.result[i].user_name,
-                                    result.result[i].board_category, result.result[i].post_anonymity,
-                                    result.result[i].user_profileimage_url, result.result[i].popular_content,
-                                    result.result[i].post_image, result.result[i].post_view,
-                                    result.result[i].post_recommend, result.result[i].post_name)
+                                    result.result[i].post_category, result.result[i].post_anonymity,
+                                    result.result[i].user_profileimage_url, result.result[i].post_image,
+                                    result.result[i].post_view, result.result[i].post_recommend,
+                                    result.result[i].post_name, result.result[i].post_comment)
                             )
                         }
                         popularAdapter.notifyDataSetChanged()

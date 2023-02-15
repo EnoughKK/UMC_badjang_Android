@@ -8,6 +8,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".ApplicationClass"
         android:allowBackup="true"
@@ -67,7 +73,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/NoTitleBarTheme"></activity>
+            android:theme="@style/NoTitleBarTheme">
+        </activity>
         <activity
             android:name=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" /> <!-- 카카오 로그인 -->
@@ -90,6 +97,8 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_native_key" />
+
+
 
         <activity
             android:name=".LoginPage.LogoActivity"

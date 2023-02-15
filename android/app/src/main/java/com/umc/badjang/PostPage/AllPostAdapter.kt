@@ -42,11 +42,16 @@ class AllPostAdapter(private val dataSet: ArrayList<AllPostData>, var context :C
     inner class ViewHolder(private val binding: RvAllPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AllPostData) {
             binding.allPostBoardName.text =  item.board_name
-
+            var name = ""
+            if(item.board_name.contains("대학교")){
+                name = item.board_name.substring(0,item.board_name.length-4)
+            }else{
+                name = item.board_name
+            }
             binding.allPostCl.setOnClickListener {
                 var fragment = PostBoardFragment()
                 val bundle = Bundle()
-                bundle.putString("name", item.board_name)
+                bundle.putString("name", name)
                 fragment.arguments = bundle
                 (context as MainActivity).changeFragment(fragment)
             }

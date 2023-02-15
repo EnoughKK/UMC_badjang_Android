@@ -57,9 +57,9 @@ class PopularPostBoardAdapter(private val dataSet: ArrayList<PopularPostBoardDat
                 binding.popularPostProfileNickname.text = "익명"
             }
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)
-            binding.popularPostProfileDate.text = item.popular_createAt.substring(0,4)+"."+item.popular_createAt.substring(5,7)+"."+item.popular_createAt.substring(8,10)
+            binding.popularPostProfileDate.text = item.post_createAt.substring(0,4)+"."+item.post_createAt.substring(5,7)+"."+item.post_createAt.substring(8,10)
             binding.popularPostContentTitle.text = item.post_name
-            binding.popularPostContentText.text = item.popular_content
+            binding.popularPostContentText.text = item.post_content
             binding.popularPostGoodNum.text = item.post_recommend.toString()
             binding.popularPostViewNum.text = item.post_view.toString()
             binding.popularPostCommentsNum.text = item.post_comment.toString()

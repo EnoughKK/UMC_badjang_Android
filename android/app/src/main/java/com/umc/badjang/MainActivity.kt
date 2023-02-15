@@ -21,9 +21,11 @@ import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.ScholarshipPage.Model.ScholarshipFilterDTO
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipViewpager1Fragment
+import com.umc.badjang.Searchpage.SearchLookupFragment
 import com.umc.badjang.Settings.AlarmFragment
 import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
+import com.umc.badjang.TSearchPage.TSearchFragment
 
 public var mConnectUserId: Int? = null
 public var mScholarshipFilterDatas: ArrayList<GetScholarshipDTO>? = null
@@ -107,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
                 }
                 R.id.search -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchLookupFragment()).commit()
                 }
                 R.id.mypage -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, MyPageFragment()).commit()

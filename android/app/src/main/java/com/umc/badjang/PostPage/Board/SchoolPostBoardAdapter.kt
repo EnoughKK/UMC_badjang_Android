@@ -43,13 +43,13 @@ class SchoolPostBoardAdapter(private val dataSet: ArrayList<SchoolPostData>, var
         fun bind(item: SchoolPostData) {
 
             binding.allPostCl.setOnClickListener {
-//                var fragment = DetailNotiFragment()
-//                val bundle = Bundle()
-//                bundle.putInt("idx", item.)
-//                fragment.arguments = bundle
-//                (context as MainActivity).changeFragment(fragment)
+                var fragment = PostBoardFragment()
+                val bundle = Bundle()
+                bundle.putString("name", item.post_school_name)
+                fragment.arguments = bundle
+                (context as MainActivity).changeFragment(fragment)
             }
-            binding.allPostBoardName.text = item.post_school_name
+            binding.allPostBoardName.text = item.post_school_name + " 게시판"
         }
     }
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".TSearchPage.TSearchFragment">
+
+    <LinearLayout
+        android:id="@+id/tsearch_linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <include
+            android:id="@+id/search_mainbar"
+            layout="@layout/search_toolbar" />
+
+    </LinearLayout>
+    <!--
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/search_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/Search_UpBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:layout_constraintEnd_toStartOf="@id/search_word" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_word"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/Search_UpBtn"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/searchview_background"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                app:queryHint="검색어를 입력하세요."
+                android:imeOptions="actionSearch"
+                app:iconifiedByDefault="false"
+                android:inputType="text"/>
+
+    </androidx.appcompat.widget.Toolbar>
+-->
+        <View
+            android:id="@+id/tsearch_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="70dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tsearch_scholarship_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="90dp"
+                android:orientation="horizontal"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+
+
+    <!-- 검색 히스토리 뷰 -->
+    <LinearLayout
+        android:id="@+id/linear_tsearch_history_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:background="#fff"
+        android:layout_marginTop="80dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:id="@+id/tsearch_history_recycler_view_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="최근 검색어"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingLeft="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tsearch_history_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tsearch_history_recycler_view_label"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</FrameLayout>
