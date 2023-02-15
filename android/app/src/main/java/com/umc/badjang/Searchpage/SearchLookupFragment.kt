@@ -8,11 +8,9 @@ import android.text.InputFilter
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -20,25 +18,26 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
-import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.Searchpage.SearchHistroy.ISearchHistroyRecyclerView
+import com.umc.badjang.Searchpage.SearchHistroy.SearchHistoryRecyclerViewAdapter
+import com.umc.badjang.Searchpage.SearchHistroy.SharedPrefManager
 import com.umc.badjang.Searchpage.models.DeleteSearchResponse
 import com.umc.badjang.Searchpage.models.RecentSearchResponse
 import com.umc.badjang.Searchpage.models.SearchData
 import com.umc.badjang.databinding.FragmentSearchLookupBinding
 import com.umc.badjang.utils.Constants.TAG
-import com.umc.badjang.utils.RESPONSE_STATE
 import com.umc.badjang.utils.toSimpleString
 import kotlinx.android.synthetic.main.fragment_search_lookup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.util.*
 import kotlin.collections.ArrayList
 
 var searchHistoryIdx:Long = 0
 
-class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnClickListener, ISearchHistroyRecyclerView {
+class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnClickListener,
+    ISearchHistroyRecyclerView {
     private lateinit var viewBinding: FragmentSearchLookupBinding// viewBinding
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -87,9 +86,9 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
     ): View? {
         viewBinding = FragmentSearchLookupBinding.inflate(layoutInflater);
        //툴바 적용
-        val myToolbar = viewBinding.searchMainBar
-        (context as AppCompatActivity).setSupportActionBar(myToolbar)
-        setHasOptionsMenu(true)
+        //val myToolbar = viewBinding.searchMainBar
+       // (context as AppCompatActivity).setSupportActionBar(myToolbar)
+        //setHasOptionsMenu(true)
 
         // 저장된 검색 기록 가져오기
         this.searchHistoryList = SharedPrefManager.getSearchHistoryList() as ArrayList<SearchData>
@@ -191,7 +190,7 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
             this.searchAPICall(query)
         }
 
-        this.viewBinding.searchMainBar.collapseActionView()
+        //this.viewBinding.searchMainBar.collapseActionView()
         return true
     }
 
@@ -236,7 +235,7 @@ class SearchLookupFragment : Fragment(), SearchView.OnQueryTextListener,View.OnC
         searchAPICall(queryString)
         this.insertSearchTermHistory(searchTerm = queryString)
         search_history_recycler_view.visibility=View.INVISIBLE
-        this.viewBinding.searchMainBar.collapseActionView()
+        //this.viewBinding.searchMainBar.collapseActionView()
     }
 
 

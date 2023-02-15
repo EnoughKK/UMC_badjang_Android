@@ -36,6 +36,8 @@ class FindIDActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
+        /*
+
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) { }
             override fun onVerificationFailed(e: FirebaseException) {
@@ -70,6 +72,8 @@ class FindIDActivity : AppCompatActivity() {
                 Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
             })
         }
+
+         */
 
 
         binding.FindIDPWPage.setOnClickListener {

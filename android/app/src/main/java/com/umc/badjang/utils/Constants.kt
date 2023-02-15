@@ -36,5 +36,6 @@ object supportApiUrl {
 
 enum class  RESPONSE_STATE {
     OKAY,
-    FAIL
+    FAIL,
+    NO_CONTENT
 }

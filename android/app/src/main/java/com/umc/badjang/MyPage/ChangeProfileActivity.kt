@@ -47,6 +47,7 @@ class ChangeProfileActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val result = response.body() as PostUserInfoModify
                     if(result.message == "요청에 성공하였습니다."){
+
                         Toast.makeText(applicationContext,result.result.toString(),Toast.LENGTH_SHORT).show()
                         finish()
                     }

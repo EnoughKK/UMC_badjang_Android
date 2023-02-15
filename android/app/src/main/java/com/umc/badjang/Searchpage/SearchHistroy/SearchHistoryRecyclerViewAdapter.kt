@@ -1,4 +1,4 @@
-package com.umc.badjang.Searchpage
+package com.umc.badjang.Searchpage.SearchHistroy
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.umc.badjang.utils.Constants.TAG
 
 class SearchHistoryRecyclerViewAdapter(searchHistoryRecyclerViewInterface: ISearchHistroyRecyclerView):RecyclerView.Adapter<SearchItemViewHolder>() {
     private  var searchHistoryList:ArrayList<SearchData> =ArrayList()
-    private var iSearchHistroyRecyclerView:ISearchHistroyRecyclerView ? =null
+    private var iSearchHistroyRecyclerView: ISearchHistroyRecyclerView? =null
 
     init{
         Log.d(TAG,"SearchHistoryRecyclerViewAdapter - init() called")

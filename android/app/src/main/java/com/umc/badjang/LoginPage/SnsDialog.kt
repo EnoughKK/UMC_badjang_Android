@@ -14,6 +14,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.LoginPage.Login.models.LoginResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.databinding.DialogSnsInfoBinding
 import com.umc.badjang.databinding.DialogTermtodisagreeBinding
@@ -59,6 +60,13 @@ class SnsDialog(private val text : String) : DialogFragment() {
             count = 0
         }
 
+        binding.snsBtnPrev.setOnClickListener{
+            val intent = Intent(requireContext(),LoginActivity::class.java)
+            //지금 까지 쌓여있는 모든 액티비티 지우기
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+        }
+
 
         binding.snsagreeBtn.setOnClickListener {
             var name: String = binding.snsName.text.toString()
@@ -101,17 +109,18 @@ class SnsDialog(private val text : String) : DialogFragment() {
                     Log.e("카카오 jwt","${jwt}")
                     Log.e("user_idx","${useridx}")
 
-                    Log.d("소셜 정보추가 서버", response.body().toString())
-                    when (response.body()!!.code) {
-                        1000 -> {
+                    var receive: SNSResponse? = response.body()
+
+                    Log.d("소셜 정보추가 서버", receive.toString())
+                        if(receive?.isSuccess==true){
                             buttonClickListener.onButtonClicked()
                             dismiss()
                             val intent = Intent(requireContext(),MainActivity::class.java)
                             //지금 까지 쌓여있는 모든 액티비티 지우기
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(intent)
                         }
-                        else -> {
+                        else if (receive?.isSuccess == false) {
                             Log.e("소셜 정보 추가 실패", "${response.message()}")
                             Toast.makeText(
                                 ApplicationClass.instance,
@@ -124,8 +133,6 @@ class SnsDialog(private val text : String) : DialogFragment() {
                         }
                     }
 
-
-                }
             })
         }
 

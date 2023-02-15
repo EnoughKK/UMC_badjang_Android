@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonElement
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.Model.GetScholarshipDTO
@@ -63,42 +64,51 @@ class SearchViewpager2Fragment: Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentSearchViewpager2Binding.inflate(layoutInflater);
-        loadScholarship()
+       // loadScholarship()
         return viewBinding.root
     }
 
-    // 데이터 가져오기 (api 셋팅)
-    private fun loadScholarship() {
-        searchRetrofit.scholarshipsearch(query_text.toString()).enqueue(object :Callback<ScholarshipSearchResponse>{
-            override fun onResponse(
-                call: Call<ScholarshipSearchResponse>,
-                response: Response<ScholarshipSearchResponse>
-            ) {
-                Log.d(ContentValues.TAG,"장학금검색 api -------------------------------------------")
-                Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+    /*
+       // 데이터 가져오기 (api 셋팅)
+       private fun loadScholarship() {
+           searchRetrofit.scholarshipsearch(query_text.toString()).enqueue(object :Callback<JsonElement>{
+               override fun onResponse(
+                   call: Call<JsonElement>,
+                   response: Response<JsonElement>
+               ) {
+                   Log.d(ContentValues.TAG,"장학금검색 api -------------------------------------------")
+                   Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
-                when(response.body()!!.code) {
-                    1000->{
-                        initRecycler()
-
-                    }
-                    else->{
-                        Log.e("장학금검색 실패","${response.message()}")
-                        Toast.makeText(ApplicationClass.instance,"${response.message()}",Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<ScholarshipSearchResponse>, t: Throwable) {
-                Log.d(ContentValues.TAG,"장학금 검색 api -------------------------------------------")
-                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
-            }
-
-        })
+                   when(response.body()!!.asJsonObject) {
 
 
-    }
+                       1000->{
+                           initRecycler()
+
+                       }
+                       else->{
+                           Log.e("장학금검색 실패","${response.message()}")
+                           Toast.makeText(ApplicationClass.instance,"${response.message()}",Toast.LENGTH_SHORT).show()
+                       }
+                   }
+
+               }
+
+               override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                   Log.d(ContentValues.TAG,"장학금 검색 api -------------------------------------------")
+                   Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+               }
+
+
+
+
+           })
+
+
+       }
+
+       */
+
 
     // recyclerview 셋팅
     private fun initRecycler() {

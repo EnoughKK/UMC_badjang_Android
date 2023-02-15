@@ -1,5 +1,6 @@
 package com.umc.badjang.Searchpage
 
+import com.google.gson.JsonElement
 import com.umc.badjang.Searchpage.models.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,7 +17,7 @@ interface SearchRetrofit {
 
     //장학금 검색 api
     @GET("/search/scholarship?query=")
-    fun scholarshipsearch(@Query("query") query: String) : Call<ScholarshipSearchResponse>
+    fun scholarshipsearch(@Query("query") query: String) : Call<JsonElement>
 
     //지원금 검색 api
     @GET("/search/support?query=")

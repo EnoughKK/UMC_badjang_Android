@@ -76,7 +76,6 @@ class SearchViewpager1Fragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         // 장학금 더보기 버튼 선택
         viewBinding.searchScholarshipMore.setOnClickListener(View.OnClickListener {
             activity?.changeFragment(MoreScholarshipFragment())
@@ -120,8 +119,8 @@ class SearchViewpager1Fragment: Fragment() {
 
         // 장학금 recyclerview 셋팅
         scholarshipAdapter = ScholarshipRVAdapter(requireContext())
-        viewBinding.scholarshipRvContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewBinding.scholarshipRvContainer.adapter = scholarshipAdapter
+        viewBinding.searchScholarshipRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewBinding.searchScholarshipRecyclerview.adapter = scholarshipAdapter
         scholarshipAdapter.datas = scholarshipDatas
 
         // 클릭 리스너 셋팅

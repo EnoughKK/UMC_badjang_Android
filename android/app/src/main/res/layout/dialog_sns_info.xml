@@ -15,17 +15,33 @@
         android:backgroundTint="@color/white"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sns_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="추가 정보 입력"
-        android:fontFamily="@font/notosanskr_bold"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        <FrameLayout
+            android:id="@+id/MyInfo_linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="78dp">
+
+            <ImageView
+                android:id="@+id/sns_btn_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/sns_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="추가 정보 입력"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </FrameLayout>
+
+
 
         <!--이름-->
         <com.google.android.material.textfield.TextInputLayout

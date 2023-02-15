@@ -33,7 +33,6 @@ import com.umc.badjang.LoginPage.Login.models.LoginResponse
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.databinding.ActivityLoginBinding
-import com.umc.badjang.databinding.DialogLogoutBinding
 import retrofit2.*
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener {
@@ -69,13 +68,13 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
         //아이디찾기 창으로
-//        binding.LoginFindID.setOnClickListener{
-//            startActivity(Intent(this, FindIDActivity::class.java))
-//        }
+        binding.LoginFindID.setOnClickListener{
+            startActivity(Intent(this, FindIDActivity::class.java))
+       }
         //비밀번호찾기 창으로
-//        binding.LoginFindPW.setOnClickListener{
-//            startActivity(Intent(this, FindPWActivity::class.java))
-//        }
+       binding.LoginFindPW.setOnClickListener{
+           startActivity(Intent(this, FindPWActivity::class.java))
+       }
 
         // 로그인 버튼
         binding.LoginBtn.setOnClickListener {
@@ -274,6 +273,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 }
                 //저장되어있는 jwt가 있으면, 바로 자동 로그인
                 else{
+                    val kakao_jwt1 = ApplicationClass.sSharedPreferences.getString("J-ACCESS-TOKEN",null)
+                    ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN",kakao_jwt1).commit()
                     dialogShow("추가 정보 입력",binding.loginToSns,false)
                 }
             }
@@ -323,6 +324,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                     }
                     //저장되어있는 jwt가 있으면, 바로 자동 로그인
                     else{
+                        val kakao_jwt2 = ApplicationClass.sSharedPreferences.getString("J-ACCESS-TOKEN",null)
+                        ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN",kakao_jwt2).commit()
                         dialogShow("추가 정보 입력",binding.loginToSns,false)
                     }
                 }
@@ -410,7 +413,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 if(success){
                     val intent = Intent(this@LoginActivity,MainActivity::class.java)
                     //지금 까지 쌓여있는 모든 액티비티 지우기
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                   // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                 }
             }

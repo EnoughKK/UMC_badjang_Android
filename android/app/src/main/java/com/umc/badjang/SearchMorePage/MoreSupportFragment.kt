@@ -79,7 +79,7 @@ class  MoreSupportFragment : Fragment() {
         mySchoolAdapter = NationalNewsAdapter(
             requireContext(),
             onClickScholarshipBookmark = {
-                apiBookmarkMySchool(it)
+                //apiBookmarkMySchool(it)
             },
             onClickSupportBookmark = {
                 null
@@ -89,7 +89,7 @@ class  MoreSupportFragment : Fragment() {
         viewBinding.mySchoolRecyclerview.adapter = mySchoolAdapter
         mySchoolAdapter.datas = mySchoolDatas
     }
-
+/*
     // 우리학교 데이터 추가
     private fun addMySchoolData(mySchoolData: NationalNewsData) {
         if(mySchoolData.nationalNewsImg == null) {
@@ -133,24 +133,8 @@ class  MoreSupportFragment : Fragment() {
             }
         }
     }
+    */
 
-    // 우리학교 장학금 즐겨찾기 추가 및 취소 api
-    private fun apiBookmarkMySchool(scholarshipIdx: Int) {
-        retrofit!!.create(BookmarkScholarshipApiService::class.java)
-            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=scholarshipIdx)
-            .enqueue(object : Callback<BookmarkResponseApiData> {
-                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
-                    Log.d(ContentValues.TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
-                    Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
-
-                }
-
-                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
-                    Log.d(ContentValues.TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
-                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
-                }
-            })
-    }
 
     // 우리학교 장학금 조회 api
     private fun apiMainMySchool() {
@@ -167,7 +151,7 @@ class  MoreSupportFragment : Fragment() {
                     // 우리학교 장학금 정보의 장학금 idx로 각 장학금 정보 조회
                     for(i:Int in (0..mySchoolData.size - 1)) {
                         //if(i >= 4) break
-                        apiScholarship(mySchoolData[i].scholarship_idx.toLong())
+                        //apiScholarship(mySchoolData[i].scholarship_idx.toLong())
                     }
                 }
 
@@ -177,7 +161,7 @@ class  MoreSupportFragment : Fragment() {
                 }
             })
     }
-
+/*
     // 장학금 idx로 장학금 정보 조회 api
     private fun apiScholarship(scholarshipIdx: Long) {
         retrofit!!.create(ScholarshipIdxApiService::class.java).getScholarshipData(scholarshipIdx)
@@ -197,7 +181,7 @@ class  MoreSupportFragment : Fragment() {
                             scholarshipData.scholarship_content,
                             scholarshipData.scholarship_image,
                             scholarshipData.scholarship_comment,
-                            scholarshipData.scholarship_view
+                            scholarshipData.scholarship_view,
                         )
                     )
                 }
@@ -207,5 +191,5 @@ class  MoreSupportFragment : Fragment() {
                     Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                 }
             })
-    }
+    }*/
 }

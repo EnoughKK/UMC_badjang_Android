@@ -43,7 +43,7 @@ class MyPageFragment : Fragment() {
     var type : String = ""
     var birth : String = ""
     var phone : String = ""
-    var push_yn : String = ""
+    var push_yn : String? = ""
     var on_off : String = ""
     var univ : String? = ""
     var college : String? = ""
@@ -52,6 +52,10 @@ class MyPageFragment : Fragment() {
     var semester : String? = ""
     var province : String? = ""
     var city : String? = ""
+    val bookmark_yn : String = ""
+    val new_post_yn : String = ""
+    val inq_answer_yn : String = ""
+    val comment_yn : String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

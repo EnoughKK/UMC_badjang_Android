@@ -15,6 +15,8 @@ import com.umc.badjang.ApplicationClass
 import com.umc.badjang.HomeMorePage.PopularPostData
 import com.umc.badjang.HomePagaApi.ImageLoader
 import com.umc.badjang.HomePagaApi.MainPopularApiService
+import com.umc.badjang.HomePagaApi.PostIdxApiData
+import com.umc.badjang.HomePagaApi.PostIdxApiService
 import com.umc.badjang.R
 import com.umc.badjang.Searchpage.SearchRetrofit
 import com.umc.badjang.Searchpage.models.BoardSearchResponse
@@ -69,36 +71,21 @@ class  MorePostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX,0)
+
         // recyclerview 세팅
         initRecycler()
 
+        //임시 데이터
+        profileImg = BitmapFactory.decodeResource(resources,R.drawable.non_profile)
 
 
         // 게시글 조회 api
-        //apiMorePost()
+        apiMorePost()
 
         // 임시 데이터
         profileImg = BitmapFactory.decodeResource(resources, R.drawable.non_profile)
 
-        val sampleData = mutableListOf<PopularPostData>(
-            PopularPostData(profileImg!!, "익명", "2022.12.28",
-            "이번에 2월에 졸업하는 사람도 해당되나요?", "다가오는 2월에 졸업하는 사람도 장학금을 받을 수 있는지 궁금합니다!\n알려주세요 ㅠㅠ",
-            null, 0, 1, 0),
-            PopularPostData(profileImg!!, "익명", "2022.12.28",
-                "혹시 게시판을 만들 수는 없나요?", "게시판을 따로 만들어서 원하는 정보만 공유하고 싶은데, 게시판을 만들 수 있나요?",
-                null, 0, 8, 1),
-            PopularPostData(profileImg!!, "익명", "2022.12.28",
-                "몇 학점 이상 들어야하는 조건이 있나요?", "경상대 학생입니다!!\n개척장학금을 받으려면 몇 학점 이상을 수강해야 한다는 조건이 있나요?",
-                null, 0, 5, 2)
-        )
-
-        // 게시글 데이터 추가
-        profileImg = BitmapFactory.decodeResource(resources, R.drawable.non_profile)
-        val popularPostImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.popular_post_img)
-        for(i: Int in 0..(sampleData.size - 1)) {
-            addPopularPostData(
-                sampleData[i])
-        }
 
         // 이전 버튼 선택 시
         viewBinding.searchmorePostBackBtn.setOnClickListener {
@@ -118,13 +105,12 @@ class  MorePostFragment : Fragment() {
     }
 
     // 게시글 데이터 추가
-    private fun addPopularPostData(popularPost: PopularPostData) {
+    private fun addMorePostData(searchMorePost: SearchMorePostData) {
         searchMorePostDatas.apply {
-            //add(searchMorePost)
+            add(searchMorePost)
         }
         searchMorePostAdapter.notifyDataSetChanged()
     }
-
 
 
     // 게시글 조회 api
@@ -134,14 +120,11 @@ class  MorePostFragment : Fragment() {
                     Log.d("게시글 더보기","게시글 -------------------------------------------")
                     Log.d("게시글 더보기", "onResponse: ${response.body().toString()}")
 
-                    var boardSearchResponse = response.body()!!
-                    var popularData: MutableList<BoardSearchResult> = allPopularData.result
-                    /*for(i:Int in (0..popularData.size - 1)) {
-                        addPopularPostData(
-                            PopularPostData(profileImg!!, "익명", "2022.12.28",
-                                popularData[i].post_content, "자기추천 장학금 신청방법은 성적향상도(15), 진로탐색경험 (15),  대외활동(10), 자격층 취득(5), 지도교수상담(5) 총 50점 중 ...",
-                                popularPostImg, 65, 215, 65))
-                    }*/
+                    var allMorePostData: BoardSearchResponse = response.body()!!
+                    var postData: MutableList<BoardSearchResult> = allMorePostData.result
+                    for(i: Int in (0..postData.size - 1)) {
+                        //apiPostData(postData[i].post_idx)
+                    }
 
                 }
 
@@ -152,118 +135,7 @@ class  MorePostFragment : Fragment() {
             })
     }
 
-    // 게시글 조회 api
-    private fun apiPostData(postIdx: Int) {
-        retrofit!!.create(PostIdxApiService::class.java).getPostData(mConnectUserId!!.toInt(), postIdx)
-            .enqueue(object : Callback<PostIdxApiData> {
-                override fun onResponse(call: Call<PostIdxApiData>, response: Response<PostIdxApiData>) {
-                    //Log.d(ContentValues.TAG,"인기글 내용 -------------------------------------------")
-                    //Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
 
-                    val postData =response.body()!!.result[0]
-
-                    // 익명
-                    if(postData.post_anonymity == "Y") {
-                        // 이미지 있음
-                        if(postData.post_image != null) {
-                            CoroutineScope(Dispatchers.Main).launch {
-                                val img: Bitmap? = withContext(Dispatchers.IO) {
-                                    ImageLoader.loadImage(postData.post_image)
-                                }
-                                addPopularPostData(
-                                    PopularPostData(
-                                        profileImg!!,
-                                        "익명",
-                                        postData.post_createAt,
-                                        postData.post_name,
-                                        postData.post_content,
-                                        img,
-                                        postData.post_comment,
-                                        postData.post_view,
-                                        postData.post_recommend
-                                    )
-                                )
-                            }
-                        }
-                        // 이미지 없음
-                        else {
-                            addPopularPostData(
-                                PopularPostData(
-                                    profileImg!!,
-                                    "익명",
-                                    postData.post_createAt,
-                                    postData.post_name,
-                                    postData.post_content,
-                                    null,
-                                    postData.post_comment,
-                                    postData.post_view,
-                                    postData.post_recommend
-                                )
-                            )
-                        }
-                    }
-                    // 익명 아님
-                    else {
-                        // 이미지 있음
-                        if(postData.post_image != null) {
-                            CoroutineScope(Dispatchers.Main).launch {
-                                val profile: Bitmap? = withContext(Dispatchers.IO) {
-                                    ImageLoader.loadImage(postData.user_profileimage_url!!)
-                                }
-                                val img: Bitmap? = withContext(Dispatchers.IO) {
-                                    ImageLoader.loadImage(postData.post_image)
-                                }
-                                addPopularPostData(
-                                    PopularPostData(
-                                        profile!!,
-                                        postData.user_name,
-                                        postData.post_createAt,
-                                        postData.post_name,
-                                        postData.post_content,
-                                        img,
-                                        postData.post_comment,
-                                        postData.post_view,
-                                        postData.post_recommend
-                                    )
-                                )
-                            }
-                        }
-                        // 이미지 없음
-                        else {
-                            CoroutineScope(Dispatchers.Main).launch {
-                                val profile: Bitmap? = withContext(Dispatchers.IO) {
-                                    ImageLoader.loadImage(postData.user_profileimage_url!!)
-                                }
-                                addPopularPostData(
-                                    PopularPostData(
-                                        profile!!,
-                                        postData.user_name,
-                                        postData.post_createAt,
-                                        postData.post_name,
-                                        postData.post_content,
-                                        null,
-                                        postData.post_comment,
-                                        postData.post_view,
-                                        postData.post_recommend
-                                    )
-                                )
-                            }
-                        }
-                    }
-
-                    /*CoroutineScope(Dispatchers.Main).launch {
-                        val img: Bitmap? = withContext(Dispatchers.IO) {
-                            ImageLoader.loadImage(postData.post_image!!)
-                        }
-                    }*/
-                }
-
-                override fun onFailure(call: Call<BoardSearchResponse>, t: Throwable) {
-                    Log.d(ContentValues.TAG,"인기글 내용 -------------------------------------------")
-                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
-                }
-            })
-    }
 
 
 }

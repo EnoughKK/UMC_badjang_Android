@@ -9,7 +9,10 @@ import com.umc.badjang.R
 import com.umc.badjang.databinding.MainBookmarksPostItemBinding
 import com.umc.badjang.databinding.MainBookmarksScholarshipItemBinding
 
-class BookmarkAdapter(private val context: Context) :
+class BookmarkAdapter(
+    private val context: Context,
+    val onClickScholarshipBookmark: (scholarship: BookmarkScholarshipData) -> Unit,
+    private val checkAll: Boolean):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var scholarshipViewBinding: MainBookmarksScholarshipItemBinding
@@ -62,19 +65,23 @@ class BookmarkAdapter(private val context: Context) :
         }
     }
 
-    class ScholarshipHolder(private val binding: MainBookmarksScholarshipItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ScholarshipHolder(private val binding: MainBookmarksScholarshipItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: BookmarkScholarshipData) {
+            if(!checkAll) { // 전체 즐겨찾기 탭이 아니면 '장학금'이라고 라벨 나오는 거 없애기
+                binding.bookmarksScholarshipLabel.visibility = View.GONE
+            }
+
             binding.bookmarksScholarshipInstitutionLabel.text = item.bookmarkScholarshipInstitution // 기관명
 
-            // 전국소식 내용 - 닫힌 버전
+            // 장학금 내용 - 닫힌 버전
             binding.bookmarksScholarshipCloseTitle.text = item.bookmarkScholarshipTitle             // 전국소식 제목
             if(item.bookmarkScholarshipImg != null)
                 binding.bookmarksScholarshipCloseImg.setImageBitmap(item.bookmarkScholarshipImg)        // 전국소식 이미지
             else
                 binding.bookmarksScholarshipCloseImg.visibility = View.GONE
 
-            // 전국소식 내용 - 열린 버전
+            // 장학금 내용 - 열린 버전
             binding.bookmarksScholarshipOpenTitle.text = item.bookmarkScholarshipTitle             // 전국소식 제목
             binding.bookmarksScholarshipOpenText.text = item.bookmarkScholarshipContent            // 전국소식내용
             if(item.bookmarkScholarshipImg != null)
@@ -86,16 +93,24 @@ class BookmarkAdapter(private val context: Context) :
             binding.bookmarksScholarshipCommentsNum.text = item.bookmarkScholarshipCommentsCnt.toString() // 댓글 수
             binding.bookmarksScholarshipViewNum.text = item.bookmarkScholarshipViewCnt.toString()         // 조회수
 
+            // 모두 즐겨찾기 되어있으므로
+            binding.bookmarksScholarshipBookmarkCheckBtn.visibility = View.GONE
+            binding.bookmarksScholarshipBookmarkUncheckBtn.visibility = View.VISIBLE
+
             // 즐겨찾기 체크 버튼 선택 시
             binding.bookmarksScholarshipBookmarkCheckBtn.setOnClickListener {
                 binding.bookmarksScholarshipBookmarkCheckBtn.visibility = View.GONE
                 binding.bookmarksScholarshipBookmarkUncheckBtn.visibility = View.VISIBLE
+
+                if(item.bookmarkScholarshipIdx != null) onClickScholarshipBookmark(item) // 즐겨찾기 추가/취소 api
             }
 
             // 즐겨찾기 해제 버튼 선택 시
             binding.bookmarksScholarshipBookmarkUncheckBtn.setOnClickListener {
                 binding.bookmarksScholarshipBookmarkCheckBtn.visibility = View.VISIBLE
                 binding.bookmarksScholarshipBookmarkUncheckBtn.visibility = View.GONE
+
+                if(item.bookmarkScholarshipIdx != null) onClickScholarshipBookmark(item) // 즐겨찾기 추가/취소 api
             }
 
             // 더보기 버튼 선택 시
@@ -122,7 +137,7 @@ class BookmarkAdapter(private val context: Context) :
         }
     }
 
-    class PostHolder(private val binding: MainBookmarksPostItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PostHolder(private val binding: MainBookmarksPostItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: BookmarkPostData) {
             // 작성자 프로필

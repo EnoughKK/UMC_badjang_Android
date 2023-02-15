@@ -1,4 +1,4 @@
-package com.umc.badjang.Searchpage
+package com.umc.badjang.Searchpage.SearchHistroy
 
 import android.content.Context
 import android.util.Log

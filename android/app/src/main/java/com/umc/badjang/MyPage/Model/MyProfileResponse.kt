@@ -8,7 +8,7 @@ data class MyProfileResponse(
     val user_type : String,
     val user_birth : String,
     val user_phone : String,
-    val user_push_yn : String,
+    val user_push_yn : String?,
     val user_on_off : String,
     val user_univ : String?,
     val user_college : String?,
@@ -16,5 +16,10 @@ data class MyProfileResponse(
     val user_grade : String?,
     val user_semester : String?,
     val user_province : String?,
-    val user_city : String?
+    val user_city : String?,
+    val bookmark_yn : String,
+    val new_post_yn : String,
+    val inq_answer_yn : String,
+    val comment_yn : String
+
 )

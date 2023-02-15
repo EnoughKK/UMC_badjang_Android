@@ -1,8 +1,9 @@
-package com.umc.badjang.Searchpage
+package com.umc.badjang.Searchpage.SearchHistroy
 
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.umc.badjang.Searchpage.SearchHistroy.ISearchHistroyRecyclerView
 import com.umc.badjang.Searchpage.models.SearchData
 import com.umc.badjang.utils.Constants.TAG
 import kotlinx.android.synthetic.main.past_search_list.view.*

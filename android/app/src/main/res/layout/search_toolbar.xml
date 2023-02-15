@@ -11,18 +11,12 @@
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/searchbar_button"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/search_main_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            tools:ignore="MissingConstraints">
 
             <ImageButton
                 android:id="@+id/Search_UpBtn"
@@ -49,9 +43,6 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text" />
 
-        </com.google.android.material.appbar.MaterialToolbar>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

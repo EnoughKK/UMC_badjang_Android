@@ -12,6 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+        <include
+            android:id="@+id/search_main_bar"
+            layout="@layout/search_toolbar" />
+
+        <!--
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,6 +37,7 @@
             app:navigationIcon="@drawable/logo"
             app:title="검색" />
     </com.google.android.material.appbar.AppBarLayout>
+        -->
 
     <View
             android:id="@+id/search_view"

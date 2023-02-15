@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:backgroundTint="@color/white"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/popular_post_cl">
 
     <ImageView
         android:id="@+id/user_image"
@@ -15,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -27,15 +30,17 @@
         app:layout_constraintTop_toTopOf="@id/user_image" />
 
     <TextView
+        android:id="@+id/write_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2022.12.28"
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/user_image"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/user_name" />
 
     <TextView
+        android:id="@+id/post_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="새로 만든 게시판"
@@ -45,24 +50,30 @@
 
     <TextView
         android:id="@+id/post_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.7"
         android:text="000 장학금"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintTop_toBottomOf="@+id/user_image"
         app:layout_constraintStart_toStartOf="@id/user_image"/>
 
     <TextView
         android:id="@+id/post_contents"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.7"
         android:text="받은 사람 있을까요?"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintTop_toBottomOf="@+id/post_title"
         app:layout_constraintStart_toStartOf="@id/user_image"/>
 
