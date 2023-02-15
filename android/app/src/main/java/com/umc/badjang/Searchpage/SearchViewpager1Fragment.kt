@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetScholarshipDTO
-import com.umc.badjang.Model.GetSupportDTO
+
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.Model.GetSupportDTO
 import com.umc.badjang.ScholarshipPage.ScholarshipDetailFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipRVAdapter
 import com.umc.badjang.ScholarshipPage.SubsidyRVAdapter
@@ -130,7 +131,7 @@ class SearchViewpager1Fragment: Fragment() {
                 val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
-                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx)
+                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx,"")
             }
         })
     }

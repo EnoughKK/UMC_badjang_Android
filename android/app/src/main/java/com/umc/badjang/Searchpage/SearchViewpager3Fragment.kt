@@ -18,10 +18,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetSupportDTO
-import com.umc.badjang.Model.supportOpiDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.supportOpiDTO
 import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
 import com.umc.badjang.databinding.RvSubsidyBinding
 import com.umc.badjang.utils.API

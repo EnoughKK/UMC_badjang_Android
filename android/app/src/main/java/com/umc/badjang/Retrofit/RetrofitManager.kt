@@ -4,24 +4,17 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.google.gson.JsonElement
-import com.google.protobuf.Api
 import com.umc.badjang.ApplicationClass
 import com.umc.badjang.ScholarshipPage.Model.*
-import com.umc.badjang.mConnectUserId
-import com.umc.badjang.ApplicationClass
-import com.umc.badjang.Model.GetScholarshipDTO
-import com.umc.badjang.Model.GetSupportDTO
-import com.umc.badjang.Model.ScholarshipViewCountDTO
 import com.umc.badjang.Searchpage.SearchRetrofit
 import com.umc.badjang.Searchpage.models.ScholarshipData
+import com.umc.badjang.mConnectUserId
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.Constants.TAG
 import com.umc.badjang.utils.RESPONSE_STATE
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
-import retrofit2.http.Query
 
 class RetrofitManager {
 

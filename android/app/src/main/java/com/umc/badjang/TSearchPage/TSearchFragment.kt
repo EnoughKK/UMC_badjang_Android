@@ -384,7 +384,7 @@ class TSearchFragment : Fragment(),SearchView.OnQueryTextListener, ISearchHistro
                 val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
-                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx)
+                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx,"")
             }
         })
     }

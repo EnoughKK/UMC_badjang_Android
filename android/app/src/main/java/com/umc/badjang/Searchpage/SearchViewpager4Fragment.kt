@@ -3,6 +3,8 @@ package com.umc.badjang.Searchpage
 import com.umc.badjang.ScholarshipPage.SubsidyRVAdapter
 import android.content.ContentValues
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,218 +19,235 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.ApplicationClass
+import com.umc.badjang.HomeMorePage.PopularPostAdapter
+import com.umc.badjang.HomeMorePage.PopularPostData
+import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetSupportDTO
-import com.umc.badjang.Model.supportOpiDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.supportOpiDTO
+import com.umc.badjang.databinding.FragmentPopularPostBinding
 import com.umc.badjang.databinding.FragmentSubsidyViewpager2Binding
 import com.umc.badjang.databinding.RvSubsidyBinding
+import com.umc.badjang.mConnectUserId
 import com.umc.badjang.utils.API
 import com.umc.badjang.utils.RESPONSE_STATE
 import com.umc.badjang.utils.supportApiUrl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import javax.xml.parsers.DocumentBuilderFactory
 
-// 창업지원 데이터
-private var supportDatas = ArrayList<supportOpiDTO>()
-
-// 창업지원 url
-private var url = "https://www.youthcenter.go.kr/opi/empList.do?pageIndex=1&display=30&query=청년취업&openApiVlak=73444351051dbc5ea4541693"
 
 class SearchViewpager4Fragment:Fragment() {
-    private lateinit var viewBinding: FragmentSubsidyViewpager2Binding
+    private lateinit var viewBinding: FragmentPopularPostBinding // viewBinding
 
-    var activity: MainActivity? = null
+    // api 통신을 위한 retrofit
+    private var retrofit: Retrofit? = null
 
-    // 지원금 recyclerview adapter
+    // 인기글 리스트 recyclerview adapter
+    private val popularPostDatas = mutableListOf<PopularPostData>()
+    private lateinit var popularPostAdapter: PopularPostAdapter
 
-    private lateinit var subsidyAdapter: SubsidyRVAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity = getActivity() as MainActivity
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        activity = null
-    }
+    // 인기글 데이터 익명 사용자 프로필 사진
+    var profileImg: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentSubsidyViewpager2Binding.inflate(layoutInflater);
-
-        addSupportAll()
-        initRecycler()
-
-        // 카테고리 선택
-        viewBinding.spinnerCategory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_category_support, R.layout.spinner_layout)
-        // 카테고리 클릭리스너
-        viewBinding.spinnerCategory.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
-                when (viewBinding.spinnerCategory.getItemAtPosition(position)) {
-                    "전체" -> {
-                        addSupportAll()
-                    }
-                    "취업지원" -> {
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL1)
-                    }
-                    "창업지원" -> {
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL2)
-                    }
-                    "주거·금융" -> {
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL3)
-                        threadStart(supportApiUrl.URL4)
-                    }
-                    "생활·복지" -> {
-
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL5)
-                        threadStart(supportApiUrl.URL6)
-                    }
-                    "정책참여" -> {
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL7)
-                    }
-                    "코로나19" -> {
-                        supportDatas.clear()
-                        threadStart(supportApiUrl.URL8)
-                    }
-                    else -> {
-                        Log.d(ContentValues.TAG, "onItemSelected: null")
-                    }
-                }
-                initRecycler()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
+        viewBinding = FragmentPopularPostBinding.inflate(layoutInflater);
 
         return viewBinding.root
     }
 
-    // recyclerview 셋팅
-    private fun initRecycler() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // 지원금 recyclerview 셋팅
-        subsidyAdapter = SubsidyRVAdapter(requireContext())
-        viewBinding.subsidyRvContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewBinding.subsidyRvContainer.adapter = subsidyAdapter
-        subsidyAdapter.datas = supportDatas
-    }
+        mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
 
-    private fun threadStart(url: String){
+        // recyclerview 세팅
+        initRecycler()
 
-        val thread = Thread(NetworkThread(url))
-        thread.start()
-        thread.join()
-    }
+        // retrofit 세팅
+        retrofit = MainApiClient.mainApiRetrofit
 
-    private fun addSupportAll(){
-        supportDatas.clear()
+        // 임시 데이터
+        profileImg = BitmapFactory.decodeResource(resources, R.drawable.non_profile)
 
-        threadStart(supportApiUrl.URL1)
-        threadStart(supportApiUrl.URL2)
-        threadStart(supportApiUrl.URL3)
-        threadStart(supportApiUrl.URL4)
-        threadStart(supportApiUrl.URL5)
-        threadStart(supportApiUrl.URL6)
-        threadStart(supportApiUrl.URL7)
-        threadStart(supportApiUrl.URL8)
-    }
+        // 인기글 조회 api
+        apiMainPopular()
 
-    class NetworkThread(
-        var url: String): Runnable {
-
-        @RequiresApi(Build.VERSION_CODES.N)
-        override fun run() {
-
-            try {
-
-                val xml: Document =
-                    DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(url)
-
-
-                xml.documentElement.normalize()
-
-                //찾고자 하는 데이터가 어느 노드 아래에 있는지 확인
-                val list: NodeList = xml.getElementsByTagName("emp")
-
-                //list.length-1 만큼 얻고자 하는 태그의 정보를 가져온다
-                for (i in 0..list.length - 1) {
-
-                    val n: Node = list.item(i)
-
-                    if (n.getNodeType() == Node.ELEMENT_NODE) {
-
-                        val elem = n as Element
-
-                        val map = mutableMapOf<String, String>()
-
-
-                        // 이부분은 어디에 쓰이는지 잘 모르겠다.
-                        for (j in 0..elem.attributes.length - 1) {
-
-                            map.putIfAbsent(elem.attributes.item(j).nodeName,
-                                elem.attributes.item(j).nodeValue)
-
-                        }
-
-                        val support_institution = elem.getElementsByTagName("polyBizTy").item(0).textContent     // 정책기관
-                        val support_name = elem.getElementsByTagName("polyBizSjnm").item(0).textContent          // 정책이름
-                        val support_category = elem.getElementsByTagName("plcyTpNm").item(0).textContent         // 정책유형
-                        val support_content = elem.getElementsByTagName("polyItcnCn").item(0).textContent        // 정책소개
-                        val support_age = elem.getElementsByTagName("ageInfo").item(0).textContent               // 참여요건 - 연령
-                        val support_job = elem.getElementsByTagName("empmSttsCn").item(0).textContent            // 참여요건 - 취업상태
-                        val support_education = elem.getElementsByTagName("accrRqisCn").item(0).textContent      // 참여요건 - 학력
-                        val support_major = elem.getElementsByTagName("majrRqisCn").item(0).textContent          // 참여요건 - 전공
-                        val support_field = elem.getElementsByTagName("splzRlmRqisCn").item(0).textContent       // 참여요건 - 특화분야
-                        val support_apply = elem.getElementsByTagName("cnsgNmor").item(0).textContent            // 신청기관명
-                        val support_date = elem.getElementsByTagName("rqutPrdCn").item(0).textContent            // 신청기간
-                        val support_procedure = elem.getElementsByTagName("rqutProcCn").item(0).textContent      // 신청절차
-                        val support_announce = elem.getElementsByTagName("jdgnPresCn").item(0).textContent       // 심사발표
-                        val support_link = elem.getElementsByTagName("rqutUrla").item(0).textContent             // 사이트 링크 주소
-
-                        val supportOpiItem = supportOpiDTO(
-                            support_institution = support_institution,
-                            support_name = support_name,
-                            support_category = support_category,
-                            support_content = support_content,
-                            support_age = support_age,
-                            support_job = support_job,
-                            support_education = support_education,
-                            support_major = support_major,
-                            support_field = support_field,
-                            support_apply = support_apply,
-                            support_date = support_date,
-                            support_procedure = support_procedure,
-                            support_announce = support_announce,
-                            support_link = support_link
-                        )
-
-                        supportDatas.add(supportOpiItem)
-
-                        Log.d("로그", "run: ${support_name}")
-
-                    }
-                }
-            } catch (e: Exception) {
-                Log.d("TTT", "오픈API" + e.toString())
-            }
+        // 이전 버튼 선택 시
+        viewBinding.popularPostBackBtn.setOnClickListener {
+            // 이전 페이지로 이동
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+            requireActivity().supportFragmentManager.popBackStack()
         }
+    }
+
+    // 인기글 recyclerview 세팅
+    private fun initRecycler() {
+        popularPostAdapter = PopularPostAdapter(requireContext())
+        viewBinding.popularPostRecyclerview.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewBinding.popularPostRecyclerview.adapter = popularPostAdapter
+        popularPostAdapter.datas = popularPostDatas
+    }
+
+    // 인기글 데이터 추가
+    private fun addPopularPostData(popularPost: PopularPostData) {
+        popularPostDatas.apply {
+            add(popularPost)
+        }
+        popularPostAdapter.notifyDataSetChanged()
+    }
+
+    // 인기글 조회 api
+    private fun apiMainPopular() {
+        retrofit!!.create(MainPopularApiService::class.java).getMainPopular()
+            .enqueue(object : Callback<MainPopularApiData> {
+                override fun onResponse(call: Call<MainPopularApiData>, response: Response<MainPopularApiData>) {
+                    //Log.d(ContentValues.TAG,"인기글 -------------------------------------------")
+                    //Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                    var allPopularData: MainPopularApiData = response.body()!!
+                    var popularData: MutableList<MainPopularApiResult> = allPopularData.result
+
+                    for(i: Int in (0..popularData.size - 1)) {
+                        apiPostData(popularData[i].post_idx)
+                    }
+
+                }
+
+                override fun onFailure(call: Call<MainPopularApiData>, t: Throwable) {
+                    //Log.d(TAG,"-------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 게시글 조회 api
+    private fun apiPostData(postIdx: Int) {
+        retrofit!!.create(PostIdxApiService::class.java).getPostData(mConnectUserId!!.toInt(), postIdx)
+            .enqueue(object : Callback<PostIdxApiData> {
+                override fun onResponse(call: Call<PostIdxApiData>, response: Response<PostIdxApiData>) {
+                    //Log.d(ContentValues.TAG,"인기글 내용 -------------------------------------------")
+                    //Log.d(ContentValues.TAG, "onResponse: ${response.body().toString()}")
+
+                    val postData = response.body()!!.result[0]
+
+                    // 익명
+                    if(postData.post_anonymity == "Y") {
+                        // 이미지 있음
+                        if(postData.post_image != null) {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val img: Bitmap? = withContext(Dispatchers.IO) {
+                                    ImageLoader.loadImage(postData.post_image)
+                                }
+                                addPopularPostData(
+                                    PopularPostData(
+                                        profileImg!!,
+                                        "익명",
+                                        postData.post_createAt,
+                                        postData.post_name,
+                                        postData.post_content,
+                                        img,
+                                        postData.post_comment,
+                                        postData.post_view,
+                                        postData.post_recommend
+                                    )
+                                )
+                            }
+                        }
+                        // 이미지 없음
+                        else {
+                            addPopularPostData(
+                                PopularPostData(
+                                    profileImg!!,
+                                    "익명",
+                                    postData.post_createAt,
+                                    postData.post_name,
+                                    postData.post_content,
+                                    null,
+                                    postData.post_comment,
+                                    postData.post_view,
+                                    postData.post_recommend
+                                )
+                            )
+                        }
+                    }
+                    // 익명 아님
+                    else {
+                        // 이미지 있음
+                        if(postData.post_image != null) {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val profile: Bitmap? = withContext(Dispatchers.IO) {
+                                    ImageLoader.loadImage(postData.user_profileimage_url!!)
+                                }
+                                val img: Bitmap? = withContext(Dispatchers.IO) {
+                                    ImageLoader.loadImage(postData.post_image)
+                                }
+                                addPopularPostData(
+                                    PopularPostData(
+                                        profile!!,
+                                        postData.user_name,
+                                        postData.post_createAt,
+                                        postData.post_name,
+                                        postData.post_content,
+                                        img,
+                                        postData.post_comment,
+                                        postData.post_view,
+                                        postData.post_recommend
+                                    )
+                                )
+                            }
+                        }
+                        // 이미지 없음
+                        else {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val profile: Bitmap? = withContext(Dispatchers.IO) {
+                                    ImageLoader.loadImage(postData.user_profileimage_url!!)
+                                }
+                                addPopularPostData(
+                                    PopularPostData(
+                                        profile!!,
+                                        postData.user_name,
+                                        postData.post_createAt,
+                                        postData.post_name,
+                                        postData.post_content,
+                                        null,
+                                        postData.post_comment,
+                                        postData.post_view,
+                                        postData.post_recommend
+                                    )
+                                )
+                            }
+                        }
+                    }
+
+                    /*CoroutineScope(Dispatchers.Main).launch {
+                        val img: Bitmap? = withContext(Dispatchers.IO) {
+                            ImageLoader.loadImage(postData.post_image!!)
+                        }
+                    }*/
+                }
+
+                override fun onFailure(call: Call<PostIdxApiData>, t: Throwable) {
+                    Log.d(ContentValues.TAG,"인기글 내용 -------------------------------------------")
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
 }

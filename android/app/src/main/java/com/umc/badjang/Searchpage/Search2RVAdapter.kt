@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.umc.badjang.Model.GetScholarshipDTO
+import com.umc.badjang.ApplicationClass
+
 import com.umc.badjang.R
+import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.ScholarshipRVAdapter
 import com.umc.badjang.databinding.RvScholarshipBinding
 import kotlin.properties.Delegates
 
@@ -16,6 +20,12 @@ class Search2RVAdapter(private val context: Context):
 
     private lateinit var viewBinding: RvScholarshipBinding
     private lateinit var mItemClickListener: OnClickInterface
+
+    // 즐겨찾기 유무 조회 DTO
+    private var isBookmarked: Boolean = false
+
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
 
     var mScholarshipIDx: Long = 1
 
@@ -30,7 +40,13 @@ class Search2RVAdapter(private val context: Context):
 
         val view = LayoutInflater.from(context).inflate(R.layout.rv_scholarship, parent, false)
 
+        // 현재 로그인 된 사용자 jwt 조회
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
+
         viewBinding = RvScholarshipBinding.bind(view)
+
+        // 즐겨찾기 유무 확인 API
+//        checkScholarshipBookmark()
 
         return ScholarshipHolder(RvScholarshipBinding.bind(view))
     }
@@ -59,35 +75,29 @@ class Search2RVAdapter(private val context: Context):
             binding.textViewViews.text = item.scholarship_view.toString()         // 장학금 뷰어수
             binding.textViewComments.text = item.scholarship_comment.toString()   // 장학금 댓글수
 
-//            if(item.bookMark == true){
-//                binding.btnStarUnChecked.visibility = View.INVISIBLE
-//                binding.btnStarChecked.visibility = View.VISIBLE
+            // 즐겨찾기 버튼 셋팅
+//            if(item.isBookmarked!!) {
+//
+//                viewBinding.btnStarChecked.visibility = View.VISIBLE
+//                viewBinding.btnStarUnChecked.visibility = View.INVISIBLE
 //            } else {
-//                binding.btnStarUnChecked.visibility = View.VISIBLE
-//                binding.btnStarChecked.visibility = View.INVISIBLE
+//
+//                viewBinding.btnStarChecked.visibility = View.INVISIBLE
+//                viewBinding.btnStarUnChecked.visibility = View.VISIBLE
 //            }
 
-            // 즐겨찾기 추가
-//            binding.btnStarUnChecked.setOnClickListener {
-//
-//                // 즐겨찾기 버튼 활성화/비활성화
-//                binding.btnStarUnChecked.visibility = View.INVISIBLE
-//                binding.btnStarChecked.visibility = View.VISIBLE
-//
-//                item.bookMark = true // DTO에 즐겨찾기 추가? <- 임시
-//
-//            }
-
-            // 즐겨찾기 해제
+            // 즐겨찾기 추가 및 삭제
 //            binding.btnStarChecked.setOnClickListener {
-//
-//                // 즐겨찾기 버튼 활성화/비활성화
-//                binding.btnStarUnChecked.visibility = View.VISIBLE
+//                bookmarkEdit()
 //                binding.btnStarChecked.visibility = View.INVISIBLE
-//
-//                item.bookMark = false // DTO에 즐겨찾기 해제? <- 임시
-//
+//                binding.btnStarUnChecked.visibility = View.VISIBLE
 //            }
+//            binding.btnStarUnChecked.setOnClickListener {
+//                bookmarkEdit()
+//                binding.btnStarChecked.visibility = View.VISIBLE
+//                binding.btnStarUnChecked.visibility = View.INVISIBLE
+//            }
+
 
             // 상세내용 더보기/접기
             binding.btnViewMore.setOnClickListener {
@@ -116,6 +126,33 @@ class Search2RVAdapter(private val context: Context):
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+
+    // 즐겨찾기 유무 조회 API
+//    private fun checkScholarshipBookmark() {
+//        RetrofitManager.instance.scholarshipBookmark(jwt!!, datas[0].scholarship_idx!!.toInt(), completion = {
+//                responseState, responseDataArrayList ->
+//
+//            when(responseState){
+//                RESPONSE_STATE.OKAY -> {
+//                    Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
+//
+//                    val scholarshipBookmarkDatas = ArrayList<ScholarshipBookmarkDTO>(responseDataArrayList)
+//
+//                }
+//                RESPONSE_STATE.FAIL -> {
+//                    Toast.makeText(context, "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+//                    Log.d(ContentValues.TAG, "api 호출 실패 : $responseDataArrayList")
+//                }
+//
+//            }
+//
+//        })
+//    }
+
+    // 즐겨찾기 추가 및 삭제 API
+    private fun bookmarkEdit() {
+        RetrofitManager.instance.bookmarkEdit(jwt!!, datas[0].scholarship_idx!!.toInt())
     }
 
 }
