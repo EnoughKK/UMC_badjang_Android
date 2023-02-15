@@ -48,6 +48,7 @@
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="검색어를 입력하세요."
+                android:imeOptions="actionSearch"
                 android:inputType="text" />
 
         </com.google.android.material.appbar.MaterialToolbar>
