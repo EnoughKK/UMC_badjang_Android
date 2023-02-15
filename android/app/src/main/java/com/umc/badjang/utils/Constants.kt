@@ -9,17 +9,24 @@ object API {
 
     const val SEARCH_SCHOLARSHIP : String = "scholarships"
 
-    const val SEARCH_SUPPORT : String = "supports"
-
     const val VIEWCOUNT_SCHOLARSHIP : String = "scholarships/{scholarshipIdx}"
 
-    const val VIEWCOUNT_SUPPORT : String = "{supportIdx}"
+    const val SCHOLARSHIP_COMMENTS: String = "scholarships/comment"
 
-    const val SUPPORT_OPI_BASE_URL : String = "https://www.youthcenter.go.kr/"
+    const val NEW_COMMENTS: String = "scholarships/comment/new-comment"
 
-    const val OPI_SUPPORT : String = "opi/empList.do"
+    const val DELETE_COMMENTS: String = "scholarships/comment/delete/{scholarship_comment_idx}"
+
+    const val SCHOLARSHIP_FILTER: String = "scholarships/myfilter"
+
+    const val EDIT_COMMENTS: String = "scholarships/comment/modify/{scholarship_comment_idx}"
+
+    const val SCHOLARSHIP_BOOKMARK: String = "scholarships/{scholarshipIdx}/bookmark_check"
+
+    const val BOOKMARK_EDIT: String = "scholarships/{scholarshipIdx}/bookmark"
 
     const val OPI_SUPPORT_KEY : String = "73444351051dbc5ea4541693"
+
 }
 
 object supportApiUrl {
@@ -35,5 +42,6 @@ object supportApiUrl {
 
 enum class  RESPONSE_STATE {
     OKAY,
-    FAIL
+    FAIL,
+    NO_CONTENT
 }

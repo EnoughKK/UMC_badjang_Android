@@ -73,7 +73,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/NoTitleBarTheme"></activity>
+            android:theme="@style/NoTitleBarTheme">
+        </activity>
         <activity
             android:name=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" /> <!-- 카카오 로그인 -->
@@ -96,6 +97,8 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_native_key" />
+
+
 
         <activity
             android:name=".LoginPage.LogoActivity"

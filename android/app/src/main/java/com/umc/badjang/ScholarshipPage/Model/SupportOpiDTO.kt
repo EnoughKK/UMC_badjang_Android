@@ -1,4 +1,4 @@
-package com.umc.badjang.Model
+package com.umc.badjang.ScholarshipPage.Model
 
 class supportOpiDTO (
     var support_institution: String?,

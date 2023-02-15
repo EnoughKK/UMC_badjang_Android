@@ -1,7 +1,6 @@
-package com.umc.badjang.Model
+package com.umc.badjang.SearchMorePage
 
-// 장학금 조회 (필터사용) DTO
-class GetScholarshipDTO (
+data class SearchMoreScholarshipData(
     var scholarship_idx: Long?,               // 장학금 idx
     var scholarship_name: String?,            // 장학금 이름
     var scholarship_institution: String?,     // 주관기관

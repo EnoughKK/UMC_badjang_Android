@@ -20,6 +20,8 @@ class KakaoSignupService(val view: KakaoSignupView) {
                 if(response.body() != null) {
                     view.onKakaoPostSignUpSuccess(response.body() as KakaoSignupResponse)
                     Log.d("Success", "-----카카오 access token 통신성공-----")
+                    val receive = response.body()
+                    ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", receive?.result?.jwt).commit()
                 }
             }
 

@@ -1,6 +1,6 @@
-package com.umc.badjang.ScholarshipPage
+package com.umc.badjang.SearchMorePage
 
-data class SubsidyRVDTO (
+data class SearchMoreSupportData(
     val universityLabel: String,
     val subsidyCategory: String,
     val subsidyTitle: String,

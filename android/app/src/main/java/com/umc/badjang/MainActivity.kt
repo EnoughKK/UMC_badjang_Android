@@ -20,12 +20,19 @@ import com.umc.badjang.PostPage.Board.PostBoardFragment
 import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PostFragment
 import com.umc.badjang.PostWritePage.PostWriteFragment
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.Model.ScholarshipFilterDTO
+
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
+import com.umc.badjang.ScholarshipPage.ScholarshipViewpager1Fragment
+import com.umc.badjang.Searchpage.SearchLookupFragment
 import com.umc.badjang.Settings.AlarmFragment
 import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
+import com.umc.badjang.TSearchPage.TSearchFragment
 
 public var mConnectUserId: Int? = null
+public var mScholarshipFilterDatas: ArrayList<GetScholarshipDTO>? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding // viewBinding
@@ -123,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, PostFragment()).commit()
                 }
                 R.id.search -> {
-                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchFragment()).commit()
+                    fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, SearchLookupFragment()).commit()
                 }
                 R.id.mypage -> {
                     fragmentManager.beginTransaction().replace(binding.fragmentLayout.id, MyPageFragment()).commit()
@@ -152,13 +159,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     // fragment data 전송, 전환
-    fun SendDataFragment(fragment: Fragment, itemIdx: Long){
+    fun SendDataFragment(fragment: Fragment, itemIdx: Long, scholarshipName: String){
 
         val bundle = Bundle()
+        bundle.putString("ScholarshipName", scholarshipName)
         bundle.putLong("ItemIdx", itemIdx)
         fragment.arguments = bundle
 
-        // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
         supportFragmentManager
             .beginTransaction()
             .add(binding.fragmentLayout.id, fragment)

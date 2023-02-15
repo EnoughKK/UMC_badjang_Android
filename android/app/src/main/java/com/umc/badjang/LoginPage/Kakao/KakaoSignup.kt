@@ -15,12 +15,15 @@ class KakaoSignup(accessToken: String): KakaoSignupView {
         }
     }
     override fun onKakaoPostSignUpSuccess(response: KakaoSignupResponse) {
+
         response.message?.let {
             if(response.code == 1000){
                 //jwt수신완료, jwt받았으면 따로 저장해놔야함.
                 Log.d("jwt수신여부","jwt 수신 성공 -> ${response.result.jwt}")
                 Log.d("message","${response.message}")
                 ApplicationClass.sSharedPreferences.edit().putString("J-ACCESS-TOKEN",response.result.jwt).commit()
+                //user_idx 저장
+                ApplicationClass.bSharedPreferences.edit().putInt("USER-IDX",response.result.user_idx).commit()
             }
             else {
                 Log.d("jwt수신여부","jwt 수신 실패-> ${response.code}")
