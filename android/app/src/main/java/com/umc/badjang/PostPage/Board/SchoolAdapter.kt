@@ -48,11 +48,11 @@ class SchoolAdapter(private val dataSet: ArrayList<SchoolData>, var context :Con
                 bundle.putInt("post_idx", item.post_idx)
                 bundle.putString("board_name", item.post_school_name + " 게시판")
                 fragment.arguments = bundle
-                (context as MainActivity).changeFragment(fragment)
+                (context as MainActivity).changeReplaceFragment(fragment)
             }
             // 작성자 프로필
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)
-            binding.popularPostProfileNickname.text = item.post_anonymity
+            binding.popularPostProfileNickname.text = item.user_name
             binding.popularPostProfileDate.text = item.post_createAt.substring(0,4)+"."+item.post_createAt.substring(5,7)+"."+item.post_createAt.substring(8,10)
             binding.popularPostContentTitle.text = item.post_name
             binding.popularPostContentText.text = item.post_content

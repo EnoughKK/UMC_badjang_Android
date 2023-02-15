@@ -48,7 +48,7 @@ class PostBoardAdapter(private val dataSet: ArrayList<BoardData>, var context :C
                 bundle.putInt("post_idx", item.post_idx)
                 bundle.putString("board_name", item.post_category)
                 fragment.arguments = bundle
-                (context as MainActivity).changeFragment(fragment)
+                (context as MainActivity).changeReplaceFragment(fragment)
             }
             // 작성자 프로필
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)

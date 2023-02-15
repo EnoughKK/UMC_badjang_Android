@@ -16,7 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.umc.badjang.HomePage.HomeFragment
+import com.umc.badjang.PostPage.Board.PostBoardFragment
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.PostPage.PostFragment
+import com.umc.badjang.PostWritePage.PostWriteFragment
 import com.umc.badjang.ScholarshipPage.ScholarshipLookupFragment
 import com.umc.badjang.Settings.AlarmFragment
 import com.umc.badjang.Settings.MyInfoFragment
@@ -62,10 +65,27 @@ class MainActivity : AppCompatActivity() {
                 }
                 // 현재 프래그먼트가 각 fragment의 첫 페이지 중 하나인 경우
                 else {
-                    Toast.makeText(this, "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
-                    doubleBackToExit = true
-                    runDelayed(1500L) {
-                        doubleBackToExit = false
+                    //게시판에서 뒤로가기 누르면 동작
+                    if(supportFragmentManager.findFragmentById(R.id.fragment_layout) is DetailPostFragment){
+                        var fragment = PostBoardFragment()
+                        val bundle = Bundle()
+                        bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+                        fragment.arguments = bundle
+                        changeReplaceFragment(fragment)
+                    }else if(supportFragmentManager.findFragmentById(R.id.fragment_layout) is PostBoardFragment){
+                        changeReplaceFragment(PostFragment())
+                    }else if(supportFragmentManager.findFragmentById(R.id.fragment_layout) is PostWriteFragment){
+                        var fragment = PostBoardFragment()
+                        val bundle = Bundle()
+                        bundle.putString("name", ApplicationClass.bSharedPreferences.getString("board_name", ""))
+                        fragment.arguments = bundle
+                        changeReplaceFragment(fragment)
+                    }else{
+                        Toast.makeText(this, "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+                        doubleBackToExit = true
+                        runDelayed(1500L) {
+                            doubleBackToExit = false
+                        }
                     }
                 }
             }
@@ -122,6 +142,14 @@ class MainActivity : AppCompatActivity() {
             .add(binding.fragmentLayout.id, fragment)
             .commit()
     }
+    //fragment replace로 전환
+    fun changeReplaceFragment(fragment: Fragment){
+        // 이전페이지로 돌아가는 기능을 이용할 수 있도록 replace가 아니라 add로
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentLayout.id, fragment)
+            .commit()
+    }
 
     // fragment data 전송, 전환
     fun SendDataFragment(fragment: Fragment, itemIdx: Long){
@@ -136,5 +164,4 @@ class MainActivity : AppCompatActivity() {
             .add(binding.fragmentLayout.id, fragment)
             .commit()
     }
-
 }
