@@ -2,6 +2,7 @@ package com.umc.badjang.Retrofit
 
 import com.google.gson.JsonElement
 import com.umc.badjang.ScholarshipPage.Model.DeleteCommentsDTO
+import com.umc.badjang.ScholarshipPage.Model.EditCommentsDTO
 import com.umc.badjang.ScholarshipPage.Model.NewCommentsDTO
 import com.umc.badjang.ScholarshipPage.Model.ScholarshipFilterDTO
 import com.umc.badjang.utils.API
@@ -35,6 +36,9 @@ interface IScholarshipComments {
 
     @PATCH(API.DELETE_COMMENTS)
     fun deleteComments(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarship_comment_idx") scholarship_comment_idx: Long?, @Body params: DeleteCommentsDTO) : Call<DeleteCommentsDTO>
+
+    @PATCH(API.EDIT_COMMENTS)
+    fun editComments(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarship_comment_idx") scholarship_comment_idx: Long?, @Body params: EditCommentsDTO) : Call<EditCommentsDTO>
 }
 
 interface IScholarshipFilter {

@@ -16,15 +16,13 @@ import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
-import com.umc.badjang.ScholarshipPage.Model.DeleteCommentsDTO
-import com.umc.badjang.ScholarshipPage.Model.NewCommentsDTO
-import com.umc.badjang.ScholarshipPage.Model.ScholarshipCommentsDTO
+import com.umc.badjang.ScholarshipPage.Model.*
 import com.umc.badjang.databinding.FragmentScholarshipCommentsBinding
 import com.umc.badjang.mConnectUserId
 import com.umc.badjang.utils.RESPONSE_STATE
 
 
-class ScholarshipCommentsFragment: Fragment() {
+class ScholarshipCommentsFragment: Fragment(), CommentsDialogInterface, EditCommentsInterface {
     private lateinit var viewBinding: FragmentScholarshipCommentsBinding
 
     var activity: MainActivity? = null
@@ -32,7 +30,17 @@ class ScholarshipCommentsFragment: Fragment() {
     // 현재 로그인 된 사용자 jwt
     private var jwt: String? = null
 
+    // 댓글 삭제 dto
+    private lateinit var deleteCommentsPostData: DeleteCommentsDTO
+
+    // 댓글 수정 dto
+    private lateinit var editCommentsPostData: EditCommentsDTO
+
+    private var curCommentsIdx: Long? = null
     private var commentsDatas = ArrayList<ScholarshipCommentsDTO>()
+    private var curScholarshipIdx: Int? = null
+    private var curUserIdx: Int? = null
+    private var curComments: String? = null
     private lateinit var commentsAdapter: CommentsRVAdapter
 
     override fun onAttach(context: Context) {
@@ -50,6 +58,8 @@ class ScholarshipCommentsFragment: Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentScholarshipCommentsBinding.inflate(layoutInflater);
+
+        commentsDatas.clear()
 
         // 현재 로그인 된 사용자 jwt 조회
         jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
@@ -89,6 +99,7 @@ class ScholarshipCommentsFragment: Fragment() {
                 viewBinding.comments.text.clear()
             }
             loadData(scholarshipIdx)
+            initRecycler()
         }
 
     }
@@ -130,43 +141,55 @@ class ScholarshipCommentsFragment: Fragment() {
         commentsAdapter.setItemClickListener(object: CommentsRVAdapter.OnClickInterface{
             override fun onItemLongClick(view: View, position: Int) {
 
-                val curUserIdx = commentsDatas[position].user_idx
-                val curScholarshipIdx = commentsDatas[position].scholarship_idx
-                val curCommentsIdx: Long = commentsDatas[position].scholarship_comment_idx!!.toLong()
-                val deleteCommentsPost = DeleteCommentsDTO(commentsDatas[position].scholarship_comment_idx, curScholarshipIdx, mConnectUserId)
+                curUserIdx = commentsDatas[position].user_idx
+                curScholarshipIdx = commentsDatas[position].scholarship_idx
+                curCommentsIdx = commentsDatas[position].scholarship_comment_idx!!.toLong()
+                curComments = commentsDatas[position].scholarship_comment_content
+                deleteCommentsPostData = DeleteCommentsDTO(commentsDatas[position].scholarship_comment_idx, curScholarshipIdx, mConnectUserId)
 
                 if (curUserIdx == mConnectUserId) {
                     Log.d("로그", "onItemLongClick: ${mConnectUserId}")
 
-                    // 팝업창 열기
-                    val popup = PopupMenu(requireContext(), view)
-                    popup.menuInflater.inflate(R.menu.comments_edit, popup.menu)
-
-                    popup.setOnMenuItemClickListener { item ->
-                        when(item.itemId) {
-
-                            //삭제 버튼 클릭시
-                            R.id.btn_delete -> {
-                                DeleteComments(curCommentsIdx, deleteCommentsPost)
-                                Log.d("삭제", "DeleteComments: ${mConnectUserId}")
-                                loadData(commentsAdapter.datas[0].scholarship_idx!!)
-                            }
-                        }
-                        true
-                    }
-                    popup.show()
+                    // 수정/삭제 다이얼로그 창 띄우기
+                    onDialogBtnClicked(view)
                 }
                 else {
 
                     // 신고하기 다이얼로그
-                    val popup = PopupMenu(requireContext(), view)
-                    popup.menuInflater.inflate(R.menu.alert_menu, popup.menu)
-                    popup.show()
+                    val myCustomDialog = ReportDialog(requireContext())
+                    myCustomDialog.show()
                 }
 
             }
         })
     }
+
+    // 내 댓글 클릭시 수정/삭제 다이얼로그 창 띄우기
+    private fun onDialogBtnClicked(view: View) {
+        val myCustomDialog = CommentsDialog(requireContext(), this)
+        myCustomDialog.show()
+    }
+
+    // 수정하기 클릭
+    override fun editBtnClicked() {
+        val myCustomDialog = EditCommentsDialog(requireContext(), this, curComments!!, jwt!!, curCommentsIdx!!, curUserIdx!!, curScholarshipIdx!!)
+        myCustomDialog.show()
+    }
+
+    // 삭제하기 클릭
+    override fun deleteClicked() {
+        DeleteComments(curCommentsIdx!!, deleteCommentsPostData)
+        Log.d("삭제", "DeleteComments: ${mConnectUserId}")
+        loadData(commentsAdapter.datas[0].scholarship_idx!!)
+        initRecycler()
+    }
+
+    // 댓글 수정 버튼 클릭시
+    override  fun editConfirmBtnClicked() {
+        loadData(commentsAdapter.datas[0].scholarship_idx!!)
+        initRecycler()
+    }
+
 
     // 댓글 생성 (api)
     private fun inputComments(body: NewCommentsDTO) {

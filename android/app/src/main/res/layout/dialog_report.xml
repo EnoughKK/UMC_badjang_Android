@@ -7,25 +7,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/btn_edit"
+        android:id="@+id/btn_report"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="수정하기"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
-    <View
-        android:layout_width="200dp"
-        android:layout_height="1dp"
-        android:background="#D9D9D9"/>
-
-    <TextView
-        android:id="@+id/btn_delete"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:text="삭제하기"
+        android:text="신고하기"
         android:gravity="center"
         android:textColor="@color/black"
         android:padding="10dp"/>

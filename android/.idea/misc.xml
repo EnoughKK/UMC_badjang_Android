@@ -8,6 +8,7 @@
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/btn_confirm.xml" value="0.2545" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/comments.xml" value="0.2605" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/dialog_border.xml" value="0.2545" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/dialog_report.xml" value="0.3405" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/dialog_selection_board.xml" value="0.171" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/favorites.xml" value="0.2565" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/favorites_small.xml" value="0.2565" />
@@ -15,6 +16,10 @@
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/polygon_up.xml" value="0.477" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_box.xml" value="0.419" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_box2.xml" value="0.419" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_box3.xml" value="0.3405" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_box4.xml" value="0.3405" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_box6.xml" value="0.3405" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_dialog.xml" value="0.3405" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/round_layout.xml" value="0.121" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/rv_comments.xml" value="0.224" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/drawable/rv_mycomments.xml" value="0.224" />
@@ -34,11 +39,17 @@
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/activity_termofuse.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_birthdatechange.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_comments_edit.xml" value="0.5526041666666667" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_edit_comments.xml" value="0.5526041666666667" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_emailchange.xml" value="0.5536458333333333" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_logout.xml" value="0.37083333333333335" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_namechange.xml" value="0.5536458333333333" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_phonechange.xml" value="0.37083333333333335" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_report.xml" value="0.5526041666666667" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_report_confirm.xml" value="0.5" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_scholarship_lookup.xml" value="0.5" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_schoolcheck.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_sns_info.xml" value="0.5536458333333333" />
+        <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_termtodisagree.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/dialog_withdrawal.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_national_news.xml" value="0.5536458333333333" />
         <entry key="..\:/UMC_badjang/android/app/src/main/res/layout/fragment_post.xml" value="0.5536458333333333" />

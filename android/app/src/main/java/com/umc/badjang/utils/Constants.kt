@@ -18,6 +18,8 @@ object API {
     const val DELETE_COMMENTS: String = "scholarships/comment/delete/{scholarship_comment_idx}"
 
     const val SCHOLARSHIP_FILTER: String = "scholarships/myfilter"
+
+    const val EDIT_COMMENTS: String = "scholarships/comment/modify/{scholarship_comment_idx}"
 }
 
 object supportApiUrl {

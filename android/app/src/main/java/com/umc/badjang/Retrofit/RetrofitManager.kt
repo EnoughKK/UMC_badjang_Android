@@ -408,6 +408,28 @@ class RetrofitManager {
         })
     }
 
+    // 장학금 댓글 수정
+    fun editComments(xAccessToken : String?, scholarship_comment_idx: Long?, params: EditCommentsDTO) {
+
+        val call = iScholarshipComments?.editComments(xAccessToken = xAccessToken!!, scholarship_comment_idx = scholarship_comment_idx, params = params).let {
+            it
+        }?: return
+
+        call.enqueue(object  : Callback<EditCommentsDTO>{
+            override fun onResponse(call: Call<EditCommentsDTO>, response: Response<EditCommentsDTO>) {
+
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : 댓글 수정 ${params.toString()}}")
+                Log.d(TAG, "onResponse: 댓글 수정")
+            }
+
+            override fun onFailure(call: Call<EditCommentsDTO>, t: Throwable) {
+
+            }
+
+        })
+
+    }
+
     // 장학금 필터
     fun scholarshipFilter(params: ScholarshipFilterDTO, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit) {
 

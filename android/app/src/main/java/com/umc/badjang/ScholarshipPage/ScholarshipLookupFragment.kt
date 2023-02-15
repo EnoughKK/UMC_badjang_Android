@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -23,6 +24,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.Bookmarks.BookmarksFragment
+import com.umc.badjang.HomeMorePage.NewIssueFragment
 import com.umc.badjang.HomePagaApi.MainApiClient
 import com.umc.badjang.HomePagaApi.MyInfoForFilterApiData
 import com.umc.badjang.HomePagaApi.MyInfoForFilterApiResult
@@ -36,6 +39,7 @@ import com.umc.badjang.databinding.DialogScholarshipLookupBinding
 import com.umc.badjang.databinding.FragmentScholarshipLookupBinding
 import com.umc.badjang.mConnectUserId
 import com.umc.badjang.utils.RESPONSE_STATE
+import kotlinx.android.synthetic.main.fragment_scholarship_lookup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +70,22 @@ class ScholarshipLookupFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentScholarshipLookupBinding.inflate(layoutInflater);
+
+        // Toolbar
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
+
+        // 즐겨찾기 버튼 선택
+        val bookmarksBtn: ImageButton = toolbar.findViewById(R.id.toolbar_star_btn)
+        bookmarksBtn.setOnClickListener {
+            activity?.changeFragment(BookmarksFragment())
+        }
+
+        // 알림 버튼 선택
+        val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
+        newIssueBtn.setOnClickListener {
+            activity?.changeFragment(NewIssueFragment())
+        }
 
         // 플로팅 버튼
         viewBinding.floatingBtnSearchFilter.setOnClickListener {

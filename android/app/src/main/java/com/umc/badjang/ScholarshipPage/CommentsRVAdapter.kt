@@ -52,15 +52,17 @@ class CommentsRVAdapter(private val context: Context):
             1 -> {
                 (holder as MyCommentsHolder).bind(datas[position])
                 holder.setIsRecyclable(false)
-                holder.itemView.setOnClickListener {
+                holder.itemView.setOnLongClickListener(View.OnLongClickListener {
                     mItemClickListener.onItemLongClick(it, position)
-                }
+                    true
+                })
             }
             else -> {
                 (holder as CommentsHolder).bind(datas[position])
                 holder.setIsRecyclable(false)
-                holder.itemView.setOnClickListener {
+                holder.itemView.setOnLongClickListener {
                     mItemClickListener.onItemLongClick(it, position)
+                    true
                 }
             }
         }

@@ -9,10 +9,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.umc.badjang.Bookmarks.BookmarksFragment
+import com.umc.badjang.HomeMorePage.NewIssueFragment
 import com.umc.badjang.MainActivity
+import com.umc.badjang.R
 import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.Retrofit.RetrofitManager
 import com.umc.badjang.databinding.FragmentScholarshipDetailBinding
@@ -47,6 +51,16 @@ class ScholarshipDetailFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentScholarshipDetailBinding.inflate(layoutInflater);
+
+        // 즐겨찾기 버튼 선택
+        viewBinding.btnFavorites.setOnClickListener {
+            activity?.changeFragment(BookmarksFragment())
+        }
+
+        // 알림 버튼 선택
+        viewBinding.btnAllam.setOnClickListener {
+            activity?.changeFragment(NewIssueFragment())
+        }
 
         viewBinding.btnBack.setOnClickListener {
             // 이전 페이지로 이동
