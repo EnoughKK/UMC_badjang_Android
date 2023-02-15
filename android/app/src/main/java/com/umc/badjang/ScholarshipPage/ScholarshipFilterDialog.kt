@@ -435,8 +435,8 @@ class ScholarshipFilterDialog(context: Context, activity: Activity) : Dialog(con
             when(responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(ContentValues.TAG, "마이필터 성공 : ${responseDataArrayList?.size}")
-                    mScholarshipDatas.clear()
-                    mScholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+                    mScholarshipFilterDatas?.clear()
+                    mScholarshipFilterDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
 
                 }
                 RESPONSE_STATE.FAIL -> {

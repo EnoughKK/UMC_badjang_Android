@@ -20,6 +20,10 @@ object API {
     const val SCHOLARSHIP_FILTER: String = "scholarships/myfilter"
 
     const val EDIT_COMMENTS: String = "scholarships/comment/modify/{scholarship_comment_idx}"
+
+    const val SCHOLARSHIP_BOOKMARK: String = "scholarships/{scholarshipIdx}/bookmark_check"
+
+    const val BOOKMARK_EDIT: String = "scholarships/{scholarshipIdx}/bookmark"
 }
 
 object supportApiUrl {

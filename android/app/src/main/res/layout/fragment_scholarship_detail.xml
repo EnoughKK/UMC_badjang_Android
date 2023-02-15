@@ -157,13 +157,24 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_add_favorites"
+            android:id="@+id/btn_add_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/favorites2" />
+
+        <ImageButton
+            android:id="@+id/btn_delete_bookmark"
+            android:layout_width="48dp"
+            android:layout_height="43dp"
+            android:backgroundTint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_star_checked_big" />
 
         <Button
             android:id="@+id/btn_link"
@@ -175,11 +186,11 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_add_favorites"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_add_bookmark"
             app:layout_constraintEnd_toStartOf="@+id/btn_comments"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_add_favorites"
-            app:layout_constraintTop_toTopOf="@+id/btn_add_favorites" />
+            app:layout_constraintStart_toEndOf="@+id/btn_add_bookmark"
+            app:layout_constraintTop_toTopOf="@+id/btn_add_bookmark" />
 
         <Button
             android:id="@+id/btn_comments"
@@ -191,11 +202,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_add_favorites"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_link"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_link"
-            app:layout_constraintTop_toTopOf="@+id/btn_add_favorites" />
+            app:layout_constraintTop_toTopOf="@+id/btn_link" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

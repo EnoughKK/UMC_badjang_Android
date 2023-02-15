@@ -14,5 +14,6 @@ class GetScholarshipDTO (
     var scholarship_term: String?,            // 신청기간
     var scholarship_presentation: String?,    // 심사발표
     var scholarship_univ: String?,            // 학교
-    var scholarship_category: String?         // 카테고리
+    var scholarship_category: String?,        // 카테고리
+    var isBookmarked: Boolean? = false
 )

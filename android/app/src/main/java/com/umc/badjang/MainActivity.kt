@@ -26,7 +26,7 @@ import com.umc.badjang.Settings.MyInfoFragment
 import com.umc.badjang.databinding.ActivityMainBinding
 
 public var mConnectUserId: Int? = null
-public var mScholarshipDatas = ArrayList<GetScholarshipDTO>()
+public var mScholarshipFilterDatas: ArrayList<GetScholarshipDTO>? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding // viewBinding

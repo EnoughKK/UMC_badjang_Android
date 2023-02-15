@@ -27,6 +27,7 @@ class RetrofitManager {
     private val iScholarshipViewCount : ISholarshipViewCount? = ScholarshipViewCountRC.getClient(API.BASE_URL)?.create(ISholarshipViewCount::class.java)
     private val iScholarshipComments : IScholarshipComments? = ScholarshipCommentsRC.getClient(API.BASE_URL)?.create(IScholarshipComments::class.java)
     private val iScholarshipFilter : IScholarshipFilter? = ScholarshipFilterRC.getClient(API.BASE_URL)?.create(IScholarshipFilter::class.java)
+    private val iScholarshipBookmark : IScholarshipBookmark? = ScholarshipBookmarkRC.getClient(API.BASE_URL)?.create(IScholarshipBookmark::class.java)
 
     // 장학금 조회 (필터사용)
     fun searchScholarship(category: String?, filter: String?, order: String?, completion: (RESPONSE_STATE, ArrayList<GetScholarshipDTO>?) -> Unit){
@@ -557,6 +558,68 @@ class RetrofitManager {
 
         })
 
+    }
+
+    // 장학금 즐겨찾기
+    fun scholarshipBookmark(xAccessToken : String?, scholarshipIdx: Int, completion: (RESPONSE_STATE, ArrayList<ScholarshipBookmarkDTO>?) -> Unit) {
+
+        val call = iScholarshipBookmark?.scholarshipBookmark(xAccessToken = xAccessToken!!, scholarshipIdx = scholarshipIdx).let {
+            it
+        }?: return
+
+        call.enqueue(object : Callback<JsonElement>{
+
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                response.body()?.let {
+
+                    var parsedScholarshipDataArray = ArrayList<ScholarshipBookmarkDTO>()
+
+                    val body = it.asJsonObject
+                    val resultItemObject = body.get("result").asJsonObject
+
+                    val scholarship_idx = resultItemObject.get("scholarship_idx").asInt
+
+                    val bookmark_check = resultItemObject.get("bookmark_check").asString
+
+                    val scholarshipBookmarkItem = ScholarshipBookmarkDTO (
+                        scholarship_idx = scholarship_idx,
+                        bookmark_check = bookmark_check
+                    )
+
+                    parsedScholarshipDataArray.add(scholarshipBookmarkItem)
+
+                    completion(RESPONSE_STATE.OKAY, parsedScholarshipDataArray)
+
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+
+        })
+
+    }
+
+    fun bookmarkEdit(xAccessToken : String?, scholarshipIdx: Int) {
+
+        val call = iScholarshipBookmark?.bookmarkEdit(xAccessToken = xAccessToken!!, scholarshipIdx = scholarshipIdx).let {
+            it
+        }?: return
+
+        call.enqueue(object  : Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                Log.d(TAG, "RetrofitManager - onResponse() called / response : 장학금 즐겨찾기 추가 ${response}}")
+                Log.d(TAG, "onResponse: 장학금 즐겨찾기 추가")
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+            }
+
+        })
     }
 
 }

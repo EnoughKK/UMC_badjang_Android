@@ -156,7 +156,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:padding="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_gravity="right|top"
             app:srcCompat="@drawable/favorites_small" />
 
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:padding="10dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_gravity="right|top"
             app:srcCompat="@drawable/ic_star_checked" />
     </FrameLayout>

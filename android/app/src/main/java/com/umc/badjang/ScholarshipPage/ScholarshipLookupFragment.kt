@@ -72,20 +72,20 @@ class ScholarshipLookupFragment: Fragment() {
         viewBinding = FragmentScholarshipLookupBinding.inflate(layoutInflater);
 
         // Toolbar
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
+//        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar) //커스텀한 toolbar를 액션바로 사용
 
         // 즐겨찾기 버튼 선택
-        val bookmarksBtn: ImageButton = toolbar.findViewById(R.id.toolbar_star_btn)
-        bookmarksBtn.setOnClickListener {
-            activity?.changeFragment(BookmarksFragment())
-        }
+//        val bookmarksBtn: ImageButton = toolbar.findViewById(R.id.toolbar_star_btn)
+//        bookmarksBtn.setOnClickListener {
+//            activity?.changeFragment(BookmarksFragment())
+//        }
 
         // 알림 버튼 선택
-        val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
-        newIssueBtn.setOnClickListener {
-            activity?.changeFragment(NewIssueFragment())
-        }
+//        val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
+//        newIssueBtn.setOnClickListener {
+//            activity?.changeFragment(NewIssueFragment())
+//        }
 
         // 플로팅 버튼
         viewBinding.floatingBtnSearchFilter.setOnClickListener {

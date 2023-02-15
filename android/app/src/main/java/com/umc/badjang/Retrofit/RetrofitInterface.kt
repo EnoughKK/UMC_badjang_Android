@@ -41,8 +41,21 @@ interface IScholarshipComments {
     fun editComments(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarship_comment_idx") scholarship_comment_idx: Long?, @Body params: EditCommentsDTO) : Call<EditCommentsDTO>
 }
 
+// 장학금 myfilter
 interface IScholarshipFilter {
 
     @POST(API.SCHOLARSHIP_FILTER)
     fun scholarshipFilter(@Body params: ScholarshipFilterDTO) : Call<JsonElement>
+}
+
+// 장학금 즐겨찾기
+interface  IScholarshipBookmark {
+
+    // 장학금 즐겨찾기 유무 조회
+    @GET(API.SCHOLARSHIP_BOOKMARK)
+    fun scholarshipBookmark(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarshipIdx") scholarshipIdx: Int?) : Call<JsonElement>
+
+    // 장학금 추가/삭제
+    @POST(API.BOOKMARK_EDIT)
+    fun bookmarkEdit(@Header("X-ACCESS-TOKEN") xAccessToken: String, @Path("scholarshipIdx") scholarshipIdx: Int?) : Call<JsonElement>
 }
