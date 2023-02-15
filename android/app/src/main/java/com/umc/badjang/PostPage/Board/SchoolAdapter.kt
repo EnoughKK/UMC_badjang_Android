@@ -10,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.umc.badjang.Bookmarks.BookmarkPostData
 import com.umc.badjang.MainActivity
 import com.umc.badjang.MyPage.Noti.DetailNotiFragment
-import com.umc.badjang.PostPage.PopularPostData
+import com.umc.badjang.PostPage.Detail.DetailPostFragment
 import com.umc.badjang.R
 import com.umc.badjang.databinding.*
 
-class PopularPostBoardAdapter(private val dataSet: ArrayList<PopularPostBoardData>, var context :Context) :
+class SchoolAdapter(private val dataSet: ArrayList<SchoolData>, var context :Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var binding: PostContentItemBinding
@@ -40,36 +40,37 @@ class PopularPostBoardAdapter(private val dataSet: ArrayList<PopularPostBoardDat
     }
 
     inner class ViewHolder(private val binding: PostContentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PopularPostBoardData) {
+        fun bind(item: SchoolData) {
 
             binding.postContentCl.setOnClickListener {
-//                var fragment = DetailNotiFragment()
-//                val bundle = Bundle()
-//                bundle.putInt("idx", item.)
-//                fragment.arguments = bundle
-//                (context as MainActivity).changeFragment(fragment)
+                var fragment = DetailPostFragment()
+                val bundle = Bundle()
+                bundle.putInt("post_idx", item.post_idx)
+                bundle.putString("board_name", item.post_school_name + " 게시판")
+                fragment.arguments = bundle
+                (context as MainActivity).changeFragment(fragment)
             }
             // 작성자 프로필
-            if(item.post_anonymity == "N"){
-                binding.popularPostProfileNickname.text = item.user_name
-            }
-            else{
-                binding.popularPostProfileNickname.text = "익명"
-            }
             Glide.with(context).load(item.user_profileimage_url).into(binding.popularPostProfileImg)
+            binding.popularPostProfileNickname.text = item.post_anonymity
             binding.popularPostProfileDate.text = item.post_createAt.substring(0,4)+"."+item.post_createAt.substring(5,7)+"."+item.post_createAt.substring(8,10)
             binding.popularPostContentTitle.text = item.post_name
             binding.popularPostContentText.text = item.post_content
             binding.popularPostGoodNum.text = item.post_recommend.toString()
             binding.popularPostViewNum.text = item.post_view.toString()
             binding.popularPostCommentsNum.text = item.post_comment.toString()
-
-            if(item.post_image == "" || item.post_image == null){
+            if(item.post_image == ""){
                 binding.popularPostContentImg.visibility = View.GONE
             }else{
                 Glide.with(context).load(item.post_image).into(binding.popularPostContentImg)
             }
+            if(item.recommend_check == 1){
+                binding.popularPostGoodIcon.setImageResource(R.drawable.ic_good_count_blue)
+            }else{
+                binding.popularPostGoodIcon.setImageResource(R.drawable.ic_good_count)
+            }
         }
     }
+
 
 }

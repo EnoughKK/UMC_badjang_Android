@@ -53,10 +53,12 @@ class SplashActivity : AppCompatActivity() {
                         sSharedPreferences.edit().putString("X-ACCESS-TOKEN", result.result.jwt).commit()
                         val intent = Intent(this@SplashActivity,MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                     else{
                         val intent = Intent(this@SplashActivity,LoginActivity::class.java)
                         startActivity(intent)
+                        finish()
                         Log.d("getProfile", "onResponse : Error code ${response.code()}")
                         Log.d("getProfile", "onResponse : Error message ${response.message()}")
                     }
