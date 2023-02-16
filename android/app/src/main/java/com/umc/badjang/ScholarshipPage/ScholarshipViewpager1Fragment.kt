@@ -11,22 +11,26 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.badjang.ApplicationClass
 import com.umc.badjang.MainActivity
-import com.umc.badjang.Model.GetScholarshipDTO
+import com.umc.badjang.ScholarshipPage.Model.GetScholarshipDTO
 import com.umc.badjang.R
 import com.umc.badjang.Retrofit.RetrofitManager
+import com.umc.badjang.ScholarshipPage.Model.ScholarshipBookmarkDTO
 import com.umc.badjang.databinding.FragmentScholarshipViewpager1Binding
-import com.umc.badjang.databinding.RvScholarshipBinding
 import com.umc.badjang.utils.RESPONSE_STATE
 
 class ScholarshipViewpager1Fragment:Fragment() {
     private lateinit var viewBinding: FragmentScholarshipViewpager1Binding
 
+    private var mScholarshipDatas = ArrayList<GetScholarshipDTO>()
+
     var activity: MainActivity? = null
+
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
 
     // 장학금 recyclerview adapter
     private var scholarshipDatas = ArrayList<GetScholarshipDTO>()
@@ -52,6 +56,9 @@ class ScholarshipViewpager1Fragment:Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentScholarshipViewpager1Binding.inflate(layoutInflater);
+
+        // 현재 로그인 된 사용자 jwt 조회
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
 
         var category: String = ""
         var filter: String = ""
@@ -158,7 +165,13 @@ class ScholarshipViewpager1Fragment:Fragment() {
             when(responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
-                    scholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+                    mScholarshipDatas = ArrayList<GetScholarshipDTO>(responseDataArrayList)
+
+
+                    // 즐겨찾기 유무 조회
+//                    for(i: Int in (0..mScholarshipDatas.size)) {
+//                        checkScholarshipBookmark(i)
+//                    }
 
                     // recyclerview 셋팅
                     initRecycler()
@@ -173,25 +186,48 @@ class ScholarshipViewpager1Fragment:Fragment() {
     }
 
     // recyclerview 셋팅
-    private fun initRecycler() {
+    public fun initRecycler() {
         Log.d(TAG, "복사 성공 : ${scholarshipDatas?.size}")
 
         // 장학금 recyclerview 셋팅
         scholarshipAdapter = ScholarshipRVAdapter(requireContext())
         viewBinding.scholarshipRvContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.scholarshipRvContainer.adapter = scholarshipAdapter
-        scholarshipAdapter.datas = scholarshipDatas
+        scholarshipAdapter.datas = mScholarshipDatas
 
         // 클릭 리스너 셋팅
         scholarshipAdapter.setItemClickListener(object: ScholarshipRVAdapter.OnClickInterface{
             override fun onClick(view: View, position: Int) {
 
-                val scholarshipIdx: Long = scholarshipDatas[position].scholarship_idx!!
+                val scholarshipIdx: Long = mScholarshipDatas[position].scholarship_idx!!
 
                 // 장학금 디테일 페이지로 전환
-                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx)
+                activity?.SendDataFragment(ScholarshipDetailFragment(), scholarshipIdx, "")
             }
         })
     }
+
+    // 즐겨찾기 유무 조회 API
+//    private fun checkScholarshipBookmark(i: Int) {
+//        RetrofitManager.instance.scholarshipBookmark(jwt!!, mScholarshipDatas[i].scholarship_idx!!.toInt(), completion = {
+//                responseState, responseDataArrayList ->
+//
+//            when(responseState){
+//                RESPONSE_STATE.OKAY -> {
+//                    Log.d(ContentValues.TAG, "api 호출 성공 : ${responseDataArrayList?.size}")
+//
+//                    val scholarshipBookmarkDatas = ArrayList<ScholarshipBookmarkDTO>(responseDataArrayList)
+//                    mScholarshipDatas[i].isBookmarked = scholarshipBookmarkDatas[0].bookmark_check == "Y"
+//
+//                }
+//                RESPONSE_STATE.FAIL -> {
+//                    Toast.makeText(context, "api 호출 에러입니다", Toast.LENGTH_SHORT).show()
+//                    Log.d(ContentValues.TAG, "api 호출 실패 : $responseDataArrayList")
+//                }
+//
+//            }
+//
+//        })
+//    }
 
 }

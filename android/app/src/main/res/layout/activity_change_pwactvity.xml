@@ -74,8 +74,9 @@
         android:textColor="#ED1C24"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-        //android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,8 +115,9 @@
         android:textSize="12sp"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    //android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
   </com.google.android.material.textfield.TextInputLayout>
 
   <androidx.appcompat.widget.AppCompatButton

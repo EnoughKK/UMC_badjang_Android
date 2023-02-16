@@ -7,6 +7,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".ApplicationClass"
@@ -55,7 +61,7 @@
             android:exported="false"
             android:parentActivityName=".LoginPage.SignUp.SignUpActivity" />
         <activity
-            android:name=".LoginPage.LoginActivity"
+            android:name=".Splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,10 +69,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginPage.LoginActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/NoTitleBarTheme"></activity>
+            android:theme="@style/NoTitleBarTheme">
+        </activity>
         <activity
             android:name=".LoginPage.SignUp.SignUpActivity"
             android:exported="false" /> <!-- 카카오 로그인 -->
@@ -90,9 +98,12 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_native_key" />
 
+
+
         <activity
             android:name=".LoginPage.LogoActivity"
             android:exported="false" /> <!-- [start fcm 설정 추가] -->
+        <activity android:name=".MyPage.ChangeProfileActivity"/>
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">

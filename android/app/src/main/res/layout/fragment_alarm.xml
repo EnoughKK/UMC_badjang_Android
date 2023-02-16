@@ -67,8 +67,7 @@
             android:thumb="@drawable/switch_thumb"
             android:track="@drawable/switch_track_selector"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_marginRight="10dp"/>
     </FrameLayout>
     <!--학교 및 지역의 새로운 글-->
     <FrameLayout

@@ -12,19 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="440dp"
         android:background="@drawable/upround_box"
+        android:backgroundTint="@color/white"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sns_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="추가 정보 입력"
-        android:fontFamily="@font/notosanskr_bold"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        <FrameLayout
+            android:id="@+id/MyInfo_linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="78dp">
+
+            <ImageView
+                android:id="@+id/sns_btn_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/sns_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="추가 정보 입력"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </FrameLayout>
+
+
 
         <!--이름-->
         <com.google.android.material.textfield.TextInputLayout
@@ -52,8 +69,9 @@
                 android:textColor="#ED1C24"
                 android:textSize="12sp"
                 android:paddingStart="5dp"
+                android:visibility="invisible"
                 android:layout_marginTop="0dp" />
-                //android:visibility="invisible"
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,8 +100,9 @@
                 android:textColor="#ED1C24"
                 android:textSize="12sp"
                 android:paddingStart="5dp"
+                android:visibility="invisible"
                 android:layout_marginTop="0dp" />
-                //android:visibility="invisible"
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,8 +131,9 @@
                 android:textColor="#ED1C24"
                 android:textSize="12sp"
                 android:paddingStart="5dp"
+                android:visibility="invisible"
                 android:layout_marginTop="0dp" />
-                //android:visibility="invisible"
+
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -133,14 +153,14 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/Signup_Disagree4"
+                    android:id="@+id/sns_alarmDisagree"
                     android:layout_width="43dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:src="@drawable/property1_off" />
 
                 <ImageButton
-                    android:id="@+id/Signup_Agree4"
+                    android:id="@+id/sns_alarmAgree"
                     android:layout_width="43dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -149,7 +169,7 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/Signup_Agreetext4"
+                android:id="@+id/sns_alarmText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=" 알림 수신 동의(선택)"
@@ -169,7 +189,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/Disagree_Btn"
+            android:id="@+id/snsagree_Btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/downround_box"

@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.umc.badjang.R
 import com.umc.badjang.databinding.MainMoreNationalNewsItemBinding
 
-class NationalNewsAdapter(private val context: Context) :
+class NationalNewsAdapter(
+    private val context: Context,
+    val onClickScholarshipBookmark: (position: Int) -> Unit,
+    val onClickSupportBookmark: (position: Int) -> Unit?) :
     RecyclerView.Adapter<NationalNewsAdapter.NationalNewsViewHolder>() {
 
     private lateinit var viewBinding: MainMoreNationalNewsItemBinding
@@ -28,13 +31,13 @@ class NationalNewsAdapter(private val context: Context) :
     override fun getItemCount(): Int = datas.size
 
     override fun onBindViewHolder(holder: NationalNewsViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(datas[position], position)
     }
 
     inner class NationalNewsViewHolder(private val binding: MainMoreNationalNewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: NationalNewsDataBitmap) {
+        fun bind(item: NationalNewsDataBitmap, position: Int) {
 
             if(item.nationalNewsInstitution != null)
                 binding.nationalNewsInstitutionLabel.text = item.nationalNewsInstitution // 기관명
@@ -66,21 +69,31 @@ class NationalNewsAdapter(private val context: Context) :
             else
                 binding.nationalNewsOpenText.visibility = View.GONE // 내용이 없는 경우
 
-
             // 기타 정보
             binding.nationalNewsCommentsNum.text = item.nationalNewsCommentsCnt.toString() // 댓글 수
             binding.nationalNewsViewNum.text = item.nationalNewsViewCnt.toString()         // 조회수
 
-            // 즐겨찾기 체크 버튼 선택 시
-            binding.nationalNewsBookmarkCheckBtn.setOnClickListener {
+
+            if(item.bookmarkCheck) {
                 binding.nationalNewsBookmarkCheckBtn.visibility = View.GONE
                 binding.nationalNewsBookmarkUncheckBtn.visibility = View.VISIBLE
             }
 
-            // 즐겨찾기 해제 버튼 선택 시
-            binding.nationalNewsBookmarkUncheckBtn.setOnClickListener {
+            else {
                 binding.nationalNewsBookmarkCheckBtn.visibility = View.VISIBLE
                 binding.nationalNewsBookmarkUncheckBtn.visibility = View.GONE
+            }
+
+            // 즐겨찾기 체크 버튼 선택 시
+            binding.nationalNewsBookmarkCheckBtn.setOnClickListener {
+                if(item.scholarshipIdx != null) onClickScholarshipBookmark(position)
+                //else if(item.supportIdx != null) onClickSupportBookmark(item.supportIdx)
+            }
+
+            // 즐겨찾기 해제 버튼 선택 시
+            binding.nationalNewsBookmarkUncheckBtn.setOnClickListener {
+                if(item.scholarshipIdx != null) onClickScholarshipBookmark(position)
+                //else if(item.supportIdx != null) onClickSupportBookmark(item.supportIdx)
             }
 
             // 더보기 버튼 선택 시

@@ -1,5 +1,6 @@
 package com.umc.badjang.HomePage
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
@@ -17,10 +18,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.umc.badjang.ApplicationClass
+import com.umc.badjang.BookmarkApi.BookmarkResponseApiData
+import com.umc.badjang.BookmarkApi.BookmarkCheckScholarshipApiService
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiData
+import com.umc.badjang.BookmarkApi.CheckScholarshipBookmarkApiService
 import com.umc.badjang.Bookmarks.BookmarksFragment
 import com.umc.badjang.HomeMorePage.*
 import com.umc.badjang.HomePagaApi.*
 import com.umc.badjang.MainActivity
+import com.umc.badjang.PostWritePage.PostWriteFragment
 import com.umc.badjang.R
 import com.umc.badjang.databinding.FragmentHomeBinding
 import com.umc.badjang.mConnectUserId
@@ -39,6 +45,12 @@ class HomeFragment : Fragment() {
 
     // api 통신을 위한 retrofit
     private var retrofit: Retrofit? = null
+
+    // 현재 로그인 된 사용자 jwt
+    private var jwt: String? = null
+
+    // 현재 로그인 된 사용자 닉네임
+    private var mUserName: String? = null
 
     // 추천 배너 슬라이더 adapter
     private lateinit var mainRecommendSliderAdapter: MainRecommendSliderAdapter
@@ -79,7 +91,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentHomeBinding.inflate(layoutInflater);
+        viewBinding = FragmentHomeBinding.inflate(layoutInflater)
 
         return viewBinding.root
     }
@@ -87,8 +99,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 현재 로그인 된 사용자 idx 조회
+        // 현재 로그인 된 사용자 idx, jwt 조회
         mConnectUserId = ApplicationClass.bSharedPreferences.getInt(ApplicationClass.USER_IDX, 0)
+        jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
 
         // Toolbar
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
@@ -119,6 +132,7 @@ class HomeFragment : Fragment() {
         val newIssueBtn: ImageButton = toolbar.findViewById(R.id.toolbar_bell_btn)
         newIssueBtn.setOnClickListener {
             activity?.changeFragment(NewIssueFragment())
+            //activity?.changeFragment(PostWriteFragment()) // 게시글 작성 페이지 테스트용
         }
 
         // 학교 필터 Floating 버튼 선택
@@ -143,6 +157,11 @@ class HomeFragment : Fragment() {
 
         // retrofit 세팅
         retrofit = MainApiClient.mainApiRetrofit
+
+        // 유저 정보 가져와서 닉네임 표시
+        apiGetUserInfo()
+        if(mUserName == null) mUserName = "회원"
+        viewBinding.mainRecommendTitle.text = mUserName + " 님을 위한 추천"
 
         // 우리학교 장학금 조회 api
         apiMainMySchool()
@@ -174,7 +193,11 @@ class HomeFragment : Fragment() {
     // recyclerview 세팅
     private fun initRecycler() {
         // 우리학교 장학금 recyclerview 세팅
-        mainMySchoolAdapter = MainMySchoolAdapter(requireContext())
+        mainMySchoolAdapter = MainMySchoolAdapter(
+            requireContext(),
+            onClickBookmark = {
+                apiBookmarkMySchool(it)
+            })
         viewBinding.mainMySchoolRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewBinding.mainMySchoolRecyclerview.adapter = mainMySchoolAdapter
         mainMySchoolAdapter.datas = mySchoolDatas
@@ -232,9 +255,47 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // 사용자 정보 가져오기
+    fun apiGetUserInfo() {
+        retrofit!!.create(MyInfoForFilterApiService::class.java).getMyInfoForFilter(xAccessToken = jwt!!)
+            .enqueue(object : Callback<MyInfoForFilterApiData> {
+                override fun onResponse(call: Call<MyInfoForFilterApiData>, response: Response<MyInfoForFilterApiData>) {
+                    Log.d(TAG, "유저 정보 가져오기 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    // 유저 닉네임 정보
+                    mUserName = response.body()!!.result.user_name
+                }
+
+                override fun onFailure(call: Call<MyInfoForFilterApiData>, t: Throwable) {
+                    Log.d(TAG, "유저 정보 가져오기 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 우리학교 장학금 즐겨찾기 추가 및 취소 api
+    private fun apiBookmarkMySchool(position: Int) {
+        retrofit!!.create(BookmarkCheckScholarshipApiService::class.java)
+            .bookmarkScholarship(xAccessToken=jwt!!, scholarshipIdx=mySchoolDatas[position].mySchoolScholarshipIdx)
+            .enqueue(object : Callback<BookmarkResponseApiData> {
+                override fun onResponse(call: Call<BookmarkResponseApiData>, response: Response<BookmarkResponseApiData>) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    mySchoolDatas[position].mySchoolBookmark = !mySchoolDatas[position].mySchoolBookmark
+                    mainMySchoolAdapter.notifyDataSetChanged()
+                }
+
+                override fun onFailure(call: Call<BookmarkResponseApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 추가 및 취소 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
     // 우리학교 장학금 조회 api
     private fun apiMainMySchool() {
-        val jwt = ApplicationClass.sSharedPreferences.getString(ApplicationClass.X_ACCESS_TOKEN, null)
         retrofit!!.create(MainMySchoolApiService::class.java).getMainMySchool(xAccessToken=jwt!!, userIdx=mConnectUserId!!)
             .enqueue(object : Callback<MainMySchoolApiData> {
                 override fun onResponse(call: Call<MainMySchoolApiData>, response: Response<MainMySchoolApiData>) {
@@ -265,16 +326,47 @@ class HomeFragment : Fragment() {
                 override fun onResponse(call: Call<ScholarshipIdxApiData>, response: Response<ScholarshipIdxApiData>) {
                     //Log.d(TAG,"장학금 조회 -------------------------------------------")
                     //Log.d(TAG, "onResponse: ${response.body().toString()}")
-                    addMySchoolData(
-                        MainMySchoolData(
-                            mySchoolDatas.size + 1,
-                            response.body()!!.result.scholarship_name,
-                            response.body()!!.result.scholarship_view
-                        ))
+                    apiCheckMySchoolBookmark(
+                        mySchoolDatas.size + 1,
+                        scholarshipIdx.toInt(),
+                        response.body()!!.result.scholarship_name,
+                        response.body()!!.result.scholarship_view
+                    )
                 }
 
                 override fun onFailure(call: Call<ScholarshipIdxApiData>, t: Throwable) {
                     Log.d(TAG,"장학금 조회 -------------------------------------------")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
+    // 우리학교 장학금 즐겨찾기 유무 체크
+    private fun apiCheckMySchoolBookmark(
+        mySchoolNum: Int, mySchoolScholarshipIdx: Int, mySchoolTitle: String, mySchoolViewNum: Int) {
+
+        retrofit!!.create(CheckScholarshipBookmarkApiService::class.java)
+            .checkScholarshipBookmark(xAccessToken=jwt!!, scholarshipIdx=mySchoolScholarshipIdx)
+            .enqueue(object : Callback<CheckScholarshipBookmarkApiData> {
+                override fun onResponse(call: Call<CheckScholarshipBookmarkApiData>, response: Response<CheckScholarshipBookmarkApiData>) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 -------------------------------------------")
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+
+                    var checkBookmark = false
+                    if(response.body()!!.result.bookmark_check == "Y") checkBookmark = true
+                    addMySchoolData(
+                        MainMySchoolData(
+                            mySchoolNum,
+                            mySchoolScholarshipIdx,
+                            mySchoolTitle,
+                            mySchoolViewNum,
+                            checkBookmark
+                        ))
+
+                }
+
+                override fun onFailure(call: Call<CheckScholarshipBookmarkApiData>, t: Throwable) {
+                    Log.d(TAG,"우리학교 장학금 즐겨찾기 -------------------------------------------")
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })

@@ -7,9 +7,4 @@
     android:background="@color/white"
     tools:context=".Bookmarks.BookmarksSupportFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="지원금" />
-
 </FrameLayout>
