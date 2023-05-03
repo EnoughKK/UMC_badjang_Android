@@ -13,10 +13,23 @@
 </br>
   
 ## 🧑‍💻 Team Information
-**PM**&nbsp;&nbsp;맥스/윤정빈  
-**Design**&nbsp;&nbsp;피스/김수연  
-**Android**&nbsp;&nbsp;이프/김성윤, 유니/민정윤, 샐리/조정미  
-**Server**&nbsp;&nbsp;코코스누스/신희용, 맥스/윤정빈, 한찌니/윤한진, 선호/이선호, 유주/이아현, 옆마당/전용진, 쥬니/조윤희  
+###### (이름 가나다순입니다)  
+**PM**  
+&nbsp;&nbsp;경상대 맥스/윤정빈  
+**Design**&nbsp;&nbsp;  
+&nbsp;&nbsp;서울여대 피스/김수연  
+**Android**  
+&nbsp;&nbsp;부경대 이프/김성윤  
+&nbsp;&nbsp;부경대 유니/민정윤  
+&nbsp;&nbsp;경상대 샐리/조정미  
+**Server**  
+&nbsp;&nbsp;부경대 코코스누스/신희용  
+&nbsp;&nbsp;경상대 맥스/윤정빈  
+&nbsp;&nbsp;부경대 한찌니/윤한진  
+&nbsp;&nbsp;부경대 선호/이선호  
+&nbsp;&nbsp;부경대 유주/이아현  
+&nbsp;&nbsp;경상대 옆마당/전용진  
+&nbsp;&nbsp;부경대 쥬니/조윤희  
   
 ## 🛠️ Stack
 **Android**  
