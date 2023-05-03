@@ -4,12 +4,29 @@
 </h1>
 
 <p align="left">💸 장학금 및 지원금 조회 플랫폼<br/>
-🏢 UMC 3기 Master Course<br/>
+🏢 UMC 3rd Masters Course<br/>
+✨ UMC 3rd DEMO DAY<br/>
 📅 개발기간: 2023.01 ~ 2023.02<br/><br/></p>
 
-## 🎓 Project Information
-- [x] 재학 중인 학교나 거주 중인 지역에서 받을 수 있는 장학금을 조회<br/>
-- [x] 커뮤니티를 통해 장학금 및 지원금 정보 공유</br>
+## ❓ Why
+1️⃣ 장학금, 지원금 관련 정보가 여러 플랫폼에 분산되어 있어 정보 탐색에 번거로움이 있습니다.   
+2️⃣ 지원 받을 수 있는 장학금이 있음에도 기회를 놓치는 학생들이 많습니다.  
+3️⃣ 장학금 및 지원금에 대한 정보만을 공유하는 커뮤니티가 존재하지 않습니다.  
+</br>
+
+## 👨‍👩‍👧‍👦 Who
+🗂️ 장학금과 지원금을 한 번에 찾아보고 싶으신 분  
+🤔 받고자하는 장학금의 지원 자격이 헷갈리시는 분  
+💬 장학금과 지원금에 대해 사람들과 이야기를 나누고 싶으신 분  
+</br>
+  
+## 🎓 Service Information
+🪙 **장학금 및 지원금 조회**
+  - [x] 선택한 학교 및 지역의 장학금과 지원금을 한 번에 확인 가능  
+
+🪙 **커뮤니티**  
+  - [x] 장학금과 지원금에 대한 정보를 댓글로 사람들과 공유 가능  
+  - [x] 게시글을 통해 사용자들과 소통 가능  
 </br>
   
 ## 🧑‍💻 Team Information
@@ -30,6 +47,7 @@
 &nbsp;&nbsp;부경대 유주/이아현  
 &nbsp;&nbsp;경상대 옆마당/전용진  
 &nbsp;&nbsp;부경대 쥬니/조윤희  
+</br>
   
 ## 🛠️ Stack
 **Android**  
@@ -42,3 +60,9 @@
   
 **Design**  
 ![Figma](https://img.shields.io/badge/Figma-white??style=plastic&logo=figma&logoColor=A259FF)
+
+## 📱 Service
+<img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075245-db3bf8ec-59ed-4f9a-8c7b-55da382dc7b0.png" width="300px"/> <img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075346-1b400cb7-f1e8-4cf2-8f43-5256fb220fc0.png" width="300px"/>  
+<img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075472-0b95bb77-367f-4b18-aa48-5e3dd9e4e1d3.png" width="300px"/> <img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075612-c689defd-a470-4e56-93e4-36ad2bbb1acc.png" width="300px"/>  
+<img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075644-0fdb8aec-1c27-49c7-bcbf-6f104542ebf1.png" width="300px"/> <img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075657-7a73b2bd-502f-42d3-9e05-0be3c5772433.png" width="300px"/>  
+<img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075847-91cc4b1d-237f-4bb5-9197-161fe06bd56a.png" width="300px"/> <img alt="Badjang" src="https://user-images.githubusercontent.com/76805879/236075858-4487323c-0654-4d5d-b28a-86016326ea18.png" width="300px"/>  
