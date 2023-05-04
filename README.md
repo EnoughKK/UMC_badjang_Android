@@ -1,6 +1,5 @@
 <h1 align="center">
-  <img alt="Badjang logo" src="https://user-images.githubusercontent.com/76805879/236067029-4e439a18-a8e4-4b41-93c1-5458e30952ba.png" width="200px"/><br/>
-  받장
+  <img alt="Badjang logo" src="https://user-images.githubusercontent.com/76805879/236329855-ce4acc52-6620-42e1-9fc0-3889ad201f43.png" height="200px"/>
   
   [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FEnoughKK%2FUMC_badjang_Android&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 </h1>
